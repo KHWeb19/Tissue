@@ -1,1 +1,1 @@
-hihihihihihihihi 합쳐져라
+hihihihihihihihi 합쳐져라ㄱㄹㄹㄹㄹㄹ
