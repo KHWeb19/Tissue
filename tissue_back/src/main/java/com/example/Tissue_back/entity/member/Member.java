@@ -23,15 +23,17 @@ public class Member {
     private Long memberNo;
 
     @Column(nullable = false)
+    @Builder.Default
     private String memberGrade = "일반";
 
     @Column(nullable = false)
+    @Builder.Default
     private int memberMileage = 0;
 
     @Column(nullable = false, length = 12)
     private String memberId;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String memberPw;
 
     @Column(nullable = false, length = 7)

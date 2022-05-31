@@ -1,5 +1,6 @@
 package com.example.Tissue_back.controller;
 
+import com.example.Tissue_back.controller.request.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,12 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/register")
-    public Member register (@Validated @RequestBody Member member) {
-        log.info("== Tissue Member Register ==" + member);
+    public MemberDto register (@Validated @RequestBody MemberDto memberDto) {
+        log.info("== Tissue Member Register ==" + memberDto);
 
-        service.register(member);
+        service.register(memberDto);
 
-        return member;
+        return memberDto;
     }
 
     // 아이디 중복 여부 체크
