@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import PerformanceRegisterPage from '../views/manager/PerformanceRegisterPage'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,6 +11,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/PerformanceRegister',
+    name: 'PerformanceRegisterPage',
+    component: PerformanceRegisterPage
   },
   {
     path: '/about',
