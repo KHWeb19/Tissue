@@ -1,18 +1,18 @@
 <template>
     <div align="center">
-      <performance-register @submit="onSubmit"/>
+        <performance-register/>
     </div>
 </template>
 
 <script>
 
-import BoardRegister from '@/components/board/BoardRegister.vue'
 import axios from 'axios'
+import PerformanceRegister from '@/components/manager/performance/PerformanceRegister.vue'
 
 export default {
   name: 'PerformanceRegisterPage',
   components: {
-    BoardRegister
+      PerformanceRegister
   },
   methods: {
     onSubmit (payload) {
@@ -26,28 +26,7 @@ export default {
         .catch(() => {
           alert('문제 발생')
         })
-    },
-    handleFileUpload () {
-            this.file = this.$refs.file.files
-            console.log("this.file")
-        },
-    submitFiles () {
-            let formData = new FormData()
-            for (let idx = 0; idx < this.files.length; idx++) {
-                formData.append('fileList', this.files[idx])
-            }
-            axios.post('http://localhost:7777/performance/register', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then (res => {
-                alert('처리 결과: ' + res.data)
-            })
-            .catch (res => {
-                alert('처리 결과: ' + res.message)
-            })
-        }
+    }
   }
 }
 </script>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import PerformanceRegisterPage from '../views/manager/PerformanceRegisterPage'
+import PerformanceRegisterPage from '../views/manager/PerformanceRegisterPage.vue'
 
 Vue.use(VueRouter)
 
