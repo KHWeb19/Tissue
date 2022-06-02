@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface PerformanceService {
-    public void register(Performance performance, MultipartFile file) throws Exception;
+    public void register(Performance performance, List<MultipartFile> fileList) throws Exception;
     public List<Performance> list();
     public Performance read(Integer boardNo);
     public void modify(Performance performance);

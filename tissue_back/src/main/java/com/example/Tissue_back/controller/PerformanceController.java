@@ -20,10 +20,10 @@ public class PerformanceController {
     private PerformanceService performanceService;
 
     @PostMapping("/register")
-    public void performanceRegister(@Validated @RequestBody Performance performance, MultipartFile file) throws Exception {
+    public void performanceRegister(@Validated @RequestBody Performance performance, @RequestParam("fileList") List<MultipartFile> fileList) throws Exception {
         log.info("performanceRegister()");
 
-        performanceService.register(performance, file);
+        performanceService.register(performance, (List<MultipartFile>) fileList);
     }
 
     @GetMapping("/list")

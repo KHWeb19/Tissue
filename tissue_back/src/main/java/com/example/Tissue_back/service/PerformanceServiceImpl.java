@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,18 +21,41 @@ public class PerformanceServiceImpl implements PerformanceService{
     private PerformanceRepository performanceRepository;
 
     @Override
-    public void register(Performance performance, MultipartFile file) throws Exception {
-        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+    public void register(Performance performance, List<MultipartFile> fileList) throws Exception {
+//        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//
+//        UUID uuid = UUID.randomUUID();
+//
+//        String fileName = uuid + "_" + file.getOriginalFilename();
+//
+//        File saveFile = new File(filePath, fileName);
+//        file.transferTo(saveFile);
 
-        UUID uuid = UUID.randomUUID();
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                log.info("requestUploadFile() - Make file: " +
+                        multipartFile.getOriginalFilename());
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        
-        File saveFile = new File(filePath, fileName);
-        file.transferTo(saveFile);
+                FileOutputStream writer = new FileOutputStream(
+                        "../../tissue_front/src/assets/uploadImg/" + multipartFile.getOriginalFilename());
 
+
+                log.info("vue에 파일 배치");
+
+                writer.write(multipartFile.getBytes());
+                writer.close();
+
+                performance.setPerformThumbnailPath(String.valueOf(writer));
+            }
+        } catch (Exception e) {
+
+        }
+
+        log.info("requestUploadFile(): Success");
         performanceRepository.save(performance);
     }
+
+
 
     @Override
     public List<Performance> list() {
