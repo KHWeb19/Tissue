@@ -15,9 +15,9 @@ public class PhoneCheckController {
     @Autowired
     PhoneCheckService service;
 
-    @GetMapping("/check")
-    public @ResponseBody
-    String sendSMS(@RequestParam(value="memberPhone",required=false) String memberPhone) throws CoolsmsException {
+    @GetMapping("/check/{memberPhone}")
+    public @ResponseBody String sendSMS (@PathVariable("memberPhone") String memberPhone) throws CoolsmsException {
+        log.info(memberPhone);
         return service.PhoneNumberCheck(memberPhone);
     }
 

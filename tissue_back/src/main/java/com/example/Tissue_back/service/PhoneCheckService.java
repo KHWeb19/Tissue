@@ -15,8 +15,8 @@ public class PhoneCheckService {
 
     public String PhoneNumberCheck(String memberPhone) throws CoolsmsException {
 
-        String api_key = "NCSTXDTJXQALYHC3";
-        String api_secret = "UQAPH9RSXL3WQASJBV6ZDBTIZI2I75BC";
+        String api_key = "NCSJCBW8SGWBBDNR";
+        String api_secret = "VH6FULIJGBULABLEGMPO90XFC2TJ3OJD";
         Message coolsms = new Message(api_key, api_secret);
 
         Random rand  = new Random();
