@@ -33,19 +33,31 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         try {
             for (MultipartFile multipartFile : fileList) {
-                log.info("requestUploadFile() - Make file: " +
-                        multipartFile.getOriginalFilename());
+                log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
-                FileOutputStream writer = new FileOutputStream(
-                        "../../tissue_front/src/assets/uploadImg/" + multipartFile.getOriginalFilename());
+//                String filePath = "C:\\image\\";
+                String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\fileTest";
 
 
-                log.info("vue에 파일 배치");
+                UUID uuid = UUID.randomUUID();
 
-                writer.write(multipartFile.getBytes());
-                writer.close();
+                // 파일 원본명 저장
+                String fileName = uuid + "_" + multipartFile.getOriginalFilename();
 
-                performance.setPerformThumbnailPath(String.valueOf(writer));
+                // 파일 저장
+                File saveFile = new File(filePath, fileName);
+                multipartFile.transferTo(saveFile);
+
+                // performance db에 저장
+                performance.setPerformThumbnail(fileName);
+                performance.setPerformThumbnailPath(filePath);
+
+//               파일 저장
+//               FileOutputStream saveFile = new FileOutputStream(
+//                        "../../tissue_front/src/assets/uploadImg/" + fileName);
+
+//               saveFile.write(multipartFile.getBytes());
+//               saveFile.close();
             }
         } catch (Exception e) {
 

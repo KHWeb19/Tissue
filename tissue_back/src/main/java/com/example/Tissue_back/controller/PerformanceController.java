@@ -4,6 +4,7 @@ import com.example.Tissue_back.entity.Performance;
 import com.example.Tissue_back.service.PerformanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +20,9 @@ public class PerformanceController {
     @Autowired
     private PerformanceService performanceService;
 
-    @PostMapping("/register")
-    public void performanceRegister(@Validated @RequestBody Performance performance, @RequestParam("fileList") List<MultipartFile> fileList) throws Exception {
+    @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+    @PostMapping(value= "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public void performanceRegister(Performance performance, @RequestParam("fileList") List<MultipartFile> fileList) throws Exception {
         log.info("performanceRegister()");
 
         performanceService.register(performance, (List<MultipartFile>) fileList);
