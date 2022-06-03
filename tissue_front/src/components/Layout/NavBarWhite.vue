@@ -62,7 +62,7 @@
 
 <script>
 export default {
-  name: "NavBar",
+  name: "NavBarWhite",
   data() {
     return {};
   },

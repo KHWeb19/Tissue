@@ -9,7 +9,6 @@
       <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
       </v-carousel-item>
     </v-carousel>
-    <div style="height: 1000px"></div>
     <div class="side_bar">
       <v-img
         :src="require('@/assets/event.png')"
@@ -17,6 +16,96 @@
         max-height="150px"
       />
     </div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid red"
+              ></div>
+              TICKET OPEN
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid red"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid orange"
+              ></div>
+              R A N K
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid orange"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid yellowgreen"
+              ></div>
+              CONCERT
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid yellowgreen"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid lightskyblue"
+              ></div>
+              MUSICAL
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid lightskyblue"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid blue"
+              ></div>
+              THEATER
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid blue"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+          <div>
+            <div class="content_title">
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid plum"
+              ></div>
+              EXHIBITION
+              <div
+                class="content_title_deco"
+                style="border-bottom: 5px solid plum"
+              ></div>
+            </div>
+            <div class="content_thumbnail">이미지</div>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -41,16 +130,6 @@ export default {
           src: "http://tkfile.yes24.com/Upload2/Display/202204/20220406/wel_mv_NTN_82569c.jpg/dims/quality/70/",
         },
       ],
-
-      colors: [
-        "green",
-        "secondary",
-        "yellow darken-4",
-        "red lighten-2",
-        "orange darken-1",
-      ],
-      cycle: false,
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"],
     };
   },
 };
@@ -66,8 +145,26 @@ export default {
   height: 150px;
   text-align: center;
   right: 50px;
-  top: 800px;
+  top: 730px;
   background-color: lightgrey;
   z-index: 1;
+  border-radius: 80px;
+}
+.content_title {
+  font-size: 50px;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+.content_thumbnail {
+  height: 200px;
+  text-align: center;
+}
+.content_title_deco {
+  width: 100px;
+  height: 55px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 </style>
