@@ -11,6 +11,8 @@ import java.util.TimeZone;
 
 @Configuration
 public class DateTimeConfig {
+
+    // 0603 추가
     private static final String dateFormat = "yyyy-MM-dd";
     private static final String datetimeFormat = "yyyy-MM-dd HH:mm:ss";
 

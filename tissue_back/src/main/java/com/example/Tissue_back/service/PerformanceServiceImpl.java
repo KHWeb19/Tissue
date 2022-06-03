@@ -35,9 +35,8 @@ public class PerformanceServiceImpl implements PerformanceService{
             for (MultipartFile multipartFile : fileList) {
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
-//                String filePath = "C:\\image\\";
+                // 파일 경로 지정
                 String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\fileTest";
-
 
                 UUID uuid = UUID.randomUUID();
 

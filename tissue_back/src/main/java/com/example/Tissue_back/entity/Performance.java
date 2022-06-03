@@ -26,6 +26,7 @@ public class Performance {
 
     private String performName;
 
+    // 시간도 같이 나옴
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date performStart;

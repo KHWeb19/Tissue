@@ -20,6 +20,7 @@ public class PerformanceController {
     @Autowired
     private PerformanceService performanceService;
 
+    // 다중파일만 해놨으니 단일파일도 해야함 0603
     @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
     @PostMapping(value= "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void performanceRegister(Performance performance, @RequestParam("fileList") List<MultipartFile> fileList) throws Exception {
