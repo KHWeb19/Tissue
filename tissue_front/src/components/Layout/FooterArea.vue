@@ -132,7 +132,7 @@ export default {
 }
 .footer_left_h1 {
   font-size: 50px;
-  color: lightcoral;
+  color: skyblue;
 }
 .footer_left_left {
   font-size: 13px;

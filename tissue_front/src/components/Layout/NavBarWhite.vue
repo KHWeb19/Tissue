@@ -74,7 +74,12 @@ export default {
 <style scoped>
 .menubar {
   position: absolute;
+  height: 90px;
+  width: 1920px;
   z-index: 1;
+  border-bottom: none;
+  background: transparent;
+  background-color: transparent;
 }
 .header_box {
   display: flex;
@@ -109,7 +114,7 @@ export default {
   margin-right: 10px;
   width: 3px;
   height: 3px;
-  background: #ec7d2c;
+  background: skyblue;
 }
 
 .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active),

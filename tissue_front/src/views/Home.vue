@@ -1,14 +1,22 @@
 <template>
   <div>
-    <v-carousel
-      height="720px"
-      class="slider"
-      delimiter-icon="mdi-minus"
-      hide-delimiter-background
-    >
-      <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
-      </v-carousel-item>
-    </v-carousel>
+    <nav-bar-black class="navbar_black" style="display: none" />
+    <nav-bar-white class="navbar_white" style="position: absolute" />
+
+    <div>
+      <v-carousel
+        height="720px"
+        class="slider"
+        delimiter-icon="mdi-minus"
+        hide-delimiter-background
+        :cycle="true"
+        :interval="3000"
+      >
+        <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
+        </v-carousel-item>
+      </v-carousel>
+    </div>
+
     <div class="side_bar">
       <v-img
         :src="require('@/assets/event.png')"
@@ -16,6 +24,7 @@
         max-height="150px"
       />
     </div>
+
     <v-container>
       <v-row>
         <v-col>
@@ -110,8 +119,15 @@
 </template>
 
 <script>
+import NavBarWhite from "@/components/Layout/NavBarWhite.vue";
+import NavBarBlack from "@/components/Layout/NavBarBlack.vue";
+
 export default {
   name: "HomeView",
+  components: {
+    NavBarWhite,
+    NavBarBlack,
+  },
 
   data() {
     return {
@@ -132,22 +148,41 @@ export default {
       ],
     };
   },
+
+  mounted() {
+    window.addEventListener("scroll", function () {
+      if (window.scrollY <= 700) {
+        document.getElementsByClassName("navbar_black")[0].style.display =
+          "none";
+        document.getElementsByClassName("navbar_white")[0].style.display = "";
+      } else if (window.scrollY > 700) {
+        document.getElementsByClassName("navbar_white")[0].style.display =
+          "none";
+        document.getElementsByClassName("navbar_black")[0].style.display = "";
+        document.getElementsByClassName("navbar_black")[0].style.position =
+          "fixed";
+      }
+    });
+  },
 };
 </script>
 
 <style scoped>
 .slider {
   z-index: 0;
+  margin-top: 0;
 }
 .side_bar {
-  position: fixed;
-  widows: 150px;
+  position: sticky;
+  float: unset;
+  left: 1700px;
+  width: 150px;
   height: 150px;
   text-align: center;
-  right: 50px;
-  top: 730px;
-  background-color: lightgrey;
-  z-index: 1;
+  bottom: 10px;
+  top: 500px;
+  background-color: transparent;
+  z-index: 2;
   border-radius: 80px;
 }
 .content_title {

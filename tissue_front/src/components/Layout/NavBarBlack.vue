@@ -55,6 +55,7 @@
           </v-btn>
         </v-tabs>
       </div>
+
       <v-spacer></v-spacer>
     </div>
   </div>
@@ -74,7 +75,12 @@ export default {
 <style scoped>
 .menubar {
   position: absolute;
+  height: 90px;
+  width: 1920px;
+  background: white;
+  background-color: white;
   z-index: 1;
+  border-bottom: 1px solid lightgrey;
 }
 .header_box {
   display: flex;
@@ -109,7 +115,7 @@ export default {
   margin-right: 10px;
   width: 3px;
   height: 3px;
-  background: #ec7d2c;
+  background: skyblue;
 }
 
 .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active),
