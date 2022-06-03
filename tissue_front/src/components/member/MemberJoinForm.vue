@@ -1,28 +1,51 @@
 <template>
     <div class="background">
         <v-container>
-               <v-row justify="center" class="logo">Tissue</v-row>
-            <v-row>
+            <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
+            <v-layout column class="mx-auto" justify-center>
                 <form name ="loginForm" @submit.prevent="onSubmit">
-                아이디<v-text-field v-model="memberId"></v-text-field>
-                비번<v-text-field type="password" v-model="memberPw"></v-text-field>
-                이름<v-text-field v-model="memberName"></v-text-field>
-                생일<v-text-field type="date" v-model="memberBirth"></v-text-field>
-                핸드폰<v-text-field v-model="memberPhone"></v-text-field>
-                <v-btn type="button" @click="checkPhone()" color="red darken-3" dark>본인인증</v-btn>
-                <br/>
-                인증번호 <v-text-field v-model="checkNum"></v-text-field>
-                <v-btn type="button"  @click="checkAuthNum()" color="red darken-3" dark>확인</v-btn>
-                <br/>
-                주소
-                <v-text-field id=zipcode style="width:150px" v-model="zipcode"></v-text-field>
-                <v-text-field @click="searchAddress()" id=address_kakao v-model="memberAddress"></v-text-field>
-                상세입력
-                <v-text-field name=address_detail></v-text-field>
-                이메일<v-text-field v-model="memberEmail"></v-text-field>
-                <v-btn type="submit" color="red darken-3" dark>JOIN</v-btn>
+                    <v-layout>
+                        <v-flex>
+                            <v-text-field v-model="memberId" style="width:350px" label="아이디" color="pink lighten-3" outlined></v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn type="button" style="zoom:1.16; margin-top:3px;" @click="checkId()" :color="this.checkIdCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark depressed>check</v-btn>
+                        </v-flex>
+                    </v-layout>
+                    <v-text-field type="password" v-model="memberPw"  label="비밀번호" 
+                        color="pink lighten-3" outlined append-icon='mdi-lock'></v-text-field>
+                    <v-text-field type="password" v-model="ckPw"  label="비밀번호 재확인" 
+                        color="pink lighten-3" outlined append-icon="mdi-lock-check"></v-text-field>
+                    <v-text-field v-model="memberName"  label="이름" color="pink lighten-3" outlined></v-text-field>
+                    <v-text-field type="date" v-model="memberBirth" label="생일" color="pink lighten-3" outlined></v-text-field>
+                    <v-layout>
+                        <v-flex>
+                            <v-text-field v-model="memberPhone" style="width:350px" label="휴대폰" placeholder=" ' - '를 제외하고 입력해주세요." color="pink lighten-3" outlined></v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn type="button" style="zoom:1.16; margin-top:3px;" @click="checkPhone()" color="blue lighten-3" dark depressed>Check</v-btn>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout justify-center v-if="this.sendAuth == true">
+                        <v-flex class="ml-8">
+                            <v-text-field v-model="checkNum" style="width:300px;" label="인증번호" color="pink lighten-3" outlined dense ></v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn type="button" style="margin-top:3px;" @click="checkAuthNum()" :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark rounded depressed><v-icon>mdi-check</v-icon></v-btn>
+                        </v-flex>
+                    </v-layout>
+                    <br/>
+                    <div class="ml-2 mb-4" style="color:grey"> 주소 </div>
+                    <v-layout>
+                        <v-text-field @click="searchAddress()" id=zipcode style="width:1px;zoom:0.85" v-model="zipcode" color="pink lighten-3" outlined placeholder="우편번호"></v-text-field>
+                        <v-text-field @click="searchAddress()" id=address_kakao v-model="memberAddress" color="pink lighten-3" ></v-text-field>
+                    </v-layout>
+                    <v-text-field name=address_detail color="pink lighten-3" placeholder="상세주소"></v-text-field>
+                    <v-text-field class="mt-3" v-model="memberEmail" label="이메일" color="pink lighten-3" outlined ></v-text-field>
+                    <v-row justify="center"><v-btn class="joinBtn" type="submit" color="blue lighten-3" dark>JOIN</v-btn></v-row>
                 </form>
-            </v-row>
+            </v-layout>
+            <join-footer/>
         </v-container>
     </div>
 
@@ -30,7 +53,9 @@
 
 <script>
 import axios from 'axios'
+import JoinFooter from './JoinFooter.vue'
 export default {
+  components: { JoinFooter },
     name: 'MemberJoinForm',
     data () {
         return {
@@ -46,7 +71,9 @@ export default {
             checkNum:'',
             phonePass:false,
             idPass: false,
-            checkCondition:false,
+            checkIdCondition:false,
+            checkPhoneCondition:false,
+            sendAuth: false
 
         }
     },
@@ -64,15 +91,34 @@ export default {
                  console.log(memberPhone)
                 alert("인증번호가 전송되었습니다.");
                 this.authNum = res.data
+                this.sendAuth = true
              })
              .catch(() => {
                  console.log("전송 실패!")
              })
         },
+         checkId() {
+            const { memberId } = this;
+            axios.get(`http://localhost:7777/Member/checkId/${memberId}`)
+            .then((res) => {
+                this.temp = res.data;
+                if (res.data) {
+                alert("사용 가능한 아이디 입니다.");
+                this.idPass = true;
+                this.checkIdCondition =true
+                } else {
+                alert("중복된 아이디 입니다.");
+                this.idPass = false;
+                }
+             });
+        },
         checkAuthNum() {
             if(this.checkNum == this.authNum) {
                 alert("인증 성공")
                 this.phonePass = true
+                this.checkPhoneCondition = true
+            }else {
+                alert("인증번호가 올바르지 않습니다.")
             }
         },
         searchAddress() {
@@ -90,12 +136,22 @@ export default {
 
 <style scoped>
 .background {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(241, 241, 241);
 }
 .logo {
     font-size: 50pt;
     margin-top:5%;
     margin-bottom:3%;
     font-family: 'Pacifico', cursive;
+}
+.mx-auto {
+     position: relative;
+     margin-top:50px;
+     width:40%;
+}
+.joinBtn {
+    margin-top:10%;
+    margin-bottom:10%;
+    zoom:1.5;
 }
 </style>>

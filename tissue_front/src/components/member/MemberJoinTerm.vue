@@ -1,13 +1,13 @@
 <template>
     <div class="background">
         <v-container>
-            <v-row justify="center" class="logo">Tissue</v-row>
+            <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
                 <v-layout column class="mx-auto">
                     <v-checkbox
                         class="checkboxSize mb-5"
                         @change="allCk()"
                         label=" Tissue 이용약관, 개인정보 수집 및 이용동의, 예매 관련 정보 수신 동의에 모두 동의합니다."
-                        color="orange"
+                        color="pink lighten-3"
                         hide-details
                     >
                     </v-checkbox>
@@ -15,11 +15,11 @@
                         class="checkboxSize"
                         v-model="checkedValues"
                         value="1"
-                        color="orange"
+                        color="pink lighten-3"
                         hide-details
                     >
                         <template v-slot:label>
-                            Tissue 이용약관 동의 &nbsp; <div style="color:orange"> (필수) </div>
+                            Tissue 이용약관 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
                         </template>
                     </v-checkbox>
                     <p/>
@@ -150,11 +150,11 @@
                         class="checkboxSize"
                         v-model="checkedValues"
                         value="2"
-                        color="orange"
+                        color="pink lighten-3"
                         hide-details
                     >
                         <template v-slot:label>
-                            개인정보 수집 및 이용 동의 &nbsp; <div style="color:orange"> (필수) </div>
+                            개인정보 수집 및 이용 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
                         </template>
                     </v-checkbox>
                     <p/>
@@ -228,33 +228,36 @@
                         class="checkboxSize"
                         v-model="checkedValues"
                         value="3"
-                        color="orange"
+                        color="pink lighten-3"
                         hide-details
                     >
                         <template v-slot:label>
-                            예매 관련 정보 수신 동의 &nbsp; <div style="color:orange"> (필수) </div>
+                            예매 관련 정보 수신 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
                         </template>
                     </v-checkbox>
-                        <div class="mt-5">
+                    <div class="mt-5">
                             &nbsp; Tissue에서 제공하는 예매 알림 서비스를 휴대전화, 이메일로 받아보실 수 있습니다. 
                             일부 서비스(별도 회원 체계로 운영하거나 Tissue 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 
                             개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.
-                        </div>
+                    </div>
                 </v-layout>
                 <v-row class="btnSet" justify="center">
                     <v-col cols="auto">
                         <router-link to="/main"><v-btn color="grey" dark>CANCLE</v-btn></router-link> 
                     </v-col>
                     <v-col cols="auto">
-                        <v-btn color="orange" dark @click="ckCheck" >NEXT</v-btn>    
+                        <v-btn color="blue lighten-3" dark @click="ckCheck" >NEXT</v-btn>    
                     </v-col>
                 </v-row>
+                <join-footer/>
         </v-container>
     </div>
 </template>
 
 <script>
+import JoinFooter from './JoinFooter.vue'
 export default {
+  components: { JoinFooter },
     name: 'MemberJoinTerm',
     data () {
         return{
@@ -292,7 +295,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 .background {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(241, 241, 241);
 }
 .logo {
     font-size: 50pt;
@@ -318,7 +321,7 @@ export default {
     padding:2%;
 }
 .btnSet{
-    padding-top:5%;
+    padding-top:6%;
     margin-bottom:50px;
     zoom: 1.5;
 }
