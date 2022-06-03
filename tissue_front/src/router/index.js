@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import PerformanceRegisterPage from '../views/manager/PerformanceRegisterPage.vue'
+import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
+import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -13,9 +15,14 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/PerformanceRegister',
+    path: '/performanceRegister',
     name: 'PerformanceRegisterPage',
     component: PerformanceRegisterPage
+  },
+  {
+    path: '/performanceList',
+    name: 'PerformanceListPage',
+    component: PerformanceListPage
   },
   {
     path: '/about',
