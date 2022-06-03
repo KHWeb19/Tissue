@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container>
-           <h3>공연 이미지 업로드 테스트 페이지~</h3>
+              <h3>공연 이미지 업로드 테스트 페이지~!!!</h3>
                 <form @submit.prevent="submitFiles">
                 <v-text-field type="text" v-model="performName" label="공연명"></v-text-field>
                 공연시작일<v-text-field type="Date" v-model="performStart"></v-text-field>
@@ -14,7 +14,7 @@
                 <v-select v-model="performCategory" label="카테고리" :items="categoryList"></v-select>
                 <v-select v-model="performGrade" label="등급" :items="gradeList"></v-select>
                 <v-textarea type="text" v-model="performer" label="출연진"></v-textarea>
-                <v-file-input couter multiple small-chips id="files" ref="file"
+                <v-file-input couter multiple small-chips id="file" ref="file"
                                 label="썸네일이미지" v-on:change="handleFileUpload()"/>
                 <div id='btn'>
                     <v-btn class="white--text" id="BtnRegister" v-on:click="submitFiles()">공연 업로드</v-btn>
@@ -65,9 +65,10 @@ export default {
             performData.append("performGrade", this.performGrade)
             performData.append("performer", this.performer)
 
-            for (let idx = 0; idx < this.files.length; idx++) {
-                performData.append('fileList', this.files[idx])
+            for (let idx = 0; idx < this.file.length; idx++) {
+                performData.append("filesList", this.file[idx])
             }
+
             axios.post('http://localhost:7777/performance/register', performData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -89,7 +90,7 @@ export default {
 .background {
     background-color: rgb(238, 238, 238);
 }
-#btn { text-align: center;  }
+#btn { text-align: center; }
 #BtnRegister { background-color: orange; width: 350px; height: 50px; font-size: 18px;}
 
 </style>
