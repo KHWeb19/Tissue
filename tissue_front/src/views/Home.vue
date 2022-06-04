@@ -2,7 +2,6 @@
   <div>
     <nav-bar-black class="navbar_black" style="display: none" />
     <nav-bar-white class="navbar_white" style="position: absolute" />
-
     <div>
       <v-carousel
         height="720px"
@@ -152,12 +151,23 @@ export default {
   mounted() {
     window.addEventListener("scroll", function () {
       if (window.scrollY <= 700) {
+        document.getElementsByClassName("navbar_black")[0].style.background =
+          "transparent";
+        document.getElementsByClassName(
+          "navbar_black"
+        )[0].style.backgroundColor = "transparent";
+        document.getElementsByClassName("navbar_black")[0].style.borderBottom =
+          "none";
         document.getElementsByClassName("navbar_black")[0].style.display =
           "none";
-        document.getElementsByClassName("navbar_white")[0].style.display = "";
       } else if (window.scrollY > 700) {
-        document.getElementsByClassName("navbar_white")[0].style.display =
-          "none";
+        document.getElementsByClassName("navbar_black")[0].style.background =
+          "white";
+        document.getElementsByClassName(
+          "navbar_black"
+        )[0].style.backgroundColor = "white";
+        document.getElementsByClassName("navbar_black")[0].style.borderBottom =
+          "1px solid lightgrey";
         document.getElementsByClassName("navbar_black")[0].style.display = "";
         document.getElementsByClassName("navbar_black")[0].style.position =
           "fixed";

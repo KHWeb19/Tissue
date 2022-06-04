@@ -41,40 +41,53 @@
               </div>
             </router-link>
             <div class="footer_center_item">
-              <v-img
-                :src="require('@/assets/resume.png')"
-                max-width="80px"
-                max-height="80px"
-                class="ml-3"
-              />
-              <p class="footer_center_item_text">공연 신청서</p>
+              <a
+                href="http://tkfile.yes24.com/Upload2/download/(예스24)_티켓등록의뢰서.xlsx"
+              >
+                <v-img
+                  :src="require('@/assets/resume.png')"
+                  max-width="80px"
+                  max-height="80px"
+                  class="ml-3"
+                />
+
+                <p class="footer_center_item_text">공연 신청서</p>
+              </a>
             </div>
           </div>
           <div class="footer_right">
             <div class="footer_right_social">
-              <v-btn class="footer_right_icon" icon
-                ><v-icon x-large color="blue">mdi-facebook</v-icon></v-btn
+              <a href="https://www.facebook.com/">
+                <v-btn class="footer_right_icon" icon
+                  ><v-icon x-large color="blue">mdi-facebook</v-icon></v-btn
+                ></a
               >
-              <v-btn class="footer_right_icon" icon
-                ><v-icon x-large color="pink">mdi-instagram</v-icon></v-btn
+              <a href="https://www.instagram.com/">
+                <v-btn class="footer_right_icon" icon
+                  ><v-icon x-large color="pink">mdi-instagram</v-icon></v-btn
+                ></a
               >
-              <v-btn class="footer_right_icon" icon
-                ><v-icon x-large color="red">mdi-youtube</v-icon></v-btn
+              <a href="https://www.youtube.com/">
+                <v-btn class="footer_right_icon" icon
+                  ><v-icon x-large color="red">mdi-youtube</v-icon></v-btn
+                ></a
               >
             </div>
 
             <div class="footer_right_store">
-              <v-img
-                :src="require('@/assets/googleplay.png')"
-                max-width="120px"
-                max-height="80px"
-                class="mr-5"
-              />
-              <v-img
-                :src="require('@/assets/appstore.png')"
-                max-width="110px"
-                max-height="80px"
-              />
+              <a href="https://play.google.com/store/games?hl=ko">
+                <v-img
+                  :src="require('@/assets/googleplay.png')"
+                  max-width="120px"
+                  max-height="80px"
+                  class="mr-5"
+              /></a>
+              <a href="https://www.apple.com/kr/app-store/">
+                <v-img
+                  :src="require('@/assets/appstore.png')"
+                  max-width="110px"
+                  max-height="80px"
+              /></a>
             </div>
           </div>
         </div>
@@ -124,6 +137,7 @@ export default {
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 0;
+  color: black;
 }
 .footer_left {
   width: 350px;

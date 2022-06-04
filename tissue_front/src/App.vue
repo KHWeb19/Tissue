@@ -26,15 +26,8 @@ export default {
   data() {
     return {
       url: window.location.href,
-      scrollY: 0,
     };
   },
-
-  /*mounted() {
-    window.addEventListener("scroll", function () {
-      console.log(window.scrollY);
-    });
-  },*/
 };
 </script>
 

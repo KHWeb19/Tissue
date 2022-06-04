@@ -67,8 +67,6 @@ export default {
   data() {
     return {};
   },
-
-  methods: {},
 };
 </script>
 
@@ -77,10 +75,12 @@ export default {
   position: absolute;
   height: 90px;
   width: 1920px;
+  z-index: 1;
+  /*
   background: white;
   background-color: white;
-  z-index: 1;
   border-bottom: 1px solid lightgrey;
+  */
 }
 .header_box {
   display: flex;
