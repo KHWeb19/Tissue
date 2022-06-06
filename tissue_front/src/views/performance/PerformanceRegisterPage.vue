@@ -16,7 +16,11 @@
                 <v-text-field type="text" v-model="performGrade" label="등급"></v-text-field>
                 <v-text-field type="text" v-model="performer" label="출연자"></v-text-field>
 
-                <label>Files
+                <label>Thumbnail
+                    <input type="file" ref="file" id="file" @change="handleThumbNailUpload()"/>
+                </label>
+
+                 <label>DetailFiles
                     <input type="file" ref="files" multiple @change="handleFileUpload()"/>
                 </label>
                 <button @click="submitFiles()" value="Upload">파일 업로드</button>
@@ -44,11 +48,16 @@ export default {
                 performCategory: '',
                 performGrade: '',
                 performer: '',
-                files: '',
+                files: '', // 다중이미지
+                file: '', // 썸네일
                 response: '' 
         }
     },
   methods: {
+      handleThumbNailUpload () {
+          this.file = this.$refs.file.files
+          console.log(this.file)
+      },
        handleFileUpload () {
             this.files = this.$refs.files.files
             console.log(this.files)
@@ -68,6 +77,8 @@ export default {
             formData.append('performGrade', this.performGrade)
             formData.append('performer', this.performer)
 
+            formData.append('file', document.getElementById('file').files[0])
+        
             for (let idx = 0; idx < this.files.length; idx++) {
                 formData.append('fileList', this.files[idx])
             }

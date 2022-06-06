@@ -21,7 +21,7 @@ public class PerformanceServiceImpl implements PerformanceService{
     private PerformanceRepository performanceRepository;
 
     @Override
-    public void register(Performance performance, List<MultipartFile> fileList) throws Exception {
+    public void register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception {
 //        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 //
 //        UUID uuid = UUID.randomUUID();
@@ -36,7 +36,7 @@ public class PerformanceServiceImpl implements PerformanceService{
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
                 // 파일 경로 지정
-                String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\fileTest";
+                String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
 
                 UUID uuid = UUID.randomUUID();
 
@@ -47,9 +47,9 @@ public class PerformanceServiceImpl implements PerformanceService{
                 File saveFile = new File(filePath, fileName);
                 multipartFile.transferTo(saveFile);
 
-                // performance db에 저장
-                performance.setPerformThumbnail(fileName);
-                performance.setPerformThumbnailPath(filePath);
+                // performance db에 detailImg 저장
+                performance.setPerformDetailImg(fileName);
+                performance.setPerformDetailImgPath(filePath);
 
 //               파일 저장
 //               FileOutputStream saveFile = new FileOutputStream(
@@ -62,7 +62,20 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         }
 
+        String thumbNailPath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail";
+
+        UUID uuid = UUID.randomUUID();
+
+        String thumbNailFileName = uuid + "_" + file.getOriginalFilename();
+
+        File saveThumbNail = new File(thumbNailPath, thumbNailFileName);
+        file.transferTo(saveThumbNail);
+
+        performance.setPerformThumbnail(thumbNailFileName);
+        performance.setPerformThumbnailPath(thumbNailPath);
+
         log.info("requestUploadFile(): Success");
+
         performanceRepository.save(performance);
     }
 

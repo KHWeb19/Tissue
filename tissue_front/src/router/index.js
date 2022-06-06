@@ -2,7 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import PerformanceRegisterPage from '@/views/PerformanceRegisterPage.vue'
+// performance
+import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
+import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
+import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
+import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +28,31 @@ const routes = [
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
     component: PerformanceRegisterPage
+  },
+  {
+    path: '/performanceListPage',
+    name: 'PerformanceListPage',
+    component: PerformanceListPage
+  },
+  {
+    path: '/performanceReadPage/:performNo',
+    name: 'PerformanceReadPage',
+    components: {
+      default: PerformanceReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/performanceModifyPage/:performNo',
+    name: 'PerformanceModifyPage',
+    components: {
+      default: PerformanceModifyPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 
