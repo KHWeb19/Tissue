@@ -54,6 +54,10 @@ public class Member {
 
     @Column(nullable = false)
     private String memberAddress;
+    @Column(nullable = false)
+    private String addZipCode;
+    @Column(nullable = false)
+    private String addDetail;
 
     @CreationTimestamp
     private Date memberRegDate;
