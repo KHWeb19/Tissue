@@ -36,4 +36,7 @@ public class MemberController {
 
         return checkId;
     }
+
+    // 로그인
+
 }
