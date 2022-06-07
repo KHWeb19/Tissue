@@ -72,11 +72,11 @@ export default {
 
 <style scoped>
 .menubar {
-  position: absolute;
   height: 90px;
   width: 1920px;
   z-index: 1;
   /*
+  position: absolute;
   background: white;
   background-color: white;
   border-bottom: 1px solid lightgrey;

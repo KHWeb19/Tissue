@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import HomeView from '../views/Home.vue'
-
+import hallTest from '@/components/Hall/HallTest.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,6 +12,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/hallTest',
+    name: 'hallTest',
+    component: hallTest
+  }
   // 메인페이지 (임지훈)
   
 ]
