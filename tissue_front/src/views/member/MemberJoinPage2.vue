@@ -13,9 +13,9 @@ export default {
   methods: {
         onSubmit (payload) {
             const { memberId, memberPw, memberName, memberBirth,
-            memberEmail, memberPhone, memberAddress, addZip, addDetail } = payload
+            memberEmail, memberPhone, memberAddress, addZipCode, addDetail } = payload
             axios.post('http://localhost:7777/Member/register', { memberId, memberPw, memberName, memberBirth,
-             memberEmail, memberPhone, memberAddress, addZip, addDetail})
+             memberEmail, memberPhone, memberAddress, addZipCode, addDetail})
             .then(()=> {
                 alert ('환영합니다 !')
                 

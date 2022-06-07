@@ -55,7 +55,7 @@ public class Member {
     @Column(nullable = false)
     private String memberAddress;
     @Column(nullable = false)
-    private String addZip;
+    private String addZipCode;
     @Column(nullable = false)
     private String addDetail;
 

@@ -34,11 +34,10 @@
                             <v-btn type="button" style="margin-top:3px;" @click="checkAuthNum()" :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark rounded depressed><v-icon>mdi-check</v-icon></v-btn>
                         </v-flex>
                     </v-layout>
-                    <br/>
-                    <div class="ml-2 mb-4" style="color:grey"> 주소 </div>
+                        <div class="ml-2 mb-4 mt-2 mr-5" style="color:grey"> 주소 </div>
                     <v-layout>
-                        <v-text-field @click="searchAddress()" id=zipcode style="width:1px;zoom:0.85" v-model="addZip" color="pink lighten-3" outlined placeholder="우편번호"></v-text-field>
-                        <v-text-field @click="searchAddress()" id=address_kakao v-model="memberAddress" color="pink lighten-3"></v-text-field>
+                        <v-text-field @click="searchAddress()" style="width:1px;zoom:0.85" v-model="addZipCode" id="zipcode" color="pink lighten-3" outlined placeholder="우편번호"></v-text-field>
+                        <v-text-field @click="searchAddress()" v-model="memberAddress" id="memberAddress" color="pink lighten-3"></v-text-field>
                     </v-layout>
                     <v-text-field name=address_detail v-model="addDetail" color="pink lighten-3" placeholder="상세주소" :rules="addRules"></v-text-field>
                     <v-text-field class="mt-3" v-model="memberEmail" label="이메일" color="pink lighten-3" outlined :rules="emailRules"></v-text-field>
@@ -65,7 +64,8 @@ export default {
             memberPhone:'',
             memberEmail:'',
             memberAddress:'',
-            addZip:'',
+            ckPw:'',
+            addZipCode:'',
             addDetail:'',
             memberBirth: '',
 
@@ -112,12 +112,12 @@ export default {
         onSubmit() {
             const validate = this.$refs.form.validate(); 
             const { memberId, memberPw, memberName, memberPhone,
-                        memberEmail, memberAddress, addZip, addDetail, memberBirth} = this
+                        memberEmail, memberAddress, addZipCode, addDetail, memberBirth} = this
             if(this.idPass == false || this.phonePass ==false ) {
                 alert("아이디와 핸드폰 검사를 진행해주세요.")
             } else if (validate) {
                 this.$emit('submit', { memberId, memberPw, memberName, memberPhone,
-                                                memberEmail, memberAddress, addZip, addDetail, memberBirth })
+                                                memberEmail, memberAddress, addZipCode, addDetail, memberBirth })
             } else {
                 alert("필수항목을 모두 작성해주세요")
             }
@@ -154,21 +154,20 @@ export default {
             if(this.checkNum == this.authNum) {
                 this.phonePass = true
                 this.checkPhoneCondition = true
+                alert("인증되셨습니다.")
             }else {
                 alert("인증번호가 올바르지 않습니다.")
             }
         },
         searchAddress() {
             new window.daum.Postcode({
-                oncomplete: function(data) {
-                    document.getElementById("zipcode").value = data.zonecode
-                    this.addZip = data.zonecode
-                    document.getElementById("address_kakao").value = data.address
+                oncomplete: (data) => {
+                    this.addZipCode = data.zonecode
                     this.memberAddress = data.address
                     document.querySelector("input[name=address_detail]").focus() 
                 }
             }).open();
-        }
+        },
     }
 }
 </script>
@@ -189,7 +188,7 @@ export default {
      width:40%;
 }
 .joinBtn {
-    margin-top:10%;
+    margin-top:9%;
     margin-bottom:10%;
     width:95%;
     zoom:1.5;
