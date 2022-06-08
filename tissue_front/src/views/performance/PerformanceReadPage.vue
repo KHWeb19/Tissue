@@ -52,7 +52,6 @@ export default {
         ...mapActions(['fetchPerformance']),
         onDelete () {
             const { performNo } = this.performance
-            //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/performance/${performNo}`)
                     .then(() => {
                         alert('삭제 성공!')

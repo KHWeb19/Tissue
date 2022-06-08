@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -45,14 +46,15 @@ public class PerformanceController {
         return performanceService.read(performNo);
     }
 
-    @PutMapping("/{performNo}")
+    @PutMapping(value="/{performNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public Performance performanceModify (
-            @PathVariable("performNo") Integer performNo,
-            @RequestBody Performance performance) {
+            @PathVariable("performNo") Integer performNo, Performance performance,
+            @RequestParam(value = "fileList", required = false ) List<MultipartFile> fileList,
+            @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         log.info ("performanceModify(): " + performance);
 
         performance.setPerformNo((Long.valueOf(performNo)));
-        performanceService.modify(performance);
+        performanceService.modify(performance, fileList, file);
 
         return performance;
     }

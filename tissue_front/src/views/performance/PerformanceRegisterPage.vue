@@ -1,10 +1,8 @@
 <template>
     <div align="center">
        <v-container>
-            <h3>공연 이미지 업로드 테스트 페이지~</h3>
-            <form>
-            <div>
-                <v-text-field type="text" v-model="performName" label="공연명"></v-text-field>
+            <h4 style="margin-top:1%;"><strong>공연 업로드 </strong></h4>
+                <v-text-field type="text" required height="5vh" style="margin-top:10px;" v-model="performName" label="공연명"></v-text-field>
                 <v-text-field type="Date" v-model="performStart" label="공연시작일"></v-text-field>
                 <v-text-field type="Date" v-model="performEnd" label="공연마감일"></v-text-field>
                 <v-text-field type="Time" v-model="performTime" label="공연시간"></v-text-field>
@@ -15,17 +13,33 @@
                 <v-text-field type="text" v-model="performCategory" label="공연카테고리"></v-text-field>
                 <v-text-field type="text" v-model="performGrade" label="등급"></v-text-field>
                 <v-text-field type="text" v-model="performer" label="출연자"></v-text-field>
+                
+                <kakao-map/>
 
-                <label>Thumbnail
-                    <input type="file" ref="file" id="file" @change="handleThumbNailUpload()"/>
-                </label>
-
-                 <label>DetailFiles
-                    <input type="file" ref="files" multiple @change="handleFileUpload()"/>
-                </label>
+                <div class="file-upload-list">
+                    <label>Thumbnail
+                        <input type="file" ref="file" id="file" @change="handleThumbNailUpload()"/>
+                    </label>
+                    <div>
+                        <img :src=file.preview class="preview"/>
+                    </div>
+                    <!-- <div class="file-upload-list__item__btn-remove" @click="handleRemove1()">
+                        삭제
+                    </div> -->
+                </div>
+                
+                <div class="file-upload-list">
+                    <label>DetailFiles
+                        <input type="file" ref="files" multiple @change="handleFileUpload()"/>
+                    </label>
+                    <div v-for="(file, index) in files" :key="index" style="text-align:center">
+                        <img :src=file.preview class="preview"/>
+                    </div>
+                    <!-- <div class="file-upload-list__item__btn-remove" @click="handleRemove2(index)">
+                        삭제
+                    </div> -->
+                </div>
                 <button @click="submitFiles()" value="Upload">파일 업로드</button>
-            </div>
-            </form>
         </v-container>
     </div>
 </template>
@@ -33,7 +47,9 @@
 <script>
 
 import axios from 'axios'
+import KakaoMap from '@/components/map/KakaoMap.vue'
 export default {
+  components: { KakaoMap },
   name: 'PerformanceRegisterPage',
   data () {
         return {
@@ -55,13 +71,36 @@ export default {
     },
   methods: {
       handleThumbNailUpload () {
-          this.file = this.$refs.file.files
-          console.log(this.file)
+        this.file = this.$refs.file.files
+        console.log(this.file)
+
+        this.file = {
+            file: this.$refs.file.files[0],
+            preview: URL.createObjectURL(this.$refs.file.files[0])
+        }
+
       },
        handleFileUpload () {
             this.files = this.$refs.files.files
             console.log(this.files)
+
+             for (let i = 0; i < this.$refs.files.files.length; i++){
+                this.files = [
+                    ...this.files,
+                    {
+                        file: this.$refs.files.files[i],
+                        preview: URL.createObjectURL(this.$refs.files.files[i])
+                    
+                    }
+                ]
+            }
         },
+        // handleRemove1 () {
+        //     this.fileList.splice(index, 1)
+        // },
+        // handleRemove2(index) {
+        //     this.fileList.splice(index, 1)
+        // },
         submitFiles () {
             let formData = new FormData()
 

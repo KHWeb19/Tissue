@@ -10,6 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,6 +35,7 @@ public class PerformanceServiceImpl implements PerformanceService{
 //        File saveFile = new File(filePath, fileName);
 //        file.transferTo(saveFile);
 
+        // 다중이미지 첨부
         try {
             for (MultipartFile multipartFile : fileList) {
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
@@ -62,6 +67,7 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         }
 
+        // 썸네일 첨부
         String thumbNailPath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail";
 
         UUID uuid = UUID.randomUUID();
@@ -98,7 +104,53 @@ public class PerformanceServiceImpl implements PerformanceService{
     }
 
     @Override
-    public void modify(Performance performance) {
+    public void modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException {
+        // 다중이미지 수정
+//        if (performance.getPerformDetailImg().equals(Optional.empty())) {
+//            Path filePath = Paths.get("c:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg\\" + performance.getPerformDetailImg());
+//            Files.delete(filePath);
+//        }
+//        try {
+//            for (MultipartFile multipartFile : fileList) {
+//                if (multipartFile != null) {
+//                    String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
+//
+//                    UUID uuid = UUID.randomUUID();
+//                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+//                    FileOutputStream saveFile = new FileOutputStream("../../tissue_front/src/assets/detailImg/" + fileName);
+//
+//                    saveFile.write(file.getBytes());
+//                    saveFile.close();
+//
+//                    performance.setPerformDetailImg(fileName);
+//                    performance.setPerformDetailImgPath(filePath);
+//                }
+//            }
+//        }catch (Exception e) {
+//
+//        }
+
+
+        // 썸네일 수정
+//        if (performance.getPerformThumbnail().equals(Optional.empty())) {
+//            Path thumbFilePath = Paths.get("c:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail\\" + performance.getPerformThumbnail());
+//            Files.delete(thumbFilePath);
+//        }
+
+        if (file != null) {
+            String thumbNailPath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail";
+
+            UUID uuid = UUID.randomUUID();
+
+            String thumbNailFileName = uuid + "_" + file.getOriginalFilename();
+
+            File saveThumbNail = new File(thumbNailPath, thumbNailFileName);
+            file.transferTo(saveThumbNail);
+
+            performance.setPerformThumbnail(thumbNailFileName);
+            performance.setPerformThumbnailPath(thumbNailPath);
+        }
+
         performanceRepository.save(performance);
     }
 

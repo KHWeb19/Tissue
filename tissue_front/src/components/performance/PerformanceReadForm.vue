@@ -88,14 +88,14 @@
             <v-row >
                 <v-col sm="3"><label>썸네일</label></v-col>
                 <v-col sm="6">
-                    <v-img :src="require(`../../assets/thumbNail/${performance.performThumbnail}`)" readonly/>
+                    <v-img :src="require(`@/assets/thumbNail/${this.performance.performThumbnail}`)"/>
                 </v-col>
             </v-row>
 
             <v-row >
                 <v-col sm="3"><label>상세이미지</label></v-col>
                 <v-col sm="6">
-                    <v-img :src="require(`../../assets/detailImg/${performance.performDetailImg}`)" readonly/>
+                    <v-img :src="require(`@/assets/detailImg/${this.performance.performDetailImg}`)"/>
                 </v-col>
             </v-row>
     

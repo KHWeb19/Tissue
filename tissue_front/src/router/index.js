@@ -2,11 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+// admin
+import AdminPage from '@/views/AdminPage.vue'
+
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
 import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
+
+// map
+import MapPage from '@/views/map/MapPage.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +29,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },  
+  },
+  {
+    path: '/adminPage',
+    name: 'AdminPage',
+    component: AdminPage
+  }, 
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
@@ -53,6 +64,11 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/mapPage',
+    name: 'MapPage',
+    component: MapPage
   },
 ]
 
