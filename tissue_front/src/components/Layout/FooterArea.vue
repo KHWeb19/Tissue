@@ -91,13 +91,6 @@
             </div>
           </div>
         </div>
-
-        <v-card-text
-          class="black--text"
-          style="border-top: 1px solid lightgrey"
-        >
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-card-text>
       </v-card>
     </v-footer>
   </div>
