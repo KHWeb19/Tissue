@@ -1,15 +1,15 @@
 <template>
     <div class="background">
-        <v-container>
+        <v-container >
             <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
-            <v-layout column class="mx-auto" justify-center>
+            <v-layout column class="mx-auto" justify-center wrap>
                 <v-form ref="form" name ="loginForm" @submit.prevent="onSubmit">
-                    <v-layout>
-                        <v-flex>
-                            <v-text-field v-model="memberId" style="width:350px" label="아이디" color="pink lighten-3"  required outlined :rules='idRules'></v-text-field>
+                    <v-layout wrap>
+                        <v-flex grow>
+                            <v-text-field class="mr-2" v-model="memberId" label="아이디" color="pink lighten-3"  required outlined :rules='idRules'></v-text-field>
                         </v-flex>
-                        <v-flex>
-                            <v-btn type="button" style="zoom:1.16; margin-top:3px;" @click="checkId()" :color="this.checkIdCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark depressed>check</v-btn>
+                        <v-flex shrink>
+                            <v-btn type="button" style="zoom:1.16; margin-top:3px; margin-bottom:12px" @click="checkId()" :color="this.checkIdCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark depressed>check</v-btn>
                         </v-flex>
                     </v-layout>
                     <v-text-field type="password" v-model="memberPw"  label="비밀번호" 
@@ -18,12 +18,12 @@
                         color="pink lighten-3" outlined append-icon="mdi-lock-check" :rules="pwRules2"></v-text-field>
                     <v-text-field v-model="memberName"  label="이름" color="pink lighten-3" outlined :rules="nameRules"></v-text-field>
                     <v-text-field type="date" v-model="memberBirth" label="생일" color="pink lighten-3" outlined></v-text-field>
-                    <v-layout>
-                        <v-flex>
-                            <v-text-field v-model="memberPhone" style="width:350px" label="휴대폰" placeholder=" ' - '를 제외하고 입력해주세요." color="pink lighten-3" outlined :rules="phRules"></v-text-field>
+                    <v-layout wrap>
+                        <v-flex grow>
+                            <v-text-field class="mr-2" v-model="memberPhone" label="휴대폰" placeholder=" ' - '를 제외하고 입력해주세요." color="pink lighten-3" outlined :rules="phRules"></v-text-field>
                         </v-flex>
-                        <v-flex>
-                            <v-btn type="button" style="zoom:1.16; margin-top:3px;" @click="checkPhone()" color="blue lighten-3" dark depressed>Check</v-btn>
+                        <v-flex shrink>
+                            <v-btn type="button" style="zoom:1.16; margin-top:3px; margin-bottom:12px" @click="checkPhone()" color="blue lighten-3" dark depressed>Check</v-btn>
                         </v-flex>
                     </v-layout>
                     <v-layout justify-center v-if="this.sendAuth == true">
@@ -36,8 +36,12 @@
                     </v-layout>
                         <div class="ml-2 mb-4 mt-2 mr-5" style="color:grey"> 주소 </div>
                     <v-layout>
-                        <v-text-field @click="searchAddress()" style="width:1px;zoom:0.85" v-model="addZipCode" id="zipcode" color="pink lighten-3" outlined placeholder="우편번호"></v-text-field>
-                        <v-text-field @click="searchAddress()" v-model="memberAddress" id="memberAddress" color="pink lighten-3"></v-text-field>
+                        <v-flex shrink>
+                            <v-text-field style="zoom:0.85" @click="searchAddress()" v-model="addZipCode" id="zipcode" color="pink lighten-3" outlined placeholder="우편번호"></v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-text-field @click="searchAddress()" v-model="memberAddress" id="memberAddress" color="pink lighten-3"></v-text-field>
+                        </v-flex>
                     </v-layout>
                     <v-text-field name=address_detail v-model="addDetail" color="pink lighten-3" placeholder="상세주소" :rules="addRules"></v-text-field>
                     <v-text-field class="mt-3" v-model="memberEmail" label="이메일" color="pink lighten-3" outlined :rules="emailRules"></v-text-field>
