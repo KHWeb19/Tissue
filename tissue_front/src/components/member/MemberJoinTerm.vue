@@ -243,7 +243,7 @@
                 </v-layout>
                 <v-row class="btnSet" justify="center">
                     <v-col cols="auto">
-                        <router-link to="/main"><v-btn color="grey" dark>CANCLE</v-btn></router-link> 
+                        <router-link to="/"><v-btn color="grey" dark>CANCLE</v-btn></router-link> 
                     </v-col>
                     <v-col cols="auto">
                         <v-btn color="blue lighten-3" dark @click="ckCheck" >NEXT</v-btn>    
