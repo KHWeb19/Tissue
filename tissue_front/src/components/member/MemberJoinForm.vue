@@ -27,10 +27,10 @@
                         </v-flex>
                     </v-layout>
                     <v-layout justify-center v-if="this.sendAuth == true">
-                        <v-flex class="ml-8">
-                            <v-text-field v-model="checkNum" style="width:300px;" label="인증번호" color="pink lighten-3" outlined dense ></v-text-field>
+                        <v-flex xs5 shrink>
+                            <v-text-field class="mr-5" v-model="checkNum" label="인증번호" color="pink lighten-3" outlined dense ></v-text-field>
                         </v-flex>
-                        <v-flex>
+                        <v-flex shrink>
                             <v-btn type="button" style="margin-top:3px;" @click="checkAuthNum()" :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark rounded depressed><v-icon>mdi-check</v-icon></v-btn>
                         </v-flex>
                     </v-layout>
@@ -189,7 +189,7 @@ export default {
 .mx-auto {
      position: relative;
      margin-top:50px;
-     width:40%;
+     width:35%;
 }
 .joinBtn {
     margin-top:9%;
