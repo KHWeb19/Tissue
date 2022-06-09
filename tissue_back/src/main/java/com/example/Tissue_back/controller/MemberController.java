@@ -28,12 +28,15 @@ public class MemberController {
     }
 
     // 아이디 중복 여부 체크
-    @GetMapping("/checkId/{id}")
-    public Boolean checkId (@PathVariable("id") String memberId){
+    @GetMapping("/checkId/{memberId}")
+    public Boolean checkId (@PathVariable("memberId") String memberId){
         log.info("checkId(): " + memberId);
 
         Boolean checkId = service.checkId(memberId);
 
         return checkId;
     }
+
+    // 로그인
+
 }

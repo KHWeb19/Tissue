@@ -28,6 +28,8 @@ public class MemberDto {
     private String memberEmail;
 
     private String memberAddress;
+    private String addZipCode;
+    private String addDetail;
 
     private Role memberRole;
 
@@ -41,6 +43,8 @@ public class MemberDto {
                 .memberPhone(memberPhone)
                 .memberEmail(memberEmail)
                 .memberAddress(memberAddress)
+                .addZipCode(addZipCode)
+                .addDetail(addDetail)
                 .memberRole(memberRole)
                 .build();
         return member;

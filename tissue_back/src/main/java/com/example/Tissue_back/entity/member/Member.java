@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -54,6 +53,10 @@ public class Member {
 
     @Column(nullable = false)
     private String memberAddress;
+    @Column(nullable = false)
+    private String addZipCode;
+    @Column(nullable = false)
+    private String addDetail;
 
     @CreationTimestamp
     private Date memberRegDate;
