@@ -15,11 +15,10 @@ public class Hall {
     private String hallName;
 
     @Column
-    private int seatRow;
+    private int rowCnt;
 
     @Column
-    private int seatColumn;
+    private int colCnt;
 
-    @Column
-    private String seatGrade;
+
 }

@@ -1,6 +1,5 @@
 package com.example.Tissue_back.service.hall;
 
-
 import com.example.Tissue_back.entity.hall.Hall;
 import com.example.Tissue_back.repository.hall.HallRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +13,9 @@ public class HallServiceImpl implements HallService{
     @Autowired
     private HallRepository hallRepository;
 
+
     @Override
     public void register(Hall hall) {
-
         hallRepository.save(hall);
     }
 }
