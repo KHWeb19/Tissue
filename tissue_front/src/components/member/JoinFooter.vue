@@ -1,12 +1,12 @@
 <template>
-    <v-container class="mt-8 mb-10">
+    <div>
         <v-row justify="center">
-        <div class="logo" style="color:skyblue">T</div><div class="logo" style="color:pink">issue</div>
-        <div class="mt-3">
-            &nbsp; &nbsp; copyright Tissue corp. @2022 All rights reserved
-        </div>
+            <div class="logo" style="color:skyblue">T</div><div class="logo" style="color:pink">issue</div>
+            <div class="mt-3">
+                &nbsp; &nbsp; copyright Tissue corp. @2022 All rights reserved
+            </div>
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <script>
