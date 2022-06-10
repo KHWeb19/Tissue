@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav-bar-black class="navbar_black" style="display: none" />
-    <nav-bar-white class="navbar_white" style="position: absolute" />
+    <new-nav-bar />
+
     <div>
       <v-carousel
         height="720px"
@@ -118,14 +118,12 @@
 </template>
 
 <script>
-import NavBarWhite from "@/components/Layout/NavBarWhite.vue";
-import NavBarBlack from "@/components/Layout/NavBarBlack.vue";
+import NewNavBar from "@/components/Layout/NewNavBar.vue";
 
 export default {
   name: "HomeView",
   components: {
-    NavBarWhite,
-    NavBarBlack,
+    NewNavBar,
   },
 
   data() {
@@ -147,39 +145,12 @@ export default {
       ],
     };
   },
-
-  mounted() {
-    window.addEventListener("scroll", function () {
-      if (window.scrollY <= 700) {
-        document.getElementsByClassName("navbar_black")[0].style.background =
-          "transparent";
-        document.getElementsByClassName(
-          "navbar_black"
-        )[0].style.backgroundColor = "transparent";
-        document.getElementsByClassName("navbar_black")[0].style.borderBottom =
-          "none";
-        document.getElementsByClassName("navbar_black")[0].style.display =
-          "none";
-      } else if (window.scrollY > 700) {
-        document.getElementsByClassName("navbar_black")[0].style.background =
-          "white";
-        document.getElementsByClassName(
-          "navbar_black"
-        )[0].style.backgroundColor = "white";
-        document.getElementsByClassName("navbar_black")[0].style.borderBottom =
-          "1px solid lightgrey";
-        document.getElementsByClassName("navbar_black")[0].style.display = "";
-        document.getElementsByClassName("navbar_black")[0].style.position =
-          "fixed";
-      }
-    });
-  },
 };
 </script>
 
 <style scoped>
 .slider {
-  z-index: 0;
+  z-index: 1;
   margin-top: 0;
 }
 .side_bar {
