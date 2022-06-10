@@ -11,7 +11,7 @@
 <script>
 import MemberJoinForm from '@/components/member/MemberJoinForm.vue'
 import axios from 'axios';
-import JoinFooter from '@/components/member/JoinFooter.vue';
+import JoinFooter from '@/components/Layout/JoinFooter.vue';
 
 export default {
   components: { MemberJoinForm, JoinFooter },
