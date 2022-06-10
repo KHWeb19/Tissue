@@ -303,7 +303,7 @@ export default {
     padding:2%;
 }
 .btnSet{
-    padding-top:6%;
+    padding-top:5%;
     zoom: 1.5;
 }
 .v-btn {
