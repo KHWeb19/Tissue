@@ -1,9 +1,15 @@
 <template>
   <v-app>
     <v-main>
-      <new-nav-bar-2 />
-      <div v-if="!isHome" style="height: 80px"></div>
-
+      <div
+        v-if="
+          this.url != 'http://localhost:8080/join' &&
+          this.url != 'http://localhost:8080/join/form'
+        "
+      >
+        <new-nav-bar-2 />
+        <div v-if="!isHome" style="height: 80px"></div>
+      </div>
       <v-main>
         <router-view />
       </v-main>
