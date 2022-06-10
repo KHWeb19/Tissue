@@ -25,7 +25,12 @@ public class WebSecurityConfig {
         http.cors()
                 .and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll();
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/admin/**").access("ROLE_ADMIN");
+
+        http.formLogin()
+                .loginPage("/login");
+
         return http.build();
     }
 
