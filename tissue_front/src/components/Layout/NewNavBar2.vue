@@ -5,7 +5,7 @@
         <v-toolbar-title>
           <router-link to="/">
             <div>
-              <div class="header_logo"><h1>Tissue</h1></div>
+              <div class="header_logo" @click="goHome"><h1>Tissue</h1></div>
             </div>
           </router-link>
         </v-toolbar-title>
@@ -85,6 +85,12 @@ export default {
         document.getElementsByClassName("menubar")[0].style.position = "fixed";
       }
     });
+  },
+  methods: {
+    goHome() {
+      this.$router.push("/");
+      this.$router.go();
+    },
   },
 };
 </script>
