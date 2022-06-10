@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 // 메인페이지 (임지훈)
-import HomeView from '../views/Home.vue'
+import Home from '../views/Home.vue'
+import hallTest from '@/components/Hall/HallTest.vue'
+import HallRegister from '@/components/Hall/HallRegister.vue'
+
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
-import MemberLoginPage from '../views/member/MemberLoginPage.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,7 +14,17 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Home
+  },
+  {
+    path: '/hallTest',
+    name: 'hallTest',
+    component: hallTest
+  },
+  {
+    path: '/hallRegister',
+    name: 'HallRegister',
+    component: HallRegister
   },
   // 메인페이지 (임지훈)
   {
@@ -26,12 +36,7 @@ const routes = [
     path: '/join/form',
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
-    },
-    {
-        path: '/login',
-        name: 'MemberLoginPage',
-        component: MemberLoginPage
-  }
+  },
 ]
 
 const router = new VueRouter({
