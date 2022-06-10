@@ -2,6 +2,8 @@
   <v-app>
     <v-main>
       <new-nav-bar-2 />
+      <div v-if="!isHome" style="height: 80px"></div>
+
       <v-main>
         <router-view />
       </v-main>
@@ -30,9 +32,19 @@ export default {
     joinFooter,
     NewNavBar2,
   },
+  data() {
+    return {
+      url: null,
+    };
+  },
 
   created() {
     this.url = window.location.href;
+    if (this.url == "http://localhost:8080/") {
+      this.isHome = true;
+    } else {
+      this.isHome = false;
+    }
   },
 };
 </script>

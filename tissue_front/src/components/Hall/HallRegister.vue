@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div style="height: 90px; border-bottom: 1px solid black"></div>
     <v-container>
       <v-row>
         <v-col>
