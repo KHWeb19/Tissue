@@ -1,4 +1,4 @@
-package com.example.Tissue_back.repository;
+package com.example.Tissue_back.repository.member;
 
 import com.example.Tissue_back.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.memberId = :id")
     Optional<Member> findByMemberId(@Param("id") String memberId);
+
+
 }

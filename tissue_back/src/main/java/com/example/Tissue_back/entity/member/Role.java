@@ -1,5 +1,6 @@
 package com.example.Tissue_back.entity.member;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -10,4 +11,5 @@ public enum Role {
     ADMIN("ROLE_ADMIN");
 
     private final String value;
+
 }

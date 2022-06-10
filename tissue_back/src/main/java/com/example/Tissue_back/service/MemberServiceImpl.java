@@ -1,9 +1,10 @@
 package com.example.Tissue_back.service;
 
-import com.example.Tissue_back.controller.request.MemberDto;
+import com.example.Tissue_back.controller.request.member.LoginDto;
+import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
-import com.example.Tissue_back.entity.member.Role;
-import com.example.Tissue_back.repository.MemberRepository;
+import com.example.Tissue_back.repository.member.MemberRepository;
+import com.example.Tissue_back.service.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,9 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository repository;
 
     @Autowired
+    private SecurityService securityService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -26,7 +30,6 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(memberDto.getMemberPw());
         memberDto.setMemberPw(encodedPassword);
-        memberDto.setMemberRole(Role.USER);
 
         repository.save(memberDto.toEntity());
     }
@@ -40,6 +43,30 @@ public class MemberServiceImpl implements MemberService {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public String login(LoginDto loginDto) {
+        Optional<Member> maybeMember = repository.findByMemberId(loginDto.getMemberId());
+
+        if(maybeMember.equals(Optional.empty())){
+            log.info("Id값이 없습니다.");
+            return null;
+        }
+
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(loginDto.getMemberPw(), loginMember.getMemberPw())) {
+            log.info("Entered wrong password!");
+            return null;
+        }
+
+        String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
+
+        String token = securityService.createToken(loginDto.getMemberId(), encodedPassword, (2*1000*60));
+
+        return token;
+
     }
 
 }

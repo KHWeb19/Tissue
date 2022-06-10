@@ -1,4 +1,4 @@
-package com.example.Tissue_back.controller.request;
+package com.example.Tissue_back.controller.request.member;
 
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.member.Role;
@@ -28,10 +28,10 @@ public class MemberDto {
     private String memberEmail;
 
     private String memberAddress;
-    private String addZip;
+    private String addZipCode;
     private String addDetail;
 
-    private Role memberRole;
+    private Role role;
 
     /* Dto -> Entity */
     public Member toEntity() {
@@ -43,9 +43,9 @@ public class MemberDto {
                 .memberPhone(memberPhone)
                 .memberEmail(memberEmail)
                 .memberAddress(memberAddress)
-                .addZip(addZip)
+                .addZipCode(addZipCode)
                 .addDetail(addDetail)
-                .memberRole(memberRole)
+                .role(role.USER)
                 .build();
         return member;
     }

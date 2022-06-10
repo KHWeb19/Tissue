@@ -1,10 +1,11 @@
 package com.example.Tissue_back.controller;
 
-import com.example.Tissue_back.controller.request.MemberDto;
-import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.controller.request.member.LoginDto;
+import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,4 +37,23 @@ public class MemberController {
 
         return checkId;
     }
+
+    // 로그인
+    @PostMapping("/login")
+    public String login (@Validated @RequestBody LoginDto loginDto) throws Exception{
+
+        log.info("== Tissue Member Login ==" + loginDto);
+
+        String response = service.login(loginDto);
+        log.info("check" + response);
+
+        if (response != null) {
+            log.info("로그인 성공!");
+        } else {
+            log.info("로그인 실패!");
+        }
+
+        return response;
+    }
+
 }
