@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div style="height: 90px; border-bottom: 1px solid black"></div>
-
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-stepper-step :complete="e1 > 1" step="1"> 행열 지정 </v-stepper-step>
