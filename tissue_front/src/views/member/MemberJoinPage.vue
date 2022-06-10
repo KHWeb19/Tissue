@@ -2,18 +2,16 @@
     <div class="background">
         <v-container>
             <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
-            <member-join-term/>
-            <join-footer class="mt-16 mb-10"/>
+            <member-join-term class="mb-5"/>
         </v-container>
     </div>
 </template>
 
 <script>
 import MemberJoinTerm from '@/components/member/MemberJoinTerm.vue';
-import JoinFooter from '@/components/Layout/JoinFooter.vue';
 
 export default {
-  components: {MemberJoinTerm, JoinFooter },
+  components: {MemberJoinTerm},
   name: 'MemberJoinPage',
 }
 </script>

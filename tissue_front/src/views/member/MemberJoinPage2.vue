@@ -2,8 +2,7 @@
     <div class="background">
         <v-container>
             <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
-            <member-join-form @submit="onSubmit" />
-            <join-footer class="mt-16 mb-10 pt-5"/>
+            <member-join-form @submit="onSubmit" class="mb-12"/>
         </v-container>
     </div>
 </template>
@@ -11,10 +10,9 @@
 <script>
 import MemberJoinForm from '@/components/member/MemberJoinForm.vue'
 import axios from 'axios';
-import JoinFooter from '@/components/Layout/JoinFooter.vue';
 
 export default {
-  components: { MemberJoinForm, JoinFooter },
+  components: { MemberJoinForm},
   name: 'MemberJoinPage2',
   methods: {
         onSubmit (payload) {
