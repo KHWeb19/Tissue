@@ -10,7 +10,7 @@
 
 <script>
 import MemberJoinTerm from '@/components/member/MemberJoinTerm.vue';
-import JoinFooter from '@/components/member/JoinFooter.vue';
+import JoinFooter from '@/components/Layout/JoinFooter.vue';
 
 export default {
   components: {MemberJoinTerm, JoinFooter },

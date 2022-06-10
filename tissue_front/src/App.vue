@@ -23,10 +23,8 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-
 export default {
   name: "App",
-
   components: {
     FooterArea,
     joinFooter,
@@ -37,7 +35,6 @@ export default {
       url: null,
     };
   },
-
   created() {
     this.url = window.location.href;
     if (this.url == "http://localhost:8080/") {
