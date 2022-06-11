@@ -3,6 +3,7 @@
     <v-main>
       <div
         v-if="
+          this.url != 'http://localhost:8080/login' &&
           this.url != 'http://localhost:8080/join' &&
           this.url != 'http://localhost:8080/join/form'
         "
@@ -16,6 +17,7 @@
     </v-main>
     <footer-area
       v-if="
+        this.url != 'http://localhost:8080/login' &&
         this.url != 'http://localhost:8080/join' &&
         this.url != 'http://localhost:8080/join/form'
       "

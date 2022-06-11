@@ -8,7 +8,7 @@
                     </div>
                 </v-col>
                 <v-col cols="1" class="mt-7">
-                    <v-btn depressed color="blue lighten-3" dark>회원가입</v-btn>
+                    <v-btn depressed color="blue lighten-3" dark to="/join">회원가입</v-btn>
                 </v-col>
             </v-row>
             <div class="box pl-5 pr-5 pb-15 mb-5">

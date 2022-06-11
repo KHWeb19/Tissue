@@ -20,7 +20,7 @@
                         </v-col>
                     </v-row> 
                     <v-row justify="center">
-                        <v-btn color="blue lighten-3" dark large width="95%">로그인</v-btn>
+                        <v-btn color="blue lighten-3" dark large width="95%" @click="login">로그인</v-btn>
                     </v-row>
                     <v-row>
                         <v-col style="color:grey; font-size:11pt" class="mt-2">
@@ -30,11 +30,12 @@
                         </v-col>
                     </v-row>
                     <v-row justify="center" class="mt-10">
-                        <button><v-img src="@/assets/button/kakao_login_medium_wide.png"></v-img></button>
+                        <button class="socialBtn"><v-img src="@/assets/button/kakao_login_medium_wide.png"></v-img></button>
                     </v-row>
                     <v-row justify="center" class="mt-5">
-                        <button class="btnBorder"><v-img src="@/assets/button/google_login.png"></v-img></button>
+                        <button class="socialBtn btnBorder"><v-img src="@/assets/button/google_login.png"></v-img></button>
                     </v-row>
+                    <br/>
                 </v-container>
             </v-tab-item>
             <v-tab-item class="mt-5">
@@ -81,6 +82,7 @@ export default {
             })
 
             localStorage.setItem('token', response.data)
+            this.$router.push('/')
             console.log(localStorage)
 
         }
@@ -98,5 +100,11 @@ export default {
 .btnBorder{
     border:1px solid rgb(194, 193, 193);
     border-radius: 5px;
+}
+
+@media (min-width: 1800px) {
+    .socialBtn {
+        width:330px;
+    }
 }
 </style>
