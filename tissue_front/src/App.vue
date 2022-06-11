@@ -45,5 +45,13 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
+<style scoped>
+.v-application {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+@font-face {
+    font-family: 'Noto Sans KR' ;
+    src: url('assets/font/NotoSansKR-Bold.otf');
+    font-weight: 500;
+}
+</style>
