@@ -2,6 +2,7 @@
     <div class="background">
         <v-container>
             <div class="mt-7 topBtn">
+                    <v-btn class="mr-2" depressed color="blue lighten-3" dark to="/join">로그인</v-btn>
                     <v-btn depressed color="blue lighten-3" dark to="/join">회원가입</v-btn>
             </div>
             <v-row justify="center" class="mt-3 mb-3">
@@ -9,16 +10,20 @@
                     <div class="logo">
                         <router-link to="/"><div style="color:skyblue; float:left;">T</div><div style="color:pink; float:left;">issue</div></router-link>
                     </div>
+                    <div class="findBtn">
+                        <div class="findIdBtn mt-10 ml-5">
+                            <router-link to="/findId"> 아이디 찾기</router-link>
+                        </div>
+                        <div class="findPwBtn mt-10 ml-5">
+                            <router-link to="/findPw"> 비밀번호 찾기 </router-link>
+                        </div>
+                    </div>
                 </v-col>
             </v-row>
-            <div class="box pl-5 pr-5 pb-15 mb-5">
-                <v-row justify="center" class="mt-12">
-                    <v-col cols="5" xl="4" class="mr-13">
-                        <member-login/>
-                    </v-col>
-                    <v-col cols="5" xl="4">
-                        <v-img src="@/assets/testtest.png"></v-img>
-                        <v-img src="@/assets/testtest2.jpg"></v-img>
+            <div class="box pl-5 pr-5 pt-10">
+                <v-row justify="center" class="mt-16" >
+                    <v-col cols="5">
+                        <member-find-id/>
                     </v-col>
                 </v-row>
             </div>
@@ -27,19 +32,22 @@
 </template>
 
 <script>
-import MemberLogin from '@/components/member/MemberLogin.vue'
+import MemberFindId from '@/components/member/MemberFindId.vue'
 
 export default {
-  components: { MemberLogin },
-
-    name:'MemberLoginPage',
+  components: { MemberFindId },
+    name:'MemberFindIdPage',
 
 }
 </script>
 
 <style scoped>
+template{
+    height:100%
+}
 .background {
     background-color: rgb(241, 241, 241);
+    height: 100%;
 }
 .logo {
     font-size: 50pt;
@@ -51,16 +59,31 @@ export default {
     border: 1px solid rgb(197, 197, 197);
     width:82%;
     margin: auto;
+    padding-bottom: 120px;
+}
+.findIdBtn {
+    float:left;
+    font-size:18pt;
+}
+.findPwBtn {
+    float:left;
+    font-size:18pt;
+}
+.findIdBtn >a {
+    color: black;
+}
+.findPwBtn >a  {
+    color:rgb(168, 167, 167);
 }
 .topBtn{
     position: absolute;
-    left:72%;
+    left:68%;
 }
 
 @media (min-width: 1800px) {
     .topBtn{
     position: absolute;
-    left:80%;
+    left:76%;
     zoom:1.2;
     }
     .background {
@@ -68,5 +91,11 @@ export default {
     height: 88vh;
     }
 }
-
+@media (max-width: 580px) {
+    .topBtn{
+    position: absolute;
+    left:60%;
+    zoom:0.8;
+    }
+}
 </style>

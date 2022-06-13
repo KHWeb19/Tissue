@@ -3,12 +3,13 @@
     <v-main>
       <div
         v-if="
+          this.url != 'http://localhost:8080/findId' &&
           this.url != 'http://localhost:8080/login' &&
           this.url != 'http://localhost:8080/join' &&
           this.url != 'http://localhost:8080/join/form'
         "
       >
-        <new-nav-bar-2 />
+        <new-nav-bar-2/>
         <div v-if="!isHome" style="height: 80px"></div>
       </div>
       <v-main>
@@ -17,6 +18,7 @@
     </v-main>
     <footer-area
       v-if="
+        this.url != 'http://localhost:8080/findId' &&
         this.url != 'http://localhost:8080/login' &&
         this.url != 'http://localhost:8080/join' &&
         this.url != 'http://localhost:8080/join/form'
@@ -61,5 +63,11 @@ export default {
     font-family: 'Noto Sans KR' ;
     src: url('assets/font/NotoSansKR-Bold.otf');
     font-weight: 500;
+}
+</style>
+
+<style>
+a {
+  text-decoration: none;
 }
 </style>

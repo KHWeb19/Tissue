@@ -23,10 +23,10 @@
                         <v-btn color="blue lighten-3" dark large width="95%" @click="login">로그인</v-btn>
                     </v-row>
                     <v-row>
-                        <v-col style="color:grey; font-size:11pt" class="mt-2">
-                            아이디 찾기
+                        <v-col style="font-size:11pt" class="rinkColor mt-2">
+                            <router-link to="/findId"> 아이디 찾기 </router-link>
                             │
-                            비밀번호 찾기
+                            <router-link to="findPw"> 비밀번호 찾기 </router-link>
                         </v-col>
                     </v-row>
                     <v-row justify="center" class="mt-10">
@@ -75,16 +75,22 @@ export default {
     },
     methods: {
         async login(){
-            const response = await axios.post('Member/login', {
+            try {
+                const response = await axios.post('Member/login', {
                 memberId : this.memberId,
                 memberPw : this.memberPw
+                })
 
-            })
-
-            localStorage.setItem('token', response.data)
-            this.$router.push('/')
-            console.log(localStorage)
-
+                if (response.data) {
+                    localStorage.setItem('token', response.data)
+                    this.$router.push('/')
+                    console.log(localStorage)
+                } else {
+                    alert("아이디와 비밀번호를 확인해주세요.")
+                }
+            }catch(error){
+                alert(error)
+            }
         }
     }
 }
@@ -101,7 +107,9 @@ export default {
     border:1px solid rgb(194, 193, 193);
     border-radius: 5px;
 }
-
+.rinkColor >a {
+    color:grey;
+}
 @media (min-width: 1800px) {
     .socialBtn {
         width:330px;

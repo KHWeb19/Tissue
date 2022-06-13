@@ -8,6 +8,8 @@ import HallRegister from '@/components/Hall/HallRegister.vue'
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
 import MemberLoginPage from '../views/member/MemberLoginPage.vue'
+import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,7 +46,12 @@ const routes = [
         path: '/login',
         name: 'MemberLoginPage',
         component:MemberLoginPage
-  }
+    },
+    {
+        path: '/findId',
+        name: 'MemberFindIdPage',
+        component:MemberFindIdPage
+    }
   // 유아림
 ]
 
