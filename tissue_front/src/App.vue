@@ -3,6 +3,7 @@
     <v-main>
       <div
         v-if="
+          this.url != 'http://localhost:8080/findPw' &&
           this.url != 'http://localhost:8080/findId' &&
           this.url != 'http://localhost:8080/login' &&
           this.url != 'http://localhost:8080/join' &&
@@ -18,6 +19,7 @@
     </v-main>
     <footer-area
       v-if="
+        this.url != 'http://localhost:8080/findPw' &&
         this.url != 'http://localhost:8080/findId' &&
         this.url != 'http://localhost:8080/login' &&
         this.url != 'http://localhost:8080/join' &&

@@ -16,7 +16,7 @@
                     </v-row>
                     <v-row dense no-gutters>
                         <v-col>
-                            <v-text-field v-model="memberPw" color="pink lighten-3" placeholder="비밀번호" outlined></v-text-field>
+                            <v-text-field type="password" v-model="memberPw" color="pink lighten-3" placeholder="비밀번호" outlined></v-text-field>
                         </v-col>
                     </v-row> 
                     <v-row justify="center">

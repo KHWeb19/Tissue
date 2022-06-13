@@ -23,7 +23,7 @@
             <div class="box pl-5 pr-5 pt-10">
                 <v-row justify="center" class="mt-16" >
                     <v-col cols="5">
-                        <member-find-id/>
+                        <member-find-pw/>
                     </v-col>
                 </v-row>
             </div>
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import MemberFindId from '@/components/member/MemberFindId.vue'
+import MemberFindPw from '@/components/member/MemberFindPw.vue'
 
 export default {
-  components: { MemberFindId },
-    name:'MemberFindIdPage',
+    components: { MemberFindPw },
+    name:'MemberFindPwPage',
 
 }
 </script>
@@ -70,10 +70,10 @@ template{
     font-size:18pt;
 }
 .findIdBtn >a {
-    color: black;
+    color:rgb(168, 167, 167);
 }
 .findPwBtn >a  {
-    color:rgb(168, 167, 167);
+    color: black;
 }
 .topBtn{
     position: absolute;
