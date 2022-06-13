@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/hall")
@@ -22,5 +24,19 @@ public class HallController {
         log.info("hallRegister()");
 
         hallService.register(hall);
+    }
+
+    @GetMapping("/list")
+    public List<Hall> hallList(){
+        log.info("hallList()");
+
+        return hallService.list();
+    }
+
+    @GetMapping("/{hallNo}")
+    public Hall hallRead(@PathVariable("hallNo")Long hallNo){
+        log.info("hallRead()" +hallNo);
+
+        return hallService.read(hallNo);
     }
 }
