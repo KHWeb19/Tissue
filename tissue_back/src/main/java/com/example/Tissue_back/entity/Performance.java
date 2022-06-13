@@ -56,8 +56,17 @@ public class Performance {
     @Column(name="perform_thumbnail_path")
     private String performThumbnailPath;
 
-    @Column(name="perform_detail_img")
-    private String performDetailImg;
+    @Column(name="perform_detail_img_1")
+    private String performDetailImg1;
+    @Column(name="perform_detail_img_2")
+    private String performDetailImg2;
+    @Column(name="perform_detail_img_3")
+    private String performDetailImg3;
+    @Column(name="perform_detail_img_4")
+    private String performDetailImg4;
+    @Column(name="perform_detail_img_5")
+    private String performDetailImg5;
+
     @Column(name="perform_detail_img_path")
     private String performDetailImgPath;
 }

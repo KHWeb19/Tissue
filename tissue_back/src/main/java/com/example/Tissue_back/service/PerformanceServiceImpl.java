@@ -26,16 +26,8 @@ public class PerformanceServiceImpl implements PerformanceService{
 
     @Override
     public void register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception {
-//        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-//
-//        UUID uuid = UUID.randomUUID();
-//
-//        String fileName = uuid + "_" + file.getOriginalFilename();
-//
-//        File saveFile = new File(filePath, fileName);
-//        file.transferTo(saveFile);
 
-        // 다중이미지 첨부
+        // 다중이미지 등록
         try {
             for (MultipartFile multipartFile : fileList) {
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
@@ -53,8 +45,22 @@ public class PerformanceServiceImpl implements PerformanceService{
                 multipartFile.transferTo(saveFile);
 
                 // performance db에 detailImg 저장
-                performance.setPerformDetailImg(fileName);
-                performance.setPerformDetailImgPath(filePath);
+                if(multipartFile == fileList.get(0)) {
+                    performance.setPerformDetailImg1(fileName);
+                    performance.setPerformDetailImgPath(filePath);
+                } else if (multipartFile == fileList.get(1)) {
+                    performance.setPerformDetailImg2(fileName);
+                    performance.setPerformDetailImgPath(filePath);
+                } else if (multipartFile == fileList.get(2)) {
+                    performance.setPerformDetailImg3(fileName);
+                    performance.setPerformDetailImgPath(filePath);
+                } else if (multipartFile == fileList.get(3)) {
+                    performance.setPerformDetailImg4(fileName);
+                    performance.setPerformDetailImgPath(filePath);
+                } else {
+                    performance.setPerformDetailImg5(fileName);
+                    performance.setPerformDetailImgPath(filePath);
+                }
 
 //               파일 저장
 //               FileOutputStream saveFile = new FileOutputStream(
@@ -67,7 +73,7 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         }
 
-        // 썸네일 첨부
+        // 썸네일 등록
         String thumbNailPath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail";
 
         UUID uuid = UUID.randomUUID();
@@ -106,37 +112,45 @@ public class PerformanceServiceImpl implements PerformanceService{
     @Override
     public void modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException {
         // 다중이미지 수정
-//        if (performance.getPerformDetailImg().equals(Optional.empty())) {
-//            Path filePath = Paths.get("c:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg\\" + performance.getPerformDetailImg());
-//            Files.delete(filePath);
-//        }
-//        try {
-//            for (MultipartFile multipartFile : fileList) {
-//                if (multipartFile != null) {
-//                    String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
-//
-//                    UUID uuid = UUID.randomUUID();
-//                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
-//                    FileOutputStream saveFile = new FileOutputStream("../../tissue_front/src/assets/detailImg/" + fileName);
-//
-//                    saveFile.write(file.getBytes());
-//                    saveFile.close();
-//
-//                    performance.setPerformDetailImg(fileName);
-//                    performance.setPerformDetailImgPath(filePath);
-//                }
-//            }
-//        }catch (Exception e) {
-//
-//        }
 
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                if (multipartFile != null) {
+                    String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
 
-        // 썸네일 수정
-//        if (performance.getPerformThumbnail().equals(Optional.empty())) {
-//            Path thumbFilePath = Paths.get("c:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail\\" + performance.getPerformThumbnail());
-//            Files.delete(thumbFilePath);
-//        }
+                    UUID uuid = UUID.randomUUID();
 
+                    // 파일 원본명 저장
+                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+
+                    // 파일 저장
+                    File saveFile = new File(filePath, fileName);
+                    multipartFile.transferTo(saveFile);
+
+                    // performance db에 detailImg 저장
+                    if(multipartFile == fileList.get(0)) {
+                        performance.setPerformDetailImg1(fileName);
+                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(1)) {
+                        performance.setPerformDetailImg2(fileName);
+                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(2)) {
+                        performance.setPerformDetailImg3(fileName);
+                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(3)) {
+                        performance.setPerformDetailImg4(fileName);
+                        performance.setPerformDetailImgPath(filePath);
+                    } else {
+                        performance.setPerformDetailImg5(fileName);
+                        performance.setPerformDetailImgPath(filePath);
+                    }
+                }
+            }
+        }catch (Exception e) {
+
+        }
+
+         //썸네일 수정
         if (file != null) {
             String thumbNailPath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\thumbNail";
 

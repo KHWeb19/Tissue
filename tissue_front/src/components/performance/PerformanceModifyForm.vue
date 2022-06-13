@@ -5,7 +5,7 @@
             <v-row>
                 <v-col sm="3"><label>공연번호</label></v-col>
                 <v-col sm="6">
-                    <input type="text" :value="performance.performNo" disabled/>
+                    <input :value="performance.performNo" disabled/>
                 </v-col>
             </v-row>
 

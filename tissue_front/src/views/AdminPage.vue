@@ -37,7 +37,7 @@ export default {
         return {
             items: [
                 { title: 'Home', icon: 'mdi-home-city', route: '/'},
-                { title: 'Performance', icon: 'mdi-account-group-outline', route: '/performanceRegisterPage'},
+                { title: 'Performance', icon: 'mdi-account-group-outline', route: '/performanceListPage'},
       ],
         }
     }

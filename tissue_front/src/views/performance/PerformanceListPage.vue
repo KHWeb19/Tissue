@@ -1,10 +1,8 @@
 <template>
     <div>
-        <performance-list-form :performances = "performances"/>
-        <v-btn absolute right plain router-link :to="{ name: 'PerformanceRegisterPage' }">
-            <v-icon>mdi-clipboard-edit-outline</v-icon>
-        </v-btn>
+        <performance-list-form :performances = "performances"/> 
     </div>
+    
 </template>
 
 <script>

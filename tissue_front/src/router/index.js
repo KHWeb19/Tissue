@@ -17,6 +17,7 @@ import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue
 
 // map
 import MapPage from '@/views/map/MapPage.vue'
+import MapPage2 from '@/views/map/MapPage2.vue'
 
 Vue.use(VueRouter)
 
@@ -38,14 +39,14 @@ const routes = [
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  // },
   {
     path: '/adminPage',
     name: 'AdminPage',
@@ -85,6 +86,11 @@ const routes = [
     path: '/mapPage',
     name: 'MapPage',
     component: MapPage,
+  },
+  {
+    path: '/mapPage2',
+    name: 'MapPage2',
+    component: MapPage2,
   }
 ]
 

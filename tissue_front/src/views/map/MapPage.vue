@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 일단 보류 0613 -->
     <kakao-map/>
   </div>
 </template>

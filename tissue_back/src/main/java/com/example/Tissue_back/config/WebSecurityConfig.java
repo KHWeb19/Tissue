@@ -28,5 +28,4 @@ public class WebSecurityConfig {
                 .antMatchers("/").permitAll();
         return http.build();
     }
-
 }

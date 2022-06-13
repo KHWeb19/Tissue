@@ -88,15 +88,38 @@
             <v-row >
                 <v-col sm="3"><label>썸네일</label></v-col>
                 <v-col sm="6">
-                    <v-img :src="require(`@/assets/thumbNail/${this.performance.performThumbnail}`)"/>
+                    <img :src="require(`@/assets/thumbNail/${this.performance.performThumbnail}`)"/>
                 </v-col>
             </v-row>
 
             <v-row >
                 <v-col sm="3"><label>상세이미지</label></v-col>
-                <v-col sm="6">
-                    <v-img :src="require(`@/assets/detailImg/${this.performance.performDetailImg}`)"/>
-                </v-col>
+                <v-row sm="6">
+                    <img v-if="this.performance.performDetailImg1 !== null && this.performance.performDetailImg1 !== 'null'"
+                     :src="require(`@/assets/detailImg/${this.performance.performDetailImg1}`)"/>
+                </v-row>
+                <v-row sm="6">
+                    <img v-if="this.performance.performDetailImg2 !== null && this.performance.performDetailImg2 !== 'null'"
+                     :src="require(`@/assets/detailImg/${this.performance.performDetailImg2}`)"/>
+                </v-row>
+                <v-row sm="6">
+                    <img v-if="this.performance.performDetailImg3 !== null && this.performance.performDetailImg3 !== 'null'"
+                     :src="require(`@/assets/detailImg/${this.performance.performDetailImg3}`)"/>
+                </v-row>
+                <v-row sm="6">
+                    <img v-if="this.performance.performDetailImg4 !== null && this.performance.performDetailImg4 !== 'null'"
+                     :src="require(`@/assets/detailImg/${this.performance.performDetailImg4}`)"/>
+                </v-row>
+                <v-row sm="6">
+                    <img v-if="this.performance.performDetailImg5 !== null && this.performance.performDetailImg5 !== 'null'"
+                     :src="require(`@/assets/detailImg/${this.performance.performDetailImg5}`)"/>
+                </v-row>
+            </v-row>
+
+            <v-row>
+                <v-col sm="3"><label>지도</label></v-col>
+                <naver-maps :height="300" :width="300" :mapOptions="mapOptions"></naver-maps>
+                <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"/>
             </v-row>
     
         </v-container>
@@ -111,6 +134,9 @@ export default {
         performance: {
             type: Object,
             required: true
+        },
+        mapOptions: {
+
         }
     }
 }
