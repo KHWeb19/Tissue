@@ -12,6 +12,7 @@ public class FindDto {
 
     private String memberName;
     private String memberId;
+    private String memberPw;
     private String memberPhone;
     private String numStr;
 }

@@ -66,5 +66,13 @@ public class MemberController {
         return service.findId(findDto);
     }
 
+    // 비밀번호 찾기
+    @PostMapping("/findPw")
+    public FindDto findPw (@Validated @RequestBody FindDto findDto) throws CoolsmsException {
+        log.info("== find Pw ==" + findDto);
+
+        return service.findPw(findDto);
+    }
+
 
 }

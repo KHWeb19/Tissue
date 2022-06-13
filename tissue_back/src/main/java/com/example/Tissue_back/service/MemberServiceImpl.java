@@ -6,6 +6,7 @@ import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.service.security.SecurityService;
+import com.example.Tissue_back.util.RandomPassword;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,4 +95,33 @@ public class MemberServiceImpl implements MemberService {
 
         return findDto;
     }
+
+    @Override
+    public FindDto findPw (FindDto findDto) throws CoolsmsException {
+        Optional<Member> findMember = repository.findByMemberId(findDto.getMemberId());
+
+        if(findMember.equals(Optional.empty())) {
+            log.info("not exist member");
+            return null;
+        }
+
+        Member member = findMember.get();
+
+        if(!Objects.equals(member.getMemberPhone(), findDto.getMemberPhone())) {
+            log.info("wrong phone number");
+            return null;
+        }
+
+        String newPw = RandomPassword.randomPassword(10);
+        findDto.setMemberPw(newPw);
+
+        String encodedPassword = passwordEncoder.encode(newPw);
+        member.setMemberPw(encodedPassword);
+        repository.save(member);
+
+        findDto.setNumStr(phoneCheckService.PhoneNumberCheck(findDto.getMemberPhone()));
+
+        return findDto;
+    }
+
 }

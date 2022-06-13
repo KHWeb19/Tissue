@@ -34,8 +34,7 @@ public class PhoneCheckService {
         params.put("type", "SMS");
         params.put("text", "[Tissue] 인증번호는 [" + numStr + "] 입니다.");
 
-        coolsms.send(params); // 메시지 전송
-
+         // 메시지 전송
         try {
             JSONObject obj = (JSONObject) coolsms.send(params);
             System.out.println(obj.toString());
