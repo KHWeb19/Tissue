@@ -3,7 +3,6 @@
     <v-main>
       <div
         v-if="
-          this.$route.name != 'home' &&
           this.$route.name != 'MemberLoginPage' &&
           this.$route.name != 'MemberJoinPage' &&
           this.$route.name != 'MemberJoinPage2' &&
