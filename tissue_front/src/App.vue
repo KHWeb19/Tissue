@@ -3,15 +3,15 @@
     <v-main>
       <div
         v-if="
-          this.url != 'http://localhost:8080/findPw' &&
-          this.url != 'http://localhost:8080/findId' &&
-          this.url != 'http://localhost:8080/login' &&
-          this.url != 'http://localhost:8080/join' &&
-          this.url != 'http://localhost:8080/join/form'
+          this.$route.name != 'home' &&
+          this.$route.name != 'MemberLoginPage' &&
+          this.$route.name != 'MemberJoinPage' &&
+          this.$route.name != 'MemberJoinPage2' &&
+          this.$route.name != 'MemberFindIdPage' &&
+          this.$route.name != 'MemberFindPwPage'
         "
       >
-        <new-nav-bar-2/>
-        <div v-if="!isHome" style="height: 80px"></div>
+        <new-nav-bar-2 /> 
       </div>
       <v-main>
         <router-view />
@@ -19,11 +19,11 @@
     </v-main>
     <footer-area
       v-if="
-        this.url != 'http://localhost:8080/findPw' &&
-        this.url != 'http://localhost:8080/findId' &&
-        this.url != 'http://localhost:8080/login' &&
-        this.url != 'http://localhost:8080/join' &&
-        this.url != 'http://localhost:8080/join/form'
+        this.$route.name != 'MemberLoginPage' &&
+        this.$route.name != 'MemberJoinPage' &&
+        this.$route.name != 'MemberJoinPage2' &&
+        this.$route.name != 'MemberFindIdPage' &&
+        this.$route.name != 'MemberFindPwPage' 
       "
     />
     <join-footer />
@@ -47,15 +47,7 @@ export default {
       url: null,
     };
   },
-  created() {
-    this.url = window.location.href;
-    if (this.url == "http://localhost:8080/") {
-      this.isHome = true;
-    } else {
-      this.isHome = false;
-    }
-  },
-};
+}
 </script>
 <style scoped>
 .v-application {

@@ -25,7 +25,7 @@
                 <v-btn class="mt-1 ml-1 mb-5" large color="blue lighten-3" dark @click="checkMember">인증번호</v-btn>
             </v-row>
             <v-row>
-                <v-text-field v-model="numStr" outlined color="blue lighten-3" dense placeholder="인증번호 4자리"></v-text-field>
+                <v-text-field v-model="numStr" outlined color="pink lighten-3" dense placeholder="인증번호 4자리"></v-text-field>
             </v-row>
             <v-row justify="center">
                 <v-btn color="blue lighten-3" large dark width="100%" @click="findPw">확인</v-btn>
@@ -52,7 +52,7 @@ export default {
             memberPhone:'',
             memberId:'',
             numStr:'',
-            getNumStr:'',
+            getNumStr:'none',
             showPw:false
         }
     },

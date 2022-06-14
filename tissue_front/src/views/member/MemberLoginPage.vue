@@ -65,7 +65,6 @@ export default {
     }
     .background {
     background-color: rgb(241, 241, 241);
-    height: 88vh;
     }
 }
 
