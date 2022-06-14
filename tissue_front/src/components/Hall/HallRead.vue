@@ -37,6 +37,7 @@
           </v-col>
         </v-row>
       </div>
+      <!--
       <div>
         <v-row v-for="(index, row) in rowArr" :key="row">
           <div>{{ row + 1 }} 열</div>
@@ -53,6 +54,72 @@
           </v-col>
         </v-row>
       </div>
+
+      <div style="width: 700px">
+        <v-row v-for="(line, index) in dataTable" :key="index">
+          <div class="mt-3">{{ index + 1 }} 열</div>
+          <v-col v-for="(item, indexes) in line" :key="indexes">
+            <div
+              style="width: 100px; height: 100px; border: 1px solid black"
+              @click="changeColor"
+              class="seat"
+              :row="index"
+              :col="indexes"
+            >
+              {{ index }}, {{ indexes }}
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      -->
+      <v-radio-group v-model="radioGroup" row>
+        <v-radio
+          v-for="kind in kindsGrade"
+          :key="kind"
+          :label="`${kind}`"
+          :value="kind"
+        >
+        </v-radio>
+      </v-radio-group>
+      <div class="d-flex">
+        <div class="mr-10" v-for="item in gradeColor" :key="item.grade">
+          <div
+            :class="{
+              yellow: item.color == 'yellow',
+              green: item.color == 'green',
+              purple: item.color == 'purple',
+            }"
+          ></div>
+          <div>{{ item.grade }}</div>
+        </div>
+      </div>
+      <table>
+        <tr v-for="(line, index) in dataTable" :key="index" :row-index="index">
+          <td
+            v-for="(item, indexes) in line"
+            :key="indexes"
+            :cell-index="indexes"
+          >
+            <div
+              style="width: 100px; height: 100px; border: 1px solid black"
+              @click="changeColor"
+              class="seat"
+              :row-index="index"
+              :cell-index="indexes"
+              :class="{
+                yellow: dataTable[index][indexes].grade == 'R',
+                green: dataTable[index][indexes].grade == 'S',
+                purple: dataTable[index][indexes].grade == 'VIP',
+              }"
+            >
+              {{ index }},{{ indexes }}
+            </div>
+          </td>
+        </tr>
+      </table>
+      <v-btn @click="modify">수정</v-btn>
+      <v-btn @click="reset">초기화</v-btn>
+      <v-btn to="/hallList">리스트로</v-btn>
     </v-container>
   </div>
 </template>
@@ -72,40 +139,74 @@ export default {
       colArr: [],
       dataTable: Array,
       isCreate: true,
+      radioGroup: "R",
+      kindsGrade: ["R", "S", "VIP"],
+      gradeColor: [
+        { color: "yellow", grade: "R" },
+        { color: "green", grade: "S" },
+        { color: "purple", grade: "VIP" },
+      ],
     };
   },
 
   created() {
     if (this.isCreate == true) {
-      /*
       this.dataTable = new Array(this.hall.rowCnt);
 
       for (let i = 0; i < this.dataTable.length; i++) {
         this.dataTable[i] = new Array(this.hall.colCnt);
       }
-*/
 
       for (let i = 0; i < this.hall.rowCnt; i++) {
-        this.rowArr.push("0");
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          this.dataTable[i][j] = { grade: "R", click: false };
+        }
       }
-      for (let i = 0; i < this.hall.colCnt; i++) {
-        this.colArr.push("0");
-      }
+      console.log(this.dataTable);
 
       this.isCreate = false;
     }
   },
   methods: {
     changeColor(e) {
-      const row = e.target.getAttribute("row");
-      const col = e.target.getAttribute("col");
-      console.log(row, col);
+      let row = e.target.getAttribute("row-index");
+      let col = e.target.getAttribute("cell-index");
+      console.log(this.radioGroup, row, col);
 
-      for (let i = 0; i < this.rowArr.length; i++) {
-        for (let j = 0; j < this.colArr.length; j++) {
-          if (row == i && col == j) {
-            console.log();
+      if (this.dataTable[row][col].click == false) {
+        this.dataTable[row][col].click = true;
+      } else if (this.dataTable[row][col].click == true) {
+        this.dataTable[row][col].click = false;
+      }
+
+      for (let i = 0; i < this.hall.rowCnt; i++) {
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          if (this.dataTable[i][j].click == true) {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * 5 + j].style.backgroundColor = "lightgrey";
+          } else if (this.dataTable[i][j].click == false) {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * 5 + j].style.backgroundColor = "white";
           }
+        }
+      }
+    },
+    modify() {
+      console.log(this.radioGroup);
+      for (let i = 0; i < this.hall.rowCnt; i++) {
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          this.dataTable[i][j].grade = this.radioGroup;
+        }
+      }
+    },
+    reset() {
+      for (let i = 0; i < this.hall.rowCnt; i++) {
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          this.dataTable[i][j].click = false;
+          let bodyTag = document.getElementsByClassName("seat");
+          bodyTag[i * 5 + j].style.backgroundColor = "white";
         }
       }
     },
@@ -113,4 +214,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.yellow {
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+}
+.green {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+}
+.purple {
+  width: 10px;
+  height: 10px;
+  background-color: purple;
+}
+.grey {
+  background-color: lightgrey;
+}
+</style>

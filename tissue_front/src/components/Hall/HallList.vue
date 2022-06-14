@@ -27,11 +27,7 @@
                 </template>
               </v-data-table>
               <div class="text-center pt-10">
-                <v-pagination
-                  v-model="page"
-                  :length="pageCount"
-                  color="orange"
-                ></v-pagination>
+                <v-pagination v-model="page" :length="pageCount"></v-pagination>
               </div>
             </div>
           </v-card>
@@ -57,14 +53,12 @@ export default {
           value: "hallNo",
           width: "100px",
           align: "center",
-          class: "orange lighten-5",
         },
         {
           text: "공연장명",
           value: "hallName",
           width: "500px",
           align: "left",
-          class: "orange lighten-5",
         },
       ],
       search: "",
