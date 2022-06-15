@@ -5,6 +5,11 @@ import HomeView from '../views/HomeView.vue'
 import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
 import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
 
+import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
+import NoticeListPage from '../views/notice/NoticeListPage.vue'
+import NoticeReadPage from '../views/notice/NoticeReadPage.vue'
+import NoticeModifyPage from '../views/notice/NoticeModifyPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -23,6 +28,36 @@ const routes = [
     path: '/performanceList',
     name: 'PerformanceListPage',
     component: PerformanceListPage
+  },
+  {
+    path: '/noticeRegister',
+    name: 'NoticeRegisterPage',
+    component: NoticeRegisterPage
+  },
+  {
+    path: '/noticeList',
+    name: 'NoticeListPage',
+    component: NoticeListPage
+  },
+  {
+    path: '/noticeRead/:noticeNo',
+    name: 'NoticeReadPage',
+    components: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/noticeModify/:noticeNo',
+    name: 'NoticeModifyPage',
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/about',
