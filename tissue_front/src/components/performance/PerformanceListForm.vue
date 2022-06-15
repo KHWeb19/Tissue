@@ -1,8 +1,5 @@
 <template>
     <div class="board-list mt-15">
-            <v-btn absolute right plain router-link :to="{ name: 'PerformanceRegisterPage' }">
-                <v-icon>mdi-clipboard-edit-outline</v-icon>
-            </v-btn>
         <table class="w3-table-all">
             <thead>
                 <tr align="center">
@@ -53,6 +50,11 @@
                         </tr>
                     </tbody>
         </table>
+        <div>
+            <v-btn absolute right plain router-link :to="{ name: 'PerformanceRegisterPage' }">
+                <v-icon>mdi-clipboard-edit-outline</v-icon>
+            </v-btn>
+        </div>  
     </div>
 </template>
 

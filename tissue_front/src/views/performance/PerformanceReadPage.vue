@@ -118,8 +118,8 @@
 
             <v-row>
                 <v-col sm="3"><label>지도</label></v-col>
-                <naver-maps :height="300" :width="300" :mapOptions="mapOptions"></naver-maps>
-                <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"/>
+                <naver-maps :height="500" :width="1000" :mapOptions="mapOptions"></naver-maps>
+                <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"></naver-marker>
             </v-row>
     
         </v-container>
@@ -145,13 +145,11 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 
-// import PerformanceReadForm from '@/components/performance/PerformanceReadForm.vue'
-
 export default {
     name: 'PerformanceReadPage',
     data(){
         return {
-            mapOptions: {
+           mapOptions: {
                 lat: null,
                 lng: null,
                 zoom: 17,
@@ -168,9 +166,6 @@ export default {
             required: true
         }
     },
-    // components: {
-    //     PerformanceReadForm
-    // },
     computed: {
         ...mapState(['performance'])
     },
@@ -178,14 +173,13 @@ export default {
         this.fetchPerformance(this.performNo)
                 .catch(() => {
                     alert('게시물 요청 실패!')
-                    console.log(this.performNo)
                     this.$router.push()
                 })
-         this.fetchMap(this.performNo)
+        this.fetchMap(this.performNo)
     },
-    //  mounted() {
-    //     this.fetchMap(this.performNo)
-    // },
+     mounted() {
+
+    },
     methods: {
         ...mapActions(['fetchPerformance']),
         onDelete () {
@@ -204,10 +198,12 @@ export default {
                 .then(res => {
                     const map = res.data
                     console.log(map)
+
                     this.mapOptions.lat = map.y
                     this.mapOptions.lng = map.x
                     this.name = map.name
                     this.address = map.address
+
                     if (map.y != 0) {
                     // this.showMap = true
                     }

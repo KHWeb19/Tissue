@@ -26,7 +26,7 @@
     <v-card v-if="name" class="mx-auto my-2" width="300">
           
       <naver-maps :height="300" :width="300" :mapOptions="mapOptions"></naver-maps>
-      <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"/>
+      <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"></naver-marker>
       <v-card-text>{{ name }}</v-card-text>
               
     </v-card>
@@ -58,6 +58,7 @@ export default {
           'Authorization': 'KakaoAK ' + '1eca13db63d6632d04bee2157ac21714' 
         }}).then(res => {
         console.log(res.data)
+        
         const list = res.data.documents
         this.resultList = []
         for (let i = 0; i < list.length; i++) {

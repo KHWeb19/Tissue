@@ -58,7 +58,7 @@
                                 <label>Thumbnail
                                     <input type="file" ref="file" id="file" @change="handleThumbNailUpload()"/>
                                 </label>
-                                <div>
+                                <div style="text-align:center">
                                     <img :src=file.preview class="preview"/>
                                 </div>
                                 <!-- <div class="file-upload-list__item__btn-remove" @click="handleRemove1()">
@@ -86,11 +86,10 @@
                 </v-row>
                 <br>
                 <v-row>
-                    <v-btn plain @click="[addMap(),submitFiles()]" value="Upload">
+                    <v-btn plain  @click="[submitFiles(),addMap()]" value="Upload">
                         <v-icon>mdi-check-outline</v-icon>
                     </v-btn>
                 </v-row>
-
         </v-container>
     </div>
 </template>
@@ -220,27 +219,24 @@ export default {
                 }
             })
             .then ((res) => {
-                // alert('공연이 등록되었습니다.')
-                this.performNo = res.data.performNo
+                console.log("공연등록", res)
                 this.map.performNo = res.data.performNo
-                console.log(this.performNo)
-                console.log(this.map.performNo)
-                // this.$router.push({ name: 'PerformanceListPage' })
             })
             .catch (res => {
                 alert('등록 실패: ' + res.message)
             })
         },
          addMap () {
-            setTimeout(() => {
-                axios.post('http://localhost:7777/map/add', this.map ).then(()=> {
-                alert('등록이 완료되었습니다!')
-                this.$router.push({ name: 'PerformanceListPage' })
-                })
-            }, 1000)
+                axios.post('http://localhost:7777/map/add', this.map )
+                .then((res)=> {
+                    console.log(res.data)
+                    alert('등록이 완료되었습니다!')
+                    this.$router.push({ name: 'PerformanceListPage' })
+                    })
+            }
          }
   }
-}
+
 </script>   
 
 <style scoped>

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface PerformanceService {
-    public void register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception;
+    public Performance register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception;
     public List<Performance> list();
     public Performance read(Integer boardNo);
 

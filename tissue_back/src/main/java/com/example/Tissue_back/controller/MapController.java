@@ -25,7 +25,7 @@ public class MapController {
 
         Map map = mapService.add(mapDto);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(map, HttpStatus.OK);
     }
 
     @GetMapping("/read/{performNo}")

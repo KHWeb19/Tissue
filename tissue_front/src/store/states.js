@@ -1,4 +1,5 @@
 export default {
     performances: [],
-    performance: null
+    performance: null,
+    map: null
 }

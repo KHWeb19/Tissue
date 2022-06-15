@@ -9,11 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +21,7 @@ public class PerformanceServiceImpl implements PerformanceService{
     private PerformanceRepository performanceRepository;
 
     @Override
-    public void register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception {
+    public Performance register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception {
 
         // 다중이미지 등록
         try {
@@ -89,6 +85,7 @@ public class PerformanceServiceImpl implements PerformanceService{
         log.info("requestUploadFile(): Success");
 
         performanceRepository.save(performance);
+        return performance;
     }
 
 
