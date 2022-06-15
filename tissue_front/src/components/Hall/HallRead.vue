@@ -107,7 +107,7 @@
               :row-index="index"
               :cell-index="indexes"
             >
-              {{ index }},{{ indexes }},{{ item.grade }}
+              {{ isClick }}
             </div>
           </td>
         </tr>
@@ -130,8 +130,8 @@ export default {
   },
   data() {
     return {
-      rowArr: [],
-      colArr: [],
+      isClick: "",
+
       dataTable: Array,
       isCreate: true,
       radioGroup: "R",
@@ -171,15 +171,8 @@ export default {
       let col = e.target.getAttribute("cell-index");
       console.log(this.radioGroup, row, col);
 
-      this.rowArr.push(row);
-      this.colArr.push(col);
-      console.log(this.rowArr, this.colArr);
-
       if (this.dataTable[row][col].click == false) {
         this.dataTable[row][col].click = true;
-        this.rowArr.push(row);
-        this.colArr.push(col);
-        console.log(this.rowArr, this.colArr);
       } else if (this.dataTable[row][col].click == true) {
         this.dataTable[row][col].click = false;
       }
@@ -192,7 +185,6 @@ export default {
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
               "lightgrey";
           } else if (this.dataTable[i][j].click == false) {
-            //let bodyTag = document.getElementsByClassName("seat");
             if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
@@ -216,10 +208,13 @@ export default {
 
     modify() {
       console.log(this.radioGroup);
-      for (let i = 0; i < this.rowArr.length; i++) {
-        let x = this.rowArr[i];
-        let y = this.colArr[i];
-        this.dataTable[x][y].grade = this.radioGroup;
+
+      for (let i = 0; i < this.hall.rowCnt; i++) {
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          if (this.dataTable[i][j].click == true) {
+            this.dataTable[i][j].grade = this.radioGroup;
+          }
+        }
       }
 
       console.log(this.dataTable);
@@ -228,9 +223,6 @@ export default {
       this.reset();
     },
     reset() {
-      this.rowArr = [];
-      this.colArr = [];
-      console.log(this.rowArr, this.colArr);
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {
           this.dataTable[i][j].click = false;

@@ -1,7 +1,7 @@
 export default {
 
     halls: [],
-    hall: null
+    hall: null,
   
-    token: this.localStorage.getItem("token")
+    //token: this.localStorage.getItem("token")
 }
