@@ -1,55 +1,66 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-main>
-      <router-view/>
+      <div
+        v-if="
+          this.$route.name != 'MemberLoginPage' &&
+          this.$route.name != 'MemberJoinPage' &&
+          this.$route.name != 'MemberJoinPage2' &&
+          this.$route.name != 'MemberFindIdPage' &&
+          this.$route.name != 'MemberFindPwPage'
+        "
+      >
+        <new-nav-bar-2 /> 
+      </div>
+      <v-main>
+        <router-view />
+      </v-main>
     </v-main>
+    <footer-area
+      v-if="
+        this.$route.name != 'MemberLoginPage' &&
+        this.$route.name != 'MemberJoinPage' &&
+        this.$route.name != 'MemberJoinPage2' &&
+        this.$route.name != 'MemberFindIdPage' &&
+        this.$route.name != 'MemberFindPwPage' 
+      "
+    />
+    <join-footer />
   </v-app>
 </template>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-
+import FooterArea from "@/components/Layout/FooterArea.vue";
+import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
+import joinFooter from "@/components/Layout/JoinFooter.vue";
 export default {
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
-};
+  name: "App",
+  components: {
+    FooterArea,
+    joinFooter,
+    NewNavBar2,
+  },
+  data() {
+    return {
+      url: null,
+    };
+  },
+}
 </script>
+<style scoped>
+.v-application {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+@font-face {
+    font-family: 'Noto Sans KR' ;
+    src: url('assets/font/NotoSansKR-Bold.otf');
+    font-weight: 500;
+}
+</style>
+
+<style>
+a {
+  text-decoration: none;
+}
+</style>

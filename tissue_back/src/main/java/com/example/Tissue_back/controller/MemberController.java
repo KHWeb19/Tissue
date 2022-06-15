@@ -1,10 +1,14 @@
 package com.example.Tissue_back.controller;
 
-import com.example.Tissue_back.controller.request.MemberDto;
+import com.example.Tissue_back.controller.request.member.FindDto;
+import com.example.Tissue_back.controller.request.member.LoginDto;
+import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +32,47 @@ public class MemberController {
     }
 
     // 아이디 중복 여부 체크
-    @GetMapping("/checkId/{id}")
-    public Boolean checkId (@PathVariable("id") String memberId){
+    @GetMapping("/checkId/{memberId}")
+    public Boolean checkId (@PathVariable("memberId") String memberId){
         log.info("checkId(): " + memberId);
 
         Boolean checkId = service.checkId(memberId);
 
         return checkId;
     }
+
+    // 로그인
+    @PostMapping("/login")
+    public String login (@Validated @RequestBody LoginDto loginDto) throws Exception{
+
+        log.info("== Tissue Member Login ==" + loginDto);
+
+        String response = service.login(loginDto);
+        log.info("check" + response);
+
+        if (response != null) {
+            log.info("로그인 성공!");
+        } else {
+            log.info("로그인 실패!");
+        }
+        return response;
+    }
+
+    // 아이디 찾기
+    @PostMapping("/findId")
+    public FindDto findId (@Validated @RequestBody FindDto findDto) throws CoolsmsException {
+        log.info("== find Id ==" + findDto);
+
+        return service.findId(findDto);
+    }
+
+    // 비밀번호 찾기
+    @PostMapping("/findPw")
+    public FindDto findPw (@Validated @RequestBody FindDto findDto) throws CoolsmsException {
+        log.info("== find Pw ==" + findDto);
+
+        return service.findPw(findDto);
+    }
+
+
 }

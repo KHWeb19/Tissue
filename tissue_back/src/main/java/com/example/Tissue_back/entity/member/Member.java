@@ -1,15 +1,16 @@
 package com.example.Tissue_back.entity.member;
 
-import com.example.Tissue_back.controller.request.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -48,14 +49,17 @@ public class Member {
     @Column(nullable = false)
     private String memberEmail;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role memberRole;
-
     @Column(nullable = false)
     private String memberAddress;
+    @Column(nullable = false)
+    private String addZipCode;
+    @Column(nullable = false)
+    private String addDetail;
 
     @CreationTimestamp
     private Date memberRegDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 }
