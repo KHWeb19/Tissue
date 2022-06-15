@@ -106,13 +106,8 @@
               class="seat"
               :row-index="index"
               :cell-index="indexes"
-              :class="{
-                yellow: dataTable[index][indexes].grade == 'R',
-                green: dataTable[index][indexes].grade == 'S',
-                purple: dataTable[index][indexes].grade == 'VIP',
-              }"
             >
-              {{ index }},{{ indexes }}
+              {{ index }},{{ indexes }},{{ item.grade }}
             </div>
           </td>
         </tr>
@@ -167,14 +162,24 @@ export default {
       this.isCreate = false;
     }
   },
+  mounted() {
+    this.paintSeatWithGrade();
+  },
   methods: {
     changeColor(e) {
       let row = e.target.getAttribute("row-index");
       let col = e.target.getAttribute("cell-index");
       console.log(this.radioGroup, row, col);
 
+      this.rowArr.push(row);
+      this.colArr.push(col);
+      console.log(this.rowArr, this.colArr);
+
       if (this.dataTable[row][col].click == false) {
         this.dataTable[row][col].click = true;
+        this.rowArr.push(row);
+        this.colArr.push(col);
+        console.log(this.rowArr, this.colArr);
       } else if (this.dataTable[row][col].click == true) {
         this.dataTable[row][col].click = false;
       }
@@ -184,29 +189,75 @@ export default {
           if (this.dataTable[i][j].click == true) {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * 5 + j].style.backgroundColor = "lightgrey";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "lightgrey";
           } else if (this.dataTable[i][j].click == false) {
-            let bodyTag = document.getElementsByClassName("seat");
+            //let bodyTag = document.getElementsByClassName("seat");
+            if (this.dataTable[i][j].grade == "R") {
+              let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * 5 + j].style.backgroundColor = "white";
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "yellow";
+            } else if (this.dataTable[i][j].grade == "S") {
+              let bodyTag = document.getElementsByClassName("seat");
+
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+            } else if (this.dataTable[i][j].grade == "VIP") {
+              let bodyTag = document.getElementsByClassName("seat");
+
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "purple";
+            }
+            //bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "white";
           }
         }
       }
     },
+
     modify() {
       console.log(this.radioGroup);
-      for (let i = 0; i < this.hall.rowCnt; i++) {
-        for (let j = 0; j < this.hall.colCnt; j++) {
-          this.dataTable[i][j].grade = this.radioGroup;
-        }
+      for (let i = 0; i < this.rowArr.length; i++) {
+        let x = this.rowArr[i];
+        let y = this.colArr[i];
+        this.dataTable[x][y].grade = this.radioGroup;
       }
+
+      console.log(this.dataTable);
+
+      this.paintSeatWithGrade();
+      this.reset();
     },
     reset() {
+      this.rowArr = [];
+      this.colArr = [];
+      console.log(this.rowArr, this.colArr);
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {
           this.dataTable[i][j].click = false;
-          let bodyTag = document.getElementsByClassName("seat");
-          bodyTag[i * 5 + j].style.backgroundColor = "white";
+          //let bodyTag = document.getElementsByClassName("seat");
+
+          //bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "white";
+          this.paintSeatWithGrade();
+        }
+      }
+    },
+
+    paintSeatWithGrade() {
+      for (let i = 0; i < this.hall.rowCnt; i++) {
+        for (let j = 0; j < this.hall.colCnt; j++) {
+          if (this.dataTable[i][j].grade == "R") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "yellow";
+          } else if (this.dataTable[i][j].grade == "S") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+          } else if (this.dataTable[i][j].grade == "VIP") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "purple";
+          }
         }
       }
     },
@@ -231,6 +282,8 @@ export default {
   background-color: purple;
 }
 .grey {
+  width: 10px;
+  height: 10px;
   background-color: lightgrey;
 }
 </style>
