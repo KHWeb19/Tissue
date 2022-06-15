@@ -1,9 +1,12 @@
 package com.example.Tissue_back.controller;
 
+import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
+import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -52,8 +55,24 @@ public class MemberController {
         } else {
             log.info("로그인 실패!");
         }
-
         return response;
     }
+
+    // 아이디 찾기
+    @PostMapping("/findId")
+    public FindDto findId (@Validated @RequestBody FindDto findDto) throws CoolsmsException {
+        log.info("== find Id ==" + findDto);
+
+        return service.findId(findDto);
+    }
+
+    // 비밀번호 찾기
+    @PostMapping("/findPw")
+    public FindDto findPw (@Validated @RequestBody FindDto findDto) throws CoolsmsException {
+        log.info("== find Pw ==" + findDto);
+
+        return service.findPw(findDto);
+    }
+
 
 }

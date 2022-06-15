@@ -47,9 +47,19 @@
             color="black"
             class="mt-5 mr-10"
           />
-          <v-btn icon class="mr-8 sub_tab_icon">
+          <v-btn icon class="mr-3 sub_tab_icon">
             <v-icon color="black" large>mdi-account-outline</v-icon>
           </v-btn>
+          <div class="mt-4" v-if="this.$store.state.token">
+            <v-btn icon class="sub_tab_icon mr-8">
+                <v-icon color="black" large>mdi-logout</v-icon>
+            </v-btn>
+        </div>
+        <div class="mt-4" v-else>
+            <v-btn icon class="sub_tab_icon mr-8" :to="{name: 'MemberLoginPage'}">
+                <v-icon color="black" large>mdi-login</v-icon>
+            </v-btn>
+        </div>
         </v-toolbar-items>
       </v-toolbar>
     </div>
@@ -89,7 +99,6 @@ export default {
   methods: {
     goHome() {
       this.$router.push("/");
-      this.$router.go();
     },
   },
 };
