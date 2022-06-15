@@ -82,7 +82,7 @@ export default {
                 })
 
                 if (response.data) {
-                    localStorage.setItem('token', response.data)
+                    localStorage.setItem("token", response.data)
                     this.$router.push('/')
                     console.log(localStorage)
                 } else {

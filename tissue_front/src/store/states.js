@@ -1,3 +1,3 @@
 export default {
-    token : localStorage.getItem('token')
+    token: this.localStorage.getItem("token")
 }
