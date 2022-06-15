@@ -1,31 +1,27 @@
 <template>
-    <div class="background">
-        <v-container>
-            <v-row justify="center" class="logo"><div style="color:skyblue">T</div><div style="color:pink">issue</div></v-row>
-                <v-layout column class="mx-auto">
-                    <v-checkbox
-                        class="checkboxSize mb-5"
-                        @change="allCk()"
-                        label=" Tissue 이용약관, 개인정보 수집 및 이용동의, 예매 관련 정보 수신 동의에 모두 동의합니다."
-                        color="pink lighten-3"
-                        hide-details
-                    >
-                    </v-checkbox>
-                    <v-checkbox
-                        class="checkboxSize"
-                        v-model="checkedValues"
-                        value="1"
-                        color="pink lighten-3"
-                        hide-details
-                    >
-                        <template v-slot:label>
-                            Tissue 이용약관 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
-                        </template>
-                    </v-checkbox>
-                    <p/>
-                    <div class="article">
-                        <div id="a">
-                            <strong>여러분을 환영합니다. </strong> <p/>
+        <div>
+            <v-layout column class="mx-auto">
+                <v-checkbox
+                    class="checkboxSize mb-5"
+                    @change="allCk()"
+                    label=" Tissue 이용약관, 개인정보 수집 및 이용동의, 예매 관련 정보 수신 동의에 모두 동의합니다."
+                    color="pink lighten-3"
+                    hide-details>
+                </v-checkbox>
+                <v-checkbox
+                    class="checkboxSize"
+                    v-model="checkedValues"
+                    value="1"
+                    color="pink lighten-3"
+                    hide-details>
+                    <template v-slot:label>
+                        Tissue 이용약관 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
+                    </template>
+                </v-checkbox>
+                <p/>
+                <div class="article">
+                    <div id="a">
+                        <strong>여러분을 환영합니다. </strong> <p/>
                         &nbsp; Tissue 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 Tissue 서비스의 이용과 관련하여 Tissue 서비스를 제공하는 Tissue 주식회사(이하 ‘Tissue’)와 이를 이용하는 Tissue 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 Tissue 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 
                         Tissue 서비스를 이용하시거나 Tissue 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
@@ -144,22 +140,21 @@
                         적용 일자: 2018년 5월 1일
                         <br/>
                         Tissue 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터로 문의 주시기 바랍니다.
-                        </div>
                     </div>
-                    <v-checkbox
-                        class="checkboxSize"
-                        v-model="checkedValues"
-                        value="2"
-                        color="pink lighten-3"
-                        hide-details
-                    >
-                        <template v-slot:label>
-                            개인정보 수집 및 이용 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
-                        </template>
-                    </v-checkbox>
-                    <p/>
-                    <div class="article">
-                        <div id="a">
+                </div>
+                <v-checkbox
+                    class="checkboxSize"
+                    v-model="checkedValues"
+                    value="2"
+                    color="pink lighten-3"
+                    hide-details>
+                    <template v-slot:label>
+                        개인정보 수집 및 이용 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
+                    </template>
+                </v-checkbox>
+                <p/>
+                <div class="article">
+                    <div id="a">
                         &nbsp; 개인정보보호법에 따라 Tissue에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다. <p/>
 
                         1. 수집하는 개인정보<br/>
@@ -221,50 +216,44 @@
 
                         4. 개인정보 수집 및 이용 동의를 거부할 권리<br/>
                         이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
-                        </div>
                     </div>
-                    <p/>
-                    <v-checkbox
-                        class="checkboxSize"
-                        v-model="checkedValues"
-                        value="3"
-                        color="pink lighten-3"
-                        hide-details
-                    >
-                        <template v-slot:label>
-                            예매 관련 정보 수신 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
-                        </template>
-                    </v-checkbox>
-                    <div class="mt-5">
-                            &nbsp; Tissue에서 제공하는 예매 알림 서비스를 휴대전화, 이메일로 받아보실 수 있습니다. 
-                            일부 서비스(별도 회원 체계로 운영하거나 Tissue 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 
-                            개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.
-                    </div>
-                </v-layout>
-                <v-row class="btnSet" justify="center">
-                    <v-col cols="auto">
-                        <router-link to="/"><v-btn color="grey" dark>CANCLE</v-btn></router-link> 
-                    </v-col>
-                    <v-col cols="auto">
-                        <v-btn color="blue lighten-3" dark @click="ckCheck" >NEXT</v-btn>    
-                    </v-col>
-                </v-row>
-                <join-footer/>
-        </v-container>
-    </div>
+                </div>
+                <p/>
+                <v-checkbox
+                    class="checkboxSize"
+                    v-model="checkedValues"
+                    value="3"
+                    color="pink lighten-3"
+                    hide-details>
+                    <template v-slot:label>
+                        예매 관련 정보 수신 동의 &nbsp; <div style="color:skyblue"> (필수) </div>
+                    </template>
+                </v-checkbox>
+                <div class="mt-5">
+                        &nbsp; Tissue에서 제공하는 예매 알림 서비스를 휴대전화, 이메일로 받아보실 수 있습니다. 
+                        일부 서비스(별도 회원 체계로 운영하거나 Tissue 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 
+                        개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.
+                </div>
+            </v-layout>
+            <v-row class="btnSet" justify="center">
+                <v-col cols="auto">
+                    <router-link to="/"><v-btn color="grey" dark>CANCLE</v-btn></router-link> 
+                </v-col>
+                <v-col cols="auto">
+                    <v-btn color="blue lighten-3" dark @click="ckCheck" >NEXT</v-btn>    
+                </v-col>
+            </v-row>
+        </div>
 </template>
 
 <script>
-import JoinFooter from './JoinFooter.vue'
 export default {
-  components: { JoinFooter },
     name: 'MemberJoinTerm',
     data () {
         return{
             checkedValues: [],
             allChecked: false
         }
-
     },
     methods: {
         allCk(){
@@ -278,7 +267,6 @@ export default {
                 }
                 this.allChecked = false
             }
-
         },
         ckCheck () {
             if (this.checkedValues.length != 3){
@@ -296,12 +284,6 @@ export default {
 
 .background {
     background-color: rgb(241, 241, 241);
-}
-.logo {
-    font-size: 50pt;
-    margin-top:5%;
-    margin-bottom:3%;
-    font-family: 'Pacifico', cursive;
 }
 .mx-auto {
      position: relative;
@@ -321,12 +303,10 @@ export default {
     padding:2%;
 }
 .btnSet{
-    padding-top:6%;
-    margin-bottom:50px;
+    padding-top:5%;
     zoom: 1.5;
 }
 .v-btn {
     width:180px;
 }
-
 </style>
