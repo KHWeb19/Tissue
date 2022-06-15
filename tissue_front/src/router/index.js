@@ -7,6 +7,9 @@ import HallRegister from '@/components/Hall/HallRegister.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
+import MemberLoginPage from '../views/member/MemberLoginPage.vue'
+import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
+import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 
 // admin
 import AdminPage from '@/views/AdminPage.vue'
@@ -41,6 +44,8 @@ const routes = [
     component: HallRegister
   },
   // 메인페이지 (임지훈)
+
+  // 유아림
   {
     path: '/join',
     name: 'MemberJoinPage',
@@ -51,6 +56,22 @@ const routes = [
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
   },
+  {
+    path: '/login',
+    name: 'MemberLoginPage',
+    component:MemberLoginPage
+  },
+  {
+    path: '/findId',
+    name: 'MemberFindIdPage',
+    component:MemberFindIdPage
+  },
+  {
+    path: '/findPw',
+    name: 'MemberFindPwPage',
+    component:MemberFindPwPage
+  }
+  // 유아림
   {
     path: '/adminPage',
     name: 'AdminPage',
