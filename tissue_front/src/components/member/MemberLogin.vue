@@ -30,7 +30,7 @@
                         </v-col>
                     </v-row>
                     <v-row justify="center" class="mt-10">
-                        <button class="socialBtn"><v-img src="@/assets/button/kakao_login_medium_wide.png"></v-img></button>
+                        <button class="socialBtn" @click="kakaoLogin"><v-img src="@/assets/button/kakao_login_medium_wide.png"></v-img></button>
                     </v-row>
                     <v-row justify="center" class="mt-5">
                         <button class="socialBtn btnBorder"><v-img src="@/assets/button/google_login.png"></v-img></button>
@@ -61,6 +61,8 @@
 
 <script>
 import axios from 'axios'
+import { KakaoAuthUri } from '../OAuth/OAuth.js'
+
 export default {
     name: 'MemberLogin',
     data () {
@@ -88,6 +90,13 @@ export default {
                 } else {
                     alert("아이디와 비밀번호를 확인해주세요.")
                 }
+            }catch(error){
+                alert(error)
+            }
+        },
+        async kakaoLogin() {
+            try {
+                location.href=KakaoAuthUri
             }catch(error){
                 alert(error)
             }
