@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -26,14 +27,13 @@ public class Performance {
 
     private String performName;
 
-    // 시간도 같이 나옴
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date performStart;
+    private LocalDate performStart;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date performEnd;
+    private LocalDate performEnd;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime performTime;
