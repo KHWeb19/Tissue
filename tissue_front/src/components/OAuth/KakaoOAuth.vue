@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios_instance from 'axios'
+import axios from 'axios'
 export default {
     name:'KakaoOAuth',
     created () {
@@ -32,8 +32,9 @@ export default {
         kakaoLogin (payload) {
             const code = payload
             console.log(code)
-            axios_instance('kakao', {
+            axios('kakao', {
                 method: "get",
+                baseURL: 'http://localhost:5000/',
                 params: {
                     code: code
                 }
