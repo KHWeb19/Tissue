@@ -50,8 +50,8 @@
           <v-btn icon class="mr-3 sub_tab_icon">
             <v-icon color="black" large>mdi-account-outline</v-icon>
           </v-btn>
-          <div class="mt-4" v-if="this.$store.state.token">
-            <v-btn icon class="sub_tab_icon mr-8">
+          <div class="mt-4" v-if="token">
+            <v-btn icon class="sub_tab_icon mr-8" @click="logout">
                 <v-icon color="black" large>mdi-logout</v-icon>
             </v-btn>
         </div>
@@ -83,6 +83,7 @@ export default {
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트", route: "ㄷ" },
       ],
+      token: localStorage.getItem('token')
     };
   },
 
@@ -100,6 +101,14 @@ export default {
     goHome() {
       this.$router.push("/");
     },
+    logout() {
+        let result = confirm('로그아웃하시겠습니까?')
+
+        if (result) {
+            localStorage.removeItem("token")
+            history.go(0)
+        }
+    }
   },
 };
 </script>

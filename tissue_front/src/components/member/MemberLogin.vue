@@ -85,6 +85,7 @@ export default {
 
                 if (response.data) {
                     localStorage.setItem("token", response.data)
+                    this.$store.state.token = localStorage.getItem("token")
                     this.$router.push('/')
                     console.log(localStorage)
                 } else {
