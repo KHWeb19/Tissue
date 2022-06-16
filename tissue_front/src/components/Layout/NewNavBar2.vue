@@ -86,16 +86,23 @@ export default {
       token: localStorage.getItem('token')
     };
   },
-
   mounted() {
-    window.addEventListener("scroll", function () {
-      if (window.scrollY <= 700) {
-        document.getElementsByClassName("menubar")[0].style.position =
-          "absolute";
-      } else if (window.scrollY > 700) {
-        document.getElementsByClassName("menubar")[0].style.position = "fixed";
-      }
-    });
+      if( !this.$route.name == 'GoogleOAuth' &&
+          !this.$route.name == 'KakaoOAuth' &&
+          !this.$route.name == 'MemberLoginPage' &&
+          !this.$route.name == 'MemberJoinPage' &&
+          !this.$route.name == 'MemberJoinPage2' &&
+          !this.$route.name == 'MemberFindIdPage' &&
+          !this.$route.name == 'MemberFindPwPage'){
+              window.addEventListener("scroll", function () {
+                if (window.scrollY <= 700) {
+                    document.getElementsByClassName("menubar")[0].style.position =
+                    "absolute";
+                } else if (window.scrollY > 700) {
+                    document.getElementsByClassName("menubar")[0].style.position = "fixed";
+                }
+              })
+            }
   },
   methods: {
     goHome() {
