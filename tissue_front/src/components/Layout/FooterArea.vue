@@ -20,17 +20,17 @@
             </div>
           </div>
           <div class="footer_center">
-            <router-link to="/">
+            <router-link to="/noticeList">
               <div class="footer_center_item">
-                <v-img
-                  :src="require('@/assets/notice.png')"
-                  max-width="80px"
-                  max-height="80px"
-                />
+                  <v-img
+                    :src="require('@/assets/notice.png')"
+                    max-width="80px"
+                    max-height="80px"
+                  />
                 <p class="footer_center_item_text">공지사항</p>
               </div>
             </router-link>
-            <router-link to="/">
+            <router-link to="/qnaList">
               <div class="footer_center_item">
                 <v-img
                   :src="require('@/assets/cs.png')"

@@ -16,16 +16,17 @@ export default {
   },
   methods: {
     onSubmit (payload) {
-      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary, file} = payload
+      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary, noticeYoutube, file} = payload
       let formData = new FormData()
       if (file != null)
       formData.append('noticeCategory', noticeCategory)
       formData.append('noticeTitle', noticeTitle)
       formData.append('noticeContent', noticeContent)
       formData.append('noticeNecessary', noticeNecessary)
+      formData.append('noticeYoutube', noticeYoutube)
       formData.append('file', file)
 
-      axios.post('http://localhost:7777/notice/register', formData, {
+      axios.post('notice/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

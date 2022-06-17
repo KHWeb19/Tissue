@@ -25,10 +25,24 @@ export default {
   methods: {
     ...mapActions(['fetchNotice']),
     onSubmit (payload) {
-      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary } = payload
-      axios.put(`http://localhost:7777/notice/${this.noticeNo}`,
-        { noticeCategory, noticeTitle, noticeContent, noticeNecessary,
-            noticeDate: this.notice.noticeDate, noticeView: this.notice.noticeView })
+      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary, noticeYoutube, file, noticeImg } = payload
+
+      let formData = new FormData()
+      if (file != null) { formData.append('file', file)}
+      formData.append('noticeCategory', noticeCategory)
+      formData.append('noticeTitle', noticeTitle)
+      formData.append('noticeContent', noticeContent)
+      formData.append('noticeNecessary', noticeNecessary)
+      formData.append('noticeYoutube', noticeYoutube)
+      formData.append('noticeImg', noticeImg)
+      formData.append('noticeDate', this.notice.noticeDate)
+      formData.append('noticeView', this.notice.noticeView)
+
+      axios.put(`notice/${this.noticeNo}`, formData, {
+       headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
         .then(res => {
           alert('게시물 수정 성공!')
           this.$router.replace({

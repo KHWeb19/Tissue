@@ -1,24 +1,24 @@
 <template>
     <body>
       <v-container>
-      <form @submit.prevent="onSubmit">
-        <h2>공지사항 등록</h2>
+      <form @submit.prevent="onSubmit"><br><br><br><br>
+        <h2>공지사항 등록</h2><br><br>
           <v-select v-model="noticeCategory" label="카테고리" :items="categoryList"></v-select>
           <v-text-field v-model="noticeTitle" label="제목" type="text"></v-text-field>
           <v-textarea v-model="noticeContent" label="내용" type="text" height="300px" ></v-textarea>
           <v-select v-model="noticeNecessary" label="필독" :items="necessaryList"></v-select>
+          <v-text-field v-model="noticeYoutube" label="유튜브src" type="text"></v-text-field>
           <input type="file" ref="files" @change="handleFileUpload()"/>
+          <v-img :src="image" alt=""/><br><br><br><br>
           <div id ='btn'>
             <v-btn class="white--text" id="BtnRegister" type="submit">등록</v-btn>
-          </div><br><br><br><br><br>
+          </div><br><br><br>
       </form>
   </v-container>
 </body>
 </template>
 
 <script>
-import axios from 'axios'
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 export default {
   name: 'NoticeRegister',
   data () {
@@ -28,9 +28,10 @@ export default {
       noticeTitle: '',
       noticeContent: '',
       noticeNecessary: '',
-      necessaryList: ['필독', '일반'],
+      necessaryList: ['필독', '일반' ],
       files: '',
-      image: ''
+      image: '',
+      noticeYoutube: ''
     }
   },
   methods: {
@@ -43,10 +44,10 @@ export default {
       this.files = this.$refs.files.files[0]
     },
     onSubmit () {
-      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary } = this
+      const { noticeCategory, noticeTitle, noticeContent, noticeNecessary, noticeYoutube } = this
       const file = this.$refs.files.files[0]
-      this.$emit('submit', { noticeCategory, noticeTitle, noticeContent, noticeNecessary, file })
-      console.log(noticeCategory, noticeTitle, file)
+      this.$emit('submit', { noticeCategory, noticeTitle, noticeContent, noticeNecessary, noticeYoutube, file })
+      console.log(noticeCategory, noticeYoutube, file)
     }
   }
 }
@@ -55,5 +56,5 @@ export default {
 <style scoped>
 h2 { font-size: 30px;}
 #btn { text-align: center; font-size: 20px; }
-#BtnRegister { background-color: blue; width: 500px; height: 55px;}
+#BtnRegister { background-color: skyblue; width: 500px; height: 55px;}
 </style>
