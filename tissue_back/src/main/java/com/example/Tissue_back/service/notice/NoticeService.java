@@ -1,7 +1,6 @@
-package com.example.Tissue_back.service.Notice;
+package com.example.Tissue_back.service.notice;
 
-import com.example.Tissue_back.entity.Notice;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.Tissue_back.entity.notice.Notice;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 

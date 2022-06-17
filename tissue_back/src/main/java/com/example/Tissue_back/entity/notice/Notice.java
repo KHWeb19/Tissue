@@ -1,4 +1,4 @@
-package com.example.Tissue_back.entity;
+package com.example.Tissue_back.entity.notice;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

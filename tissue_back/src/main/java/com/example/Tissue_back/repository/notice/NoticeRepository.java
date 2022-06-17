@@ -1,6 +1,6 @@
-package com.example.Tissue_back.repository;
+package com.example.Tissue_back.repository.notice;
 
-import com.example.Tissue_back.entity.Notice;
+import com.example.Tissue_back.entity.notice.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

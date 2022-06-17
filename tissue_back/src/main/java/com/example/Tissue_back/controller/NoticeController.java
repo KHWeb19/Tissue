@@ -1,17 +1,16 @@
 package com.example.Tissue_back.controller;
 
-import com.example.Tissue_back.entity.Notice;
-import com.example.Tissue_back.service.Notice.NoticeService;
+import com.example.Tissue_back.entity.notice.Notice;
+import com.example.Tissue_back.service.notice.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
 import java.util.List;
 
 @Slf4j
@@ -47,8 +46,7 @@ public class NoticeController {
 
 
     @PutMapping("/{noticeNo}")
-    public Notice NoticeModify (@PathVariable("noticeNo") Long noticeNo,
-                              @RequestBody Notice notice,
+    public Notice NoticeModify (@PathVariable("noticeNo") Long noticeNo, Notice notice,
                                 @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info("Notice Modify");
 
