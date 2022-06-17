@@ -33,7 +33,7 @@
                         <button class="socialBtn" @click="kakaoLogin"><v-img src="@/assets/button/kakao_login_medium_wide.png"></v-img></button>
                     </v-row>
                     <v-row justify="center" class="mt-5">
-                        <button class="socialBtn btnBorder"><v-img src="@/assets/button/google_login.png"></v-img></button>
+                        <button class="socialBtn btnBorder" @click="googleLogin"><v-img src="@/assets/button/google_login.png"></v-img></button>
                     </v-row>
                     <br/>
                 </v-container>
@@ -61,7 +61,8 @@
 
 <script>
 import axios from 'axios'
-import { KakaoAuthUri } from '../OAuth/OAuth.js'
+import { KakaoAuthUri } from '../OAuth/KakaoOAuth.js'
+import { GoogleAuthUri } from '../OAuth/GoogleOAuth.js'
 
 export default {
     name: 'MemberLogin',
@@ -95,12 +96,11 @@ export default {
                 alert(error)
             }
         },
-        async kakaoLogin() {
-            try {
-                location.href=KakaoAuthUri
-            }catch(error){
-                alert(error)
-            }
+        kakaoLogin() {
+            location.href=KakaoAuthUri
+        },
+        googleLogin() {
+            location.href=GoogleAuthUri
         }
     }
 }

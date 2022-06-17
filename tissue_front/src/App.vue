@@ -3,6 +3,7 @@
     <v-main>
       <div
         v-if="
+          this.$route.name != 'GoogleOAuth' &&
           this.$route.name != 'KakaoOAuth' &&
           this.$route.name != 'MemberLoginPage' &&
           this.$route.name != 'MemberJoinPage' &&
@@ -19,6 +20,7 @@
     </v-main>
     <footer-area
       v-if="
+        this.$route.name != 'GoogleOAuth' &&
         this.$route.name != 'KakaoOAuth' &&
         this.$route.name != 'MemberLoginPage' &&
         this.$route.name != 'MemberJoinPage' &&
@@ -27,7 +29,10 @@
         this.$route.name != 'MemberFindPwPage' 
       "
     />
-    <join-footer v-if="this.$route.name != 'KakaoOAuth'"/>
+    <join-footer 
+      v-if="
+        this.$route.name != 'KakaoOAuth' && 
+        this.$route.name != 'GoogleOAuth'"/>
   </v-app>
 </template>
 
