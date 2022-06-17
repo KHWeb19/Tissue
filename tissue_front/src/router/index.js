@@ -10,6 +10,8 @@ import MemberJoinPage from '../views/member/MemberJoinPage.vue'
 import MemberLoginPage from '../views/member/MemberLoginPage.vue'
 import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
+import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
+import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 
 
 // admin
@@ -112,6 +114,11 @@ const routes = [
     name: 'PerformanceModifyPage',
     components: {
       default: PerformanceModifyPage
+    },
+     props: {
+      default: true
+     }
+  },
     {
         path: '/login',
         name: 'MemberLoginPage',
@@ -122,8 +129,20 @@ const routes = [
         name: 'MemberFindIdPage',
         component:MemberFindIdPage
     },
-    props: {
-      default: true
+      {
+        path: '/findPw',
+        name: 'MemberFindPwPage',
+        component:MemberFindPwPage
+    },
+    {
+        path: '/kakaoLogin',
+        name:'KakaoOAuth',
+        component:KakaoOAuth
+    },
+    {
+        path: '/googleLogin',
+        name: 'GoogleOAuth',
+        component: GoogleOAuth
     }
   },
   {

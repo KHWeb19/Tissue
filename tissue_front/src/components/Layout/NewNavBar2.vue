@@ -50,8 +50,8 @@
           <v-btn icon class="mr-3 sub_tab_icon">
             <v-icon color="black" large>mdi-account-outline</v-icon>
           </v-btn>
-          <div class="mt-4" v-if="this.$store.state.token">
-            <v-btn icon class="sub_tab_icon mr-8">
+          <div class="mt-4" v-if="token">
+            <v-btn icon class="sub_tab_icon mr-8" @click="logout">
                 <v-icon color="black" large>mdi-logout</v-icon>
             </v-btn>
         </div>
@@ -83,23 +83,39 @@ export default {
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트", route: "ㄷ" },
       ],
+      token: localStorage.getItem('token')
     };
   },
-
   mounted() {
-    window.addEventListener("scroll", function () {
-      if (window.scrollY <= 700) {
-        document.getElementsByClassName("menubar")[0].style.position =
-          "absolute";
-      } else if (window.scrollY > 700) {
-        document.getElementsByClassName("menubar")[0].style.position = "fixed";
-      }
-    });
+      if( !this.$route.name == 'GoogleOAuth' &&
+          !this.$route.name == 'KakaoOAuth' &&
+          !this.$route.name == 'MemberLoginPage' &&
+          !this.$route.name == 'MemberJoinPage' &&
+          !this.$route.name == 'MemberJoinPage2' &&
+          !this.$route.name == 'MemberFindIdPage' &&
+          !this.$route.name == 'MemberFindPwPage'){
+              window.addEventListener("scroll", function () {
+                if (window.scrollY <= 700) {
+                    document.getElementsByClassName("menubar")[0].style.position =
+                    "absolute";
+                } else if (window.scrollY > 700) {
+                    document.getElementsByClassName("menubar")[0].style.position = "fixed";
+                }
+              })
+            }
   },
   methods: {
     goHome() {
       this.$router.push("/");
     },
+    logout() {
+        let result = confirm('로그아웃하시겠습니까?')
+
+        if (result) {
+            localStorage.removeItem("token")
+            history.go(0)
+        }
+    }
   },
 };
 </script>
