@@ -1,9 +1,11 @@
 import {
+
     // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
-    // map
-    FETCH_MAP
+  
+    FETCH_NOTICE_LIST,
+    FETCH_NOTICE
 } from './mutation-types'
 
 // import Vue from 'vue'
@@ -23,17 +25,17 @@ export default {
             commit(FETCH_PERFORMANCE, res.data)
         })
     },
-    // map
-    fetchMap({ commit }, performNo) {
-        return axios.get(`http://localhost:7777/map/read/${performNo}`)
-        .then((res) => {
-            const map = res.data
-            console.log(map)
-            this.mapOptions.lat = map.y
-            this.mapOptions.lng = map.x
-            this.name = map.name
-            this.address = map.address
-            commit(FETCH_MAP, res.data)
-        })
-    },
+  fetchNoticeList ({ commit }) {
+        return axios.get('http://localhost:7777/notice/list')
+          .then((res) => {
+            commit(FETCH_NOTICE_LIST, res.data)
+          })
+      },
+    fetchNotice ({ commit }, noticeNo) {
+        return axios.get(`http://localhost:7777/notice/${noticeNo}`)
+          .then((res) => {
+            commit(FETCH_NOTICE, res.data)
+          })
+      },
 }
+

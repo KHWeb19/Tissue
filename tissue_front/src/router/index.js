@@ -11,6 +11,7 @@ import MemberLoginPage from '../views/member/MemberLoginPage.vue'
 import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 
+
 // admin
 import AdminPage from '@/views/AdminPage.vue'
 
@@ -23,6 +24,15 @@ import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue
 // map
 import MapPage from '@/views/map/MapPage.vue'
 import MapPage2 from '@/views/map/MapPage2.vue'
+
+import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
+import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
+
+import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
+import NoticeListPage from '../views/notice/NoticeListPage.vue'
+import NoticeReadPage from '../views/notice/NoticeReadPage.vue'
+import NoticeModifyPage from '../views/notice/NoticeModifyPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -102,6 +112,15 @@ const routes = [
     name: 'PerformanceModifyPage',
     components: {
       default: PerformanceModifyPage
+    {
+        path: '/login',
+        name: 'MemberLoginPage',
+        component:MemberLoginPage
+    },
+    {
+        path: '/findId',
+        name: 'MemberFindIdPage',
+        component:MemberFindIdPage
     },
     props: {
       default: true
@@ -116,6 +135,54 @@ const routes = [
     path: '/mapPage2',
     name: 'MapPage2',
     component: MapPage2,
+  }
+  {
+    path: '/performanceRegister',
+    name: 'PerformanceRegisterPage',
+    component: PerformanceRegisterPage
+  },
+  {
+    path: '/performanceList',
+    name: 'PerformanceListPage',
+    component: PerformanceListPage
+  },
+  {
+    path: '/noticeRegister',
+    name: 'NoticeRegisterPage',
+    component: NoticeRegisterPage
+  },
+  {
+    path: '/noticeList',
+    name: 'NoticeListPage',
+    component: NoticeListPage
+  },
+  {
+    path: '/noticeRead/:noticeNo',
+    name: 'NoticeReadPage',
+    components: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/noticeModify/:noticeNo',
+    name: 'NoticeModifyPage',
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
 ]
 
