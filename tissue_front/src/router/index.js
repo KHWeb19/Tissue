@@ -13,6 +13,8 @@ import MemberJoinPage from '../views/member/MemberJoinPage.vue'
 import MemberLoginPage from '../views/member/MemberLoginPage.vue'
 import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
+import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
+import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 
 import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
 import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
@@ -85,6 +87,16 @@ const routes = [
         path: '/findPw',
         name: 'MemberFindPwPage',
         component:MemberFindPwPage
+    },
+    {
+        path: '/kakaoLogin',
+        name:'KakaoOAuth',
+        component:KakaoOAuth
+    },
+    {
+        path: '/googleLogin',
+        name: 'GoogleOAuth',
+        component: GoogleOAuth
     }
   // 유아림
   {
