@@ -50,14 +50,18 @@
           <v-icon color="white" large>mdi-account-outline</v-icon>
         </v-btn>
         <div class="mt-4" v-if="$store.state.token">
-            <v-btn icon class="sub_tab_icon mr-8">
-                <v-icon color="white" large>mdi-logout</v-icon>
-            </v-btn>
+          <v-btn icon class="sub_tab_icon mr-8">
+            <v-icon color="white" large>mdi-logout</v-icon>
+          </v-btn>
         </div>
         <div class="mt-4" v-else>
-            <v-btn icon class="sub_tab_icon mr-8" :to="{name: 'MemberLoginPage'}">
-                <v-icon color="white" large>mdi-login</v-icon>
-            </v-btn>
+          <v-btn
+            icon
+            class="sub_tab_icon mr-8"
+            :to="{ name: 'MemberLoginPage' }"
+          >
+            <v-icon color="white" large>mdi-login</v-icon>
+          </v-btn>
         </div>
       </v-toolbar-items>
     </v-toolbar>
@@ -65,7 +69,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "NewNavBar",
   data() {
@@ -85,8 +89,8 @@ export default {
     };
   },
   computed: {
-      ...mapState(['token'])
-  }
+    ...mapState(["token"]),
+  },
 };
 </script>
 

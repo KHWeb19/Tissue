@@ -23,6 +23,8 @@ export default {
     ...mapState(["hall"]),
   },
   created() {
+    this.$store.state.hall = null;
+
     this.fetchHall(this.hallNo).catch(() => {
       alert("게시물 요청 실패");
       this.$router.push();

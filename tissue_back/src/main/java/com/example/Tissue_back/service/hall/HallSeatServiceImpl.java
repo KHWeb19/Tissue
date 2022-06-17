@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service.hall;
 
+
 import com.example.Tissue_back.entity.hall.Hall;
 import com.example.Tissue_back.entity.hall.HallSeat;
 import com.example.Tissue_back.repository.hall.HallRepository;
@@ -41,4 +42,12 @@ public class HallSeatServiceImpl implements HallSeatService{
             }
         }
     }
+
+    @Override
+    public void modify(HallSeat hallSeat) {
+
+        //hallSeatRepository.save(modifySeat);
+    }
+
+
 }

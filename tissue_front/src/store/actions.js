@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
     FETCH_HALL_LIST,
     FETCH_HALL,
+  
     
 } from './mutation-types'
 
@@ -21,5 +22,7 @@ export default {
             commit(FETCH_HALL,res.data)
         })
     },
+    
+    
  }
 

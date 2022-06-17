@@ -37,41 +37,7 @@
           </v-col>
         </v-row>
       </div>
-      <!--
-      <div>
-        <v-row v-for="(index, row) in rowArr" :key="row">
-          <div>{{ row + 1 }} 열</div>
-          <v-col v-for="(index, col) in colArr" :key="col">
-            <div
-              style="width: 100px; height: 100px; border: 1px solid black"
-              @click="changeColor"
-              :row="row"
-              :col="col"
-              id="color"
-            >
-              {{ row }},{{ col }}
-            </div>
-          </v-col>
-        </v-row>
-      </div>
 
-      <div style="width: 700px">
-        <v-row v-for="(line, index) in dataTable" :key="index">
-          <div class="mt-3">{{ index + 1 }} 열</div>
-          <v-col v-for="(item, indexes) in line" :key="indexes">
-            <div
-              style="width: 100px; height: 100px; border: 1px solid black"
-              @click="changeColor"
-              class="seat"
-              :row="index"
-              :col="indexes"
-            >
-              {{ index }}, {{ indexes }}
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-      -->
       <v-radio-group v-model="radioGroup" row>
         <v-radio
           v-for="kind in kindsGrade"
@@ -93,7 +59,7 @@
           <div>{{ item.grade }}</div>
         </div>
       </div>
-      <table>
+      <table v-if="dataTable">
         <tr v-for="(line, index) in dataTable" :key="index" :row-index="index">
           <td
             v-for="(item, indexes) in line"
@@ -102,13 +68,11 @@
           >
             <div
               style="width: 100px; height: 100px; border: 1px solid black"
-              @click="changeColor"
+              @click="clickSeat"
               class="seat"
               :row-index="index"
               :cell-index="indexes"
-            >
-              {{ isClick }}
-            </div>
+            ></div>
           </td>
         </tr>
       </table>
@@ -120,6 +84,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "HallRead",
   props: {
@@ -131,9 +96,7 @@ export default {
   data() {
     return {
       isClick: "",
-
-      dataTable: Array,
-      isCreate: true,
+      dataTable: null,
       radioGroup: "R",
       kindsGrade: ["R", "S", "VIP"],
       gradeColor: [
@@ -141,35 +104,48 @@ export default {
         { color: "green", grade: "S" },
         { color: "purple", grade: "VIP" },
       ],
+      modifyData: this.hall,
+      seatNo: "",
+      mdSeatName: String,
+      mdSeatGrade: String,
+      hallNo: this.hall.hallNo,
     };
   },
 
   created() {
-    if (this.isCreate == true) {
-      this.dataTable = new Array(this.hall.rowCnt);
+    this.dataTable = new Array(this.hall.rowCnt);
 
-      for (let i = 0; i < this.dataTable.length; i++) {
-        this.dataTable[i] = new Array(this.hall.colCnt);
-      }
-
-      for (let i = 0; i < this.hall.rowCnt; i++) {
-        for (let j = 0; j < this.hall.colCnt; j++) {
-          this.dataTable[i][j] = { grade: "R", click: false };
-        }
-      }
-      console.log(this.dataTable);
-
-      this.isCreate = false;
+    for (let i = 0; i < this.dataTable.length; i++) {
+      this.dataTable[i] = new Array(this.hall.colCnt);
     }
+    let cnt = 0;
+    for (let i = 0; i < this.hall.rowCnt; i++) {
+      for (let j = 0; j < this.hall.colCnt; j++) {
+        this.dataTable[i][j] = {
+          name: this.hall.seats[cnt].seatName,
+          grade: this.hall.seats[cnt].seatGrade,
+          click: false,
+        };
+        cnt = cnt + 1;
+      }
+    }
+
+    console.log(this.dataTable);
   },
   mounted() {
     this.paintSeatWithGrade();
   },
   methods: {
-    changeColor(e) {
-      let row = e.target.getAttribute("row-index");
-      let col = e.target.getAttribute("cell-index");
-      console.log(this.radioGroup, row, col);
+    clickSeat(e) {
+      let row = Number(e.target.getAttribute("row-index"));
+      let col = Number(e.target.getAttribute("cell-index"));
+
+      console.log(
+        this.radioGroup,
+        row,
+        col,
+        this.hall.seats[row * this.hall.colCnt + col].seatName
+      );
 
       if (this.dataTable[row][col].click == false) {
         this.dataTable[row][col].click = true;
@@ -200,7 +176,6 @@ export default {
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
                 "purple";
             }
-            //bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "white";
           }
         }
       }
@@ -213,12 +188,32 @@ export default {
         for (let j = 0; j < this.hall.colCnt; j++) {
           if (this.dataTable[i][j].click == true) {
             this.dataTable[i][j].grade = this.radioGroup;
+            this.modifyData.seats[i * this.modifyData.colCnt + j].seatGrade =
+              this.radioGroup;
+
+            this.seatNo =
+              this.modifyData.seats[i * this.hall.colCnt + j].seatNo;
+            this.mdSeatName =
+              this.modifyData.seats[i * this.hall.colCnt + j].seatName;
+            this.mdSeatGrade =
+              this.modifyData.seats[i * this.hall.colCnt + j].seatGrade;
+
+            console.log(this.seatNo, this.mdSeatName, this.mdSeatGrade);
+
+            const { seatNo, mdSeatName, mdSeatGrade } = this;
+            axios
+              .put(`http://localhost:7777/hallSeat/${this.hallNo}`, {
+                seatNo,
+                mdSeatName,
+                mdSeatGrade,
+              })
+              .catch(() => {
+                alert("수정 실패");
+              });
           }
         }
       }
-
-      console.log(this.dataTable);
-
+      console.log(this.modifyData);
       this.paintSeatWithGrade();
       this.reset();
     },

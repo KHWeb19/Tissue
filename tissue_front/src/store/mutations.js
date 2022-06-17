@@ -1,6 +1,7 @@
 import {
     FETCH_HALL_LIST,
-    FETCH_HALL
+    FETCH_HALL,
+   
 } from './mutation-types'
 
 export default{

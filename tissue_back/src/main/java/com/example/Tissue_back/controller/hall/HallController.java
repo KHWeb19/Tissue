@@ -44,4 +44,7 @@ public class HallController {
 
         return hallService.read(hallNo);
     }
+
+    
+
 }

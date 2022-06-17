@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hall-list :halls="halls" />
+    <hall-list v-if="halls" :halls="halls" />
   </div>
 </template>
 
