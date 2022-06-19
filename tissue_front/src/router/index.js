@@ -12,6 +12,7 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
+import MyPageView from '../views/member/myPage/MyPage.vue'
 
 import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
 import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
@@ -78,7 +79,17 @@ const routes = [
         path: '/googleLogin',
         name: 'GoogleOAuth',
         component: GoogleOAuth
-    }
+    },
+    {
+        path: '/myPage',
+        name: 'MyPageView',
+        component: MyPageView
+    },
+    {
+        path: '/myPage/modify',
+        name: 'MyPageModify',
+        component: MyPageView
+    },
   // 유아림
   {
     path: '/performanceRegister',
@@ -119,16 +130,7 @@ const routes = [
     props: {
       default: true
     }
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
-
 ]
 
 const router = new VueRouter({

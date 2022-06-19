@@ -46,7 +46,7 @@
           dark
           class="mt-5 mr-10"
         />
-        <v-btn icon class="sub_tab_icon mr-3">
+        <v-btn icon class="sub_tab_icon mr-3" :to="{name: 'MyPageView'}">
           <v-icon color="white" large>mdi-account-outline</v-icon>
         </v-btn>
         <div class="mt-4" v-if="token">
