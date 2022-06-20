@@ -24,7 +24,7 @@ public class HallSeatController {
     public void hallSeatModify(@PathVariable("hallNo") Long hallNo, @Validated @RequestBody HallSeat hallSeat){
         log.info("hallModify()" + hallNo);
 
-        hallSeatService.modify(hallSeat);
+        hallSeatService.modify(hallSeat, hallNo);
 
     }
 }

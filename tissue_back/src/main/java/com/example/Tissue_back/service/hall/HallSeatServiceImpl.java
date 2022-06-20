@@ -44,9 +44,12 @@ public class HallSeatServiceImpl implements HallSeatService{
     }
 
     @Override
-    public void modify(HallSeat hallSeat) {
+    public void modify(HallSeat hallSeat,Long hallNo) {
+        log.info(String.valueOf(hallSeat));
+        Optional<Hall> findHall = hallRepository.findById(hallNo);
+        hallSeat.setHall(findHall.get());
 
-        //hallSeatRepository.save(modifySeat);
+        hallSeatRepository.save(hallSeat);
     }
 
 

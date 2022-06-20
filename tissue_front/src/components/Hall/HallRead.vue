@@ -106,8 +106,8 @@ export default {
       ],
       modifyData: this.hall,
       seatNo: "",
-      mdSeatName: String,
-      mdSeatGrade: String,
+      seatName: String,
+      seatGrade: String,
       hallNo: this.hall.hallNo,
     };
   },
@@ -193,19 +193,20 @@ export default {
 
             this.seatNo =
               this.modifyData.seats[i * this.hall.colCnt + j].seatNo;
-            this.mdSeatName =
+            this.seatName =
               this.modifyData.seats[i * this.hall.colCnt + j].seatName;
-            this.mdSeatGrade =
+            this.seatGrade =
               this.modifyData.seats[i * this.hall.colCnt + j].seatGrade;
 
-            console.log(this.seatNo, this.mdSeatName, this.mdSeatGrade);
+            console.log(this.seatNo, this.seatName, this.seatGrade);
 
-            const { seatNo, mdSeatName, mdSeatGrade } = this;
+            const { seatNo, seatName, seatGrade, hallNo } = this;
             axios
               .put(`http://localhost:7777/hallSeat/${this.hallNo}`, {
                 seatNo,
-                mdSeatName,
-                mdSeatGrade,
+                seatName,
+                seatGrade,
+                hallNo,
               })
               .catch(() => {
                 alert("수정 실패");
@@ -214,7 +215,7 @@ export default {
         }
       }
       console.log(this.modifyData);
-      this.paintSeatWithGrade();
+      //this.paintSeatWithGrade();
       this.reset();
     },
     reset() {
