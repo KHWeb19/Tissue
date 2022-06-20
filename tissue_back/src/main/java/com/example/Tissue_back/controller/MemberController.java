@@ -8,6 +8,7 @@ import com.example.Tissue_back.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +73,14 @@ public class MemberController {
         log.info("== find Pw ==" + findDto);
 
         return service.findPw(findDto);
+    }
+
+    // 회원정보 가져오기
+    @GetMapping("/info")
+    public Member getInfo (@RequestParam(value = "token") String token) {
+        log.info ("== Get Info ==" + token);
+
+        return service.getInfo(token);
     }
 
 

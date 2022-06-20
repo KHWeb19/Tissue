@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
 
-        String token = securityService.createToken(loginDto.getMemberId(), encodedPassword, (2*1000*60));
+        String token = securityService.createToken(loginDto.getMemberId(), loginMember.getRole(), (5*1000*60));
 
         return token;
     }
@@ -122,6 +122,17 @@ public class MemberServiceImpl implements MemberService {
         findDto.setNumStr(phoneCheckService.PhoneNumberCheck(findDto.getMemberPhone()));
 
         return findDto;
+    }
+
+    @Override
+    public Member getInfo (String token) {
+
+        String memberId = securityService.getMemberId(token);
+        log.info("check >>>>" + memberId);
+
+        Optional<Member> findMember = repository.findByMemberId(memberId);
+
+        return findMember.get();
     }
 
 }
