@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container style="margin-top: 100px">
       <v-row>
         <v-col>
           <div>
@@ -10,6 +10,7 @@
               label="공연장명"
               clearable
               outlined
+              color="blue lighten-3"
             />
             <v-text-field
               style="width: 500px"
@@ -17,6 +18,7 @@
               label="행 개수"
               clearable
               outlined
+              color="blue lighten-3"
             />
             <v-text-field
               style="width: 500px"
@@ -24,8 +26,9 @@
               label="열 개수"
               clearable
               outlined
+              color="blue lighten-3"
             />
-            <v-btn @click="onSubmit">등록</v-btn>
+            <v-btn text @click="onSubmit">등록</v-btn>
           </div>
         </v-col>
       </v-row>
@@ -55,7 +58,10 @@ export default {
           colCnt,
         })
         .then(() => {
-          alert("등록성공");
+          alert(
+            "공연장이 등록되었습니다. \n좌석등급은 모두 R로 지정되었습니다. \n좌석 등급을 필수로 수정해주세요."
+          );
+          this.$router.push("/HallList");
         })
         .catch(() => {
           alert("실패");

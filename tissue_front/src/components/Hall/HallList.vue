@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="white" style="width: 1400px">
+    <v-container class="white" style="width: 1400px; margin-top: 100px">
       <v-row>
         <v-col
           ><v-card flat>
@@ -14,6 +14,7 @@
                 :page.sync="page"
                 hide-default-footer
                 @page-count="pageCount = $event"
+                class="vTable"
               >
                 <template v-slot:[`item.hallName`]="{ item }">
                   <router-link
@@ -27,7 +28,11 @@
                 </template>
               </v-data-table>
               <div class="text-center pt-10">
-                <v-pagination v-model="page" :length="pageCount"></v-pagination>
+                <v-pagination
+                  v-model="page"
+                  :length="pageCount"
+                  color="pink lighten-3"
+                ></v-pagination>
               </div>
             </div>
           </v-card>
@@ -69,3 +74,23 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.vTable {
+  line-height: 85px;
+  border-top: 3px solid skyblue;
+  color: black;
+}
+</style>
+
+<style lang="scss" scoped>
+.v-data-table::v-deep th {
+  font-size: 18px !important;
+  border-bottom: 1px solid grey;
+}
+.v-data-table::v-deep td {
+  font-size: 18px !important;
+  border-bottom: 2px solid lightgrey;
+  border-top: 1px solid lightgrey;
+}
+</style>
