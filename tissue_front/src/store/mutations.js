@@ -3,8 +3,6 @@ import {
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
 
-    // map
-    FETCH_MAP
 } from './mutation-types'
 
 export default {
@@ -15,8 +13,5 @@ export default {
     [FETCH_PERFORMANCE] (state, performance) {
         state.performance = performance
     },
-    // map
-    [FETCH_MAP] (state, map) {
-        state.map = map
-    },
+
 }

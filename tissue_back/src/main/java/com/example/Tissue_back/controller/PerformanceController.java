@@ -32,13 +32,15 @@ public class PerformanceController {
     private PerformanceRepository performanceRepository;
 
     @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-    @PostMapping(value= "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity performanceRegister(Performance performance,
-                                              @RequestParam("fileList") List<MultipartFile> fileList,
-                                              @RequestParam(value = "file", required = false) MultipartFile file) throws Exception {
+    @PostMapping(value= "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity performanceRegister(@RequestPart("performance") Performance performance,
+                                              @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList,
+                                              @RequestPart(value = "file", required = false) MultipartFile file) throws Exception {
         log.info("performanceRegister()" + performance);
+        log.info("file()" + file);
+        log.info("fileList()" + fileList);
 
-        Performance performance1 = performanceService.register(performance, (List<MultipartFile>) fileList, file);
+        Performance performance1 = performanceService.register(performance, fileList, file);
 
         return new ResponseEntity(performance1, HttpStatus.OK );
     }

@@ -70,7 +70,7 @@ const routes = [
     path: '/findPw',
     name: 'MemberFindPwPage',
     component:MemberFindPwPage
-  }
+  },
   // 유아림
   {
     path: '/adminPage',

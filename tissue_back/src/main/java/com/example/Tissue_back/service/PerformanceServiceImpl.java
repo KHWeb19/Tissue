@@ -4,11 +4,13 @@ import com.example.Tissue_back.entity.Performance;
 import com.example.Tissue_back.repository.PerformanceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -25,46 +27,46 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         // 다중이미지 등록
         try {
-            for (MultipartFile multipartFile : fileList) {
-                log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
+                for (MultipartFile multipartFile : fileList) {
+                    log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
-                // 파일 경로 지정
-                String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
+                    // 파일 경로 지정
+                    String filePath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\detailImg";
 
-                UUID uuid = UUID.randomUUID();
+                    UUID uuid = UUID.randomUUID();
 
-                // 파일 원본명 저장
-                String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+                    // 파일 원본명 저장
+                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
 
-                // 파일 저장
-                File saveFile = new File(filePath, fileName);
-                multipartFile.transferTo(saveFile);
+                    // 파일 저장
+                    File saveFile = new File(filePath, fileName);
+                    multipartFile.transferTo(saveFile);
 
-                // performance db에 detailImg 저장
-                if(multipartFile == fileList.get(0)) {
-                    performance.setPerformDetailImg1(fileName);
-                    performance.setPerformDetailImgPath(filePath);
-                } else if (multipartFile == fileList.get(1)) {
-                    performance.setPerformDetailImg2(fileName);
-                    performance.setPerformDetailImgPath(filePath);
-                } else if (multipartFile == fileList.get(2)) {
-                    performance.setPerformDetailImg3(fileName);
-                    performance.setPerformDetailImgPath(filePath);
-                } else if (multipartFile == fileList.get(3)) {
-                    performance.setPerformDetailImg4(fileName);
-                    performance.setPerformDetailImgPath(filePath);
-                } else {
-                    performance.setPerformDetailImg5(fileName);
-                    performance.setPerformDetailImgPath(filePath);
+                    // 파일 저장
+//                   FileOutputStream saveFile = new FileOutputStream(
+//                            "../../tissue_front/src/assets/detailImg/" + fileName);
+//
+//                   saveFile.write(multipartFile.getBytes());
+//                   saveFile.close();
+
+                    // performance db에 detailImg 저장
+                    if(multipartFile == fileList.get(0)) {
+                        performance.setPerformDetailImg1(fileName);
+//                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(1)) {
+                        performance.setPerformDetailImg2(fileName);
+//                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(2)) {
+                        performance.setPerformDetailImg3(fileName);
+//                        performance.setPerformDetailImgPath(filePath);
+                    } else if (multipartFile == fileList.get(3)) {
+                        performance.setPerformDetailImg4(fileName);
+//                        performance.setPerformDetailImgPath(filePath);
+                    } else {
+                        performance.setPerformDetailImg5(fileName);
+//                        performance.setPerformDetailImgPath(filePath);
+                    }
                 }
-
-//               파일 저장
-//               FileOutputStream saveFile = new FileOutputStream(
-//                        "../../tissue_front/src/assets/uploadImg/" + fileName);
-
-//               saveFile.write(multipartFile.getBytes());
-//               saveFile.close();
-            }
         } catch (Exception e) {
 
         }
@@ -78,6 +80,13 @@ public class PerformanceServiceImpl implements PerformanceService{
 
         File saveThumbNail = new File(thumbNailPath, thumbNailFileName);
         file.transferTo(saveThumbNail);
+
+        // 파일 저장
+//        FileOutputStream saveThumbFile = new FileOutputStream(
+//                "../../tissue_front/src/assets/thumbNail/" + thumbNailFileName);
+//
+//        saveThumbFile.write(file.getBytes());
+//        saveThumbFile.close();
 
         performance.setPerformThumbnail(thumbNailFileName);
         performance.setPerformThumbnailPath(thumbNailPath);

@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-15">
+    <div>
        <v-container>
                <v-row>
                     <v-col>
@@ -21,12 +21,12 @@
                                 <v-text-field outlined v-model="performTime" type="Time" required></v-text-field>
                             </div>
                             <div>
-                                <label>R석가격</label>
-                                <v-text-field outlined v-model="performPriceR" type="text" required></v-text-field>
-                            </div>
-                            <div>
                                 <label>S석가격</label>
                                 <v-text-field outlined v-model="performPriceS" type="text" required></v-text-field>
+                            </div>
+                            <div>
+                                <label>R석가격</label>
+                                <v-text-field outlined v-model="performPriceR" type="text" required></v-text-field>
                             </div>
                             <div>
                                 <label>vip석가격</label>
@@ -54,37 +54,130 @@
                                 <label>출연자</label>
                                 <v-text-field outlined v-model="performer" type="text" required></v-text-field>
                             </div>
-                            <div class="file-upload-list">
-                                <label>Thumbnail
-                                    <input type="file" ref="file" id="file" @change="handleThumbNailUpload()"/>
-                                </label>
-                                <div style="text-align:center">
-                                    <img :src=file.preview class="preview"/>
+
+                            <!-- 썸네일 업로드 --> 
+                            <!-- <div class="information-container">
+                                <div class="information-title">썸네일 등록</div>
+                                <div class="file-upload-wrapper">
+                                    <div v-if="file == 0" class="file-upload-example-container">
+                                        <div class="file-upload-example">
+                                            <div class="file-notice-item file-upload-button">
+                                                <div class="image-box">
+                                                    <label for="file">등록</label>
+                                                    <input type="file" id="file" ref="file" @change="thumbNailUpload" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else class="file-preview-content-container">
+                                        <div class="file-preview-container">
+                                            <div class="file-preview-wrapper">
+                                                <div class="file-close-button" @click="thumbNailDeleteButton">
+                                                    x
+                                                </div>
+                                                <img :src="file.preview" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- <div class="file-upload-list__item__btn-remove" @click="handleRemove1()">
-                                    삭제
-                                </div> -->
-                            </div>
-                            <div class="file-upload-list">
-                                <label>DetailFiles
-                                    <input type="file" ref="files" multiple @change="handleFileUpload()"/>
-                                </label>
-                                <div v-for="(file, index) in files" :key="index" style="text-align:center">
-                                    <img :src=file.preview class="preview"/>
+                            </div> -->
+
+                            
+                            <!-- 상세 이미지 업로드 --> 
+                            <!-- <div class="information-container">
+                                <div class="information-title">상세 이미지 등록</div>
+                                <div class="picture-notice">
+                                    <ul class="room-write-wrapper">
+                                        <li>
+                                            사진은 가로로 찍은 사진을 권장합니다. (가로 사이즈 최소 800px)
+                                        </li>
+                                        <li>사진 용량은 사진 한 장당 10MB 까지 등록이 가능합니다.</li>
+
+                                    </ul>
                                 </div>
-                                <!-- <div class="file-upload-list__item__btn-remove" @click="handleRemove2(index)">
-                                    삭제
-                                </div> -->
+                                <div class="file-upload-wrapper">
+                                    <div v-if="!files.length" class="file-upload-example-container">
+                                        <div class="file-upload-example">
+                                            <div class="file-notice-item">
+                                               이미지는 최소 1장 이상 등록하셔야 하며, 가로사진을 권장합니다.
+                                            </div>
+                                            <div class="file-notice-item file-notice-item-red">
+                                                이미지는 최대 5장까지 등록 가능합니다.
+                                            </div>
+                                            <div class="file-notice-item file-upload-button">
+                                                <div class="image-box">
+                                                    <label for="multiFiles">등록</label>
+                                                    <input type="file" id="multiFiles" ref="files" @change="imageUpload" multiple />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else class="file-preview-content-container">
+                                        <div class="file-preview-container">
+                                            <div v-for="(file, index) in files" :key="index" class="file-preview-wrapper">
+                                                <div class="file-close-button" @click="imageDeleteButton" :name="file.number">
+                                                    x
+                                                </div>
+                                                <img :src="file.preview" />
+                                            </div>
+                                            <div class="file-preview-wrapper-upload">
+                                                <div class="image-box">
+                                                    <label for="addFiles">추가 사진 등록</label>
+                                                    <input type="file" id="addFiles" ref="addFiles" @change="imageAddUpload" multiple />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="information-container">
+                                <div class="file-upload-wrapper">
+                                    <label>ThumNail
+                                        <input type="file" ref="file" id="file" @change="thumbNailUpload"/>
+                                    </label> 
+                                    <div class="file-preview-container">
+                                            <div class="file-preview-wrapper">
+                                                <div class="file-close-button" @click="thumbNailDeleteButton">
+                                                    x
+                                                </div>
+                                                <img :src="file.preview" />
+                                            </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="information-container">
+                                <div class="file-upload-wrapper">
+                                    <label>DetailImages
+                                        <input type="file" ref="files" multiple @change="imageUpload"/>
+                                    </label>
+                                    <div class="file-preview-content-container">
+                                        <div class="file-preview-container">
+                                            <div v-for="(file, index) in files" :key="index" class="file-preview-wrapper">
+                                                        <div class="file-close-button" @click="imageDeleteButton" :name="file.number">
+                                                            x
+                                                        </div>
+                                                        <img :src="file.preview" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- 지도 --> 
                             <div>
                                 <label>지도첨부</label>
                                 <add-map @selectMap="selectMap"/>
                             </div>
-
                         </form>
                     </v-col>
                 </v-row>
                 <br>
+                <!-- 업로드 버튼 --> 
                 <v-row>
                     <v-btn plain  @click="[submitFiles(),addMap()]" value="Upload">
                         <v-icon>mdi-check-outline</v-icon>
@@ -104,6 +197,7 @@ export default {
   name: 'PerformanceRegisterPage',
   data () {
         return {
+                performNo: '',
                 performName: '',
                 performStart: '',
                 performEnd: '',
@@ -133,7 +227,9 @@ export default {
                     {age: '15세 이상 관람가'}
                 ],
                 performer: '',
-                files: '', // 다중이미지
+                files: [], // 다중이미지
+                filesPreview: [],
+                uploadImageIndex: 0,
                 file: '', // 썸네일
                 response: '',
                  map: {
@@ -148,37 +244,75 @@ export default {
         }
     },
   methods: {
-      handleThumbNailUpload () {
-        this.file = this.$refs.file.files
-        console.log(this.file)
-
+      thumbNailUpload () {
         this.file = {
             file: this.$refs.file.files[0],
             preview: URL.createObjectURL(this.$refs.file.files[0])
         }
-
+        console.log(this.file)
       },
-       handleFileUpload () {
-            this.files = this.$refs.files.files
-            console.log(this.files)
+       imageUpload() {
+            console.log('다중이미지 갯수: ', this.$refs.files.files.length)
 
-             for (let i = 0; i < this.$refs.files.files.length; i++){
+            let num = -1;
+            for (let i = 0; i < this.$refs.files.files.length; i++) {
                 this.files = [
                     ...this.files,
                     {
                         file: this.$refs.files.files[i],
-                        preview: URL.createObjectURL(this.$refs.files.files[i])
-                    
+                        preview: URL.createObjectURL(this.$refs.files.files[i]),
+                        number: i
                     }
                 ]
+                num = i;
             }
+            this.uploadImageIndex = num + 1; //이미지 index의 마지막 값 + 1 저장
+
+            console.log('추가 전: ', this.files)
+       },
+        imageAddUpload() {
+            console.log('추가 한 것: ', this.$refs.addFile.files)
+
+            let num = -1;
+            for (let i = 0; i < this.$refs.addFile.files.length; i++) {
+                // console.log(this.uploadImageIndex);
+                this.files = [
+                        ...this.files,
+                        {
+                            file: this.$refs.addFile.files[i],
+                            preview: URL.createObjectURL(this.$refs.addFile.files[i]),
+                            number: i + this.uploadImageIndex
+                        }
+                    ];
+                num = i;
+                console.log(this.files.preview)
+                }
+            this.uploadImageIndex = this.uploadImageIndex + num + 1;
+
+            console.log('추가 후 ref값: ',this.$refs.addFile.files);
+            console.log('추가 후: ',this.files);
         },
-        // handleRemove1 () {
-        //     this.fileList.splice(index, 1)
-        // },
-        // handleRemove2(index) {
-        //     this.fileList.splice(index, 1)
-        // },
+        imageDeleteButton(e) {
+            const name = e.target.getAttribute('name');
+            this.files = this.files.filter(data => data.number !== Number(name));
+            console.log(this.files)
+        },
+        thumbNailDeleteButton() {
+            if (this.file != null) {
+                this.file = null
+            }
+
+            // var fileCnt = 1;
+            // if(fileCnt > 0) {
+            //     for (var i = 0; i < fileCnt; i++) {
+            //         if (document.getElementsByName("file")[i].value != null){
+            //             var files = document.getElementsByName("file");
+            //             files[i].select();
+            //             document.selection.clear();
+            //     }
+            // }
+            // }
+        },
         selectMap (name, address, x, y, phone, url) {
             this.map.name = name
             this.map.address = address
@@ -189,52 +323,77 @@ export default {
         },
         submitFiles () {
             let formData = new FormData()
+            // let formMultiData = new FormData()
 
-            formData.append('performName', this.performName)
-            formData.append('performStart', this.performStart)
-            formData.append('performEnd', this.performEnd)
-            formData.append('performTime', this.performTime)
-            formData.append('performPriceR', this.performPriceR)
-            formData.append('performPriceS', this.performPriceS)
-            formData.append('performPriceVip', this.performPriceVip)
-            formData.append('performArea', this.performArea)
-            formData.append('performCategory', this.performCategory)
-            formData.append('performGrade', this.performGrade)
-            formData.append('performer', this.performer)
-
-            formData.append('file', document.getElementById('file').files[0])
-        
-            for (let idx = 0; idx < this.files.length; idx++) {
-                formData.append('fileList', this.files[idx])
+            let performInfo = {
+                performName: this.performName,
+                performStart: this.performStart,
+                performEnd: this.performEnd,
+                performTime: this.performTime,
+                performPriceR: this.performPriceR,
+                performPriceS: this.performPriceS,
+                performPriceVip: this.performPriceVip,
+                performArea: this.performArea,
+                performCategory: this.performCategory,
+                performGrade: this.performGrade,
+                performer: this.performer
             }
+
+            formData.append(
+                "performance",
+                new Blob([JSON.stringify(performInfo)],{type: "application/json"})
+            )
+
+            console.log("performInfo: " + JSON.stringify(performInfo))
+
+            // formData.append('file', new Blob([JSON.stringify(this.file)], {type: "multipart/form-data"}))
+            formData.append('file', document.getElementById('file').files[0])
+            
+            // let files = this.files 이렇게 하면 null값 나옴
+            let files = this.$refs.files.files
+            for (let idx = 0; idx < files.length; idx++) {
+                formData.append('fileList', files[idx])
+            }
+            
+        //    for (let idx = 0; idx < this.files.length; idx++) {
+        //         formData.append('fileList', new Blob([JSON.stringify(this.files[idx])], {type: "multipart/form-data"}))
+        //     }
+
+            // for (let value of formData.values()) {
+            //     console.log('formData value: %o', value)
+            // }
+
+            // for (let pair of formData.entries()) {
+            //     console.log('key: ' + pair[0])
+            //     console.log('value: %o', pair[1])
+            // }
             
             axios.post('http://localhost:7777/performance/register', formData, {
                 headers: {
-                    // 'Access-Control-Allow-Origin': '*',
-                    // 'Access-Control-Allow-Headers': '*',
-                    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    // 'Access-Control-Allow-Credentials': true,
-                    // 'Access-Control-Max-Age': '3600',
                     'Content-Type': 'multipart/form-data'
                 }
             })
             .then ((res) => {
                 console.log("공연등록", res)
+                this.performNo = res.data.performNo
                 this.map.performNo = res.data.performNo
             })
             .catch (res => {
                 alert('등록 실패: ' + res.message)
             })
         },
-         addMap () {
+        addMap () {
+           setTimeout(() => {
                 axios.post('http://localhost:7777/map/add', this.map )
-                .then((res)=> {
-                    console.log(res.data)
+                    .then(()=> {
                     alert('등록이 완료되었습니다!')
-                    this.$router.push({ name: 'PerformanceListPage' })
+                    this.$router.push(
+                        { name: 'PerformanceListPage' }
+                    )
                     })
-            }
-         }
+           }, 2000)
+        }
+    }
   }
 
 </script>   
@@ -243,4 +402,154 @@ export default {
 label {
     font-size: 5px;
 }
+
+.information-container {
+    margin-top: 50px;
+    color: #222222;
+    border: 1px solid #dddddd;
+}
+        
+.information-title {
+    text-align: center;
+    font-size: 18px;
+    line-height: 60px;
+    border-bottom: 1px solid #dddddd;
+}
+        
+.file-upload-example {
+    height: 100%;
+}
+        
+.picture-notice {
+    margin: 20px;
+    padding: 20px 40px;
+    border: 1px solid #dddddd;
+}
+        
+        .file-preview-content-container {
+            height: 100%;
+        }
+        
+.file-upload-wrapper {
+    margin: 20px;
+    border: 1px solid #dddddd;
+    background-color: #f4f4f4;
+    min-height: 350px;
+    font-size: 15px;
+    color: #888888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+        
+.file-upload-example-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        
+.file-notice-item {
+    margin-top: 5px;
+    text-align: center;
+}
+        
+.file-notice-item-red {
+    color: #ef4351;
+}
+        
+        .image-box {
+            margin-top: 30px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        
+        .image-box input[type='file'] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+        }
+        
+        .image-box label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #232d4a;
+            color: #fff;
+            vertical-align: middle;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .thumb-image-box {
+            margin-top: 30px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        
+        .thumb-image-box input[type='file'] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+        }
+
+        .thumb-image-box label {
+           display: inline-block;
+            padding: 10px 20px;
+            background-color: #232d4a;
+            color: #fff;
+            vertical-align: middle;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .file-preview-wrapper {
+            padding: 10px;
+            position: relative;
+        }
+        
+        .file-preview-wrapper>img {
+            position: relative;
+            width: 190px;
+            height: 130px;
+            z-index: 10;
+        }
+        
+        .file-close-button {
+            position: absolute;
+            line-height: 18px;
+            z-index: 99;
+            font-size: 18px;
+            right: 5px;
+            top: 10px;
+            color: #fff;
+            font-weight: bold;
+            background-color: #666666;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .file-preview-container {
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .file-preview-wrapper-upload {
+            margin: 10px;
+            padding-top: 20px;
+            background-color: #888888;
+            width: 190px;
+            height: 130px;
+        }
+
 </style>

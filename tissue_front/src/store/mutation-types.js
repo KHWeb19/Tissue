@@ -1,4 +1,3 @@
 // performance
 export const FETCH_PERFORMANCE_LIST='FETCH_PERFORMANCE_LIST'
 export const FETCH_PERFORMANCE = 'FETCH_PERFORMANCE'
-export const FETCH_MAP = 'FETCH_MAP'

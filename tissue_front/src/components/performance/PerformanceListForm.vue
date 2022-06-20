@@ -1,5 +1,5 @@
 <template>
-    <div class="board-list mt-15">
+    <div class="board-list mt-5">
         <table class="w3-table-all">
             <thead>
                 <tr align="center">
@@ -50,11 +50,10 @@
                         </tr>
                     </tbody>
         </table>
-        <div>
-            <v-btn absolute right plain router-link :to="{ name: 'PerformanceRegisterPage' }">
+            <v-btn plain router-link :to="{ name: 'PerformanceRegisterPage' }">
                 <v-icon>mdi-clipboard-edit-outline</v-icon>
-            </v-btn>
-        </div>  
+            </v-btn>  
+
     </div>
 </template>
 
@@ -76,24 +75,31 @@ export default {
     background-color: rgb(241, 241, 241);
 }
 table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
   width: 100%;
   border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
 }
-table th {
-  font-size: 1rem;
+
+thead {
+  font-weight: bold;
+  color: black;
+  background: #B2EBF2;
 }
-table tr {
-  height: 0.5rem;
-  text-align: center;
-  border-bottom: 1px solid #505050;
+
+td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
 }
-table tr:first-of-type {
-  border-top: 2px solid #404040;
+
+td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
 }
-table tr td {
-  padding: 1rem 0;
-  font-size: 1rem;
-}
+
 img {
     width: 100px;
     height: 100px;
@@ -101,8 +107,8 @@ img {
     overflow: hidden;
     object-fit: cover;
 }
-.board-list {
+/* .board-list {
     width: 100%;
     margin: auto;
-}  
+}   */
 </style>>
