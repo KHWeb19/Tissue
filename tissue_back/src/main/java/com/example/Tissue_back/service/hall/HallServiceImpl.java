@@ -40,5 +40,10 @@ public class HallServiceImpl implements HallService{
         return maybeBoard.get();
     }
 
+    @Override
+    public void remove(Long hallNo) {
+        hallRepository.deleteById(hallNo);
+    }
+
 
 }

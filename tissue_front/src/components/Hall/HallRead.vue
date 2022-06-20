@@ -76,9 +76,47 @@
           </td>
         </tr>
       </table>
-      <v-btn @click="modify">수정</v-btn>
-      <v-btn @click="reset">초기화</v-btn>
-      <v-btn to="/hallList">리스트로</v-btn>
+
+      <div class="d-flex">
+        <v-btn @click="modify">수정</v-btn>
+        <v-btn @click="reset">초기화</v-btn>
+        <template>
+          <div>
+            <v-dialog v-model="dialogDeleteHall" width="460">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" @click="resetCheckBox">
+                  공연장 삭제
+                </v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title> 공연장 삭제 </v-card-title>
+                <v-card-text class="mt-5 pb-0">
+                  정말로 공연을 삭제하시겠습니까? <br />
+                  삭제를 원하시면 동의버튼을 체크하시고 <br />
+                  삭제버튼을 클릭해주세요.
+                </v-card-text>
+                <v-container fluid>
+                  <v-checkbox
+                    v-model="checkbox"
+                    label="동의합니다."
+                  ></v-checkbox>
+                </v-container>
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn text :disabled="!checkbox" @click="remove">
+                    탈퇴
+                  </v-btn>
+                  <v-btn text @click="dialogDeleteHall = false"> 취소 </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </div>
+        </template>
+        <v-btn to="/hallList">리스트로</v-btn>
+      </div>
     </v-container>
   </div>
 </template>
@@ -95,6 +133,8 @@ export default {
   },
   data() {
     return {
+      dialogDeleteHall: false,
+      checkbox: false,
       isClick: "",
       dataTable: null,
       radioGroup: "R",
@@ -229,7 +269,16 @@ export default {
         }
       }
     },
-
+    remove() {
+      const { hallNo } = this;
+      axios.delete(`http://localhost:7777/hall/${hallNo}`).then(() => {
+        alert("공연삭제가 완료되었습니다.");
+        this.$router.push("/hallList");
+      });
+    },
+    resetCheckBox() {
+      this.checkbox = false;
+    },
     paintSeatWithGrade() {
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {

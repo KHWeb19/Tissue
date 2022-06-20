@@ -7,5 +7,5 @@ public interface HallService {
     public void register(Hall hall);
     public List<Hall> list();
     public Hall read(Long hallNo);
-
+    public void remove(Long hallNo);
 }
