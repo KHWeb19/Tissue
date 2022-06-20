@@ -10,7 +10,7 @@
         "
       >
         <div>
-          <div class="stage">stage</div>
+          <div class="stage">S T A G E</div>
 
           <div style="display: flex">
             <div style="width: 50px">
@@ -55,11 +55,11 @@
 
         <div class="ml-10">
           <div>
-            <div class="mb-10 showHallInfo">
+            <div class="mb-10 showHallInfo" style="height: 250px">
               <v-row>
                 <v-col>
-                  <div>
-                    <div>공연장명</div>
+                  <div class="pt-7">
+                    <div style="font-size: 20px">공연장명</div>
                     <v-text-field
                       flat
                       solo
@@ -67,8 +67,9 @@
                       :value="hall.hallName"
                       single-line
                       style="height: 50px"
+                      class="mb-7"
                     />
-                    <div>총 좌석 수</div>
+                    <div style="font-size: 20px">총 좌석 수</div>
                     <v-text-field
                       flat
                       solo
@@ -76,6 +77,7 @@
                       :value="hall.rowCnt * hall.colCnt"
                       single-line
                       style="height: 50px"
+                      class="mb-7"
                     />
                   </div>
                 </v-col>
@@ -86,12 +88,14 @@
               <div class="mr-10" v-for="item in gradeColor" :key="item.grade">
                 <div
                   :class="{
-                    yellow: item.color == 'yellow',
-                    green: item.color == 'green',
-                    purple: item.color == 'purple',
+                    lightsalmon: item.color == 'lightsalmon',
+                    lightgreen: item.color == 'lightgreen',
+                    mediumpurple: item.color == 'mediumpurple',
                   }"
                 ></div>
-                <div>{{ item.grade }}</div>
+                <div style="text-align: center">
+                  {{ item.grade }}
+                </div>
               </div>
             </div>
 
@@ -111,14 +115,33 @@
               {{ index.info }}
             </span>
           </div>
-          <div class="d-flex">
-            <v-btn text @click="modify">수정</v-btn>
-            <v-btn text @click="reset">초기화</v-btn>
+          <div class="d-flex mt-5">
+            <v-btn
+              color="pink lighten-3"
+              class="white--text mr-2 ml-2"
+              rounded
+              @click="modify"
+              >수정</v-btn
+            >
+            <v-btn
+              color="pink lighten-3"
+              class="white--text mr-2"
+              rounded
+              @click="reset"
+              >초기화</v-btn
+            >
             <template>
               <div>
                 <v-dialog v-model="dialogDeleteHall" width="460">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn text v-bind="attrs" v-on="on" @click="resetCheckBox">
+                    <v-btn
+                      color="pink lighten-3"
+                      class="white--text mr-2"
+                      rounded
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="resetCheckBox"
+                    >
                       공연장 삭제
                     </v-btn>
                   </template>
@@ -151,7 +174,13 @@
                 </v-dialog>
               </div>
             </template>
-            <v-btn text to="/hallList">리스트로</v-btn>
+            <v-btn
+              color="pink lighten-3"
+              class="white--text mr-2"
+              rounded
+              to="/hallList"
+              >리스트로</v-btn
+            >
           </div>
         </div>
       </div>
@@ -178,9 +207,9 @@ export default {
       radioGroup: "R",
       kindsGrade: ["R", "S", "VIP"],
       gradeColor: [
-        { color: "yellow", grade: "R" },
-        { color: "green", grade: "S" },
-        { color: "purple", grade: "VIP" },
+        { color: "lightsalmon", grade: "R" },
+        { color: "lightgreen", grade: "S" },
+        { color: "mediumpurple", grade: "VIP" },
       ],
       modifyData: this.hall,
       seatNo: "",
@@ -217,15 +246,18 @@ export default {
         if (this.dataTable[i][j].grade == "R") {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "yellow";
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+            "lightsalmon";
         } else if (this.dataTable[i][j].grade == "S") {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+            "lightgreen";
         } else if (this.dataTable[i][j].grade == "VIP") {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "purple";
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+            "mediumpurple";
         }
       }
     }
@@ -262,23 +294,23 @@ export default {
           if (this.dataTable[i][j].click == true) {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightgrey";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "skyblue";
           } else if (this.dataTable[i][j].click == false) {
             if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "yellow";
+                "lightsalmon";
             } else if (this.dataTable[i][j].grade == "S") {
               let bodyTag = document.getElementsByClassName("seat");
 
-              bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "lightgreen";
             } else if (this.dataTable[i][j].grade == "VIP") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "purple";
+                "mediumpurple";
             }
           }
         }
@@ -329,15 +361,18 @@ export default {
           if (this.dataTable[i][j].grade == "R") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "yellow";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "lightsalmon";
           } else if (this.dataTable[i][j].grade == "S") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "lightgreen";
           } else if (this.dataTable[i][j].grade == "VIP") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "purple";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "mediumpurple";
           }
         }
       }
@@ -360,15 +395,15 @@ export default {
           if (this.dataTable[i][j].grade == "R") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "yellow";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightsalmon";
           } else if (this.dataTable[i][j].grade == "S") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "green";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightgreen";
           } else if (this.dataTable[i][j].grade == "VIP") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "purple";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "mediumpurple";
           }
         }
       }
@@ -378,20 +413,20 @@ export default {
 </script>
 
 <style scoped>
-.yellow {
-  width: 10px;
-  height: 10px;
-  background-color: yellow;
+.lightsalmon {
+  width: 25px;
+  height: 25px;
+  background-color: lightsalmon;
 }
-.green {
-  width: 10px;
-  height: 10px;
-  background-color: green;
+.lightgreen {
+  width: 25px;
+  height: 25px;
+  background-color: lightgreen;
 }
-.purple {
-  width: 10px;
-  height: 10px;
-  background-color: purple;
+.mediumpurple {
+  width: 25px;
+  height: 25px;
+  background-color: mediumpurple;
 }
 .grey {
   width: 10px;
@@ -407,6 +442,8 @@ export default {
 }
 
 .stage {
+  border-radius: 15px;
+  font-size: 30px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -422,11 +459,13 @@ export default {
   height: 200px;
   border: 1px solid skyblue;
   padding: 10px;
+  border-radius: 15px;
 }
 .showHallInfo {
   width: 390px;
   border: 1px solid skyblue;
   padding: 10px;
+  border-radius: 15px;
 }
 .showCol {
   width: 50px;

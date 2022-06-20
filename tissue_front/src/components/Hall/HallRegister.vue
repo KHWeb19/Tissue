@@ -1,35 +1,52 @@
 <template>
   <div>
     <v-container style="margin-top: 100px">
-      <v-row>
-        <v-col>
-          <div>
-            <v-text-field
-              style="width: 500px"
-              v-model="hallName"
-              label="공연장명"
-              clearable
-              outlined
-              color="blue lighten-3"
-            />
-            <v-text-field
-              style="width: 500px"
-              v-model="rowCnt"
-              label="행 개수"
-              clearable
-              outlined
-              color="blue lighten-3"
-            />
-            <v-text-field
-              style="width: 500px"
-              v-model="colCnt"
-              label="열 개수"
-              clearable
-              outlined
-              color="blue lighten-3"
-            />
-            <v-btn text @click="onSubmit">등록</v-btn>
-          </div>
+      <v-row justify="center">
+        <v-col cols="auto">
+          <v-card flat>
+            <div>
+              <v-text-field
+                style="width: 500px"
+                v-model="hallName"
+                label="공연장명"
+                clearable
+                outlined
+                color="blue lighten-3"
+              />
+              <v-text-field
+                style="width: 500px"
+                v-model="rowCnt"
+                label="행 개수"
+                clearable
+                outlined
+                color="blue lighten-3"
+              />
+              <v-text-field
+                style="width: 500px"
+                v-model="colCnt"
+                label="열 개수"
+                clearable
+                outlined
+                color="blue lighten-3"
+              />
+              <div style="display: flex; justify-content: center">
+                <v-btn
+                  rounded
+                  color="pink lighten-3 mr-3"
+                  class="white--text"
+                  @click="onSubmit"
+                  >등록</v-btn
+                >
+                <v-btn
+                  rounded
+                  color="pink lighten-3 ml-3"
+                  to="HallList"
+                  class="white--text"
+                  >리스트로</v-btn
+                >
+              </div>
+            </div>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>

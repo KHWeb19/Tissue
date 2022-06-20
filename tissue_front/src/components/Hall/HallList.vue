@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-container class="white" style="width: 1400px; margin-top: 100px">
-      <v-row>
-        <v-col
+      <v-row justify="center">
+        <v-col cols="auto"
           ><v-card flat>
             <div>
               <v-data-table
@@ -33,6 +33,15 @@
                   :length="pageCount"
                   color="pink lighten-3"
                 ></v-pagination>
+              </div>
+              <div style="float: right">
+                <v-btn
+                  rounded
+                  color="pink lighten-3"
+                  style="color: white"
+                  to="/HallRegister"
+                  >공연장 등록</v-btn
+                >
               </div>
             </div>
           </v-card>
@@ -80,6 +89,7 @@ export default {
   line-height: 85px;
   border-top: 3px solid skyblue;
   color: black;
+  width: 1000px;
 }
 </style>
 
