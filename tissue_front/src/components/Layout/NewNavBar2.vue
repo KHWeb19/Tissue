@@ -54,12 +54,16 @@
             <v-btn icon class="sub_tab_icon mr-8" @click="logout">
                 <v-icon color="black" large>mdi-logout</v-icon>
             </v-btn>
-        </div>
-        <div class="mt-4" v-else>
-            <v-btn icon class="sub_tab_icon mr-8" :to="{name: 'MemberLoginPage'}">
-                <v-icon color="black" large>mdi-login</v-icon>
+          </div>
+          <div class="mt-4" v-else>
+            <v-btn
+              icon
+              class="sub_tab_icon mr-8"
+              :to="{ name: 'MemberLoginPage' }"
+            >
+              <v-icon color="black" large>mdi-login</v-icon>
             </v-btn>
-        </div>
+          </div>
         </v-toolbar-items>
       </v-toolbar>
     </div>

@@ -6,7 +6,6 @@
 
 <script>
 import HallRegister from "@/components/Hall/HallRegister.vue";
-import axios from "axios";
 
 export default {
   name: "HallRegisterPage",

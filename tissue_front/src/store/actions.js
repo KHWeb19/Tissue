@@ -1,13 +1,47 @@
+import axios from 'axios'
 import {
+    FETCH_HALL_LIST,
+    FETCH_HALL,
+      // performance
+    FETCH_PERFORMANCE_LIST,
+    FETCH_PERFORMANCE,
+
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
     FETCH_MEMBER_INFO
+
 } from './mutation-types'
 
-import axios from 'axios'
+//import router from '@/router'
 
 export default {
-    fetchNoticeList ({ commit }) {
+    fetchHallList({commit}) {
+        return axios.get('http://localhost:7777/hall/list')
+        .then((res)=>{
+            commit(FETCH_HALL_LIST,res.data)
+        })
+    },
+    
+    fetchHall({commit},hallNo) {
+        return axios.get(`http://localhost:7777/hall/${hallNo}`)
+        .then((res)=>{
+            commit(FETCH_HALL,res.data)
+        })
+    },
+   // peformance
+    fetchPerformanceList({ commit }) {
+        return axios.get('http://localhost:7777/performance/list')
+                .then((res) => {
+                    commit(FETCH_PERFORMANCE_LIST, res.data)
+                })
+    },
+    fetchPerformance({ commit }, performNo) {
+        return axios.get(`http://localhost:7777/performance/${performNo}`)
+        .then((res) => {
+            commit(FETCH_PERFORMANCE, res.data)
+        })
+    },
+  fetchNoticeList ({ commit }) {
         return axios.get('http://localhost:7777/notice/list')
           .then((res) => {
             commit(FETCH_NOTICE_LIST, res.data)
@@ -26,3 +60,4 @@ export default {
         })
     }
 }
+

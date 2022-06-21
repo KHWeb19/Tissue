@@ -2,8 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
-import hallTest from '@/components/Hall/HallTest.vue'
-import HallRegister from '@/components/Hall/HallRegister.vue'
+import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
+import HallListPage from '@/views/hall/HallListPage.vue'
+import HallReadPage from '@/views/hall/HallReadPage.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -14,8 +16,15 @@ import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
 
-import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
-import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
+
+// admin
+import AdminPage from '@/views/AdminPage.vue'
+
+// performance
+import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
+import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
+import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
+import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -33,15 +42,26 @@ const routes = [
     component: Home
   },
   {
-    path: '/hallTest',
-    name: 'hallTest',
-    component: hallTest
+    path: '/hallRegister',
+    name: 'HallRegisterPage',
+    component: HallRegisterPage
   },
   {
-    path: '/hallRegister',
-    name: 'HallRegister',
-    component: HallRegister
+    path: '/hallList',
+    name: 'HallListPage',
+    component: HallListPage
   },
+  {
+    path: '/hallRead/:hallNo',
+    name: 'HallReadPage',
+    components: {
+      default: HallReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+
   // 메인페이지 (임지훈)
 
   // 유아림
@@ -91,16 +111,45 @@ const routes = [
         component: MyPageView
     },
   // 유아림
+
+  // 공연장 (노서현)
   {
-    path: '/performanceRegister',
+    path: '/adminPage',
+    name: 'AdminPage',
+    component: AdminPage
+  }, 
+  {
+    path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
     component: PerformanceRegisterPage
   },
   {
-    path: '/performanceList',
+    path: '/performanceListPage',
     name: 'PerformanceListPage',
     component: PerformanceListPage
   },
+  {
+    path: '/performanceReadPage/:performNo',
+    name: 'PerformanceReadPage',
+    components: {
+      default: PerformanceReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/performanceModifyPage/:performNo',
+    name: 'PerformanceModifyPage',
+    components: {
+      default: PerformanceModifyPage
+    },
+     props: {
+      default: true
+     }
+  },
+  // 공연장 (노서현)
+  
   {
     path: '/noticeRegister',
     name: 'NoticeRegisterPage',
@@ -130,7 +179,6 @@ const routes = [
     props: {
       default: true
     }
-  }
 ]
 
 const router = new VueRouter({

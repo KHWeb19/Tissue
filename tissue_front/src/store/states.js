@@ -1,5 +1,11 @@
 export default {
 
+    halls: [],
+    hall: null,
+
+    performances: [],
+    performance: null,
+
     notices: [],
     notice: null,
 
@@ -8,5 +14,4 @@ export default {
     // 유아림
 
 }
-
 

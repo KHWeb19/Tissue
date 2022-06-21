@@ -9,7 +9,10 @@
           this.$route.name != 'MemberJoinPage' &&
           this.$route.name != 'MemberJoinPage2' &&
           this.$route.name != 'MemberFindIdPage' &&
-          this.$route.name != 'MemberFindPwPage'
+          this.$route.name != 'MemberFindPwPage' &&
+          this.$route.name != 'PerformanceRegisterPage' &&
+          this.$route.name != 'PerformanceReadPage' &&
+          this.$route.name != 'PerformanceModifyPage'
         "
       >
         <new-nav-bar-2/>

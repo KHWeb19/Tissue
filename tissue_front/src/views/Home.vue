@@ -4,7 +4,7 @@
 
     <div>
       <v-carousel
-        height="720px"
+        height="100%"
         class="slider"
         delimiter-icon="mdi-minus"
         hide-delimiter-background
