@@ -13,5 +13,6 @@ public interface MemberService {
     public FindDto findId(FindDto findDto) throws CoolsmsException;
     public FindDto findPw(FindDto findDto) throws  CoolsmsException;
     public Member getInfo (String token);
+    public Boolean checkPw (LoginDto check);
 
 }

@@ -132,7 +132,23 @@ public class MemberServiceImpl implements MemberService {
 
         Optional<Member> findMember = repository.findByMemberId(memberId);
 
-        return findMember.get();
+        Member member = findMember.get();
+        member.setMemberPw(null);
+
+        return member;
+    }
+
+    @Override
+    public Boolean checkPw (LoginDto check) {
+        Optional<Member> maybeMember = repository.findByMemberId(check.getMemberId());
+
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(check.getMemberPw(), loginMember.getMemberPw())) {
+            log.info("Entered wrong password!");
+            return false;
+        }
+        return true;
     }
 
 }

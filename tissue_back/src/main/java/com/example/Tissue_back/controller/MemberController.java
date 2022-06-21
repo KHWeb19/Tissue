@@ -5,6 +5,7 @@ import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.service.MemberService;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,12 @@ public class MemberController {
         log.info ("== Get Info ==" + token);
 
         return service.getInfo(token);
+    }
+
+    @PostMapping("/checkPw")
+    public Boolean checkPw (@Validated @RequestBody LoginDto check) {
+        log.info("==Check Pw==" + check);
+        return service.checkPw(check);
     }
 
 
