@@ -10,7 +10,7 @@ export default {
     notice: null,
 
     // 유아림
-    memberInfo: []
+    memberInfo: {}
     // 유아림
 
 }

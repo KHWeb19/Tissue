@@ -103,12 +103,22 @@ const routes = [
     {
         path: '/myPage',
         name: 'MyPageView',
-        component: MyPageView
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
     },
     {
         path: '/myPage/modify',
         name: 'MyPageModify',
-        component: MyPageView
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
     },
   // 유아림
 
@@ -170,14 +180,15 @@ const routes = [
       default: true
     }
   },
-  {
-    path: '/noticeModify/:noticeNo',
-    name: 'NoticeModifyPage',
-    components: {
-      default: NoticeModifyPage
-    },
-    props: {
-      default: true
+    {
+        path: '/noticeModify/:noticeNo',
+        name: 'NoticeModifyPage',
+        components: {
+            default: NoticeModifyPage
+        },
+        props: {
+            default: true
+        }
     }
 ]
 

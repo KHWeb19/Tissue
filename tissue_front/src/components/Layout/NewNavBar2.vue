@@ -125,7 +125,7 @@ export default {
     },
      goToMyPage() {
           if (this.token != null) {
-              this.$router.push('/myPage')
+              this.$router.go({name: 'myPageView'})
           } else {
               alert("로그인이 필요합니다.")
               this.$router.push('/login')
