@@ -13,8 +13,15 @@ import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 
-import PerformanceRegisterPage from '../views/manager/performance/PerformanceRegisterPage.vue'
-import PerformanceListPage from '../views/manager/performance/PerformanceListPage.vue'
+
+// admin
+import AdminPage from '@/views/AdminPage.vue'
+
+// performance
+import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
+import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
+import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
+import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -54,42 +61,71 @@ const routes = [
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
   },
-    {
-        path: '/login',
-        name: 'MemberLoginPage',
-        component:MemberLoginPage
-    },
-    {
-        path: '/findId',
-        name: 'MemberFindIdPage',
-        component:MemberFindIdPage
-    },
-    {
-        path: '/findPw',
-        name: 'MemberFindPwPage',
-        component:MemberFindPwPage
-    },
-    {
-        path: '/kakaoLogin',
-        name:'KakaoOAuth',
-        component:KakaoOAuth
-    },
-    {
-        path: '/googleLogin',
-        name: 'GoogleOAuth',
-        component: GoogleOAuth
-    }
-  // 유아림
   {
-    path: '/performanceRegister',
+    path: '/login',
+    name: 'MemberLoginPage',
+    component:MemberLoginPage
+},
+{
+    path: '/findId',
+    name: 'MemberFindIdPage',
+    component:MemberFindIdPage
+},
+  {
+    path: '/findPw',
+    name: 'MemberFindPwPage',
+    component:MemberFindPwPage
+},
+{
+    path: '/kakaoLogin',
+    name:'KakaoOAuth',
+    component:KakaoOAuth
+},
+{
+    path: '/googleLogin',
+    name: 'GoogleOAuth',
+    component: GoogleOAuth
+},
+  // 유아림
+
+  // 공연장 (노서현)
+  {
+    path: '/adminPage',
+    name: 'AdminPage',
+    component: AdminPage
+  }, 
+  {
+    path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
     component: PerformanceRegisterPage
   },
   {
-    path: '/performanceList',
+    path: '/performanceListPage',
     name: 'PerformanceListPage',
     component: PerformanceListPage
   },
+  {
+    path: '/performanceReadPage/:performNo',
+    name: 'PerformanceReadPage',
+    components: {
+      default: PerformanceReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/performanceModifyPage/:performNo',
+    name: 'PerformanceModifyPage',
+    components: {
+      default: PerformanceModifyPage
+    },
+     props: {
+      default: true
+     }
+  },
+  // 공연장 (노서현)
+  
   {
     path: '/noticeRegister',
     name: 'NoticeRegisterPage',
@@ -120,15 +156,14 @@ const routes = [
       default: true
     }
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  // }
 ]
 
 const router = new VueRouter({
