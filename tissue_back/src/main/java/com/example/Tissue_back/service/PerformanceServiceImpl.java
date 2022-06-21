@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service;
 
+import com.example.Tissue_back.controller.request.PerformanceDto;
 import com.example.Tissue_back.entity.Performance;
 import com.example.Tissue_back.repository.PerformanceRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -94,6 +95,7 @@ public class PerformanceServiceImpl implements PerformanceService{
         log.info("requestUploadFile(): Success");
 
         performanceRepository.save(performance);
+
         return performance;
     }
 
@@ -116,7 +118,8 @@ public class PerformanceServiceImpl implements PerformanceService{
     }
 
     @Override
-    public void modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException {
+    public Performance modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException {
+
         // 다중이미지 수정
 
         try {
@@ -172,6 +175,8 @@ public class PerformanceServiceImpl implements PerformanceService{
         }
 
         performanceRepository.save(performance);
+
+        return performance;
     }
 
     @Override

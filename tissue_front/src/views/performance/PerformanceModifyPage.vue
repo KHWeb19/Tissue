@@ -271,7 +271,7 @@ export default {
                 new Blob([JSON.stringify(performInfo)],{type: "application/json"})
             )
 
-            console.log("performInfo: " + JSON.stringify(performInfo))
+            console.log("performInfo: " + JSON.stringify(performInfo)) // performInfo 콘솔에는 잘 나옴
 
             formData.append('file', document.getElementById('file').files[0])
             
@@ -285,7 +285,8 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then (() => {
+            .then ((res) => {
+                console.log(res)
                 this.fetchPerformance(this.performNo)
             })
             .catch (res => {
@@ -296,9 +297,10 @@ export default {
             axios.patch(`map/modify/${this.performNo}`, this.map )
                 .then((res)=> {
                     alert('게시물 수정 성공!')
+                    console.log(res)
                     this.$router.push({
                         name: 'PerformanceReadPage',
-                        params: { performNo: res.data.performNo.toString() }
+                        params: { performNo: this.performNo }
                     })
                 })
         }

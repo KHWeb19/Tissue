@@ -53,10 +53,12 @@ export default {
   methods: {
     searchMap () {
       const search = this.search
-      axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?y=37.498721&x=127.0329693&radius=20000&query=${search}`,{ 
-        headers: { 
-          'Authorization': 'KakaoAK 78da6e48fdb89eb7bc6e4b5a1f0197a6' 
-          }})
+      axios({
+        method: 'get',
+        baseURL: 'https://dapi.kakao.com/',
+        url: `v2/local/search/keyword.json?y=37.498721&x=127.0329693&radius=20000?query=${search}`,
+        headers: { 'Authorization': 'KakaoAK 1eca13db63d6632d04bee2157ac21714'}
+      })
       .then(res => {
         console.log(res.data)
         const list = res.data.documents
