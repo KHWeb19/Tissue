@@ -6,6 +6,8 @@ import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
 import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -51,7 +53,11 @@ const routes = [
       default: true
     }
   },
-
+  {
+    path: '/ticketing',
+    name: 'TicketingPage',
+    component: TicketingPage
+  },
   // 메인페이지 (임지훈)
 
   // 유아림
