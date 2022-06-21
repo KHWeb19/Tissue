@@ -24,7 +24,10 @@
                                 {{ performance.performNo }}
                             </td>
                             <td align="center">
-                                <img :src="require(`../../assets/thumbNail/${performance.performThumbnail}`)" alt=""/>
+                                <router-link :to="{ name: 'PerformanceReadPage',
+                                                    params: { performNo: performance.performNo.toString() } }">
+                                    <img :src="require(`../../assets/thumbNail/${performance.performThumbnail}`)" alt=""/>
+                                </router-link>
                             </td>
                             <td align="center">
                                 {{ performance.performCategory }}

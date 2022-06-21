@@ -55,82 +55,6 @@
                                 <v-text-field outlined v-model="performer" type="text" required></v-text-field>
                             </div>
 
-                            <!-- 썸네일 업로드 --> 
-                            <!-- <div class="information-container">
-                                <div class="information-title">썸네일 등록</div>
-                                <div class="file-upload-wrapper">
-                                    <div v-if="file == 0" class="file-upload-example-container">
-                                        <div class="file-upload-example">
-                                            <div class="file-notice-item file-upload-button">
-                                                <div class="image-box">
-                                                    <label for="file">등록</label>
-                                                    <input type="file" id="file" ref="file" @change="thumbNailUpload" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-else class="file-preview-content-container">
-                                        <div class="file-preview-container">
-                                            <div class="file-preview-wrapper">
-                                                <div class="file-close-button" @click="thumbNailDeleteButton">
-                                                    x
-                                                </div>
-                                                <img :src="file.preview" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            
-                            <!-- 상세 이미지 업로드 --> 
-                            <!-- <div class="information-container">
-                                <div class="information-title">상세 이미지 등록</div>
-                                <div class="picture-notice">
-                                    <ul class="room-write-wrapper">
-                                        <li>
-                                            사진은 가로로 찍은 사진을 권장합니다. (가로 사이즈 최소 800px)
-                                        </li>
-                                        <li>사진 용량은 사진 한 장당 10MB 까지 등록이 가능합니다.</li>
-
-                                    </ul>
-                                </div>
-                                <div class="file-upload-wrapper">
-                                    <div v-if="!files.length" class="file-upload-example-container">
-                                        <div class="file-upload-example">
-                                            <div class="file-notice-item">
-                                               이미지는 최소 1장 이상 등록하셔야 하며, 가로사진을 권장합니다.
-                                            </div>
-                                            <div class="file-notice-item file-notice-item-red">
-                                                이미지는 최대 5장까지 등록 가능합니다.
-                                            </div>
-                                            <div class="file-notice-item file-upload-button">
-                                                <div class="image-box">
-                                                    <label for="multiFiles">등록</label>
-                                                    <input type="file" id="multiFiles" ref="files" @change="imageUpload" multiple />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-else class="file-preview-content-container">
-                                        <div class="file-preview-container">
-                                            <div v-for="(file, index) in files" :key="index" class="file-preview-wrapper">
-                                                <div class="file-close-button" @click="imageDeleteButton" :name="file.number">
-                                                    x
-                                                </div>
-                                                <img :src="file.preview" />
-                                            </div>
-                                            <div class="file-preview-wrapper-upload">
-                                                <div class="image-box">
-                                                    <label for="addFiles">추가 사진 등록</label>
-                                                    <input type="file" id="addFiles" ref="addFiles" @change="imageAddUpload" multiple />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
                             <div class="information-container">
                                 <div class="file-upload-wrapper">
                                     <label>ThumNail
@@ -165,13 +89,10 @@
                                 </div>
                             </div>
 
-
-
-
                             <!-- 지도 --> 
                             <div>
                                 <label>지도첨부</label>
-                                <add-map @selectMap="selectMap"/>
+                                <add-map @selectMap="selectMap"></add-map>
                             </div>
                         </form>
                     </v-col>
@@ -313,7 +234,7 @@ export default {
             // }
             // }
         },
-        selectMap (name, address, x, y, phone, url) {
+         selectMap (name, address, x, y, phone, url) {
             this.map.name = name
             this.map.address = address
             this.map.x = x
@@ -368,7 +289,7 @@ export default {
             //     console.log('value: %o', pair[1])
             // }
             
-            axios.post('http://localhost:7777/performance/register', formData, {
+            axios.post('performance/register', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -384,7 +305,7 @@ export default {
         },
         addMap () {
            setTimeout(() => {
-                axios.post('http://localhost:7777/map/add', this.map )
+                axios.post('map/add', this.map )
                     .then(()=> {
                     alert('등록이 완료되었습니다!')
                     this.$router.push(
@@ -426,9 +347,9 @@ label {
     border: 1px solid #dddddd;
 }
         
-        .file-preview-content-container {
-            height: 100%;
-        }
+.file-preview-content-container {
+    height: 100%;
+}
         
 .file-upload-wrapper {
     margin: 20px;
@@ -458,98 +379,98 @@ label {
     color: #ef4351;
 }
         
-        .image-box {
-            margin-top: 30px;
-            padding-bottom: 20px;
-            text-align: center;
-        }
-        
-        .image-box input[type='file'] {
-            position: absolute;
-            width: 0;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-            border: 0;
-        }
-        
-        .image-box label {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #232d4a;
-            color: #fff;
-            vertical-align: middle;
-            font-size: 15px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+.image-box {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    text-align: center;
+}
 
-        .thumb-image-box {
-            margin-top: 30px;
-            padding-bottom: 20px;
-            text-align: center;
-        }
-        
-        .thumb-image-box input[type='file'] {
-            position: absolute;
-            width: 0;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-            border: 0;
-        }
+.image-box input[type='file'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
 
-        .thumb-image-box label {
-           display: inline-block;
-            padding: 10px 20px;
-            background-color: #232d4a;
-            color: #fff;
-            vertical-align: middle;
-            font-size: 15px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        
-        .file-preview-wrapper {
-            padding: 10px;
-            position: relative;
-        }
-        
-        .file-preview-wrapper>img {
-            position: relative;
-            width: 190px;
-            height: 130px;
-            z-index: 10;
-        }
-        
-        .file-close-button {
-            position: absolute;
-            line-height: 18px;
-            z-index: 99;
-            font-size: 18px;
-            right: 5px;
-            top: 10px;
-            color: #fff;
-            font-weight: bold;
-            background-color: #666666;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .file-preview-container {
-            height: 100%;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .file-preview-wrapper-upload {
-            margin: 10px;
-            padding-top: 20px;
-            background-color: #888888;
-            width: 190px;
-            height: 130px;
-        }
+.image-box label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #232d4a;
+    color: #fff;
+    vertical-align: middle;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.thumb-image-box {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.thumb-image-box input[type='file'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.thumb-image-box label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #232d4a;
+    color: #fff;
+    vertical-align: middle;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.file-preview-wrapper {
+    padding: 10px;
+    position: relative;
+}
+
+.file-preview-wrapper>img {
+    position: relative;
+    width: 190px;
+    height: 130px;
+    z-index: 10;
+}
+
+.file-close-button {
+    position: absolute;
+    line-height: 18px;
+    z-index: 99;
+    font-size: 18px;
+    right: 5px;
+    top: 10px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #666666;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.file-preview-container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.file-preview-wrapper-upload {
+    margin: 10px;
+    padding-top: 20px;
+    background-color: #888888;
+    width: 190px;
+    height: 130px;
+}
 
 </style>

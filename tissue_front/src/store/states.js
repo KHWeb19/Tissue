@@ -4,5 +4,6 @@ export default {
     performance: null,
 
     // token: this.localStorage.getItem("token")
-    
+    notices: [],
+    notice: null,
 }

@@ -192,9 +192,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import AddMap from '@/components/map/AddMap.vue'
 export default {
     name: 'PerformanceModifyForm',
+    components: {
+        AddMap
+    },
     props: {
         performance: {
             type: Object,
@@ -211,11 +214,41 @@ export default {
             performPriceS: '',
             performPriceVip: '',
             performArea: '',
+            areaList: [
+                    {area: '서울'},
+                    {area: '경기/인천'},
+                    {area: '대전/충청/강원'},
+                    {area: '부산/대구/울산/경상'},
+                    {area: '광주/전라'},
+                    {area: '제주'},
+                ],
             performCategory: '',
+            list: [
+                    {category: '뮤지컬'},
+                    {category: '콘서트'},
+                    {category: '연극'},
+                    {category: '전시회'},
+                ],
             performGrade: '',
+            ageList: [
+                    {age: '7세 이상 관람가'},
+                    {age: '15세 이상 관람가'}
+                ],
             performer: '',
-            files: '', // 다중이미지
+            files: [], // 다중이미지
+            filesPreview: [],
+            uploadImageIndex: 0,
             file: '', // 썸네일
+            response: '',
+            map: {
+            x: null,
+            y: null,
+            name: null,
+            address: null,
+            phone: null,
+            url: null,
+            performNo: null
+            }
         }
     },
     created () {
@@ -233,29 +266,49 @@ export default {
         // this.files = this.performance.performThumbnail
     },
     methods: {
-        handleThumbNailUpload () {
-            this.file = this.$refs.file.files
-            console.log(this.file)
-
+        thumbNailUpload () {
             this.file = {
-                file: this.$refs.file.files[0],
-                preview: URL.createObjectURL(this.$refs.file.files[0])
+            file: this.$refs.file.files[0],
+            preview: URL.createObjectURL(this.$refs.file.files[0])
             }
+            console.log(this.file)
         },
-       handleFileUpload () {
-            this.files = this.$refs.files.files
-            console.log(this.files)
+       imageUpload () {
+            // this.files = this.$refs.files.files
+            // console.log(this.files)
 
-             for (let i = 0; i < this.$refs.files.files.length; i++){
+            //  for (let i = 0; i < this.$refs.files.files.length; i++){
+            //     this.files = [
+            //         ...this.files,
+            //         {
+            //             file: this.$refs.files.files[i],
+            //             preview: URL.createObjectURL(this.$refs.files.files[i])
+                    
+            //         }
+            //     ]
+            // }
+            console.log('다중이미지 갯수: ', this.$refs.files.files.length)
+
+            let num = -1;
+            for (let i = 0; i < this.$refs.files.files.length; i++) {
                 this.files = [
                     ...this.files,
                     {
                         file: this.$refs.files.files[i],
-                        preview: URL.createObjectURL(this.$refs.files.files[i])
-                    
+                        preview: URL.createObjectURL(this.$refs.files.files[i]),
+                        number: i
                     }
                 ]
+                num = i;
             }
+            this.uploadImageIndex = num + 1; //이미지 index의 마지막 값 + 1 저장
+
+            console.log(this.files)
+        },
+        imageDeleteButton(e) {
+            const name = e.target.getAttribute('name');
+            this.files = this.files.filter(data => data.number !== Number(name));
+            console.log(this.files)
         },
         selectMap (name, address, x, y, phone, url) {
             this.map.name = name
@@ -293,13 +346,14 @@ export default {
         },
         modifyMap() {
             setTimeout(() => {
-                axios.post('http://localhost:7777/map/add', this.map )
-                    .then(()=> {
-                    alert('등록이 완료되었습니다!')
-                    this.$router.push(
-                        { name: 'PerformanceListPage' }
-                    )
-                    })
+                this.$emit('submit', this.map)
+                // axios.post('http://localhost:7777/map/add', this.map )
+                //     .then(()=> {
+                //     alert('등록이 완료되었습니다!')
+                //     this.$router.push(
+                //         { name: 'PerformanceListPage' }
+                //     )
+                //     })
            }, 2000)
         }
     }
