@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
 
-        String token = securityService.createToken(loginDto.getMemberId(), loginMember.getRole(), (5*1000*60));
+        String token = securityService.createToken(loginDto.getMemberId(), loginMember.getRole(), (10*1000*60));
 
         return token;
     }

@@ -1,6 +1,7 @@
 import {
     FETCH_NOTICE_LIST,
-    FETCH_NOTICE
+    FETCH_NOTICE,
+    FETCH_MEMBER_INFO
 } from './mutation-types'
 
 import axios from 'axios'
@@ -17,5 +18,11 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
-      },
+    },
+    fetchMemberInfo({ commit }, token) {
+        return axios.get('Member/info', { params: { token: token }})
+            .then((res) => {
+                commit(FETCH_MEMBER_INFO, res.data)
+        })
+    }
 }

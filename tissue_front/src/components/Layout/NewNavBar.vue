@@ -46,7 +46,7 @@
           dark
           class="mt-5 mr-10"
         />
-        <v-btn icon class="sub_tab_icon mr-3" :to="{name: 'MyPageView'}">
+        <v-btn icon class="sub_tab_icon mr-3" @click="goToMyPage">
           <v-icon color="white" large>mdi-account-outline</v-icon>
         </v-btn>
         <div class="mt-4" v-if="token">
@@ -81,8 +81,12 @@ export default {
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트", route: "ㄷ" },
       ],
-      token: localStorage.getItem('token')
+      token:''
     };
+  },
+  created() {
+      this.token = localStorage.getItem('token')
+
   },
   methods: {
       logout() {
@@ -91,6 +95,14 @@ export default {
           if (result) {
               localStorage.removeItem("token")
               history.go(0)
+          }
+      },
+      goToMyPage() {
+          if (this.token != null) {
+              this.$router.push('/myPage')
+          } else {
+              alert("로그인이 필요합니다.")
+              this.$router.push('/login')
           }
       }
   }
