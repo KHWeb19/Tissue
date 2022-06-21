@@ -2,16 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
-import hallTest from '@/components/Hall/HallTest.vue'
-import HallRegister from '@/components/Hall/HallRegister.vue'
+import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
+import HallListPage from '@/views/hall/HallListPage.vue'
+import HallReadPage from '@/views/hall/HallReadPage.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
 import MemberLoginPage from '../views/member/MemberLoginPage.vue'
 import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
-import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
-import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 
 
 // admin
@@ -39,15 +39,26 @@ const routes = [
     component: Home
   },
   {
-    path: '/hallTest',
-    name: 'hallTest',
-    component: hallTest
+    path: '/hallRegister',
+    name: 'HallRegisterPage',
+    component: HallRegisterPage
   },
   {
-    path: '/hallRegister',
-    name: 'HallRegister',
-    component: HallRegister
+    path: '/hallList',
+    name: 'HallListPage',
+    component: HallListPage
   },
+  {
+    path: '/hallRead/:hallNo',
+    name: 'HallReadPage',
+    components: {
+      default: HallReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+
   // 메인페이지 (임지훈)
 
   // 유아림
@@ -156,14 +167,6 @@ const routes = [
       default: true
     }
   },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = new VueRouter({

@@ -1,9 +1,12 @@
 export default {
 
+    halls: [],
+    hall: null,
+
     performances: [],
     performance: null,
 
-    // token: this.localStorage.getItem("token")
     notices: [],
     notice: null,
 }
+

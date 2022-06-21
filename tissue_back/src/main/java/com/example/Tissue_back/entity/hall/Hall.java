@@ -1,6 +1,7 @@
 package com.example.Tissue_back.entity.hall;
 
 import lombok.Data;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -20,5 +21,7 @@ public class Hall {
     @Column
     private int colCnt;
 
+    @OneToMany(mappedBy = "hall", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<HallSeat> seats;
 
 }
