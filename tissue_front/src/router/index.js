@@ -20,7 +20,7 @@ import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 
 
 // admin
-import AdminPage from '@/views/AdminPage.vue'
+
 
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
@@ -119,11 +119,7 @@ const routes = [
   // 유아림
 
   // 공연장 (노서현)
-  {
-    path: '/adminPage',
-    name: 'AdminPage',
-    component: AdminPage
-  }, 
+ 
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
