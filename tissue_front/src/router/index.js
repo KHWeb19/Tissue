@@ -6,6 +6,9 @@ import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
 import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import PerformanceTest from '@/views/performance/PerformanceTest.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -15,7 +18,6 @@ import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
-
 
 // admin
 import AdminPage from '@/views/AdminPage.vue'
@@ -61,7 +63,21 @@ const routes = [
       default: true
     }
   },
-
+  {
+    path: '/ticketing/:performNo',
+    name: 'TicketingPage',
+    components: {
+      default: TicketingPage
+  },
+  props:{
+      default: true
+  }
+  },
+  {
+    path: '/test',
+    name: 'PerformanceTest',
+    component: PerformanceTest
+  },
   // 메인페이지 (임지훈)
 
   // 유아림

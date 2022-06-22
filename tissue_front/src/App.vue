@@ -30,13 +30,14 @@
         this.$route.name != 'MemberJoinPage' &&
         this.$route.name != 'MemberJoinPage2' &&
         this.$route.name != 'MemberFindIdPage' &&
-        this.$route.name != 'MemberFindPwPage' 
+        this.$route.name != 'MemberFindPwPage'
       "
     />
-    <join-footer 
+    <join-footer
       v-if="
-        this.$route.name != 'KakaoOAuth' && 
-        this.$route.name != 'GoogleOAuth'"/>
+        this.$route.name != 'KakaoOAuth' && this.$route.name != 'GoogleOAuth'
+      "
+    />
   </v-app>
 </template>
 
@@ -69,12 +70,12 @@ export default {
 </script>
 <style scoped>
 .v-application {
-    font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 @font-face {
-    font-family: 'Noto Sans KR' ;
-    src: url('assets/font/NotoSansKR-Bold.otf');
-    font-weight: 500;
+  font-family: "Noto Sans KR";
+  src: url("assets/font/NotoSansKR-Bold.otf");
+  font-weight: 500;
 }
 </style>
 

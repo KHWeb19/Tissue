@@ -69,4 +69,9 @@ public class Performance {
 
     @Column(name="perform_detail_img_path")
     private String performDetailImgPath;
+
+
+    //임지훈
+    @Column
+    private String hallName;
 }

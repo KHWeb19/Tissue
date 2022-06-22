@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="menubar">
-      <v-toolbar height="80px" color="white" elevation="0">
+    <div class="menubar2">
+      <v-toolbar height="80px" elevation="0">
         <v-toolbar-title>
           <router-link to="/">
             <div>
@@ -52,7 +52,7 @@
           </v-btn>
           <div class="mt-4" v-if="token">
             <v-btn icon class="sub_tab_icon mr-8" @click="logout">
-                <v-icon color="black" large>mdi-logout</v-icon>
+              <v-icon color="black" large>mdi-logout</v-icon>
             </v-btn>
           </div>
           <div class="mt-4" v-else>
@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: "NewNavBar",
+  name: "NewNavBar2",
   data() {
     return {
       isScroll: false,
@@ -87,26 +87,30 @@ export default {
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트", route: "ㄷ" },
       ],
-      token: ''
+      token: localStorage.getItem("token"),
     };
   },
   mounted() {
-      if( this.$route.name != 'GoogleOAuth' &&
-          this.$route.name != 'KakaoOAuth' &&
-          this.$route.name != 'MemberLoginPage' &&
-          this.$route.name != 'MemberJoinPage' &&
-          this.$route.name != 'MemberJoinPage2' &&
-          this.$route.name != 'MemberFindIdPage' &&
-          this.$route.name != 'MemberFindPwPage'){
-              window.addEventListener("scroll", function () {
-                if (window.scrollY <= 700) {
-                    document.getElementsByClassName("menubar")[0].style.position =
-                    "absolute";
-                } else if (window.scrollY > 700) {
-                    document.getElementsByClassName("menubar")[0].style.position = "fixed";
-                }
-              })
-            }
+    if (
+      this.$route.name != "GoogleOAuth" &&
+      this.$route.name != "KakaoOAuth" &&
+      this.$route.name != "MemberLoginPage" &&
+      this.$route.name != "MemberJoinPage" &&
+      this.$route.name != "MemberJoinPage2" &&
+      this.$route.name != "MemberFindIdPage" &&
+      this.$route.name != "MemberFindPwPage"
+    ) {
+      window.addEventListener("scroll", function () {
+        let a = document.getElementsByClassName("menubar2");
+        for (let i = 0; i < a.length; i++) {
+          if (window.scrollY <= 700) {
+            a[i].style.position = "absolute";
+          } else if (window.scrollY > 700) {
+            a[i].style.position = "fixed";
+          }
+        }
+      });
+    }
   },
   created () {
       this.token = localStorage.getItem('token')
@@ -116,8 +120,7 @@ export default {
       this.$router.push("/");
     },
     logout() {
-        let result = confirm('로그아웃하시겠습니까?')
-
+      let result = confirm("로그아웃하시겠습니까?");
         if (result) {
             localStorage.removeItem("token")
             this.$router.push("/")
@@ -132,13 +135,12 @@ export default {
               this.$router.push('/login')
           }
       }
-    
-  },
+   },
 };
 </script>
 
 <style scoped>
-.menubar {
+.menubar2 {
   position: absolute;
   z-index: 1;
   width: 100%;
