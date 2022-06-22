@@ -6,15 +6,16 @@ import {
     FETCH_PERFORMANCE,
   
     FETCH_NOTICE_LIST,
-    FETCH_NOTICE
-   
+    FETCH_NOTICE,
+    FETCH_MEMBER_INFO,
+
 } from './mutation-types'
 
 export default{
     [FETCH_HALL_LIST](state, halls){
         state.halls = halls
     },
-    [FETCH_HALL](state, hall){
+    [FETCH_HALL](state, hall) {
         state.hall = hall
     },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
@@ -29,5 +30,8 @@ export default{
     },
     [FETCH_NOTICE] (state, notice) {
         state.notice = notice
+    },
+    [FETCH_MEMBER_INFO](state, memberInfo) {
+        state.memberInfo = memberInfo
     }
 }

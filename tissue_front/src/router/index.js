@@ -17,7 +17,7 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
-
+import MyPageView from '../views/member/myPage/MyPage.vue'
 
 // admin
 import AdminPage from '@/views/AdminPage.vue'
@@ -91,31 +91,51 @@ const routes = [
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
   },
-  {
-    path: '/login',
-    name: 'MemberLoginPage',
-    component:MemberLoginPage
-},
-{
-    path: '/findId',
-    name: 'MemberFindIdPage',
-    component:MemberFindIdPage
-},
-  {
-    path: '/findPw',
-    name: 'MemberFindPwPage',
-    component:MemberFindPwPage
-},
-{
-    path: '/kakaoLogin',
-    name:'KakaoOAuth',
-    component:KakaoOAuth
-},
-{
-    path: '/googleLogin',
-    name: 'GoogleOAuth',
-    component: GoogleOAuth
-},
+    {
+        path: '/login',
+        name: 'MemberLoginPage',
+        component:MemberLoginPage
+    },
+    {
+        path: '/findId',
+        name: 'MemberFindIdPage',
+        component:MemberFindIdPage
+    },
+    {
+        path: '/findPw',
+        name: 'MemberFindPwPage',
+        component:MemberFindPwPage
+    },
+    {
+        path: '/kakaoLogin',
+        name:'KakaoOAuth',
+        component:KakaoOAuth
+    },
+    {
+        path: '/googleLogin',
+        name: 'GoogleOAuth',
+        component: GoogleOAuth
+    },
+    {
+        path: '/myPage',
+        name: 'MyPageView',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/myPage/modify',
+        name: 'MyPageModify',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
   // 유아림
 
   // 공연장 (노서현)
@@ -176,16 +196,16 @@ const routes = [
       default: true
     }
   },
-  {
-    path: '/noticeModify/:noticeNo',
-    name: 'NoticeModifyPage',
-    components: {
-      default: NoticeModifyPage
-    },
-    props: {
-      default: true
+    {
+        path: '/noticeModify/:noticeNo',
+        name: 'NoticeModifyPage',
+        components: {
+            default: NoticeModifyPage
+        },
+        props: {
+            default: true
+        }
     }
-  },
 ]
 
 const router = new VueRouter({
