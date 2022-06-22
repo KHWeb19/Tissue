@@ -103,9 +103,9 @@ export default {
       window.addEventListener("scroll", function () {
         let a = document.getElementsByClassName("menubar2");
         for (let i = 0; i < a.length; i++) {
-          if (window.scrollY <= 700) {
+          if (window.scrollY <= 600) {
             a[i].style.position = "absolute";
-          } else if (window.scrollY > 700) {
+          } else if (window.scrollY > 600) {
             a[i].style.position = "fixed";
           }
         }
