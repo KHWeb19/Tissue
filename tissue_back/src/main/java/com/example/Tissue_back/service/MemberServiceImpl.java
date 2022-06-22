@@ -151,4 +151,23 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    @Override
+    public void modify (MemberDto memberDto) {
+        Optional<Member> oMember = repository.findByMemberId(memberDto.getMemberId());
+
+        String encodedPassword = passwordEncoder.encode(memberDto.getMemberPw());
+        memberDto.setMemberPw(encodedPassword);
+
+        Member member = oMember.get();
+        member.setMemberPw(memberDto.getMemberPw());
+        member.setMemberPhone(memberDto.getMemberPhone());
+        member.setMemberEmail(memberDto.getMemberEmail());
+        member.setAddZipCode(memberDto.getAddZipCode());
+        member.setMemberAddress(memberDto.getMemberAddress());
+        member.setAddDetail(memberDto.getAddDetail());
+        member.setMemberBirth(memberDto.getMemberBirth());
+
+        repository.save(member);
+
+    }
 }

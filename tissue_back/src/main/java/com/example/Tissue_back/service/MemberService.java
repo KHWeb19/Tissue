@@ -14,5 +14,6 @@ public interface MemberService {
     public FindDto findPw(FindDto findDto) throws  CoolsmsException;
     public Member getInfo (String token);
     public Boolean checkPw (LoginDto check);
+    public void modify (MemberDto memberDto);
 
 }

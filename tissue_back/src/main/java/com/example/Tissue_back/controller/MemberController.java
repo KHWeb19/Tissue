@@ -90,5 +90,14 @@ public class MemberController {
         return service.checkPw(check);
     }
 
+    // 회원정보 수정
+    @PutMapping("/modify")
+    public MemberDto modify (@Validated @RequestBody MemberDto memberDto) {
+        log.info("=== Tissue Member Modify ===" + memberDto);
+
+        service.modify(memberDto);
+
+        return memberDto;
+    }
 
 }

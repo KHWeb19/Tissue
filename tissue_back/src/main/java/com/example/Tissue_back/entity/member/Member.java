@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class Member {
 
     @Id
@@ -41,7 +42,7 @@ public class Member {
     private String memberName;
 
     @Column
-    private Date memberBirth;
+    private LocalDate memberBirth;
 
     @Column(nullable = false)
     private String memberPhone;
@@ -57,7 +58,7 @@ public class Member {
     private String addDetail;
 
     @CreationTimestamp
-    private Date memberRegDate;
+    private LocalDate memberRegDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
