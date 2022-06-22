@@ -132,8 +132,8 @@ export default {
             ],
             emailRules: [
                 v => !!v || '이메일을 입력해주세요',
+                v => /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/.test(v) || '이메일 형식으로 입력해주세요'
             ]
-
         }
     },
     methods: {

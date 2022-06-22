@@ -120,7 +120,8 @@ export default {
 
         if (result) {
             localStorage.removeItem("token")
-            history.go(0)
+            this.$router.push("/")
+            this.token = null
         }
     },
      goToMyPage() {
