@@ -1,117 +1,119 @@
 <template>
     <v-container fluid>
         <div v-if="visible">
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    아이디
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field :value="memberInfo.memberId" disabled dense></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    비밀번호
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field type="password" v-model="memberPw" color="pink lighten-3" outlined dense
-                    :rules="pwRules"> </v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    비밀번호 재확인
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field type="password" v-model="memberPw2" color="pink lighten-3" outlined dense
-                    :rules="pwRules2"> </v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    이름
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field :value="memberInfo.memberName" disabled dense> </v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    생일
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field v-model="memberBirth" type="date"  color="pink lighten-3" dense outlined> </v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    휴대폰
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5" v-if="!able">
-                    <v-text-field v-model="memberPhone" color="pink lighten-3" dense outlined :rules="phRules" disabled style="float:left" class="mr-2"> </v-text-field>
-                    <v-btn color="blue lighten-3" dark @click="ableChange" depressed>변경</v-btn>
-                </v-col>
-                <v-col cols="5" v-else>
-                    <v-row>
-                        <v-col cols="8">
-                            <v-text-field v-model="memberPhone" color="pink lighten-3" dense outlined :rules="phRules"> </v-text-field>
+            <v-form ref="form">
+                <v-row justify="center">
+                    <v-col cols="3" class="label">
+                        아이디
+                    </v-col>
+                    <v-divider vertical class="mr-12"/>
+                    <v-col cols="5">
+                        <v-text-field :value="memberInfo.memberId" disabled dense></v-text-field>
+                    </v-col>
+                </v-row>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            비밀번호
                         </v-col>
-                        <v-col cols="2">
-                            <v-btn color="blue lighten-3" dark @click="checkPhone" depressed>인증번호</v-btn>
-                        </v-col>
-                    </v-row>
-                    <v-row v-if="sendAuth" justify="center">
-                        <v-col cols="6">
-                            <v-text-field v-model="checkNum" color="pink lighten-3" dense outlined placeholder="인증번호" style="float:left" class="mr-2"></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-btn :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark @click="checkAuthNum" depressed>확인</v-btn>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    이메일
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-text-field v-model="memberEmail" color="pink lighten-3" dense outlined :rules="emailRules"> </v-text-field>
-                </v-col>
-            </v-row>
-            <v-row justify="center">
-                <v-col cols="3" class="label">
-                    주소
-                </v-col>
-                <v-divider vertical class="mr-12"/>
-                <v-col cols="5">
-                    <v-row>
+                        <v-divider vertical class="mr-12"/>
                         <v-col cols="5">
-                            <v-text-field style="zoom:0.85" @click="searchAddress()" 
-                            v-model="addZipCode" color="pink lighten-3" outlined placeholder="우편번호" dense>
-                        </v-text-field>
-                        </v-col>
-                        <v-col cols="7">
-                            <v-text-field @click="searchAddress()" dense color="pink lighten-3" v-model="memberAddress" :rules="addRules"></v-text-field>
+                            <v-text-field type="password" v-model="memberPw" color="pink lighten-3" outlined dense
+                            :rules="pwRules"> </v-text-field>
                         </v-col>
                     </v-row>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field name=address_detail v-model="addDetail" placeholder="상세주소" dense color="pink lighten-3"></v-text-field>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            비밀번호 재확인
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5">
+                            <v-text-field type="password" v-model="memberPw2" color="pink lighten-3" outlined dense
+                            :rules="pwRules2"> </v-text-field>
                         </v-col>
                     </v-row>
-                </v-col>
-            </v-row>
-            <v-row justify="center" class="mt-15">
-                <v-btn color="blue lighten-3" x-large dark depressed width="250" @click="modify">회원정보 수정</v-btn>
-            </v-row>
-        </div>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            이름
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5">
+                            <v-text-field :value="memberInfo.memberName" disabled dense> </v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            생일
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5">
+                            <v-text-field v-model="memberBirth" type="date"  color="pink lighten-3" dense outlined> </v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            휴대폰
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5" v-if="!able">
+                            <v-text-field v-model="memberPhone" color="pink lighten-3" dense outlined :rules="phRules" disabled style="float:left" class="mr-2"> </v-text-field>
+                            <v-btn color="blue lighten-3" dark @click="ableChange" depressed>변경</v-btn>
+                        </v-col>
+                        <v-col cols="5" v-else>
+                            <v-row>
+                                <v-col cols="8">
+                                    <v-text-field v-model="memberPhone" color="pink lighten-3" dense outlined :rules="phRules"> </v-text-field>
+                                </v-col>
+                                <v-col cols="2">
+                                    <v-btn color="blue lighten-3" dark @click="checkPhone" depressed>인증번호</v-btn>
+                                </v-col>
+                            </v-row>
+                            <v-row v-if="sendAuth" justify="center">
+                                <v-col cols="6">
+                                    <v-text-field v-model="checkNum" color="pink lighten-3" dense outlined placeholder="인증번호" style="float:left" class="mr-2"></v-text-field>
+                                </v-col>
+                                <v-col cols="2">
+                                    <v-btn :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'" dark @click="checkAuthNum" depressed>확인</v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            이메일
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5">
+                            <v-text-field v-model="memberEmail" color="pink lighten-3" dense outlined :rules="emailRules"> </v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="3" class="label">
+                            주소
+                        </v-col>
+                        <v-divider vertical class="mr-12"/>
+                        <v-col cols="5">
+                            <v-row>
+                                <v-col cols="5">
+                                    <v-text-field style="zoom:0.85" @click="searchAddress()" 
+                                    v-model="addZipCode" color="pink lighten-3" outlined placeholder="우편번호" dense>
+                                </v-text-field>
+                                </v-col>
+                                <v-col cols="7">
+                                    <v-text-field @click="searchAddress()" dense color="pink lighten-3" v-model="memberAddress" :rules="addRules"></v-text-field>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-text-field name=address_detail v-model="addDetail" placeholder="상세주소" dense color="pink lighten-3"></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center" class="mt-15">
+                        <v-btn color="blue lighten-3" x-large dark depressed width="250" @click='modify'>회원정보 수정</v-btn>
+                    </v-row>
+                </v-form>
+            </div>
         <div v-else>
             <v-container>
             <v-row justify="center" class="mb-5" style="font-size:15pt">
@@ -179,7 +181,9 @@ export default {
             ],
             addRules: [
                 v => !!v || '주소를 입력해주세요',
-            ]
+            ],
+
+            token: localStorage.getItem('token'),
         }
     },
     created () {
@@ -218,7 +222,10 @@ export default {
         },
         async modify() {
             try {
-                if(this.phonePass == true){
+                const validate = this.$refs.form.validate(); 
+                if(this.phonePass == false) {
+                    alert("휴대폰 인증이 필요합니다.")
+                } else if(validate) {
                     const response = await axios.put('Member/modify', {
                         memberId: this.memberInfo.memberId,
                         memberName: this.memberInfo.memberName,
@@ -228,15 +235,13 @@ export default {
                         memberEmail: this.memberEmail,
                         addZipCode: this.addZipCode,
                         memberAddress: this.memberAddress,
-                        addDetail: this.addDetail
-                    })
+                        addDetail: this.addDetail })
+
                     if(response.data){
                         alert("회원정보가 수정되셨습니다.")
                         history.go(0)
-                    }else {
-                        alert("")
                     }
-                }else {alert ("휴대폰 인증이 필요합니다.")}
+                } else {alert ("필수항목을 모두 작성해주세요.")}
             }catch(error) {
                 alert(error)
             }
