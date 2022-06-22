@@ -16,7 +16,7 @@ export default{
     },
     [FETCH_HALL](state, hall){
         state.hall = hall
-
+    },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances
     },
@@ -27,4 +27,7 @@ export default{
     [FETCH_NOTICE_LIST] (state, notices) {
         state.notices = notices
     },
+    [FETCH_NOTICE] (state, notice) {
+        state.notice = notice
+    }
 }

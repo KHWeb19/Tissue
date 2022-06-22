@@ -35,6 +35,7 @@
     "swiper": "^5.3.7",
     "vue-cli-plugin-vuetify": "~2.5.0",
     "vue-cookies": "^1.8.1",
+    "vue-naver-maps": "^0.14.3",
     "vue-template-compiler": "^2.6.14",
     "vuetify-loader": "^1.7.0"
   },
