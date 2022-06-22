@@ -36,8 +36,14 @@
                         :row-index="index"
                         :cell-index="indexes"
                       ></div>
-                      <div v-if="indexes == 0" style="width: 50px"></div>
-                      <div v-if="indexes == 3" style="width: 50px"></div>
+                      <div v-if="hall.rowCnt <= 5">
+                        <div v-if="indexes == 0" style="width: 50px"></div>
+                        <div v-if="indexes == 3" style="width: 50px"></div>
+                      </div>
+                      <div v-if="hall.rowCnt > 5">
+                        <div v-if="indexes == 2" style="width: 50px"></div>
+                        <div v-if="indexes == 7" style="width: 50px"></div>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -46,8 +52,8 @@
           </div>
         </div>
         <div class="ml-10">
-          <div>좌석 등급 / 가격</div>
-          <div class="showSeatMoney">
+          <div class="ml-2 infoTitle">좌석 등급 / 가격</div>
+          <div class="showSeatPrice">
             <div class="ml-1">
               <div
                 class="d-flex mt-3 mb-10"
@@ -67,19 +73,27 @@
               </div>
             </div>
           </div>
-          <div>선택한 좌석</div>
+          <div class="ml-2 mt-2 infoTitle">선택한 좌석</div>
           <div class="showSelectSeat">
             <span v-for="(index, show) in showSelectInfo" :key="show">
               {{ index.info }}
             </span>
           </div>
-          <div>결제 금액</div>
+          <div class="ml-2 mt-2 infoTitle">결제 금액</div>
           <div class="showSelectPrice">
             <div>{{ selectPrice }} 원</div>
           </div>
-          <div>
-            <v-btn>뒤로</v-btn>
-            <v-btn @click="reset">초기화</v-btn>
+          <div class="mt-3">
+            <v-btn rounded class="white--text" color="pink lighten-3"
+              >뒤로</v-btn
+            >
+            <v-btn
+              rounded
+              class="white--text"
+              color="pink lighten-3"
+              @click="reset"
+              >초기화</v-btn
+            >
           </div>
         </div>
       </div>
@@ -201,7 +215,10 @@ export default {
       if (this.dataTable[row][col].click == false) {
         this.dataTable[row][col].click = true;
         if (this.showSelectInfo.length < 10) {
-          this.showSelectInfo.push({ info: temp });
+          this.showSelectInfo.push({
+            info: temp,
+            grade: this.dataTable[row][col].grade,
+          });
           if (priceGradeTemp == "R") {
             this.selectPrice += this.performance.performPriceR;
           } else if (priceGradeTemp == "S") {
@@ -258,6 +275,7 @@ export default {
       }
       console.log(this.showSelectInfo);
       this.$emit("showSelectInfo", this.showSelectInfo);
+      this.$emit("selectPrice", this.selectPrice);
     },
 
     reset() {
@@ -285,6 +303,7 @@ export default {
       this.showSelectInfo = [];
       this.selectPrice = 0;
       this.$emit("showSelectInfo", this.showSelectInfo);
+      this.$emit("selectPrice", this.selectPrice);
     },
 
     resetCheckBox() {
@@ -358,11 +377,14 @@ export default {
   margin-right: 0;
   padding-top: 12px;
 }
-.showSeatMoney {
+.showSeatPrice {
   width: 390px;
   height: 200px;
   border: 1px solid skyblue;
   padding: 10px;
   border-radius: 15px;
+}
+.infoTitle {
+  font-size: 20px;
 }
 </style>

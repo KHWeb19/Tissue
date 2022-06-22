@@ -43,8 +43,14 @@
                         :row-index="index"
                         :cell-index="indexes"
                       ></div>
-                      <div v-if="indexes == 0" style="width: 50px"></div>
-                      <div v-if="indexes == 3" style="width: 50px"></div>
+                      <div v-if="hall.rowCnt <= 5">
+                        <div v-if="indexes == 0" style="width: 50px"></div>
+                        <div v-if="indexes == 3" style="width: 50px"></div>
+                      </div>
+                      <div v-if="hall.rowCnt > 5">
+                        <div v-if="indexes == 1" style="width: 50px"></div>
+                        <div v-if="indexes == 7" style="width: 50px"></div>
+                      </div>
                     </div>
                   </td>
                 </tr>
