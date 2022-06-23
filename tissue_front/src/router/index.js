@@ -9,6 +9,8 @@ import HallReadPage from '@/views/hall/HallReadPage.vue'
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
+import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -77,6 +79,11 @@ const routes = [
     path: '/test',
     name: 'PerformanceTest',
     component: PerformanceTest
+  },
+  {
+    path: '/Admin',
+    name: 'AdminMainPage',
+    component: AdminMainPage
   },
   // 메인페이지 (임지훈)
 
