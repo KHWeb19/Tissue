@@ -1,14 +1,7 @@
 <template>
   <div>
     <v-container>
-      <div
-        style="
-          display: flex;
-          margin-top: 100px;
-          justify-content: center;
-          align-items: center;
-        "
-      >
+      <div style="display: flex; justify-content: center; align-items: center">
         <div>
           <div class="stage">S T A G E</div>
 

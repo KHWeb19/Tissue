@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container style="margin-top: 100px">
+    <v-container>
       <v-row justify="center">
         <v-col cols="auto">
           <v-card flat>
