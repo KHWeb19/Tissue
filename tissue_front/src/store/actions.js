@@ -8,7 +8,8 @@ import {
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
-    FETCH_MEMBER_INFO
+    FETCH_MEMBER_INFO,
+    FETCH_MEMBER
 
 } from './mutation-types'
 
@@ -58,6 +59,13 @@ export default {
             .then((res) => {
                 commit(FETCH_MEMBER_INFO, res.data)
         })
-    }
+    },
+    fetchMember({ commit }) {
+        return axios.get('Admin/memberInfo')
+            .then((res) => {
+                commit(FETCH_MEMBER, res.data)
+        })
+    },
+    
 }
 
