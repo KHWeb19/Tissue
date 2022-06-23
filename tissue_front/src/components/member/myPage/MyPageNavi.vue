@@ -68,7 +68,7 @@
                 </v-row>
                 <v-row class="main mb-15 pb-15">
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
-                    <div v-else>메인</div>
+                    <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                 </v-row>
             </v-main>
         </div>
@@ -77,8 +77,9 @@
 
 <script>
 import MyPageModify from '@/components/member/myPage/MyPageModify.vue'
+import MyPageOut from './MyPageOut.vue'
 export default {
-  components: { MyPageModify },
+  components: { MyPageModify, MyPageOut },
     name:'MyPageNavi',
     props:{
         memberInfo: {
@@ -89,11 +90,12 @@ export default {
     data () {
         return {
             items: [
-                { title: 'My 정보수정', icon: 'mdi-view-dashboard', route:'/myPage/modify' },
-                { title: 'My 찜목록', icon: 'mdi-image' },
-                { title: 'My 예매 내역', icon: 'mdi-help-box' },
-                { title: 'My QnA', icon: 'mdi-view-dashboard' },
-                { title: 'My 후기', icon: 'mdi-image' },
+                { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
+                { title: 'My 찜목록', icon: 'mdi-star' },
+                { title: 'My 예매 내역', icon: 'mdi-book' },
+                { title: 'My QnA', icon: 'mdi-chat-question' },
+                { title: 'My 후기', icon: 'mdi-pencil' },
+                { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
             ],
         }
     },

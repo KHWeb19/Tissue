@@ -138,6 +138,16 @@ const routes = [
         }
     },
     {
+        path: '/myPage/signOut',
+        name: 'MyPageOut',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
+    {
         path: '/test2',
         name: 'AdminMember',
         component: AdminMember
