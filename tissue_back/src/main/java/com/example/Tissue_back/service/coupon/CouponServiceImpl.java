@@ -4,12 +4,18 @@ import com.example.Tissue_back.entity.coupon.Coupon;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -38,5 +44,22 @@ public class CouponServiceImpl implements CouponService {
         }
 
         couponRepository.save(coupon);
+    }
+
+    @Override
+    public List<Coupon> list() {
+        return couponRepository.findAll(Sort.by(Sort.Direction.DESC, "couponNo"));
+    }
+
+    @Override
+    public void remove(Long couponNo) throws Exception {
+        Optional<Coupon> selectFile = couponRepository.findById(couponNo);
+        Coupon deleteFile = selectFile.get();
+
+        if (deleteFile.getFilename() != null){
+            Path filePath = Paths.get("C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\coupon\\" + deleteFile.getFilename());
+            Files.delete(filePath);
+        }
+        couponRepository.deleteById(couponNo);
     }
 }

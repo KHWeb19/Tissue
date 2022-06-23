@@ -8,6 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/coupon")
@@ -22,5 +24,19 @@ public class CouponController {
        log.info("couponRegister()" + file);
 
        couponService.register(coupon, file);
+    }
+
+    @GetMapping("/list")
+    public List<Coupon> couponList(){
+        log.info("couponList()");
+
+        return couponService.list();
+    }
+
+    @DeleteMapping("/{couponNo}")
+    public void couponRemove( @PathVariable("couponNo") Long couponNo, Coupon coupon) throws Exception{
+        log.info("couponRemove()" + couponNo);
+
+        couponService.remove(couponNo);
     }
 }

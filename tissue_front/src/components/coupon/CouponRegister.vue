@@ -136,7 +136,7 @@
 
             <div class="d-flex" style="justify-content: flex-end">
               <v-btn type="submit" class="mr-5" large rounded> 등록 </v-btn>
-              <v-btn large rounded> 취소 </v-btn>
+              <v-btn large rounded to="/couponList"> 취소 </v-btn>
             </div>
           </form>
         </v-col>
