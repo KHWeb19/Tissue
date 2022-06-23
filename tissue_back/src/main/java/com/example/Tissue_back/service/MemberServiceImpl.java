@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
 
-        String token = securityService.createToken(loginDto.getMemberId(), encodedPassword, (2*1000*60));
+        String token = securityService.createToken(loginDto.getMemberId(), loginMember.getRole(), (10*1000*60));
 
         return token;
     }
@@ -124,4 +124,50 @@ public class MemberServiceImpl implements MemberService {
         return findDto;
     }
 
+    @Override
+    public Member getInfo (String token) {
+
+        String memberId = securityService.getMemberId(token);
+        log.info("check >>>>" + memberId);
+
+        Optional<Member> findMember = repository.findByMemberId(memberId);
+
+        Member member = findMember.get();
+        member.setMemberPw(null);
+
+        return member;
+    }
+
+    @Override
+    public Boolean checkPw (LoginDto check) {
+        Optional<Member> maybeMember = repository.findByMemberId(check.getMemberId());
+
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(check.getMemberPw(), loginMember.getMemberPw())) {
+            log.info("Entered wrong password!");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void modify (MemberDto memberDto) {
+        Optional<Member> oMember = repository.findByMemberId(memberDto.getMemberId());
+
+        String encodedPassword = passwordEncoder.encode(memberDto.getMemberPw());
+        memberDto.setMemberPw(encodedPassword);
+
+        Member member = oMember.get();
+        member.setMemberPw(memberDto.getMemberPw());
+        member.setMemberPhone(memberDto.getMemberPhone());
+        member.setMemberEmail(memberDto.getMemberEmail());
+        member.setAddZipCode(memberDto.getAddZipCode());
+        member.setMemberAddress(memberDto.getMemberAddress());
+        member.setAddDetail(memberDto.getAddDetail());
+        member.setMemberBirth(memberDto.getMemberBirth());
+
+        repository.save(member);
+
+    }
 }

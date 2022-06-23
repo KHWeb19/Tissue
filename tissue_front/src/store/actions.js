@@ -1,19 +1,34 @@
+import axios from 'axios'
 import {
-
-    // performance
+    FETCH_HALL_LIST,
+    FETCH_HALL,
+      // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
 
     FETCH_NOTICE_LIST,
-    FETCH_NOTICE
+    FETCH_NOTICE,
+    FETCH_MEMBER_INFO
 
 } from './mutation-types'
 
-// import Vue from 'vue'
-import axios from 'axios'
+//import router from '@/router'
 
 export default {
-    // peformance
+    fetchHallList({commit}) {
+        return axios.get('http://localhost:7777/hall/list')
+        .then((res)=>{
+            commit(FETCH_HALL_LIST,res.data)
+        })
+    },
+    
+    fetchHall({commit},hallNo) {
+        return axios.get(`http://localhost:7777/hall/${hallNo}`)
+        .then((res)=>{
+            commit(FETCH_HALL,res.data)
+        })
+    },
+   // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')
                 .then((res) => {
@@ -37,6 +52,12 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
-      },
+    },
+    fetchMemberInfo({ commit }, token) {
+        return axios.get('Member/info', { params: { token: token }})
+            .then((res) => {
+                commit(FETCH_MEMBER_INFO, res.data)
+        })
+    }
 }
 

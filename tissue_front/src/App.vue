@@ -15,7 +15,8 @@
           this.$route.name != 'PerformanceModifyPage'
         "
       >
-        <new-nav-bar-2 /> 
+        <new-nav-bar-2/>
+        <div v-if="this.$route.name !='home'" style="height: 80px"></div> 
       </div>
       <v-main>
         <router-view />
@@ -29,13 +30,14 @@
         this.$route.name != 'MemberJoinPage' &&
         this.$route.name != 'MemberJoinPage2' &&
         this.$route.name != 'MemberFindIdPage' &&
-        this.$route.name != 'MemberFindPwPage' 
+        this.$route.name != 'MemberFindPwPage'
       "
     />
-    <join-footer 
+    <join-footer
       v-if="
-        this.$route.name != 'KakaoOAuth' && 
-        this.$route.name != 'GoogleOAuth'"/>
+        this.$route.name != 'KakaoOAuth' && this.$route.name != 'GoogleOAuth'
+      "
+    />
   </v-app>
 </template>
 
@@ -56,16 +58,24 @@ export default {
       url: null,
     };
   },
+  created() {
+    this.url = window.location.href;
+    if (this.url == "http://localhost:8080/") {
+      this.isHome = true;
+    } else {
+      this.isHome = false;
+    }
+  },
 }
 </script>
 <style scoped>
 .v-application {
-    font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 @font-face {
-    font-family: 'Noto Sans KR' ;
-    src: url('assets/font/NotoSansKR-Bold.otf');
-    font-weight: 500;
+  font-family: "Noto Sans KR";
+  src: url("assets/font/NotoSansKR-Bold.otf");
+  font-weight: 500;
 }
 </style>
 

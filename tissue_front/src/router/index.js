@@ -2,8 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
-import hallTest from '@/components/Hall/HallTest.vue'
-import HallRegister from '@/components/Hall/HallRegister.vue'
+import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
+import HallListPage from '@/views/hall/HallListPage.vue'
+import HallReadPage from '@/views/hall/HallReadPage.vue'
+
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import PerformanceTest from '@/views/performance/PerformanceTest.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -12,10 +17,10 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
-
+import MyPageView from '../views/member/myPage/MyPage.vue'
 
 // admin
-import AdminPage from '@/views/AdminPage.vue'
+
 
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
@@ -39,14 +44,39 @@ const routes = [
     component: Home
   },
   {
-    path: '/hallTest',
-    name: 'hallTest',
-    component: hallTest
+    path: '/hallRegister',
+    name: 'HallRegisterPage',
+    component: HallRegisterPage
   },
   {
-    path: '/hallRegister',
-    name: 'HallRegister',
-    component: HallRegister
+    path: '/hallList',
+    name: 'HallListPage',
+    component: HallListPage
+  },
+  {
+    path: '/hallRead/:hallNo',
+    name: 'HallReadPage',
+    components: {
+      default: HallReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/ticketing/:performNo',
+    name: 'TicketingPage',
+    components: {
+      default: TicketingPage
+  },
+  props:{
+      default: true
+  }
+  },
+  {
+    path: '/test',
+    name: 'PerformanceTest',
+    component: PerformanceTest
   },
   // 메인페이지 (임지훈)
 
@@ -61,39 +91,55 @@ const routes = [
     name: 'MemberJoinPage2',
     component: MemberJoinPage2,
   },
-  {
-    path: '/login',
-    name: 'MemberLoginPage',
-    component:MemberLoginPage
-},
-{
-    path: '/findId',
-    name: 'MemberFindIdPage',
-    component:MemberFindIdPage
-},
-  {
-    path: '/findPw',
-    name: 'MemberFindPwPage',
-    component:MemberFindPwPage
-},
-{
-    path: '/kakaoLogin',
-    name:'KakaoOAuth',
-    component:KakaoOAuth
-},
-{
-    path: '/googleLogin',
-    name: 'GoogleOAuth',
-    component: GoogleOAuth
-},
+    {
+        path: '/login',
+        name: 'MemberLoginPage',
+        component:MemberLoginPage
+    },
+    {
+        path: '/findId',
+        name: 'MemberFindIdPage',
+        component:MemberFindIdPage
+    },
+    {
+        path: '/findPw',
+        name: 'MemberFindPwPage',
+        component:MemberFindPwPage
+    },
+    {
+        path: '/kakaoLogin',
+        name:'KakaoOAuth',
+        component:KakaoOAuth
+    },
+    {
+        path: '/googleLogin',
+        name: 'GoogleOAuth',
+        component: GoogleOAuth
+    },
+    {
+        path: '/myPage',
+        name: 'MyPageView',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/myPage/modify',
+        name: 'MyPageModify',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
   // 유아림
 
   // 공연장 (노서현)
-  {
-    path: '/adminPage',
-    name: 'AdminPage',
-    component: AdminPage
-  }, 
+ 
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
@@ -146,24 +192,16 @@ const routes = [
       default: true
     }
   },
-  {
-    path: '/noticeModify/:noticeNo',
-    name: 'NoticeModifyPage',
-    components: {
-      default: NoticeModifyPage
-    },
-    props: {
-      default: true
+    {
+        path: '/noticeModify/:noticeNo',
+        name: 'NoticeModifyPage',
+        components: {
+            default: NoticeModifyPage
+        },
+        props: {
+            default: true
+        }
     }
-  },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = new VueRouter({

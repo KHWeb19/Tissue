@@ -86,4 +86,9 @@ public class Performance {
         this.performGrade = performanceDto.getPerformGrade();
         this.performer = performanceDto.getPerformer();
     }
+
+
+    //임지훈
+    @Column
+    private String hallName;
 }
