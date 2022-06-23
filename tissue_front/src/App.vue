@@ -15,7 +15,8 @@
           this.$route.name != 'PerformanceModifyPage'
         "
       >
-        <new-nav-bar-2 />
+        <new-nav-bar-2/>
+        <div v-if="this.$route.name !='home'" style="height: 80px"></div> 
       </div>
       <v-main>
         <router-view />
@@ -57,7 +58,15 @@ export default {
       url: null,
     };
   },
-};
+  created() {
+    this.url = window.location.href;
+    if (this.url == "http://localhost:8080/") {
+      this.isHome = true;
+    } else {
+      this.isHome = false;
+    }
+  },
+}
 </script>
 <style scoped>
 .v-application {

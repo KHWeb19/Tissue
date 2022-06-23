@@ -7,8 +7,9 @@ import {
     FETCH_PERFORMANCE,
 
     FETCH_NOTICE_LIST,
-    FETCH_NOTICE
-    
+    FETCH_NOTICE,
+    FETCH_MEMBER_INFO
+
 } from './mutation-types'
 
 //import router from '@/router'
@@ -51,8 +52,12 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
-      },
-    
- }
-
+    },
+    fetchMemberInfo({ commit }, token) {
+        return axios.get('Member/info', { params: { token: token }})
+            .then((res) => {
+                commit(FETCH_MEMBER_INFO, res.data)
+        })
+    }
+}
 
