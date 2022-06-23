@@ -10,6 +10,8 @@ import TicketingPage from '@/views/Ticketing/TicketingPage.vue'
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
 import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
+import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
+import CouponListPage from '@/views/coupon/CouponListPage.vue'
 
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
@@ -84,6 +86,16 @@ const routes = [
     path: '/Admin',
     name: 'AdminMainPage',
     component: AdminMainPage
+  },
+  {
+    path: '/couponRegister',
+    name: 'CouponRegisterPage',
+    component: CouponRegisterPage
+  },
+  {
+    path: '/couponList',
+    name: 'CouponListPage',
+    component: CouponListPage
   },
   // 메인페이지 (임지훈)
 
