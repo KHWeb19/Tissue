@@ -1,7 +1,9 @@
 package com.example.Tissue_back.entity;
 
+import com.example.Tissue_back.controller.request.PerformanceDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +21,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Performance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +72,20 @@ public class Performance {
 
     @Column(name="perform_detail_img_path")
     private String performDetailImgPath;
+
+    public void updatePerformance(PerformanceDto performanceDto) {
+        this.performName = performanceDto.getPerformName();
+        this.performStart = performanceDto.getPerformStart();
+        this.performEnd = performanceDto.getPerformEnd();
+        this.performTime = performanceDto.getPerformTime();
+        this.performPriceS = performanceDto.getPerformPriceS();
+        this.performPriceR = performanceDto.getPerformPriceR();
+        this.performPriceVip = performanceDto.getPerformPriceVip();
+        this.performArea = performanceDto.getPerformArea();
+        this.performCategory = performanceDto.getPerformCategory();
+        this.performGrade = performanceDto.getPerformGrade();
+        this.performer = performanceDto.getPerformer();
+    }
 
 
     //임지훈
