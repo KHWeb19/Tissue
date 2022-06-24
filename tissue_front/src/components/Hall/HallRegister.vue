@@ -1,6 +1,34 @@
 <template>
   <div>
-    <v-container style="margin-top: 100px">
+    <div class="titleBox">
+      <div>
+        <div
+          style="
+            font-size: 50px;
+            text-align: center;
+            font-weight: bold;
+            padding-top: 25px;
+            padding-bottom: 10px;
+          "
+        >
+          Hall MANAGEMENT
+        </div>
+        <div
+          style="
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: grey;
+          "
+        >
+          Tissue 사용자들을 위한 공연장을 관리해주세요.
+        </div>
+      </div>
+    </div>
+    <div
+      style="height: 20px; background-color: #f8bbd0; margin-bottom: 50px"
+    ></div>
+    <v-container>
       <v-row justify="center">
         <v-col cols="auto">
           <v-card flat>
@@ -11,7 +39,7 @@
                 label="공연장명"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -19,7 +47,7 @@
                 label="행 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -27,19 +55,19 @@
                 label="열 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <div style="display: flex; justify-content: center">
                 <v-btn
                   rounded
-                  color="pink lighten-3 mr-3"
+                  color="blue lighten-3 mr-3"
                   class="white--text"
                   @click="onSubmit"
                   >등록</v-btn
                 >
                 <v-btn
                   rounded
-                  color="pink lighten-3 ml-3"
+                  color="blue lighten-3 ml-3"
                   to="HallList"
                   class="white--text"
                   >리스트로</v-btn
@@ -87,3 +115,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.titleBox {
+  width: 100%;
+  height: 168.91px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #fce4ec;
+  border-bottom: 1px solid lightgrey;
+}
+</style>

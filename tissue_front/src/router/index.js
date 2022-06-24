@@ -9,6 +9,11 @@ import HallReadPage from '@/views/hall/HallReadPage.vue'
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
+import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
+import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
+import CouponListPage from '@/views/coupon/CouponListPage.vue'
+import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -77,6 +82,31 @@ const routes = [
     path: '/test',
     name: 'PerformanceTest',
     component: PerformanceTest
+  },
+  {
+    path: '/Admin',
+    name: 'AdminMainPage',
+    component: AdminMainPage
+  },
+  {
+    path: '/couponRegister',
+    name: 'CouponRegisterPage',
+    component: CouponRegisterPage
+  },
+  {
+    path: '/couponList',
+    name: 'CouponListPage',
+    component: CouponListPage
+  },
+  {
+    path: '/couponModify/:couponNo',
+    name: 'CouponModifyPage',
+    components: {
+      default: CouponModifyPage
+  },
+  props:{
+      default: true
+  }
   },
   // 메인페이지 (임지훈)
 

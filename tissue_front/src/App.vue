@@ -1,6 +1,22 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main style="padding: 0">
+      <div
+        v-if="
+          this.$route.name == 'HallRegisterPage' ||
+          this.$route.name == 'HallListPage' ||
+          this.$route.name == 'HallReadPage' ||
+          this.$route.name == 'PerformanceListPage' ||
+          this.$route.name == 'PerformanceRegisterPage' ||
+          this.$route.name == 'PerformanceReadPage' ||
+          this.$route.name == 'PerformanceModifyPage' ||
+          this.$route.name == 'CouponRegisterPage' ||
+          this.$route.name == 'CouponListPage' ||
+          this.$route.name == 'CouponModifyPage'
+        "
+      >
+        <admin-main />
+      </div>
       <div
         v-if="
           this.$route.name != 'GoogleOAuth' &&
@@ -12,11 +28,22 @@
           this.$route.name != 'MemberFindPwPage' &&
           this.$route.name != 'PerformanceRegisterPage' &&
           this.$route.name != 'PerformanceReadPage' &&
-          this.$route.name != 'PerformanceModifyPage'
+          this.$route.name != 'PerformanceModifyPage' &&
+          this.$route.name != 'AdminMainPage' &&
+          this.$route.name != 'HallRegisterPage' &&
+          this.$route.name != 'HallListPage' &&
+          this.$route.name != 'HallReadPage' &&
+          this.$route.name != 'PerformanceListPage' &&
+          this.$route.name != 'PerformanceRegisterPage' &&
+          this.$route.name != 'PerformanceReadPage' &&
+          this.$route.name != 'PerformanceModifyPage' &&
+          this.$route.name != 'CouponRegisterPage' &&
+          this.$route.name != 'CouponListPage' &&
+          this.$route.name != 'CouponModifyPage'
         "
       >
-        <new-nav-bar-2/>
-        <div v-if="this.$route.name !='home'" style="height: 80px"></div> 
+        <new-nav-bar-2 />
+        <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
       </div>
       <v-main>
         <router-view />
@@ -30,12 +57,35 @@
         this.$route.name != 'MemberJoinPage' &&
         this.$route.name != 'MemberJoinPage2' &&
         this.$route.name != 'MemberFindIdPage' &&
-        this.$route.name != 'MemberFindPwPage'
+        this.$route.name != 'MemberFindPwPage' &&
+        this.$route.name != 'AdminMainPage' &&
+        this.$route.name != 'HallRegisterPage' &&
+        this.$route.name != 'HallListPage' &&
+        this.$route.name != 'HallReadPage' &&
+        this.$route.name != 'PerformanceListPage' &&
+        this.$route.name != 'PerformanceRegisterPage' &&
+        this.$route.name != 'PerformanceReadPage' &&
+        this.$route.name != 'PerformanceModifyPage' &&
+        this.$route.name != 'CouponRegisterPage' &&
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage'
       "
     />
     <join-footer
       v-if="
-        this.$route.name != 'KakaoOAuth' && this.$route.name != 'GoogleOAuth'
+        this.$route.name != 'KakaoOAuth' &&
+        this.$route.name != 'GoogleOAuth' &&
+        this.$route.name != 'AdminMainPage' &&
+        this.$route.name != 'HallRegisterPage' &&
+        this.$route.name != 'HallListPage' &&
+        this.$route.name != 'HallReadPage' &&
+        this.$route.name != 'PerformanceListPage' &&
+        this.$route.name != 'PerformanceRegisterPage' &&
+        this.$route.name != 'PerformanceReadPage' &&
+        this.$route.name != 'PerformanceModifyPage' &&
+        this.$route.name != 'CouponRegisterPage' &&
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage'
       "
     />
   </v-app>
@@ -46,12 +96,14 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
+import AdminMain from "@/components/Admin/AdminMain.vue";
 export default {
   name: "App",
   components: {
     FooterArea,
     joinFooter,
     NewNavBar2,
+    AdminMain,
   },
   data() {
     return {
@@ -66,7 +118,7 @@ export default {
       this.isHome = false;
     }
   },
-}
+};
 </script>
 <style scoped>
 .v-application {

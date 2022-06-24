@@ -1,6 +1,8 @@
 
 export const FETCH_HALL_LIST ='FETCH_HALL_LIST'
 export const FETCH_HALL ='FETCH_HALL'
+export const FETCH_COUPON_LIST = 'FETCH_COUPON_LIST'
+export const FETCH_COUPON = 'FETCH_COUPON'
 
 // performance
 export const FETCH_PERFORMANCE_LIST='FETCH_PERFORMANCE_LIST'

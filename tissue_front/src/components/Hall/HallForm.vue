@@ -84,13 +84,13 @@
             <div>{{ selectPrice }} 원</div>
           </div>
           <div class="mt-3">
-            <v-btn rounded class="white--text" color="pink lighten-3"
+            <v-btn rounded class="white--text" color="blue lighten-3"
               >뒤로</v-btn
             >
             <v-btn
               rounded
               class="white--text"
-              color="pink lighten-3"
+              color="blue lighten-3"
               @click="reset"
               >초기화</v-btn
             >
@@ -358,14 +358,14 @@ export default {
 .showSelectSeat {
   width: 390px;
   height: 100px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
 .showSelectPrice {
   width: 390px;
   height: 100px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
@@ -380,7 +380,7 @@ export default {
 .showSeatPrice {
   width: 390px;
   height: 200px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }

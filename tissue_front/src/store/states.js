@@ -3,6 +3,9 @@ export default {
     halls: [],
     hall: null,
 
+    couponList:[],
+    coupon: null,
+
     performances: [],
     performance: null,
 
