@@ -67,14 +67,14 @@ export default {
           route: "/couponList",
         },
         {
-          title: "쿠폰 관리",
+          title: "공지사항 관리",
           icon: "mdi-ticket-percent",
-          route: "/couponList",
+          route: "/",
         },
         {
-          title: "쿠폰 관리",
+          title: "자주 묻는 질문 관리",
           icon: "mdi-ticket-percent",
-          route: "/couponList",
+          route: "/",
         },
       ],
     };
