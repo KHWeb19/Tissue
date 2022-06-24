@@ -3,19 +3,19 @@
     <v-navigation-drawer
       permanent
       height="100%"
-      width="400px"
+      width="350px"
       app
       color="blue lighten-5"
     >
-      <v-list-item style="height: 20%">
+      <v-list-item style="height: 25%">
         <v-list-item-content>
-          <v-list-item-title class="mb-5">
+          <v-list-item-title class="mb-5 ml-3">
             <router-link to="/">
               <span class="logo" style="color: skyblue">T</span>
               <span class="logo" style="color: pink">issue</span>
             </router-link>
           </v-list-item-title>
-          <v-list-item-subtitle class="black--text" style="font-size: 20px">
+          <v-list-item-subtitle class="black--text ml-5" style="font-size: 20px">
             관리자님 환영합니다!
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -29,7 +29,7 @@
           :key="item.title"
           :to="item.route"
           link
-          class="mt-5 mb-5"
+          class="mt-5 mb-5 ml-5"
         >
           <v-list-item-icon>
             <v-icon class="pink--text">{{ item.icon }}</v-icon>
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "회원 관리", icon: "mdi-account" },
+        { title: "회원 관리", icon: "mdi-account", route:'/Admin/member' },
         {
           title: "공연 관리",
           icon: "mdi-play-box-outline",

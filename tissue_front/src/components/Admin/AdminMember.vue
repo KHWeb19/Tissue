@@ -1,48 +1,55 @@
 <template>
-    <v-container class="mb-15">
-        <v-row class="countMember ml-3 mt-10">
-            전체 회원 수&nbsp;<span style="color:skyblue">{{ member.length }}</span> 명
+    <v-container>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 회원 관리
+            </v-toolbar-title>
+        </v-app-bar>
+        <v-container>
+            <v-row class="countMember ml-3 mt-10">
+                전체 회원 수&nbsp;<span style="color:skyblue">{{ member.length }}</span> 명
+                </v-row>
+                <v-row justify="end">
+                    <v-col cols="5">
+                    <v-text-field
+                        v-model="keyword"
+                        append-icon="search"
+                        label="회원 검색"
+                        single-line
+                        color="pink lighten-3"
+                    ></v-text-field>
+                </v-col>
             </v-row>
-            <v-row justify="end">
-                <v-col cols="5">
-                <v-text-field
-                    v-model="keyword"
-                    append-icon="search"
-                    label="회원 검색"
-                    single-line
+            <v-data-table
+                :headers="headers"
+                :items="member"
+                hide-default-footer
+                :search="keyword"
+                :page.sync="page"
+                :items-per-page="itemsPerPage"
+                @page-count="pageCount = $event"
+                >
+            <template v-slot:[`item.delete`]="{item}">
+                <v-icon small @click="saveRole(item.memberNo, item.role)">mdi-content-save</v-icon>
+                <v-icon small @click="deleteItem(item.memberId, item.memberNo)"> delete </v-icon>
+            </template>
+            <template v-slot:[`item.role`]="{item}">
+                <select v-model="item.role">
+                    <option value="USER">회원</option>
+                    <option value="ADMIN">관리자</option>
+                </select>
+            </template>
+            </v-data-table>
+            <v-divider class="mb-5"/>
+            <v-pagination
+                    v-model="page"
+                    :length="pageCount"
+                    total-visible="10"
                     color="pink lighten-3"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-        <v-data-table
-            :headers="headers"
-            :items="member"
-            hide-default-footer
-            :search="keyword"
-            :page.sync="page"
-            :items-per-page="itemsPerPage"
-            @page-count="pageCount = $event"
-            >
-        <template v-slot:[`item.delete`]="{item}">
-            <v-icon small @click="saveRole(item.memberNo, item.role)">mdi-content-save</v-icon>
-            <v-icon small @click="deleteItem(item.memberId, item.memberNo)"> delete </v-icon>
-        </template>
-        <template v-slot:[`item.role`]="{item}">
-            <select v-model="item.role">
-                <option value="USER">회원</option>
-                <option value="ADMIN">관리자</option>
-            </select>
-        </template>
-        </v-data-table>
-        <v-divider class="mb-5"/>
-        <v-pagination
-                v-model="page"
-                :length="pageCount"
-                total-visible="10"
-                color="pink lighten-3"
-                circle
-            >
-        </v-pagination>
+                    circle
+                >
+            </v-pagination>
+        </v-container>
     </v-container>
 </template>
 

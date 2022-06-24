@@ -1,34 +1,10 @@
 <template>
-  <div>
-    <div class="titleBox">
-      <div>
-        <div
-          style="
-            font-size: 50px;
-            text-align: center;
-            font-weight: bold;
-            padding-top: 25px;
-            padding-bottom: 10px;
-          "
-        >
-          COUPON MANAGEMENT
-        </div>
-        <div
-          style="
-            font-size: 20px;
-            text-align: center;
-            font-weight: bold;
-            color: grey;
-          "
-        >
-          Tissue 사용자들을 위한 쿠폰을 관리해주세요.
-        </div>
-      </div>
-    </div>
-    <div
-      style="height: 20px; background-color: #f8bbd0; margin-bottom: 50px"
-    ></div>
-
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 쿠폰 관리
+        </v-toolbar-title>
+    </v-app-bar>
     <v-container>
       <v-row class="mt-5 mb-5">
         <v-col
@@ -160,7 +136,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>
