@@ -45,22 +45,24 @@
               <div class="couponPrice">{{ coupon.couponPrice | comma }}</div>
             </v-img>
 
-            <v-card-title class="pt-0 pb-0">
+            <v-card-title class="pt-0 pb-0 couponTitle">
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
             </v-card-title>
 
             <v-card-actions class="pb-0 pt-0 pl-0">
-              <v-card-text class="pb-0 pt-0"
-                >발급 기간: {{ coupon.couponStart }} ~
+              <v-card-text class="pb-0 pt-0 subContent"
+                ><b class="subTitle">발급 기간:</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
             </v-card-actions>
 
             <v-card-actions class="pb-0 pt-0 pl-0">
-              <v-card-text class="pb-0 pt-0"
-                >사용 조건: {{ coupon.couponCondition }}</v-card-text
+              <v-card-text class="pb-0 pt-0 subContent"
+                ><b class="subTitle">사용 조건:</b>
+                {{ coupon.couponCondition }}</v-card-text
               >
               <template>
+                <div><v-btn text>수정</v-btn></div>
                 <div>
                   <v-dialog v-model="dialogDeleteCoupon" width="450">
                     <template v-slot:activator="{ on, attrs }">
@@ -120,7 +122,7 @@
               :disabled="pageNum === 0"
               @click="prevPage"
               class="page-btn"
-              color="pink lighten-3"
+              color="blue lighten-3"
             >
               이전
             </v-btn>
@@ -132,7 +134,7 @@
               :disabled="pageNum >= pageCount - 1"
               @click="nextPage"
               class="page-btn"
-              color="pink lighten-3"
+              color="blue lighten-3"
             >
               다음
             </v-btn>
@@ -247,5 +249,29 @@ export default {
 }
 .btn-cover .page-count {
   padding: 0 1rem;
+}
+
+.couponTitle {
+  font-size: 16px;
+  line-height: 23px;
+  color: #333;
+  font-weight: 700;
+  height: 46px;
+  overflow: hidden;
+}
+.subTitle {
+  float: left;
+  width: 57px;
+  font-size: 13px;
+  line-height: 21px;
+  color: #666;
+  font-weight: 700;
+  margin-right: 5px;
+}
+.subContent {
+  clear: right;
+  font-size: 13px;
+  line-height: 21px;
+  color: #999;
 }
 </style>
