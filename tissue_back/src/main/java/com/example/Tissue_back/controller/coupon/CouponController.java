@@ -33,6 +33,25 @@ public class CouponController {
         return couponService.list();
     }
 
+    @GetMapping("/{couponNo}")
+    public Coupon couponRead(@PathVariable("couponNo") Long couponNo){
+        log.info("couponRead()" + couponNo);
+
+        return couponService.read(couponNo);
+    }
+
+    @PutMapping("/{couponNo}")
+    public Coupon couponModify(@PathVariable("couponNo")Long couponNo,Coupon coupon,
+                               @RequestParam(required = false) MultipartFile file) throws Exception{
+        log.info("couponModify()" + couponNo);
+
+        coupon.setCouponNo(couponNo);
+        couponService.modify(coupon, file);
+
+        return coupon;
+    }
+
+
     @DeleteMapping("/{couponNo}")
     public void couponRemove( @PathVariable("couponNo") Long couponNo, Coupon coupon) throws Exception{
         log.info("couponRemove()" + couponNo);

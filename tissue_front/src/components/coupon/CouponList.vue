@@ -62,7 +62,15 @@
                 {{ coupon.couponCondition }}</v-card-text
               >
               <template>
-                <div><v-btn text>수정</v-btn></div>
+                <div>
+                  <router-link
+                    :to="{
+                      name: 'CouponModifyPage',
+                      params: { couponNo: coupon.couponNo.toString() },
+                    }"
+                    ><v-btn text>수정</v-btn></router-link
+                  >
+                </div>
                 <div>
                   <v-dialog v-model="dialogDeleteCoupon" width="450">
                     <template v-slot:activator="{ on, attrs }">

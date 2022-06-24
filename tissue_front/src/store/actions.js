@@ -4,6 +4,7 @@ import {
     FETCH_HALL,
 
     FETCH_COUPON_LIST,
+    FETCH_COUPON,
       // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
@@ -34,6 +35,12 @@ export default {
         return axios.get("http://localhost:7777/coupon/list")
         .then((res)=>{
             commit(FETCH_COUPON_LIST,res.data)
+        })
+    },
+    fetchCoupon({commit},couponNo) {
+        return axios.get(`http://localhost:7777/coupon/${couponNo}`)
+        .then((res)=>{
+            commit(FETCH_COUPON,res.data)
         })
     },
    // peformance

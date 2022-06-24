@@ -11,7 +11,8 @@
           this.$route.name == 'PerformanceReadPage' ||
           this.$route.name == 'PerformanceModifyPage' ||
           this.$route.name == 'CouponRegisterPage' ||
-          this.$route.name == 'CouponListPage'
+          this.$route.name == 'CouponListPage' ||
+          this.$route.name == 'CouponModifyPage'
         "
       >
         <admin-main />
@@ -37,7 +38,8 @@
           this.$route.name != 'PerformanceReadPage' &&
           this.$route.name != 'PerformanceModifyPage' &&
           this.$route.name != 'CouponRegisterPage' &&
-          this.$route.name != 'CouponListPage'
+          this.$route.name != 'CouponListPage' &&
+          this.$route.name != 'CouponModifyPage'
         "
       >
         <new-nav-bar-2 />
@@ -65,7 +67,8 @@
         this.$route.name != 'PerformanceReadPage' &&
         this.$route.name != 'PerformanceModifyPage' &&
         this.$route.name != 'CouponRegisterPage' &&
-        this.$route.name != 'CouponListPage'
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage'
       "
     />
     <join-footer
@@ -81,7 +84,8 @@
         this.$route.name != 'PerformanceReadPage' &&
         this.$route.name != 'PerformanceModifyPage' &&
         this.$route.name != 'CouponRegisterPage' &&
-        this.$route.name != 'CouponListPage'
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage'
       "
     />
   </v-app>

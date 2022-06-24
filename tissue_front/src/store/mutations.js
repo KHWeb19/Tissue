@@ -3,6 +3,7 @@ import {
     FETCH_HALL,
 
     FETCH_COUPON_LIST,
+    FETCH_COUPON,
   // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
@@ -22,6 +23,9 @@ export default{
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList
+    },
+    [FETCH_COUPON](state, coupon) {
+        state.coupon = coupon
     },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances

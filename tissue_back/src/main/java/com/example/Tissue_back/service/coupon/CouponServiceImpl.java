@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -52,6 +53,45 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
+    public Coupon read(Long couponNo) {
+        Optional<Coupon> maybeReadCoupon = couponRepository.findById(couponNo);
+
+        if(maybeReadCoupon.equals(Optional.empty())){
+            log.info("No coupon");
+        }
+
+        return maybeReadCoupon.get();
+    }
+
+    @Override
+    public void modify(Coupon coupon, @RequestParam(required = false) MultipartFile file) throws Exception {
+        Optional<Coupon> selectFile = couponRepository.findById(coupon.getCouponNo());
+        Coupon deleteFile = selectFile.get();
+
+        if (deleteFile.getFilename() != null){
+            Path filePath = Paths.get("C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\coupon\\" + deleteFile.getFilename());
+            Files.delete(filePath);
+        }
+
+        if (file != null) {
+            String filepath = "C:\\khweb19\\Tissue\\tissue_front\\src\\assets\\coupon";
+
+            UUID uuid = UUID.randomUUID();
+
+            String fileName = uuid + "_" + file.getOriginalFilename();
+
+            File saveCoupon = new File(filepath,fileName);
+            file.transferTo(saveCoupon);
+
+            coupon.setFilename(fileName);
+            coupon.setFilepath(fileName);
+        }
+
+        couponRepository.save(coupon);
+    }
+
+
+    @Override
     public void remove(Long couponNo) throws Exception {
         Optional<Coupon> selectFile = couponRepository.findById(couponNo);
         Coupon deleteFile = selectFile.get();
@@ -62,4 +102,6 @@ public class CouponServiceImpl implements CouponService {
         }
         couponRepository.deleteById(couponNo);
     }
+
+
 }
