@@ -1,8 +1,8 @@
-package com.example.Tissue_back.service;
+package com.example.Tissue_back.service.map;
 
-import com.example.Tissue_back.controller.request.MapDto;
-import com.example.Tissue_back.entity.Map;
-import com.example.Tissue_back.repository.MapRepository;
+import com.example.Tissue_back.controller.request.map.MapDto;
+import com.example.Tissue_back.entity.map.Map;
+import com.example.Tissue_back.repository.map.MapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
-package com.example.Tissue_back.controller;
+package com.example.Tissue_back.controller.map;
 
-import com.example.Tissue_back.controller.request.MapDto;
-import com.example.Tissue_back.entity.Map;
-import com.example.Tissue_back.service.MapService;
+import com.example.Tissue_back.controller.request.map.MapDto;
+import com.example.Tissue_back.entity.map.Map;
+import com.example.Tissue_back.service.map.MapService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

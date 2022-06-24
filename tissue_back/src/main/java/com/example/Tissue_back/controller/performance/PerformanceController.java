@@ -1,15 +1,13 @@
-package com.example.Tissue_back.controller;
+package com.example.Tissue_back.controller.performance;
 
-import com.example.Tissue_back.controller.request.PerformanceDto;
-import com.example.Tissue_back.entity.Performance;
-import com.example.Tissue_back.repository.PerformanceRepository;
-import com.example.Tissue_back.service.PerformanceService;
+import com.example.Tissue_back.entity.performance.Performance;
+import com.example.Tissue_back.repository.performance.PerformanceRepository;
+import com.example.Tissue_back.service.performance.PerformanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

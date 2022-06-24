@@ -1,50 +1,22 @@
-import axios from 'axios'
 import {
-    FETCH_HALL_LIST,
-    FETCH_HALL,
-
-    FETCH_COUPON_LIST,
-    FETCH_COUPON,
-      // performance
+    // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
-    FETCH_MEMBER_INFO,
-    FETCH_MEMBER
+
+    // event
+    FETCH_EVENT_LIST,
+    FETCH_EVENT,
 
 } from './mutation-types'
 
-//import router from '@/router'
+// import Vue from 'vue'
+import axios from 'axios'
 
 export default {
-    fetchHallList({commit}) {
-        return axios.get('http://localhost:7777/hall/list')
-        .then((res)=>{
-            commit(FETCH_HALL_LIST,res.data)
-        })
-    },
-    
-    fetchHall({commit},hallNo) {
-        return axios.get(`http://localhost:7777/hall/${hallNo}`)
-        .then((res)=>{
-            commit(FETCH_HALL,res.data)
-        })
-    },
-    fetchCouponList({commit}) {
-        return axios.get("http://localhost:7777/coupon/list")
-        .then((res)=>{
-            commit(FETCH_COUPON_LIST,res.data)
-        })
-    },
-    fetchCoupon({commit},couponNo) {
-        return axios.get(`http://localhost:7777/coupon/${couponNo}`)
-        .then((res)=>{
-            commit(FETCH_COUPON,res.data)
-        })
-    },
-   // peformance
+    // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')
                 .then((res) => {
@@ -68,19 +40,20 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
+      },
+
+    // event
+    fetchEventList({ commit }) {
+      return axios.get('http://localhost:7777/event/list')
+              .then((res) => {
+                  commit(FETCH_EVENT_LIST, res.data)
+              })
     },
-    fetchMemberInfo({ commit }, token) {
-        return axios.get('Member/info', { params: { token: token }})
-            .then((res) => {
-                commit(FETCH_MEMBER_INFO, res.data)
-        })
+    fetchEvent({ commit }, eventNo) {
+      return axios.get(`http://localhost:7777/event/${eventNo}`)
+      .then((res) => {
+          commit(FETCH_EVENT, res.data)
+      })
     },
-    fetchMember({ commit }) {
-        return axios.get('Admin/memberInfo')
-            .then((res) => {
-                commit(FETCH_MEMBER, res.data)
-        })
-    },
-    
 }
 

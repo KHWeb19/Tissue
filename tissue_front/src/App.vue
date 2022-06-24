@@ -1,22 +1,6 @@
 <template>
   <v-app>
-    <v-main style="padding: 0">
-      <div
-        v-if="
-          this.$route.name == 'HallRegisterPage' ||
-          this.$route.name == 'HallListPage' ||
-          this.$route.name == 'HallReadPage' ||
-          this.$route.name == 'PerformanceListPage' ||
-          this.$route.name == 'PerformanceRegisterPage' ||
-          this.$route.name == 'PerformanceReadPage' ||
-          this.$route.name == 'PerformanceModifyPage' ||
-          this.$route.name == 'CouponRegisterPage' ||
-          this.$route.name == 'CouponListPage' ||
-          this.$route.name == 'CouponModifyPage'
-        "
-      >
-        <admin-main />
-      </div>
+    <v-main>
       <div
         v-if="
           this.$route.name != 'GoogleOAuth' &&
@@ -29,21 +13,10 @@
           this.$route.name != 'PerformanceRegisterPage' &&
           this.$route.name != 'PerformanceReadPage' &&
           this.$route.name != 'PerformanceModifyPage' &&
-          this.$route.name != 'AdminMainPage' &&
-          this.$route.name != 'HallRegisterPage' &&
-          this.$route.name != 'HallListPage' &&
-          this.$route.name != 'HallReadPage' &&
-          this.$route.name != 'PerformanceListPage' &&
-          this.$route.name != 'PerformanceRegisterPage' &&
-          this.$route.name != 'PerformanceReadPage' &&
-          this.$route.name != 'PerformanceModifyPage' &&
-          this.$route.name != 'CouponRegisterPage' &&
-          this.$route.name != 'CouponListPage' &&
-          this.$route.name != 'CouponModifyPage'
+          this.$route.name != 'AdminPage'
         "
       >
-        <new-nav-bar-2 />
-        <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
+        <new-nav-bar-2 /> 
       </div>
       <v-main>
         <router-view />
@@ -57,37 +30,13 @@
         this.$route.name != 'MemberJoinPage' &&
         this.$route.name != 'MemberJoinPage2' &&
         this.$route.name != 'MemberFindIdPage' &&
-        this.$route.name != 'MemberFindPwPage' &&
-        this.$route.name != 'AdminMainPage' &&
-        this.$route.name != 'HallRegisterPage' &&
-        this.$route.name != 'HallListPage' &&
-        this.$route.name != 'HallReadPage' &&
-        this.$route.name != 'PerformanceListPage' &&
-        this.$route.name != 'PerformanceRegisterPage' &&
-        this.$route.name != 'PerformanceReadPage' &&
-        this.$route.name != 'PerformanceModifyPage' &&
-        this.$route.name != 'CouponRegisterPage' &&
-        this.$route.name != 'CouponListPage' &&
-        this.$route.name != 'CouponModifyPage'
+        this.$route.name != 'MemberFindPwPage' 
       "
     />
-    <join-footer
+    <join-footer 
       v-if="
-        this.$route.name != 'KakaoOAuth' &&
-        this.$route.name != 'GoogleOAuth' &&
-        this.$route.name != 'AdminMainPage' &&
-        this.$route.name != 'HallRegisterPage' &&
-        this.$route.name != 'HallListPage' &&
-        this.$route.name != 'HallReadPage' &&
-        this.$route.name != 'PerformanceListPage' &&
-        this.$route.name != 'PerformanceRegisterPage' &&
-        this.$route.name != 'PerformanceReadPage' &&
-        this.$route.name != 'PerformanceModifyPage' &&
-        this.$route.name != 'CouponRegisterPage' &&
-        this.$route.name != 'CouponListPage' &&
-        this.$route.name != 'CouponModifyPage'
-      "
-    />
+        this.$route.name != 'KakaoOAuth' && 
+        this.$route.name != 'GoogleOAuth'"/>
   </v-app>
 </template>
 
@@ -96,38 +45,28 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-import AdminMain from "@/components/Admin/AdminMain.vue";
 export default {
   name: "App",
   components: {
     FooterArea,
     joinFooter,
     NewNavBar2,
-    AdminMain,
   },
   data() {
     return {
       url: null,
     };
   },
-  created() {
-    this.url = window.location.href;
-    if (this.url == "http://localhost:8080/") {
-      this.isHome = true;
-    } else {
-      this.isHome = false;
-    }
-  },
-};
+}
 </script>
 <style scoped>
 .v-application {
-  font-family: "Noto Sans KR", sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 @font-face {
-  font-family: "Noto Sans KR";
-  src: url("assets/font/NotoSansKR-Bold.otf");
-  font-weight: 500;
+    font-family: 'Noto Sans KR' ;
+    src: url('assets/font/NotoSansKR-Bold.otf');
+    font-weight: 500;
 }
 </style>
 

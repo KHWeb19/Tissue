@@ -1,125 +1,71 @@
 <template>
-  <!-- <div align = "center"> -->
-  <v-container>
-    <v-row>
-      <v-col>
-        <h1>{{ performance.performCategory }}</h1>
-      </v-col>
-      <v-col>
-        <h1>[{{ performance.performName }}]</h1>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col
-        >{{ performance.performStart }} ~ {{ performance.performEnd }}</v-col
-      >
-      <v-col> {{ name }} {{ address }}</v-col>
-    </v-row>
-    <hr class="mt-5 mb-5" color="black" />
-    <v-row>
-      <v-col>
-        <img
-          class="img"
-          :src="
-            require(`@/assets/thumbNail/${this.performance.performThumbnail}`)
-          "
-        />
-      </v-col>
-      <v-col>
-        <h4>{{ performance.performGrade }}</h4>
-        <h4>{{ performance.performStart }}</h4>
-        <h4>{{ performance.performer }}</h4>
-        <h4>{{ performance.performPriceS }}원</h4>
-        <h4>{{ performance.performPriceR }}원</h4>
-        <h4>{{ performance.performPriceVip }}원</h4>
-        <router-link
-          :to="{
-            name: 'TicketingPage',
-            params: { performNo: performance.performNo.toString() },
-          }"
-        >
-          <v-btn>예매하기</v-btn></router-link
-        >
-      </v-col>
-    </v-row>
-    <hr class="mt-5 mb-5" />
-    <div align="center" class="detailImgBox">
-      <v-row justify="center">
-        <v-col class="label">상세이미지</v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col>
-          <img
-            class="img"
-            v-if="
-              this.performance.performDetailImg1 !== null &&
-              this.performance.performDetailImg1 !== 'null'
-            "
-            :src="
-              require(`@/assets/detailImg/${this.performance.performDetailImg1}`)
-            "
-          />
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col>
-          <img
-            class="img"
-            v-if="
-              this.performance.performDetailImg2 !== null &&
-              this.performance.performDetailImg2 !== 'null'
-            "
-            :src="
-              require(`@/assets/detailImg/${this.performance.performDetailImg2}`)
-            "
-          />
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col>
-          <img
-            class="img"
-            v-if="
-              this.performance.performDetailImg3 !== null &&
-              this.performance.performDetailImg3 !== 'null'
-            "
-            :src="
-              require(`@/assets/detailImg/${this.performance.performDetailImg3}`)
-            "
-          />
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col>
-          <img
-            class="img"
-            v-if="
-              this.performance.performDetailImg4 !== null &&
-              this.performance.performDetailImg4 !== 'null'
-            "
-            :src="
-              require(`@/assets/detailImg/${this.performance.performDetailImg4}`)
-            "
-          />
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col>
-          <img
-            class="img"
-            v-if="
-              this.performance.performDetailImg5 !== null &&
-              this.performance.performDetailImg5 !== 'null'
-            "
-            :src="
-              require(`@/assets/detailImg/${this.performance.performDetailImg5}`)
-            "
-          />
-        </v-col>
-      </v-row>
-    </div>
+    <!-- <div align = "center"> -->
+        <v-container>
+            <v-row>
+                <v-col>
+                    <h1>{{ performance.performCategory }}</h1>
+                </v-col>
+                <v-col>
+                    <h1>[{{ performance.performName}}]</h1>
+                </v-col>
+            </v-row> 
+            <v-row>
+                <v-col>{{ performance.performStart }} ~ {{ performance.performEnd }}</v-col>
+                <v-col> {{ name }} {{ address }}</v-col>
+            </v-row>
+            <hr class="mt-5 mb-5" color="black">
+            <v-row>
+                <v-col>
+                    <img class="thumbImg" :src="require(`@/assets/thumbNail/${this.performance.performThumbnail}`)"/>
+                </v-col>
+                <v-col>
+                    <h4>{{ performance.performGrade }}</h4>
+                    <h4>{{ performance.performStart }}</h4>
+                    <h4>{{ performance.performer }}</h4>
+                    <h4>{{ performance.performPriceS }}원</h4>
+                    <h4>{{ performance.performPriceR }}원</h4>
+                    <h4>{{ performance.performPriceVip }}원</h4>
+                </v-col>
+            </v-row>
+            <hr class="mt-5 mb-5">
+            <div align="center" class="detailImgBox">
+            <v-row justify="center">
+                    <v-col class="label">상세이미지</v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col>
+                <img class="img" v-if="this.performance.performDetailImg1 !== null && this.performance.performDetailImg1 !== 'null'"
+                    :src="require(`@/assets/detailImg/${this.performance.performDetailImg1}`)"/>
+                </v-col>
+            </v-row>
+             <v-row justify="center">
+                <v-col>
+                    <img class="img" v-if="this.performance.performDetailImg2 !== null && this.performance.performDetailImg2 !== 'null'"
+                        :src="require(`@/assets/detailImg/${this.performance.performDetailImg2}`)"/>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col>
+                    <img class="img" v-if="this.performance.performDetailImg3 !== null && this.performance.performDetailImg3 !== 'null'"
+                    :src="require(`@/assets/detailImg/${this.performance.performDetailImg3}`)"/>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col>
+                    <img class="img" v-if="this.performance.performDetailImg4 !== null && this.performance.performDetailImg4 !== 'null'"
+                    :src="require(`@/assets/detailImg/${this.performance.performDetailImg4}`)"/>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col>
+                    <img class="img" v-if="this.performance.performDetailImg5 !== null && this.performance.performDetailImg5 !== 'null'"
+                    :src="require(`@/assets/detailImg/${this.performance.performDetailImg5}`)"/>
+                </v-col>
+            </v-row>
+            </div>
 
-    <hr class="mt-5 mb-5" />
+            <hr class="mt-5 mb-5">
+
             <div align="center">
              <v-row>
                 <v-col v-if="showMap">
@@ -136,19 +82,22 @@
                     수정
                 </v-btn>
 
-      <v-btn plain @click="onDelete"> 삭제 </v-btn>
+                <v-btn plain @click="onDelete">
+                    삭제
+                </v-btn>
 
-      <v-btn plain router-link :to="{ name: 'PerformanceListPage' }">
-        돌아가기
-      </v-btn>
-    </div>
-  </v-container>
-  <!-- </div> -->
+                <v-btn plain router-link :to="{ name: 'PerformanceListPage' }">
+                    돌아가기
+                </v-btn>
+            </div>
+        </v-container>
+    <!-- </div> -->
 </template>
 
 <script>
-import axios from "axios";
-import { mapActions, mapState } from "vuex";
+
+import axios from 'axios'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'PerformanceReadPage',
@@ -180,10 +129,12 @@ export default {
                     alert('게시물 요청 실패!')
                     this.$router.push()
                 })
-    this.fetchMap(this.performNo);
-  },
-  methods: {
-    ...mapActions(["fetchPerformance"]),
+
+        this.fetchMap(this.performNo)
+    },
+    methods: {
+        ...mapActions(['fetchPerformance']),
+
         onDelete () {
             const { performNo, performThumbnail, performDetailImg1, performDetailImg2, performDetailImg3, performDetailImg4, performDetailImg5 } = this.performance
             axios.delete(`performance/${performNo}`, { performThumbnail, performDetailImg1, performDetailImg2, performDetailImg3, performDetailImg4, performDetailImg5 })
@@ -200,30 +151,31 @@ export default {
                 .then(res => {
                     const map = res.data
                     console.log(map)
-        this.mapOptions.lat = map.y;
-        this.mapOptions.lng = map.x;
-        this.name = map.name;
-        this.address = map.address;
-        this.phone = map.phone;
-        this.url = map.url;
-                   if (map.y != 0) {
+
+                    this.mapOptions.lat = map.y
+                    this.mapOptions.lng = map.x
+                    this.name = map.name
+                    this.address = map.address
+                    this.phone = map.phone
+                    this.url = map.url
+
+                    if (map.y != 0) {
                     this.showMap = true
                     }
             })
-
         }
-      });
-    },
-  },
-};
+    }
+}
+
 </script>
 
 <style scoped>
+
 table {
   position: relative;
   border: 1px #a39485 solid;
-  font-size: 0.9em;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
   width: 100%;
   border-collapse: collapse;
   border-radius: 5px;
@@ -233,18 +185,20 @@ table {
 }
 
 .label {
-  text-align: center;
+    text-align: center;
 }
 
-.img {
-  position: relative;
-  max-height: 500px;
-  max-width: 500px;
-  /* margin-top: 5%; */
+.thumbImg {
+    position: relative;
+    max-height: 500px;
+    max-width: 500px;
+    /* margin-top: 5%; */
 }
 
 .detailImgBox {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
+
+
 </style>

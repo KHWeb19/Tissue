@@ -1,33 +1,19 @@
 import {
-    FETCH_HALL_LIST,
-    FETCH_HALL,
-
-    FETCH_COUPON_LIST,
-    FETCH_COUPON,
-  // performance
+    // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
-    FETCH_MEMBER_INFO,
-    FETCH_MEMBER
+
+    // event
+    FETCH_EVENT_LIST,
+    FETCH_EVENT,
 
 } from './mutation-types'
 
-export default{
-    [FETCH_HALL_LIST](state, halls){
-        state.halls = halls
-    },
-    [FETCH_HALL](state, hall) {
-        state.hall = hall
-    },
-    [FETCH_COUPON_LIST](state, couponList){
-        state.couponList = couponList
-    },
-    [FETCH_COUPON](state, coupon) {
-        state.coupon = coupon
-    },
+export default {
+    // performance
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances
     },
@@ -41,10 +27,12 @@ export default{
     [FETCH_NOTICE] (state, notice) {
         state.notice = notice
     },
-    [FETCH_MEMBER_INFO](state, memberInfo) {
-        state.memberInfo = memberInfo
+
+    // event
+    [FETCH_EVENT_LIST] (state, events) {
+        state.events = events
     },
-    [FETCH_MEMBER](state, member) {
-        state.member = member
+    [FETCH_EVENT] (state, event) {
+        state.event = event
     }
 }

@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:7777/map/list').then(res => {
+    axios.get('map/list').then(res => {
       this.placeList = res.data
     })
   },

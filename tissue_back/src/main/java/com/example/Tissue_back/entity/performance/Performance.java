@@ -1,7 +1,6 @@
-package com.example.Tissue_back.entity;
+package com.example.Tissue_back.entity.performance;
 
-import com.example.Tissue_back.controller.request.PerformanceDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.Tissue_back.controller.request.performance.PerformanceDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 @NoArgsConstructor

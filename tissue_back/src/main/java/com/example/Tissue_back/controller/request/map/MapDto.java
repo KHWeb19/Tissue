@@ -1,6 +1,6 @@
-package com.example.Tissue_back.controller.request;
+package com.example.Tissue_back.controller.request.map;
 
-import com.example.Tissue_back.entity.Map;
+import com.example.Tissue_back.entity.map.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

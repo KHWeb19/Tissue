@@ -57,7 +57,7 @@
                                     <label>ThumNail
                                         <input type="file" ref="file" id="file" @change="thumbNailUpload"/>
                                     </label> 
-                                    <div class="file-preview-container">
+                                    <div v-if="file" class="file-preview-container">
                                             <div class="file-preview-wrapper">
                                                 <div class="file-close-button" @click="thumbNailDeleteButton">
                                                     x
