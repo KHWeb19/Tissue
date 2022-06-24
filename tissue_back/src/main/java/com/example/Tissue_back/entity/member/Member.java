@@ -1,5 +1,6 @@
 package com.example.Tissue_back.entity.member;
 
+import com.example.Tissue_back.entity.coupon.Coupon;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +11,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -63,4 +66,8 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "member")
+    private List<Coupon> coupons = new ArrayList<>();
+
 }
