@@ -1,34 +1,11 @@
 <template>
-  <div>
-    <div class="titleBox">
-      <div>
-        <div
-          style="
-            font-size: 50px;
-            text-align: center;
-            font-weight: bold;
-            padding-top: 25px;
-            padding-bottom: 10px;
-          "
-        >
-          Hall MANAGEMENT
-        </div>
-        <div
-          style="
-            font-size: 20px;
-            text-align: center;
-            font-weight: bold;
-            color: grey;
-          "
-        >
-          Tissue 사용자들을 위한 공연장을 관리해주세요.
-        </div>
-      </div>
-    </div>
-    <div
-      style="height: 20px; background-color: #f8bbd0; margin-bottom: 50px"
-    ></div>
-    <v-container>
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 공연장 관리
+        </v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-10">
       <div style="display: flex; justify-content: center; align-items: center">
         <div>
           <div class="stage">S T A G E</div>
@@ -212,7 +189,7 @@
         </div>
       </div>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>

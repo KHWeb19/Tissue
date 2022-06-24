@@ -1,5 +1,10 @@
 <template>
-    <div class="board-list mt-5">
+    <v-container class="board-list mt-5">
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 공연 관리
+            </v-toolbar-title>
+        </v-app-bar>
         <table class="w3-table-all">
             <thead>
                 <tr align="center">
@@ -57,7 +62,7 @@
                 <v-icon>mdi-clipboard-edit-outline</v-icon>
             </v-btn>  
 
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -90,7 +95,7 @@ table {
 thead {
   font-weight: bold;
   color: black;
-  background: #B2EBF2;
+  background: rgb(195, 233, 248);
 }
 
 td, th {

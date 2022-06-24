@@ -11,6 +11,7 @@ import {
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
     FETCH_MEMBER_INFO,
+    FETCH_MEMBER
 
 } from './mutation-types'
 
@@ -42,5 +43,8 @@ export default{
     },
     [FETCH_MEMBER_INFO](state, memberInfo) {
         state.memberInfo = memberInfo
+    },
+    [FETCH_MEMBER](state, member) {
+        state.member = member
     }
 }

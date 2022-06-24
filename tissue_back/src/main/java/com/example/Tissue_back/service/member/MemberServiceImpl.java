@@ -1,10 +1,12 @@
-package com.example.Tissue_back.service;
+package com.example.Tissue_back.service.member;
 
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.repository.member.MemberRepository;
+import com.example.Tissue_back.service.PhoneCheckService;
+import com.example.Tissue_back.service.member.MemberService;
 import com.example.Tissue_back.service.security.SecurityService;
 import com.example.Tissue_back.util.RandomPassword;
 import lombok.extern.slf4j.Slf4j;
@@ -169,5 +171,20 @@ public class MemberServiceImpl implements MemberService {
 
         repository.save(member);
 
+    }
+
+    @Override
+    public Boolean remove (Long memberNo, String checkPw) {
+        Optional<Member> check = repository.findById(memberNo);
+
+        Member member = check.get();
+
+        if (!passwordEncoder.matches(checkPw, member.getMemberPw())) {
+            log.info("Entered wrong password!");
+            return false;
+        } else {
+            repository.deleteById(Long.valueOf(memberNo));
+            return true;
+        }
     }
 }

@@ -1,16 +1,13 @@
-package com.example.Tissue_back.controller;
+package com.example.Tissue_back.controller.member;
 
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
-import com.example.Tissue_back.service.MemberService;
-import lombok.extern.java.Log;
+import com.example.Tissue_back.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,6 +95,15 @@ public class MemberController {
         service.modify(memberDto);
 
         return memberDto;
+    }
+
+    // 회원탈퇴
+    @DeleteMapping("/remove/{memberNo}")
+    public Boolean remove (@PathVariable("memberNo") Long memberNo,
+                           @RequestParam(value = "checkPw") String checkPw) {
+        log.info("remove()" + memberNo + checkPw);
+
+        return service.remove(memberNo, checkPw);
     }
 
 }
