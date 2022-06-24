@@ -66,6 +66,16 @@ export default {
           icon: "mdi-ticket-percent",
           route: "/couponList",
         },
+        {
+          title: "쿠폰 관리",
+          icon: "mdi-ticket-percent",
+          route: "/couponList",
+        },
+        {
+          title: "쿠폰 관리",
+          icon: "mdi-ticket-percent",
+          route: "/couponList",
+        },
       ],
     };
   },
