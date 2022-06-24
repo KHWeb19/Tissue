@@ -185,7 +185,7 @@ const routes = [
     {
         path: '/Admin/member',
         name: 'AdminMember',
-        component: AdminMember
+        component: AdminMember 
     },
   // 유아림
 
