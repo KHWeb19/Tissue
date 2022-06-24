@@ -2,8 +2,20 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
-import hallTest from '@/components/Hall/HallTest.vue'
-import HallRegister from '@/components/Hall/HallRegister.vue'
+
+import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
+import HallListPage from '@/views/hall/HallListPage.vue'
+import HallReadPage from '@/views/hall/HallReadPage.vue'
+
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import PerformanceTest from '@/views/performance/PerformanceTest.vue'
+
+import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
+import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
+import CouponListPage from '@/views/coupon/CouponListPage.vue'
+import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
+
+import EventMainPage from '@/views/event/EventMainPage.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -54,6 +66,11 @@ const routes = [
     path: '/hallRegister',
     name: 'HallRegister',
     component: HallRegister
+  },
+  {
+    path: '/event',
+    name: 'EventMainPage',
+    component: EventMainPage
   },
   // 메인페이지 (임지훈)
 

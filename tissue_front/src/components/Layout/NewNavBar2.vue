@@ -85,7 +85,7 @@ export default {
       subLinks: [
         { text: "지역", route: "ㄱ" },
         { text: "랭킹", route: "ㄴ" },
-        { text: "이벤트", route: "ㄷ" },
+        { text: "이벤트/쿠폰", route: "event" },
       ],
       token: localStorage.getItem("token"),
     };
@@ -112,8 +112,8 @@ export default {
       });
     }
   },
-  created () {
-      this.token = localStorage.getItem('token')
+  created() {
+    this.token = localStorage.getItem("token");
   },
   methods: {
     goHome() {
@@ -121,21 +121,21 @@ export default {
     },
     logout() {
       let result = confirm("로그아웃하시겠습니까?");
-        if (result) {
-            localStorage.removeItem("token")
-            this.$router.push("/")
-            this.token = null
-        }
-    },
-     goToMyPage() {
-          if (this.token != null) {
-              this.$router.go({name: 'myPageView'})
-          } else {
-              alert("로그인이 필요합니다.")
-              this.$router.push('/login')
-          }
+      if (result) {
+        localStorage.removeItem("token");
+        this.$router.push("/");
+        this.token = null;
       }
-   },
+    },
+    goToMyPage() {
+      if (this.token != null) {
+        this.$router.go({ name: "myPageView" });
+      } else {
+        alert("로그인이 필요합니다.");
+        this.$router.push("/login");
+      }
+    },
+  },
 };
 </script>
 
