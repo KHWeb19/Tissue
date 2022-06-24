@@ -14,6 +14,7 @@ import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
 import CouponListPage from '@/views/coupon/CouponListPage.vue'
 import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
 
+import EventMainPage from '@/views/event/EventMainPage.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -107,6 +108,11 @@ const routes = [
   props:{
       default: true
   }
+  },
+  {
+    path: '/event',
+    name: 'EventMainPage',
+    component: EventMainPage
   },
   // 메인페이지 (임지훈)
 
