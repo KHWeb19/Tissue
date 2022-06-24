@@ -35,52 +35,50 @@
             </v-navigation-drawer>
             <v-main class="ml-3" >
                 <v-row class="statusBox">
-                    <v-col class="mt-8 ml-10">
+                    <v-col class="mt-8 ml-10"
+                    v-for="info in infos"
+                    :key="info.title"
+                    >
+                        <v-row> 
+                            <button @click="info.clickAction">{{ info.title }}</button>
+                            <v-dialog 
+                                v-for="d in dialog"
+                                :key="d.title"
+                                v-model="d.value"
+                                hide-overlay
+                                width="440"
+                                content-class="elevation-2"
+                                >
+                                <grade-dialog v-if="d.title =='grade'"/>
+                                <mileage-dialog v-else/>
+                            </v-dialog>
+                        </v-row>
                         <v-row>
-                            <v-col >
-                                <v-row class="mb-5">
-                                회원등급 >
-                                </v-row>
-                                <v-row class="status mt-16">
-                                    {{memberInfo.memberGrade}}
-                                </v-row>
-                            </v-col>
-                            <v-divider  vertical class="mr-8"/>
-                            <v-col>
-                                <v-row class="mb-5">
-                                사용 가능 쿠폰 >
-                                </v-row>
-                                <v-row class="status mt-16">
-                                    사용가능 쿠폰
-                                </v-row>
-                            </v-col>
-                            <v-divider  vertical class="mr-8"/>
-                            <v-col>
-                                <v-row class="mb-5">
-                                마일리지 >
-                                </v-row>
-                                <v-row class="status mt-16">
-                                    {{memberInfo.memberMileage}}
-                                </v-row>
-                            </v-col>
-                        </v-row>   
+                            <v-divider class="mt-3 mr-10"/>
+                        </v-row>
+                        <v-row class="infoValue mt-15">
+                            {{ info.value }}
+                        </v-row>
                     </v-col>
                 </v-row>
                 <v-row class="main mb-15 pb-15">
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
+                    <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" />
                 </v-row>
             </v-main>
         </div>
-
 </template>
 
 <script>
-import MyPageModify from '@/components/member/myPage/MyPageModify.vue'
+import MyPageModify from './MyPageModify.vue'
 import MyPageOut from './MyPageOut.vue'
+import MyPageCoupon from './MyPageCoupon.vue'
+import GradeDialog from './GradeDialog.vue'
+import MileageDialog from './MileageDialog.vue'
 export default {
-  components: { MyPageModify, MyPageOut },
-    name:'MyPageNavi',
+  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog },
+    name: 'MyPageNavi',
     props:{
         memberInfo: {
             type:Object,
@@ -89,6 +87,10 @@ export default {
     },
     data () {
         return {
+            dialog: [ 
+                {title: 'grade', value: false},
+                {title: 'mileage', value: false}
+            ],
             items: [
                 { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
                 { title: 'My 찜목록', icon: 'mdi-star' },
@@ -97,9 +99,32 @@ export default {
                 { title: 'My 후기', icon: 'mdi-pencil' },
                 { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
             ],
+            infos: [
+                { title: '회원 등급 >', value: this.memberInfo.memberGrade, 
+                    clickAction:() =>{
+                        this.showPage(1)
+                } },
+                { title: '사용 가능 쿠폰 >', value: '' , 
+                    clickAction:() => {
+                        this.showPage(2)}
+                },
+                { title: '마일리지 >', value: this.memberInfo.memberMileage, 
+                    clickAction:() => {
+                        this.showPage(3)
+                } } 
+            ],
         }
     },
     methods: {
+        showPage (title) {
+            if (title == 1){
+                this.dialog[0].value = true
+            } else if (title == 2) {
+                this.$router.push('/myPage/coupon')
+            } else {
+                this.dialog[1].value = true
+            }
+        }
     }
 }
 </script>
@@ -123,6 +148,9 @@ export default {
     left: 65%;
     top: 30%;
     transform: translate(-60%, -30%);
+}
+.infoValue{
+    font-size:25pt;
 }
 
 </style>

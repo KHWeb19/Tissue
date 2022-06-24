@@ -148,6 +148,11 @@ const routes = [
         }
     },
     {
+        path: '/myPage/coupon',
+        name: 'MyPageCoupon',
+        component: MyPageView
+    },
+    {
         path: '/test2',
         name: 'AdminMember',
         component: AdminMember
