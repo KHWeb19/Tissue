@@ -1,6 +1,23 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main style="padding: 0">
+      <div
+        v-if="
+          this.$route.name == 'HallRegisterPage' ||
+          this.$route.name == 'HallListPage' ||
+          this.$route.name == 'HallReadPage' ||
+          this.$route.name == 'PerformanceListPage' ||
+          this.$route.name == 'PerformanceRegisterPage' ||
+          this.$route.name == 'PerformanceReadPage' ||
+          this.$route.name == 'PerformanceModifyPage' ||
+          this.$route.name == 'CouponRegisterPage' ||
+          this.$route.name == 'CouponListPage' ||
+          this.$route.name == 'CouponModifyPage' ||
+          this.$route.name == 'AdminMember'
+        "
+      >
+        <admin-main />
+      </div>
       <div
         v-if="
           this.$route.name != 'GoogleOAuth' &&
@@ -13,7 +30,18 @@
           this.$route.name != 'PerformanceRegisterPage' &&
           this.$route.name != 'PerformanceReadPage' &&
           this.$route.name != 'PerformanceModifyPage' &&
-          this.$route.name != 'AdminPage'
+          this.$route.name != 'AdminMainPage' &&
+          this.$route.name != 'HallRegisterPage' &&
+          this.$route.name != 'HallListPage' &&
+          this.$route.name != 'HallReadPage' &&
+          this.$route.name != 'PerformanceListPage' &&
+          this.$route.name != 'PerformanceRegisterPage' &&
+          this.$route.name != 'PerformanceReadPage' &&
+          this.$route.name != 'PerformanceModifyPage' &&
+          this.$route.name != 'CouponRegisterPage' &&
+          this.$route.name != 'CouponListPage' &&
+          this.$route.name != 'CouponModifyPage' &&
+          this.$route.name != 'AdminMember'
         "
       >
         <new-nav-bar-2 /> 
@@ -30,13 +58,39 @@
         this.$route.name != 'MemberJoinPage' &&
         this.$route.name != 'MemberJoinPage2' &&
         this.$route.name != 'MemberFindIdPage' &&
-        this.$route.name != 'MemberFindPwPage' 
+        this.$route.name != 'MemberFindPwPage' &&
+        this.$route.name != 'AdminMainPage' &&
+        this.$route.name != 'HallRegisterPage' &&
+        this.$route.name != 'HallListPage' &&
+        this.$route.name != 'HallReadPage' &&
+        this.$route.name != 'PerformanceListPage' &&
+        this.$route.name != 'PerformanceRegisterPage' &&
+        this.$route.name != 'PerformanceReadPage' &&
+        this.$route.name != 'PerformanceModifyPage' &&
+        this.$route.name != 'CouponRegisterPage' &&
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage' &&
+        this.$route.name != 'AdminMember'
       "
     />
     <join-footer 
       v-if="
-        this.$route.name != 'KakaoOAuth' && 
-        this.$route.name != 'GoogleOAuth'"/>
+        this.$route.name != 'KakaoOAuth' &&
+        this.$route.name != 'GoogleOAuth' &&
+        this.$route.name != 'AdminMainPage' &&
+        this.$route.name != 'HallRegisterPage' &&
+        this.$route.name != 'HallListPage' &&
+        this.$route.name != 'HallReadPage' &&
+        this.$route.name != 'PerformanceListPage' &&
+        this.$route.name != 'PerformanceRegisterPage' &&
+        this.$route.name != 'PerformanceReadPage' &&
+        this.$route.name != 'PerformanceModifyPage' &&
+        this.$route.name != 'CouponRegisterPage' &&
+        this.$route.name != 'CouponListPage' &&
+        this.$route.name != 'CouponModifyPage' &&
+        this.$route.name != 'AdminMember'
+      "
+    />
   </v-app>
 </template>
 
