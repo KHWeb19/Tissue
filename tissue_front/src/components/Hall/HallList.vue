@@ -59,13 +59,13 @@
                 <v-pagination
                   v-model="page"
                   :length="pageCount"
-                  color="pink lighten-3"
+                  color="blue lighten-3"
                 ></v-pagination>
               </div>
               <div style="float: right">
                 <v-btn
                   rounded
-                  color="pink lighten-3"
+                  color="blue lighten-3"
                   style="color: white"
                   to="/HallRegister"
                   >공연장 등록</v-btn

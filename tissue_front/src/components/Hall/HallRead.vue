@@ -144,14 +144,14 @@
           </div>
           <div class="d-flex mt-5">
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2 ml-2"
               rounded
               @click="modify"
               >수정</v-btn
             >
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2"
               rounded
               @click="reset"
@@ -162,7 +162,7 @@
                 <v-dialog v-model="dialogDeleteHall" width="460">
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      color="pink lighten-3"
+                      color="blue lighten-3"
                       class="white--text mr-2"
                       rounded
                       v-bind="attrs"
@@ -202,7 +202,7 @@
               </div>
             </template>
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2"
               rounded
               to="/hallList"
@@ -484,13 +484,13 @@ export default {
 .showSelectSeat {
   width: 390px;
   height: 200px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
 .showHallInfo {
   width: 390px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }

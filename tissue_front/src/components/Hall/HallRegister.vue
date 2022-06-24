@@ -39,7 +39,7 @@
                 label="공연장명"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -47,7 +47,7 @@
                 label="행 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -55,19 +55,19 @@
                 label="열 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <div style="display: flex; justify-content: center">
                 <v-btn
                   rounded
-                  color="pink lighten-3 mr-3"
+                  color="blue lighten-3 mr-3"
                   class="white--text"
                   @click="onSubmit"
                   >등록</v-btn
                 >
                 <v-btn
                   rounded
-                  color="pink lighten-3 ml-3"
+                  color="blue lighten-3 ml-3"
                   to="HallList"
                   class="white--text"
                   >리스트로</v-btn
