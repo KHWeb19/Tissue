@@ -9,6 +9,11 @@ import HallReadPage from '@/views/hall/HallReadPage.vue'
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
+import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
+import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
+import CouponListPage from '@/views/coupon/CouponListPage.vue'
+import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
+
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -18,6 +23,7 @@ import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
+import AdminMember from '../components/member/AdminMember.vue'
 
 // admin
 
@@ -78,6 +84,31 @@ const routes = [
     name: 'PerformanceTest',
     component: PerformanceTest
   },
+  {
+    path: '/Admin',
+    name: 'AdminMainPage',
+    component: AdminMainPage
+  },
+  {
+    path: '/couponRegister',
+    name: 'CouponRegisterPage',
+    component: CouponRegisterPage
+  },
+  {
+    path: '/couponList',
+    name: 'CouponListPage',
+    component: CouponListPage
+  },
+  {
+    path: '/couponModify/:couponNo',
+    name: 'CouponModifyPage',
+    components: {
+      default: CouponModifyPage
+  },
+  props:{
+      default: true
+  }
+  },
   // 메인페이지 (임지훈)
 
   // 유아림
@@ -135,6 +166,26 @@ const routes = [
         props: {
             default: true
         }
+    },
+    {
+        path: '/myPage/signOut',
+        name: 'MyPageOut',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/myPage/coupon',
+        name: 'MyPageCoupon',
+        component: MyPageView
+    },
+    {
+        path: '/test2',
+        name: 'AdminMember',
+        component: AdminMember
     },
   // 유아림
 

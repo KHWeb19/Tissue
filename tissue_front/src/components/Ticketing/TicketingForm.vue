@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container style="margin-top: 100px">
+    <v-container>
       <v-row>
         <v-col>
           <v-stepper v-model="e1">
@@ -95,11 +95,11 @@
                 </v-card>
 
                 <div style="float: right">
-                  <v-btn color="pink lighten-3" text @click="goStep2">
+                  <v-btn color="blue lighten-3" text @click="goStep2">
                     좌석 선택 완료
                   </v-btn>
 
-                  <v-btn color="pink lighten-3" text to="/"> 뒤로 </v-btn>
+                  <v-btn color="blue lighten-3" text to="/"> 뒤로 </v-btn>
                 </div>
               </v-stepper-content>
 
@@ -110,11 +110,11 @@
                   height="200px"
                 ></v-card>
                 <div style="float: right">
-                  <v-btn color="pink lighten-3" text @click="e1 = 3">
+                  <v-btn color="blue lighten-3" text @click="e1 = 3">
                     다음 단계
                   </v-btn>
 
-                  <v-btn color="pink lighten-3" text @click="backStep1">
+                  <v-btn color="blue lighten-3" text @click="backStep1">
                     이전 단계
                   </v-btn>
                 </div>
@@ -127,11 +127,11 @@
                   height="200px"
                 ></v-card>
                 <div style="float: right">
-                  <v-btn color="pink lighten-3" text @click="e1 = 4">
+                  <v-btn color="blue lighten-3" text @click="e1 = 4">
                     다음 단계
                   </v-btn>
 
-                  <v-btn color="pink lighten-3" text @click="e1 = 2">
+                  <v-btn color="blue lighten-3" text @click="e1 = 2">
                     이전 단계
                   </v-btn>
                 </div>
@@ -144,11 +144,11 @@
                   height="200px"
                 ></v-card>
                 <div style="float: right">
-                  <v-btn color="pink lighten-3" text @click="e1 = 1">
+                  <v-btn color="blue lighten-3" text @click="e1 = 1">
                     다음 단계
                   </v-btn>
 
-                  <v-btn color="pink lighten-3" text @click="e1 = 3">
+                  <v-btn color="blue lighten-3" text @click="e1 = 3">
                     이전 단계
                   </v-btn>
                 </div>
@@ -242,7 +242,7 @@ export default {
 }
 .summaryInfo {
   width: 390px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }

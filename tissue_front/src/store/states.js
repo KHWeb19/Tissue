@@ -3,6 +3,9 @@ export default {
     halls: [],
     hall: null,
 
+    couponList:[],
+    coupon: null,
+
     performances: [],
     performance: null,
 
@@ -10,7 +13,8 @@ export default {
     notice: null,
 
     // 유아림
-    memberInfo: {}
+    memberInfo: {},
+    member:[]
     // 유아림
 
 }
