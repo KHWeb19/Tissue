@@ -1,6 +1,22 @@
 <template>
   <div>
     <v-container>
+      <v-row>
+        <v-col>
+          <div
+            style="
+              text-align: center;
+              font-size: 30px;
+              font-weight: lighter;
+              margin: 30px;
+            "
+          >
+            <b style="font-size: 45px; font-weight: bold">C</b> O U P O N &nbsp;
+            <b style="font-size: 45px; font-weight: bold">Z</b> O N E
+          </div>
+          <v-divider></v-divider>
+        </v-col>
+      </v-row>
       <v-row class="mt-5 mb-5">
         <v-col
           v-for="coupon in paginatedData"

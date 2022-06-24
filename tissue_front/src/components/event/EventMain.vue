@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>슬라이더 구역</div>
     <v-container>
       <div class="titleCategory">
         <v-tabs color="blue lighten-3" centered height="70px">
