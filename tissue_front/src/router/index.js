@@ -24,7 +24,7 @@ import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
-import AdminMember from '../components/member/AdminMember.vue'
+import AdminMember from '../components/Admin/AdminMember.vue'
 
 // admin
 
@@ -189,9 +189,9 @@ const routes = [
         component: MyPageView
     },
     {
-        path: '/test2',
+        path: '/Admin/member',
         name: 'AdminMember',
-        component: AdminMember
+        component: AdminMember 
     },
   // 유아림
 
