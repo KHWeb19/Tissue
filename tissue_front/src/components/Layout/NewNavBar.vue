@@ -50,14 +50,18 @@
           <v-icon color="white" large>mdi-account-outline</v-icon>
         </v-btn>
         <div class="mt-4" v-if="token">
-            <v-btn icon class="sub_tab_icon mr-8" @click="logout">
-                <v-icon color="white" large>mdi-logout</v-icon>
-            </v-btn>
+          <v-btn icon class="sub_tab_icon mr-8" @click="logout">
+            <v-icon color="white" large>mdi-logout</v-icon>
+          </v-btn>
         </div>
         <div class="mt-4" v-else>
-            <v-btn icon class="sub_tab_icon mr-8" :to="{name: 'MemberLoginPage'}">
-                <v-icon color="white" large>mdi-login</v-icon>
-            </v-btn>
+          <v-btn
+            icon
+            class="sub_tab_icon mr-8"
+            :to="{ name: 'MemberLoginPage' }"
+          >
+            <v-icon color="white" large>mdi-login</v-icon>
+          </v-btn>
         </div>
       </v-toolbar-items>
     </v-toolbar>
@@ -79,33 +83,32 @@ export default {
       subLinks: [
         { text: "지역", route: "ㄱ" },
         { text: "랭킹", route: "ㄴ" },
-        { text: "이벤트", route: "ㄷ" },
+        { text: "이벤트/쿠폰", route: "event" },
       ],
-      token:''
+      token: "",
     };
   },
   created() {
-      this.token = localStorage.getItem('token')
-
+    this.token = localStorage.getItem("token");
   },
   methods: {
-      logout() {
-          let result = confirm('로그아웃하시겠습니까?')
+    logout() {
+      let result = confirm("로그아웃하시겠습니까?");
 
-          if (result) {
-              localStorage.removeItem("token")
-              history.go(0)
-          }
-      },
-      goToMyPage() {
-          if (this.token != null) {
-              this.$router.push('/myPage')
-          } else {
-              alert("로그인이 필요합니다.")
-              this.$router.push('/login')
-          }
+      if (result) {
+        localStorage.removeItem("token");
+        history.go(0);
       }
-  }
+    },
+    goToMyPage() {
+      if (this.token != null) {
+        this.$router.push("/myPage");
+      } else {
+        alert("로그인이 필요합니다.");
+        this.$router.push("/login");
+      }
+    },
+  },
 };
 </script>
 
