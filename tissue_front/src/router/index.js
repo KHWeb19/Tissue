@@ -23,6 +23,7 @@ import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
+import AdminMember from '../components/member/AdminMember.vue'
 
 // admin
 
@@ -165,6 +166,26 @@ const routes = [
         props: {
             default: true
         }
+    },
+    {
+        path: '/myPage/signOut',
+        name: 'MyPageOut',
+        components: {
+            default: MyPageView
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/myPage/coupon',
+        name: 'MyPageCoupon',
+        component: MyPageView
+    },
+    {
+        path: '/test2',
+        name: 'AdminMember',
+        component: AdminMember
     },
   // 유아림
 
