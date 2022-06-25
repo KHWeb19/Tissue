@@ -17,55 +17,59 @@
           <v-divider></v-divider>
         </v-col>
       </v-row>
-      <v-row class="mt-5 mb-5">
-        <v-col v-for="event in paginatedData" :key="event" lg="4" sm="6">
-          <v-card width="400">
-            <div class="imgWrap">
-              <div class="pt-10">
-                <v-img
-                  :src="require(`@/assets/coupon/${이벤트썸네일}`)"
-                  class="img"
-                >
-                </v-img>
-              </div>
-            </div>
+      <v-row>
+        <!-- <v-col v-for="event in paginatedData" :key="event" lg="4" sm="6"> -->
+        <v-col lg="4" sm="6">
+          <v-card width="370px" flat>
+            <v-img :src="require(`@/assets/notice.png`)"> </v-img>
 
-            <v-card-title class="pt-1 pb-1 couponTitle">
-              [{{ event.couponCategory }}]{{ coupon.couponName }}
+            <v-card-title class="eventCategory blue--text text--lighten-3">
+              이벤트 카테고리
             </v-card-title>
+            <v-card-subtitle class="eventTitle"> 이벤트 제목 </v-card-subtitle>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
-              <v-card-text class="pb-0 pt-0 subContent"
-                ><b class="subTitle">발급 기간 :</b> {{ coupon.couponStart }} ~
-                {{ coupon.couponEnd }}</v-card-text
-              >
-            </v-card-actions>
+            <v-card-text class="eventDate"
+              >이벤트 기간 : {{ "이벤트 시작일" }} ~ {{ "이벤트 종료일" }}
+            </v-card-text>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
-              <v-card-text class="pb-0 pt-0 subContent"
-                ><b class="subTitle">사용 기간 :</b> {{ coupon.couponStart }} ~
-                {{ coupon.couponEnd }}</v-card-text
-              >
-              <v-btn icon @click="show = !show">
-                <v-icon>{{
-                  show ? "mdi-chevron-up" : "mdi-chevron-down"
-                }}</v-icon>
-              </v-btn>
-            </v-card-actions>
-
-            <v-divider></v-divider>
-
-            <v-expand-transition>
-              <div v-show="show">
-                <v-card-text class="pb-1 pt-1 subContent"
-                  ><b class="subTitle">사용 조건 :</b>
-                  {{ coupon.couponCondition }}</v-card-text
-                >
-              </div>
-            </v-expand-transition>
+            <v-progress-linear value="15"></v-progress-linear>
+            <v-card-text
+              style="text-align: right; font-size: 13px; color: #999"
+            >
+              이벤트 남은 기간
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
+
+<script>
+export default {
+  name: "EventEval",
+  data() {
+    return {};
+  },
+};
+</script>
+
+<style scoped>
+.eventTitle {
+  font-size: 16px;
+  color: #333;
+  height: 46px;
+  margin-top: 20px;
+}
+.eventCategory {
+  margin-left: 13px;
+  display: inline-block;
+  font-size: 15px;
+  padding: 5px;
+  border: 1px solid skyblue;
+}
+.eventDate {
+  font-size: 13px;
+  color: #999;
+}
+</style>
