@@ -32,7 +32,10 @@
               >이벤트 기간 : {{ "이벤트 시작일" }} ~ {{ "이벤트 종료일" }}
             </v-card-text>
 
-            <v-progress-linear value="15"></v-progress-linear>
+            <v-progress-linear
+              color="blue lighten-3"
+              value="15"
+            ></v-progress-linear>
             <v-card-text
               style="text-align: right; font-size: 13px; color: #999"
             >
