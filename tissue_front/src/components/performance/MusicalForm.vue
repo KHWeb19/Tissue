@@ -6,11 +6,14 @@
           <div class="mainTitle">M U S I C A L</div>
           <div class="categoryBox">
             <v-tabs color="blue lighten-3" centered height="70px">
-              <v-tab
-                class="black--text sortBtn"
-                v-for="item in sort"
-                :key="item.name"
-                >{{ item.name }}</v-tab
+              <v-tab class="black--text sortBtn" @click="sortOrig"
+                >평점순</v-tab
+              >
+              <v-tab class="black--text sortBtn" @click="sortRecent"
+                >최신순</v-tab
+              >
+              <v-tab class="black--text sortBtn" @click="sortEnd"
+                >종료임박순</v-tab
               >
             </v-tabs>
           </div>
@@ -22,12 +25,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col
-          v-for="perform in musicalList"
-          :key="perform.title"
-          lg="3"
-          sm="6"
-        >
+        <v-col v-for="perform in copyData" :key="perform.title" lg="3" sm="6">
           <router-link
             :to="{
               name: 'PerformanceDetailPage',
@@ -73,8 +71,24 @@ export default {
 
   data() {
     return {
-      sort: [{ name: "평점순" }, { name: "최신순" }, { name: "종료임박 순" }],
+      originalData: [...this.musicalList],
+      copyData: this.musicalList,
     };
+  },
+  methods: {
+    sortOrig() {
+      this.copyData = [...this.originalData];
+    },
+    sortRecent() {
+      this.copyData.sort(function (a, b) {
+        return new Date(b.performStart) - new Date(a.performStart);
+      });
+    },
+    sortEnd() {
+      this.copyData.sort(function (a, b) {
+        return new Date(a.performEnd) - new Date(b.performEnd);
+      });
+    },
   },
 };
 </script>

@@ -6,9 +6,15 @@
           <div class="mainTitle">C O N C E R T</div>
           <div class="categoryBox">
             <v-tabs color="blue lighten-3" centered height="70px">
-              <v-tab class="black--text sortBtn">평점순</v-tab>
-              <v-tab class="black--text sortBtn">최신순</v-tab>
-              <v-tab class="black--text sortBtn">종료임박순</v-tab>
+              <v-tab class="black--text sortBtn" @click="sortOrig"
+                >평점순</v-tab
+              >
+              <v-tab class="black--text sortBtn" @click="sortRecent"
+                >최신순</v-tab
+              >
+              <v-tab class="black--text sortBtn" @click="sortEnd"
+                >종료임박순</v-tab
+              >
             </v-tabs>
           </div>
           <div class="countBox">
@@ -19,12 +25,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col
-          v-for="perform in concertList"
-          :key="perform.title"
-          lg="3"
-          sm="6"
-        >
+        <v-col v-for="perform in copyData" :key="perform.title" lg="3" sm="6">
           <router-link
             :to="{
               name: 'PerformanceDetailPage',
@@ -74,11 +75,22 @@ export default {
       copyData: this.concertList,
     };
   },
-
+  mounted() {
+    this.copyData = null;
+    this.sortOrig();
+  },
   methods: {
-    recentSort() {
+    sortOrig() {
+      this.copyData = [...this.originalData];
+    },
+    sortRecent() {
       this.copyData.sort(function (a, b) {
-        return a.performStart - b.performStart;
+        return new Date(a.performStart) - new Date(b.performStart);
+      });
+    },
+    sortEnd() {
+      this.copyData.sort(function (a, b) {
+        return new Date(a.performEnd) - new Date(b.performEnd);
       });
     },
   },

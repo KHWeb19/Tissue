@@ -1,6 +1,6 @@
 <template>
   <div>
-    <concert-form :concertList="concertList" />
+    <concert-form v-if="concertList" :concertList="concertList" />
   </div>
 </template>
 
@@ -13,6 +13,7 @@ export default {
   components: {
     ConcertForm,
   },
+
   computed: {
     ...mapState(["concertList"]),
   },
