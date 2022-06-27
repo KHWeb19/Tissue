@@ -7,6 +7,10 @@ import {
   // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
+    FETCH_CONCERT_LIST,
+    FETCH_MUSICAL_LIST,
+    FETCH_THEATER_LIST,
+    FETCH_EXHIBITION_LIST,
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -27,6 +31,18 @@ export default{
     },
     [FETCH_COUPON](state, coupon) {
         state.coupon = coupon
+    },
+    [FETCH_CONCERT_LIST] (state, concertList) {
+        state.concertList = concertList
+    },
+    [FETCH_MUSICAL_LIST] (state, musicalList) {
+        state.musicalList = musicalList
+    },
+    [FETCH_THEATER_LIST] (state, theaterList) {
+        state.theaterList = theaterList
+    },
+    [FETCH_EXHIBITION_LIST] (state, exhibitionList) {
+        state.exhibitionList = exhibitionList
     },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances

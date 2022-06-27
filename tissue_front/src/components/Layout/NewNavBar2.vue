@@ -77,10 +77,10 @@ export default {
     return {
       isScroll: false,
       mainLinks: [
-        { text: "콘서트", route: "a" },
-        { text: "뮤지컬", route: "b" },
-        { text: "연극", route: "c" },
-        { text: "전시회", route: "d" },
+        { text: "콘서트", route: "/concert" },
+        { text: "뮤지컬", route: "/musical" },
+        { text: "연극", route: "/theater" },
+        { text: "전시회", route: "/exhibition" },
       ],
       subLinks: [
         { text: "지역", route: "ㄱ" },
