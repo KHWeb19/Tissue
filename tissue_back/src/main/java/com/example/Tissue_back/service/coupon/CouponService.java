@@ -13,5 +13,5 @@ public interface CouponService {
     public void remove(Long couponNo) throws Exception;
     public Coupon read(Long couponNo);
     public void modify (Coupon coupon, @RequestParam(required = false)MultipartFile file) throws Exception;
-    public void download (Long couponNo, String token);
+    public Boolean download (Long couponNo, String token);
 }

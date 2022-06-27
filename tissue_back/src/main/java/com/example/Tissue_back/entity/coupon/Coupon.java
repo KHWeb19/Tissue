@@ -42,8 +42,8 @@ public class Coupon {
 
     @Column
     private String filepath;
-
-    @ManyToOne
-    @JoinColumn(name="member_no")
-    private Member members;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="memberNo")
+//    private Member member;
 }

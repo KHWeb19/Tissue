@@ -113,18 +113,27 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public void download(Long couponNo, String token) {
+    public Boolean download(Long couponNo, String token) {
         String memberId = securityService.getMemberId(token);
         log.info("check >>>>" + memberId);
 
         Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+
         Optional<Coupon> whatCoupon = couponRepository.findById(couponNo);
 
         Coupon coupon = whatCoupon.get();
         Member member = findMember.get();
 
-        coupon.setMembers(member);
+        log.info("----"+member.getCoupons());
 
+        if(member.getCoupons().contains(coupon)){
+            return false;
+        }
+
+        member.getCoupons().add(coupon);
+
+        memberRepository.save(member);
+        return true;
     }
 
 }

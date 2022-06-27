@@ -60,10 +60,11 @@ public class CouponController {
     }
 
     // 쿠폰 다운로드
-    @PostMapping("/download/{couponNo}")
-    public void couponDown (@PathVariable("couponNo") Long couponNo, @RequestParam(value="token") String token) {
-        log.info("couponDown()" + couponNo);
+    @GetMapping("/download/{couponNo}")
+    public Boolean couponDown (@PathVariable("couponNo") Long couponNo, @RequestParam(value="token") String token) {
+        log.info("couponDown()" + couponNo + token);
 
+        return couponService.download(couponNo, token);
 
     }
 

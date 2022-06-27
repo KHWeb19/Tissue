@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -67,7 +69,9 @@ public class Member {
     @Column(nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @Builder.Default
     private List<Coupon> coupons = new ArrayList<>();
 
 }
