@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "NewNavBar",
   data() {
@@ -102,7 +103,14 @@ export default {
     },
     goToMyPage() {
       if (this.token != null) {
-        this.$router.push("/myPage");
+          axios.get('Admin/role',{params: {token: this.token}})
+          .then((res) => {
+              if(res.data == true){
+                  this.$router.push("/Admin")
+              }else {
+                  this.$router.push("/myPage")
+              }
+          })
       } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");
