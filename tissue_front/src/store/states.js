@@ -8,5 +8,11 @@ export default {
 
     notices: [],
     notice: null,
+
+    qnaList: [],
+    qna: null,
+    qnaComments: [],
+    qnaBestList: [],
+    qnaBest: null
 }
 
