@@ -183,4 +183,24 @@ public class PerformanceServiceImpl implements PerformanceService{
     public void remove(Integer performNo) {
         performanceRepository.deleteById(Long.valueOf(performNo));
     }
+
+    @Override
+    public List<Performance> concertList() {
+        return performanceRepository.findPerformanceWithConcert();
+    }
+
+    @Override
+    public List<Performance> musicalList() {
+        return performanceRepository.findPerformanceWithMusical();
+    }
+
+    @Override
+    public List<Performance> theaterList() {
+        return performanceRepository.findPerformanceWithTheater();
+    }
+
+    @Override
+    public List<Performance> exhibitionList() {
+        return performanceRepository.findPerformanceWithExhibition();
+    }
 }

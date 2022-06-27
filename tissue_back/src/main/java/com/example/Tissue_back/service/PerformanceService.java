@@ -15,5 +15,10 @@ public interface PerformanceService {
     public Performance modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException;
     public void remove(Integer performNo);
 
+    public List<Performance> concertList();
+    public List<Performance> musicalList();
+    public List<Performance> theaterList();
+    public List<Performance> exhibitionList();
+
 
 }
