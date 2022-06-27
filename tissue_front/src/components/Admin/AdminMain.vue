@@ -15,7 +15,10 @@
               <span class="logo" style="color: pink">issue</span>
             </router-link>
           </v-list-item-title>
-          <v-list-item-subtitle class="black--text ml-5" style="font-size: 20px">
+          <v-list-item-subtitle
+            class="black--text ml-5"
+            style="font-size: 20px"
+          >
             관리자님 환영합니다!
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -53,7 +56,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "회원 관리", icon: "mdi-account", route:'/Admin/member' },
+        { title: "회원 관리", icon: "mdi-account", route: "/Admin/member" },
         {
           title: "공연 관리",
           icon: "mdi-play-box-outline",
@@ -65,6 +68,16 @@ export default {
           title: "쿠폰 관리",
           icon: "mdi-ticket-percent",
           route: "/couponList",
+        },
+        {
+          title: "공지사항 관리",
+          icon: "mdi-bulletin-board",
+          route: "/",
+        },
+        {
+          title: "자주 묻는 질문 관리",
+          icon: "mdi-comment-question",
+          route: "/",
         },
       ],
     };

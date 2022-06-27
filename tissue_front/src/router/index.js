@@ -16,6 +16,11 @@ import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
 
 import EventMainPage from '@/views/event/EventMainPage.vue'
 
+import ConcertPage from '@/views/performance/ConcertPage.vue'
+import MusicalPage from '@/views/performance/MusicalPage.vue'
+import TheaterPage from '@/views/performance/TheaterPage.vue'
+import ExhibitionPage from '@/views/performance/ExhibitionPage.vue'
+
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
 import MemberLoginPage from '../views/member/MemberLoginPage.vue'
@@ -115,7 +120,27 @@ const routes = [
     name: 'EventMainPage',
     component: EventMainPage
   },
-  // 메인페이지 (임지훈)
+  {
+    path: '/concert',
+    name: 'ConcertPage',
+    component: ConcertPage
+  },
+  {
+    path: '/musical',
+    name: 'MusicalPage',
+    component: MusicalPage
+  },
+  {
+    path: '/theater',
+    name: 'TheaterPage',
+    component: TheaterPage
+  },
+  {
+    path: '/exhibition',
+    name: 'ExhibitionPage',
+    component: ExhibitionPage
+  },
+  // (임지훈)
 
   // 유아림
   {

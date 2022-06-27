@@ -5,9 +5,14 @@ import {
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
+
       // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
+    FETCH_CONCERT_LIST,
+    FETCH_MUSICAL_LIST,
+    FETCH_THEATER_LIST,
+    FETCH_EXHIBITION_LIST,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -43,6 +48,30 @@ export default {
         .then((res)=>{
             commit(FETCH_COUPON,res.data)
         })
+    },
+    fetchConcertList({ commit }) {
+        return axios.get('http://localhost:7777/performance/concertList')
+                .then((res) => {
+                    commit(FETCH_CONCERT_LIST, res.data)
+                })
+    },
+    fetchMusicalList({ commit }) {
+        return axios.get('http://localhost:7777/performance/musicalList')
+                .then((res) => {
+                    commit(FETCH_MUSICAL_LIST, res.data)
+                })
+    },
+    fetchTheaterList({ commit }) {
+        return axios.get('http://localhost:7777/performance/theaterList')
+                .then((res) => {
+                    commit(FETCH_THEATER_LIST, res.data)
+                })
+    },
+    fetchExhibitionList({ commit }) {
+        return axios.get('http://localhost:7777/performance/exhibitionList')
+                .then((res) => {
+                    commit(FETCH_EXHIBITION_LIST, res.data)
+                })
     },
    // peformance
     fetchPerformanceList({ commit }) {

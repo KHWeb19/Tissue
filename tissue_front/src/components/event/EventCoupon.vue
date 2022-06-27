@@ -24,7 +24,7 @@
           lg="4"
           sm="6"
         >
-          <v-card width="400" height="350">
+          <v-card width="400">
             <div class="imgWrap">
               <div class="pt-10">
                 <v-img
@@ -54,14 +54,23 @@
                 ><b class="subTitle">사용 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
+              <v-btn icon @click="show = !show">
+                <v-icon>{{
+                  show ? "mdi-chevron-up" : "mdi-chevron-down"
+                }}</v-icon>
+              </v-btn>
             </v-card-actions>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
-              <v-card-text class="pb-0 pt-0 subContent"
-                ><b class="subTitle">사용 조건 :</b>
-                {{ coupon.couponCondition }}</v-card-text
-              >
-            </v-card-actions>
+            <v-divider></v-divider>
+
+            <v-expand-transition>
+              <div v-show="show">
+                <v-card-text class="pb-1 pt-1 subContent"
+                  ><b class="subTitle">사용 조건 :</b>
+                  {{ coupon.couponCondition }}</v-card-text
+                >
+              </div>
+            </v-expand-transition>
           </v-card>
         </v-col>
       </v-row>
@@ -115,6 +124,7 @@ export default {
   data() {
     return {
       pageNum: 0,
+      show: false,
     };
   },
   filters: {

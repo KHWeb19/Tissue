@@ -113,4 +113,31 @@ public class PerformanceController {
 
         performanceService.remove(performNo);
     }
+
+    //임지훈 항목별 리스트 출력
+    @GetMapping("/concertList")
+    public List<Performance> concertList() {
+        log.info("concertList()");
+        String category = "콘서트";
+        return performanceService.categoryList(category);
+    }
+    @GetMapping("/musicalList")
+    public List<Performance> musicalList() {
+        log.info("musicalList()");
+        String category = "뮤지컬";
+        return performanceService.categoryList(category);
+    }
+    @GetMapping("/theaterList")
+    public List<Performance> theaterList() {
+        log.info("theaterList()");
+        String category = "연극";
+        return performanceService.categoryList(category);
+    }
+    @GetMapping("/exhibitionList")
+    public List<Performance> exhibitionList() {
+        log.info("exhibitionList()");
+        String category = "전시회";
+        return performanceService.categoryList(category);
+    }
+
 }

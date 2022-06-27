@@ -9,6 +9,12 @@ export default {
     performances: [],
     performance: null,
 
+    concertList : [],
+    musicalList : [],
+    theaterList : [],
+    exhibitionList : [],
+
+
     notices: [],
     notice: null,
 
