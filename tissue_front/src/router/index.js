@@ -25,6 +25,8 @@ import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
 
+import SearchPage from '../views/search/SearchPage.vue'
+
 // admin
 
 
@@ -206,6 +208,16 @@ const routes = [
         name: 'MyPageQnA',
         component: MyPageView,
         beforeEnter: requireLogin()
+    },
+    {
+        path: '/search/:keyword',
+        name: 'SearchPage',
+        components: {
+            default: SearchPage
+        },
+        props: {
+            default: true
+        }
     },
   // 유아림
 

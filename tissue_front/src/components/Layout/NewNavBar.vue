@@ -39,6 +39,8 @@
         <v-text-field
           hide-details
           append-icon="mdi-magnify"
+          @click:append="search"
+          v-model="keyword"
           single-line
           filled
           dense
@@ -87,6 +89,7 @@ export default {
         { text: "이벤트/쿠폰", route: "event" },
       ],
       token: "",
+      keyword:''
     };
   },
   created() {
@@ -116,6 +119,10 @@ export default {
         this.$router.push("/login");
       }
     },
+    search() {
+        console.log(this.keyword)
+        this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
+    }
   },
 };
 </script>
