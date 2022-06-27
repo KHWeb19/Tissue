@@ -8,7 +8,6 @@
             item.name
           }}</v-tab>
           <v-tab-item v-for="n in 2" :key="n">
-            <event-eval v-if="n == 1" :key="n" />
             <event-coupon v-if="n == 2" :list-array="pageArray" />
           </v-tab-item>
         </v-tabs>
@@ -19,7 +18,6 @@
 
 <script>
 import EventCoupon from "@/components/event/EventCoupon.vue";
-import EventEval from "@/components/event/EventEval.vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
 
@@ -27,7 +25,6 @@ export default {
   name: "EventMain",
   components: {
     EventCoupon,
-    EventEval,
   },
   data() {
     return {
