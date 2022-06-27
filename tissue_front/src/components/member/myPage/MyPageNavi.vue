@@ -65,6 +65,7 @@
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
+                    <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'"/>
                 </v-row>
             </v-main>
         </div>
@@ -76,8 +77,9 @@ import MyPageOut from './MyPageOut.vue'
 import MyPageCoupon from './MyPageCoupon.vue'
 import GradeDialog from './GradeDialog.vue'
 import MileageDialog from './MileageDialog.vue'
+import MyPageQnA from './MyPageQnA.vue'
 export default {
-  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog },
+  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA },
     name: 'MyPageNavi',
     props:{
         memberInfo: {
@@ -95,7 +97,7 @@ export default {
                 { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
                 { title: 'My 찜목록', icon: 'mdi-star' },
                 { title: 'My 예매 내역', icon: 'mdi-book' },
-                { title: 'My QnA', icon: 'mdi-chat-question' },
+                { title: 'My QnA', icon: 'mdi-chat-question', route:'/myPage/qna'},
                 { title: 'My 후기', icon: 'mdi-pencil' },
                 { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
             ],
