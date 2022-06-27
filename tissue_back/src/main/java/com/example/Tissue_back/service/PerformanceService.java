@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service;
 
+import com.example.Tissue_back.controller.request.PerformanceDto;
 import com.example.Tissue_back.entity.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,7 +12,7 @@ public interface PerformanceService {
     public List<Performance> list();
     public Performance read(Integer boardNo);
 
-    public void modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException;
+    public Performance modify(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws IOException;
     public void remove(Integer performNo);
 
 

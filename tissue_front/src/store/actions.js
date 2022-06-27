@@ -2,6 +2,9 @@ import axios from 'axios'
 import {
     FETCH_HALL_LIST,
     FETCH_HALL,
+
+    FETCH_COUPON_LIST,
+    FETCH_COUPON,
       // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
@@ -13,6 +16,10 @@ import {
     FETCH_QNA_COMMENT_LIST,
     FETCH_QNA_BEST_LIST,
     FETCH_QNA_BEST
+    
+    FETCH_MEMBER_INFO,
+    FETCH_MEMBER
+
 
 } from './mutation-types'
 
@@ -30,6 +37,18 @@ export default {
         return axios.get(`http://localhost:7777/hall/${hallNo}`)
         .then((res)=>{
             commit(FETCH_HALL,res.data)
+        })
+    },
+    fetchCouponList({commit}) {
+        return axios.get("http://localhost:7777/coupon/list")
+        .then((res)=>{
+            commit(FETCH_COUPON_LIST,res.data)
+        })
+    },
+    fetchCoupon({commit},couponNo) {
+        return axios.get(`http://localhost:7777/coupon/${couponNo}`)
+        .then((res)=>{
+            commit(FETCH_COUPON,res.data)
         })
     },
    // peformance
@@ -87,7 +106,19 @@ export default {
             commit(FETCH_QNA_BEST, res.data)
           })
     },
-
- }
+    fetchMemberInfo({ commit }, token) {
+        return axios.get('Member/info', { params: { token: token }})
+            .then((res) => {
+                commit(FETCH_MEMBER_INFO, res.data)
+        })
+    },
+    fetchMember({ commit }) {
+        return axios.get('Admin/memberInfo')
+            .then((res) => {
+                commit(FETCH_MEMBER, res.data)
+        })
+    },
+    
+}
 
 

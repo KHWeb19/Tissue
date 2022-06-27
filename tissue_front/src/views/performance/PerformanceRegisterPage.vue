@@ -1,5 +1,10 @@
 <template>
-    <div>
+    <v-container>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 공연 관리
+            </v-toolbar-title>
+        </v-app-bar>
        <v-container>
                <v-row>
                     <v-col>
@@ -105,7 +110,7 @@
                     </v-btn>
                 </v-row>
         </v-container>
-    </div>
+    </v-container>
 </template>
 
 <script>

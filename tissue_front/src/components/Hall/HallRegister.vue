@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <v-container style="margin-top: 100px">
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 공연장 관리
+        </v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-10">
       <v-row justify="center">
         <v-col cols="auto">
           <v-card flat>
@@ -11,7 +16,7 @@
                 label="공연장명"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -19,7 +24,7 @@
                 label="행 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <v-text-field
                 style="width: 500px"
@@ -27,19 +32,19 @@
                 label="열 개수"
                 clearable
                 outlined
-                color="blue lighten-3"
+                color="pink lighten-3"
               />
               <div style="display: flex; justify-content: center">
                 <v-btn
                   rounded
-                  color="pink lighten-3 mr-3"
+                  color="blue lighten-3 mr-3"
                   class="white--text"
                   @click="onSubmit"
                   >등록</v-btn
                 >
                 <v-btn
                   rounded
-                  color="pink lighten-3 ml-3"
+                  color="blue lighten-3 ml-3"
                   to="HallList"
                   class="white--text"
                   >리스트로</v-btn
@@ -50,7 +55,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -87,3 +92,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.titleBox {
+  width: 100%;
+  height: 168.91px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #fce4ec;
+  border-bottom: 1px solid lightgrey;
+}
+</style>

@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <v-container>
-      <div
-        style="
-          display: flex;
-          margin-top: 100px;
-          justify-content: center;
-          align-items: center;
-        "
-      >
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 공연장 관리
+        </v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-10">
+      <div style="display: flex; justify-content: center; align-items: center">
         <div>
           <div class="stage">S T A G E</div>
 
@@ -43,8 +41,14 @@
                         :row-index="index"
                         :cell-index="indexes"
                       ></div>
-                      <div v-if="indexes == 0" style="width: 50px"></div>
-                      <div v-if="indexes == 3" style="width: 50px"></div>
+                      <div v-if="hall.rowCnt <= 5">
+                        <div v-if="indexes == 0" style="width: 50px"></div>
+                        <div v-if="indexes == 3" style="width: 50px"></div>
+                      </div>
+                      <div v-if="hall.rowCnt > 5">
+                        <div v-if="indexes == 1" style="width: 50px"></div>
+                        <div v-if="indexes == 7" style="width: 50px"></div>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -117,14 +121,14 @@
           </div>
           <div class="d-flex mt-5">
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2 ml-2"
               rounded
               @click="modify"
               >수정</v-btn
             >
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2"
               rounded
               @click="reset"
@@ -135,7 +139,7 @@
                 <v-dialog v-model="dialogDeleteHall" width="460">
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      color="pink lighten-3"
+                      color="blue lighten-3"
                       class="white--text mr-2"
                       rounded
                       v-bind="attrs"
@@ -175,7 +179,7 @@
               </div>
             </template>
             <v-btn
-              color="pink lighten-3"
+              color="blue lighten-3"
               class="white--text mr-2"
               rounded
               to="/hallList"
@@ -185,7 +189,7 @@
         </div>
       </div>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -457,13 +461,13 @@ export default {
 .showSelectSeat {
   width: 390px;
   height: 200px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
 .showHallInfo {
   width: 390px;
-  border: 1px solid skyblue;
+  border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
@@ -473,5 +477,14 @@ export default {
   margin: 5px;
   margin-right: 0;
   padding-top: 12px;
+}
+
+.titleBox {
+  width: 100%;
+  height: 168.91px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #fce4ec;
+  border-bottom: 1px solid lightgrey;
 }
 </style>

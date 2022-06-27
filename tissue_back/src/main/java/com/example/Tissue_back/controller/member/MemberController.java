@@ -1,14 +1,13 @@
-package com.example.Tissue_back.controller;
+package com.example.Tissue_back.controller.member;
 
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
-import com.example.Tissue_back.service.MemberService;
+import com.example.Tissue_back.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,5 +73,37 @@ public class MemberController {
         return service.findPw(findDto);
     }
 
+    // 회원정보 가져오기
+    @GetMapping("/info")
+    public Member getInfo (@RequestParam(value = "token") String token) {
+        log.info ("== Get Info ==" + token);
+
+        return service.getInfo(token);
+    }
+
+    @PostMapping("/checkPw")
+    public Boolean checkPw (@Validated @RequestBody LoginDto check) {
+        log.info("==Check Pw==" + check);
+        return service.checkPw(check);
+    }
+
+    // 회원정보 수정
+    @PutMapping("/modify")
+    public MemberDto modify (@Validated @RequestBody MemberDto memberDto) {
+        log.info("=== Tissue Member Modify ===" + memberDto);
+
+        service.modify(memberDto);
+
+        return memberDto;
+    }
+
+    // 회원탈퇴
+    @DeleteMapping("/remove/{memberNo}")
+    public Boolean remove (@PathVariable("memberNo") Long memberNo,
+                           @RequestParam(value = "checkPw") String checkPw) {
+        log.info("remove()" + memberNo + checkPw);
+
+        return service.remove(memberNo, checkPw);
+    }
 
 }

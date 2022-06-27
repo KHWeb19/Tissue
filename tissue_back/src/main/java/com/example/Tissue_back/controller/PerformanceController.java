@@ -1,5 +1,6 @@
 package com.example.Tissue_back.controller;
 
+import com.example.Tissue_back.controller.request.PerformanceDto;
 import com.example.Tissue_back.entity.Performance;
 import com.example.Tissue_back.repository.PerformanceRepository;
 import com.example.Tissue_back.service.PerformanceService;
@@ -59,9 +60,10 @@ public class PerformanceController {
         return performanceService.read(performNo);
     }
 
-    @PutMapping(value="/{performNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PutMapping(value="/{performNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public Performance performanceModify (
-            @PathVariable("performNo") Integer performNo, Performance performance,
+            @PathVariable("performNo") Integer performNo,
+            @RequestPart("performance") Performance performance,
             @RequestParam(value = "fileList", required = false ) List<MultipartFile> fileList,
             @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         log.info ("performanceModify(): " + performance);
@@ -97,10 +99,11 @@ public class PerformanceController {
             Files.delete(filePath);
         }
 
-        performance.setPerformNo((Long.valueOf(performNo)));
-        performanceService.modify(performance, fileList, file);
 
-        return performance;
+        performance.setPerformNo((Long.valueOf(performNo)));
+        Performance performance1 = performanceService.modify(performance, fileList, file);
+
+        return performance1;
     }
 
     @DeleteMapping("/{performNo}")

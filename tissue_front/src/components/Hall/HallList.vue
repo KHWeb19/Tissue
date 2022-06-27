@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <v-container class="white" style="width: 1400px; margin-top: 100px">
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 공연장 관리
+        </v-toolbar-title>
+    </v-app-bar>
+    <v-container class="white mt-10" style="width: 1400px">
       <v-row justify="center">
         <v-col cols="auto"
           ><v-card flat>
@@ -31,13 +36,13 @@
                 <v-pagination
                   v-model="page"
                   :length="pageCount"
-                  color="pink lighten-3"
+                  color="blue lighten-3"
                 ></v-pagination>
               </div>
               <div style="float: right">
                 <v-btn
                   rounded
-                  color="pink lighten-3"
+                  color="blue lighten-3"
                   style="color: white"
                   to="/HallRegister"
                   >공연장 등록</v-btn
@@ -48,7 +53,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -90,6 +95,14 @@ export default {
   border-top: 3px solid skyblue;
   color: black;
   width: 1000px;
+}
+.titleBox {
+  width: 100%;
+  height: 168.91px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #fce4ec;
+  border-bottom: 1px solid lightgrey;
 }
 </style>
 
