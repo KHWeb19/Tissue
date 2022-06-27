@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -68,6 +70,9 @@ public class Performance {
 
     @Column(name="perform_detail_img_path")
     private String performDetailImgPath;
+
+    @CreationTimestamp
+    private Date performRegDate;
 
     public void updatePerformance(PerformanceDto performanceDto) {
         this.performName = performanceDto.getPerformName();

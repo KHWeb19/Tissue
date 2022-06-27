@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -38,6 +39,8 @@ public class PerformanceDto {
 
     private String performer;
 
+    private Date performRegDate;
+
     public Performance toEntity() {
         return Performance.builder()
                 .performNo(performNo)
@@ -52,6 +55,7 @@ public class PerformanceDto {
                 .performCategory(performCategory)
                 .performGrade(performGrade)
                 .performer(performer)
+                .performRegDate(performRegDate)
                 .build();
     }
 }

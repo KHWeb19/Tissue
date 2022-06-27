@@ -4,13 +4,13 @@
             <v-row>
                 <v-col>
                     <form>
-                        <div>
+                        <!-- <div>
                             <label>공연번호 확인</label>
-                            <input type="text" :value="performance.performNo" readonly/>
-                        </div>
+                            <input type="text" :value="event.performance.performNo" readonly/>
+                        </div> -->
                         <div>
                             <label>공연썸네일</label>
-                            <img :src="require(`@/assets/thumbNail/${this.performance.performThumbnail}`)"/>
+                            <img :src="require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)"/>
                         </div>
                         <div>
                             <label>제목</label>
@@ -50,11 +50,7 @@ export default {
         event: {
             type: Object,
             required: true
-        },
-        performance: {
-            type: Object,
-            required: true
-        },
+        }
     },
     data() {
         return {

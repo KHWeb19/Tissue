@@ -28,10 +28,6 @@ import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
 
-
-// admin
-import AdminPage from '@/views/AdminPage.vue'
-
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
 import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
@@ -61,14 +57,64 @@ const routes = [
     component: Home
   },
   {
-    path: '/hallTest',
-    name: 'hallTest',
-    component: hallTest
+    path: '/hallRegister',
+    name: 'HallRegisterPage',
+    component: HallRegisterPage
   },
   {
-    path: '/hallRegister',
-    name: 'HallRegister',
-    component: HallRegister
+    path: '/hallList',
+    name: 'HallListPage',
+    component: HallListPage
+  },
+  {
+    path: '/hallRead/:hallNo',
+    name: 'HallReadPage',
+    components: {
+      default: HallReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/ticketing/:performNo',
+    name: 'TicketingPage',
+    components: {
+      default: TicketingPage
+  },
+  props:{
+      default: true
+  }
+  },
+  {
+    path: '/test',
+    name: 'PerformanceTest',
+    component: PerformanceTest
+  },
+  {
+    path: '/Admin',
+    name: 'AdminMainPage',
+    component: AdminMainPage
+  },
+  {
+    path: '/couponRegister',
+    name: 'CouponRegisterPage',
+    component: CouponRegisterPage
+  },
+  {
+    path: '/couponList',
+    name: 'CouponListPage',
+    component: CouponListPage
+  },
+  {
+    path: '/couponModify/:couponNo',
+    name: 'CouponModifyPage',
+    components: {
+      default: CouponModifyPage
+  },
+  props:{
+      default: true
+  }
   },
   {
     path: '/event',
@@ -156,11 +202,6 @@ const routes = [
   // 유아림
 
   // 노서현
-  {
-    path: '/adminPage',
-    name: 'AdminPage',
-    component: AdminPage
-  }, 
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',

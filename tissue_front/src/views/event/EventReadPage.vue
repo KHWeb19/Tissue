@@ -1,6 +1,6 @@
 <template>
     <div>
-        <event-read-form v-if="event" :event="event" :performance="performance"/>
+        <event-read-form v-if="event" :event="event"/>
     </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
     name: 'EventReadPage',
     data() {
         return {
-            performance: ''
+
         }
     },
     components: {
@@ -24,7 +24,7 @@ export default {
         }
     },
     created() {
-        this.performance = this.event.performance
+        console.log(this.event)
     },
     computed: {
         ...mapState(['event'])

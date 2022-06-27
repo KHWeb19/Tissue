@@ -8,7 +8,8 @@
             item.name
           }}</v-tab>
           <v-tab-item v-for="n in 2" :key="n">
-            <event-coupon v-if="n == 2" :list-array="pageArray" />
+            <event-tab v-if="n == 1" :eventPageArray="eventPageArray" />
+            <event-coupon v-else :list-array="pageArray" />
           </v-tab-item>
         </v-tabs>
       </div>
@@ -18,6 +19,7 @@
 
 <script>
 import EventCoupon from "@/components/event/EventCoupon.vue";
+import EventTab from "@/components/event/EventTab.vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
 
@@ -25,22 +27,25 @@ export default {
   name: "EventMain",
   components: {
     EventCoupon,
+    EventTab
   },
   data() {
     return {
       pageArray: [],
+      eventPageArray: [],
       items: [{ name: "이벤트" }, { name: "쿠폰" }],
     };
   },
 
   computed: {
-    ...mapState(["couponList"]),
+    ...mapState(["couponList","events"]),
   },
   mounted() {
     this.fetchCouponList();
+    this.fetchEventList()
   },
   methods: {
-    ...mapActions(["fetchCouponList"]),
+    ...mapActions(["fetchCouponList", "fetchEventList"]),
   },
 
   created() {
@@ -52,6 +57,14 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+
+    axios.get("/event/list")
+    .then((res) => {
+      this.eventPageArray = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   },
 };
 </script>
