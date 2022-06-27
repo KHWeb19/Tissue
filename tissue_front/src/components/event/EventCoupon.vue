@@ -24,7 +24,7 @@
           lg="4"
           sm="6"
         >
-          <v-card width="400" height="350">
+          <v-card width="400" height="390">
             <div class="imgWrap">
               <div class="pt-10">
                 <v-img
@@ -38,29 +38,32 @@
               </div>
             </div>
 
-            <v-card-title class="pt-1 pb-1 couponTitle">
+            <v-card-title class="pt-3 pb-1 couponTitle">
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
             </v-card-title>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
+            <v-card-actions class="pb-3 pt-2 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">발급 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
             </v-card-actions>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
+            <v-card-actions class="pb-2 pt-1 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">사용 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
             </v-card-actions>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
+            <v-card-actions class="pb-3 pt-1 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">사용 조건 :</b>
                 {{ coupon.couponCondition }}</v-card-text
               >
+                <v-row justify="end" class="mt-2 mr-3">
+                    <v-btn  color="blue lighten-3"  depressed  dark @click="down(coupon.couponNo)">다운로드</v-btn>
+                </v-row>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -98,6 +101,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "EventCoupon",
   props: {
@@ -144,6 +148,26 @@ export default {
     prevPage() {
       this.pageNum -= 1;
     },
+    down(couponNo) {
+         let token = localStorage.getItem('token')
+
+         if(token !=null) {
+             axios.get(`coupon/download/${couponNo}`,{ params : {token: token} })
+             .then((res) => {
+                 if(res.data == true){
+                 alert("쿠폰이 발행되었습니다.")
+                 }else {
+                     alert('이미 발행된 쿠폰입니다.')
+                 }
+             })
+             .catch(() => {
+                 console.log("에러")
+                 console.log(couponNo, token)
+             }) 
+         }else {
+             alert("로그인이 필요합니다.")
+         }
+    }
   },
 };
 </script>
