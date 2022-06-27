@@ -6,12 +6,9 @@
           <div class="mainTitle">C O N C E R T</div>
           <div class="categoryBox">
             <v-tabs color="blue lighten-3" centered height="70px">
-              <v-tab
-                class="black--text sortBtn"
-                v-for="item in sort"
-                :key="item.name"
-                >{{ item.name }}</v-tab
-              >
+              <v-tab class="black--text sortBtn">평점순</v-tab>
+              <v-tab class="black--text sortBtn">최신순</v-tab>
+              <v-tab class="black--text sortBtn">종료임박순</v-tab>
             </v-tabs>
           </div>
           <div class="countBox">
@@ -73,8 +70,17 @@ export default {
 
   data() {
     return {
-      sort: [{ name: "평점순" }, { name: "최신순" }, { name: "종료임박 순" }],
+      originalData: [...this.concertList],
+      copyData: this.concertList,
     };
+  },
+
+  methods: {
+    recentSort() {
+      this.copyData.sort(function (a, b) {
+        return a.performStart - b.performStart;
+      });
+    },
   },
 };
 </script>

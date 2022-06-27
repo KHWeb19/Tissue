@@ -118,26 +118,26 @@ public class PerformanceController {
     @GetMapping("/concertList")
     public List<Performance> concertList() {
         log.info("concertList()");
-
-        return performanceService.concertList();
+        String category = "콘서트";
+        return performanceService.categoryList(category);
     }
     @GetMapping("/musicalList")
     public List<Performance> musicalList() {
         log.info("musicalList()");
-
-        return performanceService.musicalList();
+        String category = "뮤지컬";
+        return performanceService.categoryList(category);
     }
     @GetMapping("/theaterList")
     public List<Performance> theaterList() {
         log.info("theaterList()");
-
-        return performanceService.theaterList();
+        String category = "연극";
+        return performanceService.categoryList(category);
     }
     @GetMapping("/exhibitionList")
     public List<Performance> exhibitionList() {
         log.info("exhibitionList()");
-
-        return performanceService.exhibitionList();
+        String category = "전시회";
+        return performanceService.categoryList(category);
     }
 
 }

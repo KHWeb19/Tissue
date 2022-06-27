@@ -185,22 +185,11 @@ public class PerformanceServiceImpl implements PerformanceService{
     }
 
     @Override
-    public List<Performance> concertList() {
-        return performanceRepository.findPerformanceWithConcert();
+    public List<Performance> categoryList(String category) {
+        return performanceRepository.findPerformanceWithCategory(category);
+
     }
 
-    @Override
-    public List<Performance> musicalList() {
-        return performanceRepository.findPerformanceWithMusical();
-    }
 
-    @Override
-    public List<Performance> theaterList() {
-        return performanceRepository.findPerformanceWithTheater();
-    }
 
-    @Override
-    public List<Performance> exhibitionList() {
-        return performanceRepository.findPerformanceWithExhibition();
-    }
 }
