@@ -64,7 +64,7 @@
                 <v-row class="main mb-15 pb-15">
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
-                    <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" />
+                    <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
                 </v-row>
             </v-main>
         </div>
@@ -104,7 +104,7 @@ export default {
                     clickAction:() =>{
                         this.showPage(1)
                 } },
-                { title: '사용 가능 쿠폰 >', value: '' , 
+                { title: '사용 가능 쿠폰 >', value: this.memberInfo.coupons.length, 
                     clickAction:() => {
                         this.showPage(2)}
                 },
@@ -124,7 +124,7 @@ export default {
             } else {
                 this.dialog[1].value = true
             }
-        }
+        },
     }
 }
 </script>
