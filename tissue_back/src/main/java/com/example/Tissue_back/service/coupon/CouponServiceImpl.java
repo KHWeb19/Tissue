@@ -1,7 +1,10 @@
 package com.example.Tissue_back.service.coupon;
 
 import com.example.Tissue_back.entity.coupon.Coupon;
+import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
+import com.example.Tissue_back.repository.member.MemberRepository;
+import com.example.Tissue_back.service.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -25,6 +28,12 @@ public class CouponServiceImpl implements CouponService {
 
     @Autowired
     private CouponRepository couponRepository;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public void register(Coupon coupon, MultipartFile file) throws Exception {
@@ -103,5 +112,28 @@ public class CouponServiceImpl implements CouponService {
         couponRepository.deleteById(couponNo);
     }
 
+    @Override
+    public Boolean download(Long couponNo, String token) {
+        String memberId = securityService.getMemberId(token);
+        log.info("check >>>>" + memberId);
+
+        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+
+        Optional<Coupon> whatCoupon = couponRepository.findById(couponNo);
+
+        Coupon coupon = whatCoupon.get();
+        Member member = findMember.get();
+
+        log.info("----"+member.getCoupons());
+
+        if(member.getCoupons().contains(coupon)){
+            return false;
+        }
+
+        member.getCoupons().add(coupon);
+
+        memberRepository.save(member);
+        return true;
+    }
 
 }
