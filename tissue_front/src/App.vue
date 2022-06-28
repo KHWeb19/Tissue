@@ -16,7 +16,7 @@
           this.$route.name == 'AdminMember'
         "
       >
-        <admin-main />
+        <admin-navi />
       </div>
       <div
         v-if="
@@ -100,13 +100,14 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-import AdminMain from "@/components/Admin/AdminNavi.vue";
+import AdminNavi from '@/components/Admin/AdminNavi.vue';
 export default {
   name: "App",
   components: {
     FooterArea,
     joinFooter,
     NewNavBar2,
+    AdminNavi,
   },
   data() {
     return {
