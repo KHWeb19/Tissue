@@ -19,7 +19,7 @@
       </v-row>
       <v-row class="mt-5 mb-5">
         <v-col
-          v-for="coupon in paginatedData"
+          v-for="(coupon, index) in paginatedData"
           :key="coupon.couponNo"
           lg="4"
           sm="6"
@@ -54,9 +54,9 @@
                 ><b class="subTitle">사용 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
-              <v-btn icon @click="show = !show">
+              <v-btn icon @click="showData[index].show = !showData[index].show">
                 <v-icon>{{
-                  show ? "mdi-chevron-up" : "mdi-chevron-down"
+                  showData[index].show ? "mdi-chevron-up" : "mdi-chevron-down"
                 }}</v-icon>
               </v-btn>
             </v-card-actions>
@@ -64,7 +64,7 @@
             <v-divider></v-divider>
 
             <v-expand-transition>
-              <div v-show="show">
+              <div v-show="showData[index].show">
                 <v-card-text class="pb-1 pt-1 subContent"
                   ><b class="subTitle">사용 조건 :</b>
                   {{ coupon.couponCondition }}</v-card-text
@@ -124,9 +124,15 @@ export default {
   data() {
     return {
       pageNum: 0,
-      show: false,
+      showData: [],
     };
   },
+  created() {
+    for (let i = 0; i < this.listArray.length; i++) {
+      this.showData.push({ show: false });
+    }
+  },
+
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
