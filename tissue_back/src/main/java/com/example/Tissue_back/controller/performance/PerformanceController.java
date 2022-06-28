@@ -1,8 +1,12 @@
 package com.example.Tissue_back.controller.performance;
 
+
+import com.example.Tissue_back.controller.request.performance.KeywordDto;
+
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.service.performance.PerformanceService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -136,6 +140,14 @@ public class PerformanceController {
         log.info("exhibitionList()");
         String category = "전시회";
         return performanceService.categoryList(category);
+    }
+
+    // 검색 (유아림)
+    @PostMapping("/search")
+    public List<Performance> searchList (@RequestBody KeywordDto keywordDto) {
+        log.info("=== search ===" + keywordDto);
+        String keyword = keywordDto.getKeyword();
+        return performanceService.search(keyword);
     }
 
 }

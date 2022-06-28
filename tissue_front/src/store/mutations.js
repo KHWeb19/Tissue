@@ -1,4 +1,9 @@
 import {
+    FETCH_HALL_LIST,
+    FETCH_HALL,
+
+    FETCH_COUPON_LIST,
+    FETCH_COUPON,
     // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
@@ -9,12 +14,16 @@ import {
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
-
+    FETCH_MEMBER_INFO,
+    FETCH_MEMBER,
+    FETCH_SEARCH_LIST,
+    FETCH_NOTICE_SEARCH_LIST,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
 
 } from './mutation-types'
+
 
 export default{
     [FETCH_HALL_LIST](state, halls){
@@ -54,7 +63,18 @@ export default{
     [FETCH_NOTICE] (state, notice) {
         state.notice = notice
     },
-
+    [FETCH_MEMBER_INFO](state, memberInfo) {
+        state.memberInfo = memberInfo
+    },
+    [FETCH_MEMBER](state, member) {
+        state.member = member
+    },
+    [FETCH_SEARCH_LIST](state, searchList) {
+        state.searchList = searchList
+    },
+    [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
+        state.noticeSearchList = noticeSearchList
+    },
     // event
     [FETCH_EVENT_LIST] (state, events) {
         state.events = events

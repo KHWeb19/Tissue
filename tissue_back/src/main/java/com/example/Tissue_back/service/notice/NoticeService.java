@@ -14,4 +14,5 @@ public interface NoticeService {
     public void remove (Long noticeNo);
     //조회수
     public int updateNoticeView(Long noticeNo);
+    public List<Notice> search(String keyword);
 }

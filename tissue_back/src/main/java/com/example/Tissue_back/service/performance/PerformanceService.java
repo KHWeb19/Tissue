@@ -15,5 +15,6 @@ public interface PerformanceService {
     public void remove(Integer performNo);
 
     public List<Performance> categoryList(String category);
+    public List<Performance> search(String keyword);
 
 }

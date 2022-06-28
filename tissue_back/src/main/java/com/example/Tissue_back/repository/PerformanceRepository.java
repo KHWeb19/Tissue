@@ -14,5 +14,6 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
     @Query(value = "select p from Performance p where p.performCategory = :category")
     List<Performance> findPerformanceWithCategory(@Param("category") String category);
 
+    List<Performance> findByPerformNameContaining (String keyword);
 
 }

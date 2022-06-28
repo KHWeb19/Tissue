@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service.performance;
 
+
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -187,6 +188,10 @@ public class PerformanceServiceImpl implements PerformanceService{
 
     }
 
-
+    @Override
+    public List<Performance> search(String keyword) {
+        List<Performance> findList = performanceRepository.findByPerformNameContaining(keyword);
+        return findList;
+    }
 
 }
