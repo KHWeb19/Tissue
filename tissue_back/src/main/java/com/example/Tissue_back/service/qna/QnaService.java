@@ -13,5 +13,5 @@ public interface QnaService {
     // 비밀글 확인
     public Boolean checkSecret (Long qnaNo);
     //비밀번호 일치 여부 확인
-    public Boolean checkQnaPw (Long qnaNo, String qnaPw);
+    public Boolean checkQnaPw (Integer qnaNo, String qnaPw);
 }

@@ -69,8 +69,8 @@ public class QnaServiceImpl implements QnaService{
     }
     //비밀번호 일치 여부 확인
     @Override
-    public Boolean checkQnaPw (Long qnaNo, String qnaPw) {
-        Optional<Qna> maybeQna = repository.findById(qnaNo);
+    public Boolean checkQnaPw (Integer qnaNo, String qnaPw) {
+        Optional<Qna> maybeQna = repository.findById(Long.valueOf(qnaNo));
 
         if(maybeQna.get().getQnaPw().matches(qnaPw)) {
             log.info("Password Correct!");
