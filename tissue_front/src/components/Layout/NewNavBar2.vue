@@ -83,7 +83,7 @@ export default {
         { text: "전시회", route: "/exhibition" },
       ],
       subLinks: [
-        { text: "지역", route: "ㄱ" },
+        { text: "지역", route: "area" },
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트/쿠폰", route: "event" },
       ],

@@ -8,7 +8,7 @@
 
 import axios from 'axios'
 import NoticeRegister from '@/components/notice/NoticeRegister.vue'
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 export default {
   name: 'NoticeRegisterPage',
   components: {
