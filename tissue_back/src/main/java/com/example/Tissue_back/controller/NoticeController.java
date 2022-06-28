@@ -1,7 +1,7 @@
 package com.example.Tissue_back.controller;
 
 import com.example.Tissue_back.controller.request.performance.KeywordDto;
-import com.example.Tissue_back.entity.Performance;
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.notice.Notice;
 import com.example.Tissue_back.service.notice.NoticeService;
 import lombok.extern.slf4j.Slf4j;

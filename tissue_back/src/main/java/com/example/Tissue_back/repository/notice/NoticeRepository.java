@@ -1,6 +1,6 @@
 package com.example.Tissue_back.repository.notice;
 
-import com.example.Tissue_back.entity.Performance;
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.notice.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
