@@ -45,6 +45,7 @@
         "
       >
         <new-nav-bar-2 /> 
+        <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
       </div>
       <v-main>
         <router-view />

@@ -1,6 +1,6 @@
 package com.example.Tissue_back.service.notice;
 
-import com.example.Tissue_back.entity.Performance;
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.notice.Notice;
 import com.example.Tissue_back.repository.notice.NoticeRepository;
 import lombok.extern.slf4j.Slf4j;
