@@ -19,6 +19,7 @@ import ConcertPage from '@/views/performance/ConcertPage.vue'
 import MusicalPage from '@/views/performance/MusicalPage.vue'
 import TheaterPage from '@/views/performance/TheaterPage.vue'
 import ExhibitionPage from '@/views/performance/ExhibitionPage.vue'
+import PerformanceDetailPage from '@/views/performance/PerformanceDetailPage.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -150,6 +151,16 @@ const routes = [
     path: '/exhibition',
     name: 'ExhibitionPage',
     component: ExhibitionPage
+  },
+  {
+    path: '/performanceDetail/:performNo',
+    name: 'PerformanceDetailPage',
+    components: {
+      default: PerformanceDetailPage
+  },
+  props:{
+      default: true
+  }
   },
   // (임지훈)
 
