@@ -18,18 +18,20 @@
                 <v-tab>제주</v-tab>
             </v-tabs> -->
 
-            <ul class="tabs">
+            <!-- <ul class="tabs">
                 <li v-for="tab in tabs" v-bind:class="{active : tab === selectedTab}" :key="tab.index" @click="onClickTab(tab)">
                     {{ tab.name }}
                 </li>
-            </ul>
+            </ul> -->
 
-            <!-- <v-tabs class="tabs mt-5" v-bind:class="{active : tab === selectedTab}" :key="tab.index" @click="onClickTab(tab)"
-                fixed-tabs background-color="blue lighten-3" dark>
-            </v-tabs> -->
+            <v-tabs class="tabs mt-5" fixed-tabs background-color="blue lighten-3" dark>
+                <v-tab v-for="tab in tabs" :key="tab" @click="onClickTab(tab)">
+                    {{ tab.name }}
+                </v-tab>
+            </v-tabs>
 
             <br><br><br><br>
-            <p>상세검색 구역</p>
+            <p>상세검색 구역</p> 
             <br><br><br><br>
             <h3>현재 예매 가능한 공연은 총  {{performances.length}} 개 입니다.</h3>
             <br><br><br><br>
@@ -108,6 +110,78 @@
                  <v-row>
                     <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[3].name == perform.performArea">
+                            <v-card class="mx-auto" max-width="216" height="410" flat>
+                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
+                                <v-card-title class="performTitle mb-1">
+                                    {{ perform.performName }}
+                                </v-card-title>
+                                <v-card-subtitle class="performSub pb-0">
+                                    {{ perform.performStart }} ~
+                                    {{ perform.performEnd }}</v-card-subtitle>
+                                <div v-for="map in mapList" :key="map.mapNo">
+                                    <div v-if="perform.performNo == map.performNo">
+                                        <v-card-subtitle  class="performSub pt-0">
+                                            {{ map.name }}
+                                        </v-card-subtitle>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+            <div v-if="selectedTab === tabs[4]">
+                 <v-row>
+                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
+                        <div v-if="tabs[4].name == perform.performArea">
+                            <v-card class="mx-auto" max-width="216" height="410" flat>
+                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
+                                <v-card-title class="performTitle mb-1">
+                                    {{ perform.performName }}
+                                </v-card-title>
+                                <v-card-subtitle class="performSub pb-0">
+                                    {{ perform.performStart }} ~
+                                    {{ perform.performEnd }}</v-card-subtitle>
+                                <div v-for="map in mapList" :key="map.mapNo">
+                                    <div v-if="perform.performNo == map.performNo">
+                                        <v-card-subtitle  class="performSub pt-0">
+                                            {{ map.name }}
+                                        </v-card-subtitle>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+            <div v-if="selectedTab === tabs[5]">
+                 <v-row>
+                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
+                        <div v-if="tabs[5].name == perform.performArea">
+                            <v-card class="mx-auto" max-width="216" height="410" flat>
+                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
+                                <v-card-title class="performTitle mb-1">
+                                    {{ perform.performName }}
+                                </v-card-title>
+                                <v-card-subtitle class="performSub pb-0">
+                                    {{ perform.performStart }} ~
+                                    {{ perform.performEnd }}</v-card-subtitle>
+                                <div v-for="map in mapList" :key="map.mapNo">
+                                    <div v-if="perform.performNo == map.performNo">
+                                        <v-card-subtitle  class="performSub pt-0">
+                                            {{ map.name }}
+                                        </v-card-subtitle>
+                                    </div>
+                                </div>
+                            </v-card>
+                        </div>
+                    </v-col>
+                </v-row>
+            </div>
+            <div v-if="selectedTab === tabs[6]">
+                 <v-row>
+                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
+                        <div v-if="tabs[6].name == perform.performArea">
                             <v-card class="mx-auto" max-width="216" height="410" flat>
                                 <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
                                 <v-card-title class="performTitle mb-1">
