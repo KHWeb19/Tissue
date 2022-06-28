@@ -24,7 +24,7 @@
           lg="4"
           sm="6"
         >
-          <v-card width="400" height="390">
+          <v-card width="400">
             <div class="imgWrap">
               <div class="pt-10">
                 <v-img
@@ -71,7 +71,6 @@
                 >
               </div>
             </v-expand-transition>
-
           </v-card>
         </v-col>
       </v-row>
@@ -108,7 +107,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "EventCoupon",
   props: {
@@ -163,25 +162,26 @@ export default {
       this.pageNum -= 1;
     },
     down(couponNo) {
-         let token = localStorage.getItem('token')
+      let token = localStorage.getItem("token");
 
-         if(token !=null) {
-             axios.get(`coupon/download/${couponNo}`,{ params : {token: token} })
-             .then((res) => {
-                 if(res.data == true){
-                 alert("쿠폰이 발행되었습니다.")
-                 }else {
-                     alert('이미 발행된 쿠폰입니다.')
-                 }
-             })
-             .catch(() => {
-                 console.log("에러")
-                 console.log(couponNo, token)
-             }) 
-         }else {
-             alert("로그인이 필요합니다.")
-         }
-    }
+      if (token != null) {
+        axios
+          .get(`coupon/download/${couponNo}`, { params: { token: token } })
+          .then((res) => {
+            if (res.data == true) {
+              alert("쿠폰이 발행되었습니다.");
+            } else {
+              alert("이미 발행된 쿠폰입니다.");
+            }
+          })
+          .catch(() => {
+            console.log("에러");
+            console.log(couponNo, token);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    },
   },
 };
 </script>

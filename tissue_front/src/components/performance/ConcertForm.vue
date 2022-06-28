@@ -29,7 +29,7 @@
           <router-link
             :to="{
               name: 'PerformanceDetailPage',
-              params: { performNo: perform.performNo },
+              params: { performNo: perform.performNo.toString() },
             }"
           >
             <v-card class="mx-auto" max-width="216" height="410" flat>
@@ -75,10 +75,7 @@ export default {
       copyData: this.concertList,
     };
   },
-  mounted() {
-    //this.copyData = null;
-    //this.sortOrig();
-  },
+
   methods: {
     sortOrig() {
       this.copyData = [...this.originalData];

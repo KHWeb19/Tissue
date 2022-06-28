@@ -1,6 +1,6 @@
 <template>
   <div>
-    <exhibition-form :exhibitionList="exhibitionList" />
+    <exhibition-form v-if="exhibitionList" :exhibitionList="exhibitionList" />
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   name: "ExhibitionPage",
   components: {
     ExhibitionForm,
+  },
+  created() {
+    this.$store.state.exhibitionList = null;
   },
   computed: {
     ...mapState(["exhibitionList"]),
