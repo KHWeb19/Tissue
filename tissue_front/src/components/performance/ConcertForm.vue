@@ -76,8 +76,8 @@ export default {
     };
   },
   mounted() {
-    this.copyData = null;
-    this.sortOrig();
+    //this.copyData = null;
+    //this.sortOrig();
   },
   methods: {
     sortOrig() {

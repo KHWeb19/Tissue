@@ -14,6 +14,9 @@ export default {
     ConcertForm,
   },
 
+  created() {
+    this.$store.state.concertList = null;
+  },
   computed: {
     ...mapState(["concertList"]),
   },
