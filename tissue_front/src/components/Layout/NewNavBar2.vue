@@ -40,6 +40,8 @@
           <v-text-field
             hide-details
             append-icon="mdi-magnify"
+            @click:append="search"
+            v-model="keyword"
             single-line
             filled
             dense
@@ -85,9 +87,10 @@ export default {
       subLinks: [
         { text: "지역", route: "ㄱ" },
         { text: "랭킹", route: "ㄴ" },
-        { text: "이벤트/쿠폰", route: "event" },
+        { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: localStorage.getItem("token"),
+      keyword:''
     };
   },
   mounted() {
@@ -135,6 +138,11 @@ export default {
         this.$router.push("/login");
       }
     },
+    search() {
+        console.log(this.keyword)
+        this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
+        this.keyword=''
+    }
   },
 };
 </script>

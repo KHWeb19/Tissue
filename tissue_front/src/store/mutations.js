@@ -15,7 +15,9 @@ import {
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
     FETCH_MEMBER_INFO,
-    FETCH_MEMBER
+    FETCH_MEMBER,
+    FETCH_SEARCH_LIST,
+    FETCH_NOTICE_SEARCH_LIST
 
 } from './mutation-types'
 
@@ -62,5 +64,11 @@ export default{
     },
     [FETCH_MEMBER](state, member) {
         state.member = member
+    },
+    [FETCH_SEARCH_LIST](state, searchList) {
+        state.searchList = searchList
+    },
+    [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
+        state.noticeSearchList = noticeSearchList
     }
 }

@@ -20,7 +20,9 @@ export default {
 
     // 유아림
     memberInfo: {},
-    member:[]
+    member: [],
+    searchList: [],
+    noticeSearchList: []
     // 유아림
 
 }
