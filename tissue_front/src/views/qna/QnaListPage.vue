@@ -1,5 +1,5 @@
 <template>
-    <div class="background"><br><br><br>
+    <div class="background">
     <v-row justify="center">
       <v-col xs="20" sm="10" md="10">
       <v-card><br>
