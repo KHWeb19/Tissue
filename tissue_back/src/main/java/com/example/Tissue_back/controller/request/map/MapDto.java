@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:tissue_back/src/main/java/com/example/Tissue_back/controller/request/performance/MapDto.java
-package com.example.Tissue_back.controller.request.performance;
-========
+
 package com.example.Tissue_back.controller.request.map;
->>>>>>>> main:tissue_back/src/main/java/com/example/Tissue_back/controller/request/map/MapDto.java
 
 import com.example.Tissue_back.entity.map.Map;
 import lombok.AllArgsConstructor;
