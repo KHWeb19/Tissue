@@ -1,6 +1,6 @@
 package com.example.Tissue_back.service;
 
-import com.example.Tissue_back.controller.request.performance.MapDto;
+import com.example.Tissue_back.controller.request.map.MapDto;
 import com.example.Tissue_back.entity.Map;
 import com.example.Tissue_back.repository.MapRepository;
 import org.springframework.beans.factory.annotation.Autowired;

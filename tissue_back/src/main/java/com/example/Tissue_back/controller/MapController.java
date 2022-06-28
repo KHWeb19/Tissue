@@ -1,6 +1,6 @@
 package com.example.Tissue_back.controller;
 
-import com.example.Tissue_back.controller.request.performance.MapDto;
+import com.example.Tissue_back.controller.request.map.MapDto;
 import com.example.Tissue_back.entity.Map;
 import com.example.Tissue_back.service.MapService;
 import lombok.extern.slf4j.Slf4j;
