@@ -3,47 +3,42 @@
         <v-container><br><br><br>
             <v-row>
                 <v-col>
-                    <form>
-                        <!-- <div>
-                            <label>공연번호 확인</label>
-                            <input type="text" :value="event.performance.performNo" readonly/>
-                        </div> -->
-                        <div>
-                            <label>공연썸네일</label>
-                            <img :src="require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)"/>
-                        </div>
-                        <div>
-                            <label>제목</label>
-                            <input type="text" :value="event.eventTitle" readonly/>
-                        </div>
-                        <div>
-                            <label>카테고리</label>
-                            <input type="text" :value="event.eventCategory" readonly/>
-                        </div>
-                        <div>
-                            <label>시작일</label>
-                            <input type="text" :value="event.eventStart" readonly/>
-                        </div>
-                        <div>
-                            <label>종료일</label>
-                            <input type="text" :value="event.eventEnd" readonly/>
-                        </div>
-                    </form>
+                    <img :src="require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)"/>
+                </v-col>
+                <v-col>
+                    <div>
+                        <label>제목</label>
+                        <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventTitle" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>카테고리</label>
+                        <v-text-field outlined  color="pink lighten-3" type="text" :value="event.eventCategory" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>시작일</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventStart" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>종료일</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventEnd" readonly></v-text-field>
+                    </div>
                 </v-col>
             </v-row>
-            
             <br>
-
-            <!-- <v-row>
-                <v-btn color="blue lighten-3" dark @click="onSubmit" value="Upload">
-                    등록
+            <div>
+                <v-btn class="mr-5" color="blue lighten-3" dark router-link :to="{ name: 'EventModifyPage', params: { eventNo: event.eventNo } }">
+                    수정
                 </v-btn>
-            </v-row> -->
+                <v-btn color="blue lighten-3" dark @click="onDelete(event.eventNo)">
+                    삭제
+                </v-btn>
+            </div>
         </v-container>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'EventReadForm',
     props: {
@@ -56,6 +51,26 @@ export default {
         return {
 
         }
-    }
+    },
+    methods: {
+        onDelete (eventNo) {
+            axios.delete(`event/${eventNo}`)
+                    .then(() => {
+                        alert('이벤트를 삭제했습니다.')
+                        this.$router.push({ name: 'EventListPage' })
+                    })
+                    .catch(() => {
+                        alert('삭제 실패!')
+                    })
+        }
+    },
 }
 </script>
+
+<style scoped>
+img {
+   position: relative;
+    max-height: 500px;
+    max-width: 500px;
+}
+</style>

@@ -62,15 +62,18 @@ public class EventController {
     @PutMapping("/{eventNo}")
     public Event eventModify (
             @PathVariable("eventNo") Integer eventNo,
-            @RequestPart("event") Event event,
-            @RequestParam(value = "fileList", required = false ) List<MultipartFile> fileList) {
-        log.info ("eventModify(): " + event);
+            @RequestBody EventDto eventDto) throws Exception {
+        log.info ("eventModify(): ");
 
-        event.setEventNo(Long.valueOf(eventNo));
+        Optional<Performance> optionalPerformance = performanceRepository.findByPerformNo(eventDto.getPerformNo());
 
-        Event event1 = eventService.modify(event, fileList);
+        if (!optionalPerformance.isPresent()) {
+            return null;
+        }
 
-        return event1;
+        Event event = eventService.modify(eventDto, eventNo, optionalPerformance.get());
+
+        return event;
     }
 
     @DeleteMapping("/{eventNo}")

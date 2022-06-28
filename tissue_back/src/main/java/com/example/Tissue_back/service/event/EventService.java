@@ -11,6 +11,6 @@ public interface EventService {
     public void register(EventDto eventDto, Performance performance);
     public List<Event> list();
     public Event read(Integer eventNo);
-    public Event modify(Event event, List<MultipartFile> fileList);
+    public Event modify(EventDto eventDto, Integer eventNo, Performance performance) throws Exception;
     public void remove(Integer eventNo);
 }

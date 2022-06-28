@@ -34,6 +34,7 @@ export default {
             .then (res => {
                 alert('이벤트가 등록되었습니다.')
                 console.log(res)
+                this.$router.push({name: 'EventListPage'})
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)

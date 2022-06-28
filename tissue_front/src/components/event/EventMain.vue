@@ -60,6 +60,7 @@ export default {
 
     axios.get("/event/list")
     .then((res) => {
+      console.log("event res: ", res)
       this.eventPageArray = res.data
     })
     .catch((err) => {

@@ -34,12 +34,14 @@ import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 import MapPage from '@/views/map/MapPage.vue'
+import AreaPage from '@/views/area/AreaPage.vue'
 
 // event
 import EventRegisterPage from '@/views/event/EventRegisterPage.vue'
 import EventListPage from '@/views/event/EventListPage.vue'
 import EventReadPage from '@/views/event/EventReadPage.vue'
 import EventModifyPage from '@/views/event/EventModifyPage.vue'
+
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -266,6 +268,11 @@ const routes = [
      props: {
       default: true
      }
+  },
+  {
+    path: '/area',
+    name: 'AreaPage',
+    component: AreaPage
   },
   // 노서현
   

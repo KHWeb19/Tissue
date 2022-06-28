@@ -22,4 +22,5 @@ public class EventDto {
     private LocalDate eventStart;
     private LocalDate eventEnd;
     private Date eventRegDate;
+
 }

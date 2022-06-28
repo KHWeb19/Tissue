@@ -1,5 +1,6 @@
 package com.example.Tissue_back.entity.event;
 
+import com.example.Tissue_back.controller.request.event.EventDto;
 import com.example.Tissue_back.entity.performance.Performance;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,4 +39,5 @@ public class Event {
 
     @CreationTimestamp
     private Date eventRegDate;
+
 }

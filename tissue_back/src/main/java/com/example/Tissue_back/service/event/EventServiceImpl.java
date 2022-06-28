@@ -54,13 +54,28 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public Event modify(Event event, List<MultipartFile> fileList) {
+    public Event modify(EventDto eventDto, Integer eventNo, Performance performance) throws Exception {
+        Optional<Event> optionalEvent = eventRepository.findById(Long.valueOf(eventNo));
+
+        if(optionalEvent.isEmpty()) {
+            throw new Exception("event is not present");
+        }
+
+        Event event = optionalEvent.get();
+
+        event.setEventTitle(eventDto.getEventTitle());
+        event.setEventCategory(eventDto.getEventCategory());
+        event.setEventStart(eventDto.getEventStart());
+        event.setEventEnd(eventDto.getEventEnd());
+        event.setPerformance(performance);
+
+        eventRepository.save(event);
 
         return event;
     }
 
     @Override
     public void remove(Integer eventNo) {
-
+        eventRepository.deleteById(Long.valueOf(eventNo));
     }
 }

@@ -22,9 +22,15 @@
                     <h4>{{ performance.performGrade }}</h4>
                     <h4>{{ performance.performStart }}</h4>
                     <h4>{{ performance.performer }}</h4>
+                    <div v-if="performance.performPriceS !== null && performance.performPriceS !== 'null'">
                     <h4>{{ performance.performPriceS }}원</h4>
+                    </div>
+                    <div v-if="performance.performPriceR !== null && performance.performPriceR !== 'null'">
                     <h4>{{ performance.performPriceR }}원</h4>
+                    </div>
+                    <div v-if="performance.performPriceVip !== null && performance.performPriceVip !== 'null'">
                     <h4>{{ performance.performPriceVip }}원</h4>
+                    </div>
                 </v-col>
             </v-row>
             <hr class="mt-5 mb-5">

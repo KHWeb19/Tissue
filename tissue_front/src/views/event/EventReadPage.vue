@@ -25,19 +25,22 @@ export default {
     },
     created() {
         console.log(this.event)
-    },
-    computed: {
-        ...mapState(['event'])
-    },
-    mounted() {
+
         this.fetchEvent(this.eventNo)
             .catch(() => {
                         alert('이벤트 게시물 요청 실패!')
                         console.log(this.eventNo)
                     })
     },
+    computed: {
+        ...mapState(['event'])
+    },
     methods: {
-        ...mapActions(['fetchEvent'])
+        ...mapActions(['fetchEvent']),
     }
 }
 </script>
+
+<style scoped>
+
+</style>
