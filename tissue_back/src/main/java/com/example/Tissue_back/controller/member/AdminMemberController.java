@@ -4,6 +4,8 @@ import com.example.Tissue_back.controller.request.member.RoleModifyDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.member.Role;
 import com.example.Tissue_back.service.member.AdminMemberService;
+import com.example.Tissue_back.service.security.SecurityService;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,22 @@ public class AdminMemberController {
 
     @Autowired
     private AdminMemberService service;
+
+    @Autowired
+    private SecurityService securityService;
+
+    // 관리자 권한 판단
+    @GetMapping("/role")
+    public Boolean admin (@RequestParam(value="token") String token) {
+        log.info("==is role admin?==" + token);
+        Claims role = securityService.getRole(token);
+
+        log.info("role" + role.get("roles"));
+        if (!role.get("roles").toString().equals("ADMIN")){
+            return false;
+        }
+        return true;
+    }
 
     // 회원정보 전체 조회
     @GetMapping("/memberInfo")

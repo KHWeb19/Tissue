@@ -39,6 +39,8 @@
         <v-text-field
           hide-details
           append-icon="mdi-magnify"
+          @click:append="search"
+          v-model="keyword"
           single-line
           filled
           dense
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "NewNavBar",
   data() {
@@ -86,6 +89,7 @@ export default {
         { text: "이벤트/쿠폰", route: "event" },
       ],
       token: "",
+      keyword:''
     };
   },
   created() {
@@ -102,12 +106,23 @@ export default {
     },
     goToMyPage() {
       if (this.token != null) {
-        this.$router.push("/myPage");
+          axios.get('Admin/role',{params: {token: this.token}})
+          .then((res) => {
+              if(res.data == true){
+                  this.$router.push("/Admin")
+              }else {
+                  this.$router.push("/myPage")
+              }
+          })
       } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");
       }
     },
+    search() {
+        console.log(this.keyword)
+        this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
+    }
   },
 };
 </script>

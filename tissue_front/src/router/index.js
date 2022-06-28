@@ -9,7 +9,6 @@ import HallReadPage from '@/views/hall/HallReadPage.vue'
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
-import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
 import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
 import CouponListPage from '@/views/coupon/CouponListPage.vue'
 import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
@@ -31,6 +30,8 @@ import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
 
+import SearchPage from '../views/search/SearchPage.vue'
+
 // admin
 
 
@@ -47,6 +48,16 @@ import NoticeModifyPage from '../views/notice/NoticeModifyPage.vue'
 
 
 Vue.use(VueRouter)
+
+const requireLogin = () => (to, from, next) => {
+    let token = localStorage.getItem('token')
+    if (token !== null) {
+        return next()
+    } else {
+        alert('로그인이 필요한 서비스입니다.')
+        router.push("/")
+    }
+} 
 
 const routes = [
   // 메인페이지 (임지훈)
@@ -92,8 +103,8 @@ const routes = [
   },
   {
     path: '/Admin',
-    name: 'AdminMainPage',
-    component: AdminMainPage
+    name: 'AdminMember',
+    component: AdminMember
   },
   {
     path: '/couponRegister',
@@ -186,7 +197,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/modify',
@@ -196,7 +208,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/signOut',
@@ -206,17 +219,30 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/coupon',
         name: 'MyPageCoupon',
-        component: MyPageView
+        component: MyPageView,
+        beforeEnter: requireLogin()
     },
     {
-        path: '/Admin/member',
-        name: 'AdminMember',
-        component: AdminMember 
+        path: '/myPage/qna',
+        name: 'MyPageQnA',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/search/:keyword',
+        name: 'SearchPage',
+        components: {
+            default: SearchPage
+        },
+        props: {
+            default: true
+        }
     },
   // 유아림
 

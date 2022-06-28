@@ -56,7 +56,8 @@ export default {
   data() {
     return {
       items: [
-        { title: "회원 관리", icon: "mdi-account", route: "/Admin/member" },
+
+        { title: "회원 관리", icon: "mdi-account", route:'/Admin' },
         {
           title: "공연 관리",
           icon: "mdi-play-box-outline",
