@@ -1,6 +1,6 @@
 package com.example.Tissue_back.controller;
 
-import com.example.Tissue_back.controller.request.PerformanceDto;
+import com.example.Tissue_back.controller.request.performance.KeywordDto;
 import com.example.Tissue_back.entity.Performance;
 import com.example.Tissue_back.repository.PerformanceRepository;
 import com.example.Tissue_back.service.PerformanceService;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -138,6 +137,14 @@ public class PerformanceController {
         log.info("exhibitionList()");
         String category = "전시회";
         return performanceService.categoryList(category);
+    }
+
+    // 검색 (유아림)
+    @PostMapping("/search")
+    public List<Performance> searchList (@RequestBody KeywordDto keywordDto) {
+        log.info("=== search ===" + keywordDto);
+        String keyword = keywordDto.getKeyword();
+        return performanceService.search(keyword);
     }
 
 }

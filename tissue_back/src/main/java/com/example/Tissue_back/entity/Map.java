@@ -1,6 +1,6 @@
 package com.example.Tissue_back.entity;
 
-import com.example.Tissue_back.controller.request.MapDto;
+import com.example.Tissue_back.controller.request.performance.MapDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

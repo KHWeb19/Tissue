@@ -1,6 +1,5 @@
 package com.example.Tissue_back.service;
 
-import com.example.Tissue_back.controller.request.PerformanceDto;
 import com.example.Tissue_back.entity.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,5 +15,6 @@ public interface PerformanceService {
     public void remove(Integer performNo);
 
     public List<Performance> categoryList(String category);
+    public List<Performance> search(String keyword);
 
 }
