@@ -22,7 +22,7 @@ export default {
              memberEmail, memberPhone, memberAddress, addZipCode, addDetail})
             .then(()=> {
                 alert ('환영합니다 !')
-                
+                this.$router.push('/login')
             })
             .catch(res => {
                 alert(res.response.data.message)

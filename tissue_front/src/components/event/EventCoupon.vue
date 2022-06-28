@@ -19,12 +19,12 @@
       </v-row>
       <v-row class="mt-5 mb-5">
         <v-col
-          v-for="coupon in paginatedData"
+          v-for="(coupon, index) in paginatedData"
           :key="coupon.couponNo"
           lg="4"
           sm="6"
         >
-          <v-card width="400" height="350">
+          <v-card width="400">
             <div class="imgWrap">
               <div class="pt-10">
                 <v-img
@@ -38,30 +38,39 @@
               </div>
             </div>
 
-            <v-card-title class="pt-1 pb-1 couponTitle">
+            <v-card-title class="pt-3 pb-1 couponTitle">
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
             </v-card-title>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
+            <v-card-actions class="pb-3 pt-2 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">발급 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
             </v-card-actions>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
+            <v-card-actions class="pb-2 pt-1 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">사용 기간 :</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
               >
+              <v-btn icon @click="showData[index].show = !showData[index].show">
+                <v-icon>{{
+                  showData[index].show ? "mdi-chevron-up" : "mdi-chevron-down"
+                }}</v-icon>
+              </v-btn>
             </v-card-actions>
 
-            <v-card-actions class="pb-1 pt-1 pl-0">
-              <v-card-text class="pb-0 pt-0 subContent"
-                ><b class="subTitle">사용 조건 :</b>
-                {{ coupon.couponCondition }}</v-card-text
-              >
-            </v-card-actions>
+            <v-divider></v-divider>
+
+            <v-expand-transition>
+              <div v-show="showData[index].show">
+                <v-card-text class="pb-1 pt-1 subContent"
+                  ><b class="subTitle">사용 조건 :</b>
+                  {{ coupon.couponCondition }}</v-card-text
+                >
+              </div>
+            </v-expand-transition>
           </v-card>
         </v-col>
       </v-row>
@@ -98,6 +107,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "EventCoupon",
   props: {
@@ -115,8 +125,15 @@ export default {
   data() {
     return {
       pageNum: 0,
+      showData: [],
     };
   },
+  created() {
+    for (let i = 0; i < this.listArray.length; i++) {
+      this.showData.push({ show: false });
+    }
+  },
+
   filters: {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -143,6 +160,27 @@ export default {
     },
     prevPage() {
       this.pageNum -= 1;
+    },
+    down(couponNo) {
+      let token = localStorage.getItem("token");
+
+      if (token != null) {
+        axios
+          .get(`coupon/download/${couponNo}`, { params: { token: token } })
+          .then((res) => {
+            if (res.data == true) {
+              alert("쿠폰이 발행되었습니다.");
+            } else {
+              alert("이미 발행된 쿠폰입니다.");
+            }
+          })
+          .catch(() => {
+            console.log("에러");
+            console.log(couponNo, token);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+      }
     },
   },
 };

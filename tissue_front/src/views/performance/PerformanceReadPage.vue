@@ -71,7 +71,6 @@
             </div>
 
             <hr class="mt-5 mb-5">
-
             <div align="center">
              <v-row>
                 <v-col v-if="showMap">
@@ -82,11 +81,14 @@
                 </v-col>
             </v-row>
             </div>
-
-            <div align="center">
-                <v-btn plain router-link :to="{ name: 'PerformanceModifyPage', params: { performNo } }">
-                    수정
-                </v-btn>
+    <div align="center">
+      <v-btn
+        plain
+        router-link
+        :to="{ name: 'PerformanceModifyPage', params: { performNo } }"
+      >
+        수정
+      </v-btn>
 
                 <v-btn plain @click="onDelete">
                     삭제

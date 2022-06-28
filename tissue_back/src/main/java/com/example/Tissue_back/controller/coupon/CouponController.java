@@ -58,4 +58,14 @@ public class CouponController {
 
         couponService.remove(couponNo);
     }
+
+    // 쿠폰 다운로드
+    @GetMapping("/download/{couponNo}")
+    public Boolean couponDown (@PathVariable("couponNo") Long couponNo, @RequestParam(value="token") String token) {
+        log.info("couponDown()" + couponNo + token);
+
+        return couponService.download(couponNo, token);
+
+    }
+
 }

@@ -180,4 +180,13 @@ public class PerformanceServiceImpl implements PerformanceService{
     public void remove(Integer performNo) {
         performanceRepository.deleteById(Long.valueOf(performNo));
     }
+
+    @Override
+    public List<Performance> categoryList(String category) {
+        return performanceRepository.findPerformanceWithCategory(category);
+
+    }
+
+
+
 }

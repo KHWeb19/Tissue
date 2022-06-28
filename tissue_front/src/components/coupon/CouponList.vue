@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-app-bar app elevation="3">
-        <v-toolbar-title class="ml-3">
-            📌 쿠폰 관리
-        </v-toolbar-title>
+      <v-toolbar-title class="ml-3"> 📌 쿠폰 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container>
       <v-row class="mt-5 mb-5">
@@ -13,7 +11,7 @@
           lg="4"
           sm="6"
         >
-          <v-card width="300" height="250">
+          <v-card width="350">
             <v-img
               :src="require(`@/assets/coupon/${coupon.filename}`)"
               height="150px"
@@ -25,7 +23,7 @@
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
             </v-card-title>
 
-            <v-card-actions class="pb-0 pt-0 pl-0">
+            <v-card-actions class="pb-1 pt-0 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">발급 기간:</b> {{ coupon.couponStart }} ~
                 {{ coupon.couponEnd }}</v-card-text
@@ -33,6 +31,13 @@
             </v-card-actions>
 
             <v-card-actions class="pb-0 pt-0 pl-0">
+              <v-card-text class="pb-1 pt-0 subContent"
+                ><b class="subTitle">사용 기간:</b> {{ coupon.couponStart }} ~
+                {{ coupon.couponEnd }}</v-card-text
+              >
+            </v-card-actions>
+
+            <v-card-actions class="pb-1 pt-0 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
                 ><b class="subTitle">사용 조건:</b>
                 {{ coupon.couponCondition }}</v-card-text
@@ -44,7 +49,7 @@
                       name: 'CouponModifyPage',
                       params: { couponNo: coupon.couponNo.toString() },
                     }"
-                    ><v-btn text>수정</v-btn></router-link
+                    ><v-btn height="21" text>수정</v-btn></router-link
                   >
                 </div>
                 <div>
@@ -56,6 +61,7 @@
                         v-bind="attrs"
                         v-on="on"
                         @click="resetCheckBox"
+                        height="21"
                       >
                         삭제
                       </v-btn>
@@ -220,7 +226,7 @@ export default {
 .couponPrice {
   font-size: 60px;
   padding-top: 30px;
-  padding-left: 25px;
+  padding-left: 45px;
 }
 .btn-cover {
   margin-top: 1.5rem;
@@ -245,7 +251,7 @@ export default {
 }
 .subTitle {
   float: left;
-  width: 57px;
+  width: 60px;
   font-size: 13px;
   line-height: 21px;
   color: #666;

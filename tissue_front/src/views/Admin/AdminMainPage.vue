@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import AdminMain from "@/components/Admin/AdminMain.vue";
+import AdminMain from "@/components/Admin/AdminNavi.vue";
 
 export default {
   name: "AdminMainPage",
