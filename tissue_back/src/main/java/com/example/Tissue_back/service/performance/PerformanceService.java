@@ -1,6 +1,6 @@
-package com.example.Tissue_back.service;
+package com.example.Tissue_back.service.performance;
 
-import com.example.Tissue_back.entity.Performance;
+import com.example.Tissue_back.entity.performance.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

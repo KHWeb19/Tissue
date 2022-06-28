@@ -1,5 +1,5 @@
-import axios from 'axios'
 import {
+
     FETCH_HALL_LIST,
     FETCH_HALL,
 
@@ -16,16 +16,24 @@ import {
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
+
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
     FETCH_NOTICE_SEARCH_LIST,
 
+    // event
+    FETCH_EVENT_LIST,
+    FETCH_EVENT,
+
+
 } from './mutation-types'
 
-//import router from '@/router'
+// import Vue from 'vue'
+import axios from 'axios'
 
 export default {
+
     fetchHallList({commit}) {
         return axios.get('http://localhost:7777/hall/list')
         .then((res)=>{
@@ -99,12 +107,26 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
+      },
+
+    // event
+    fetchEventList({ commit }) {
+      return axios.get('http://localhost:7777/event/list')
+              .then((res) => {
+                  commit(FETCH_EVENT_LIST, res.data)
+              })
+    },
+    fetchEvent({ commit }, eventNo) {
+      return axios.get(`http://localhost:7777/event/${eventNo}`)
+      .then((res) => {
+          commit(FETCH_EVENT, res.data)
+      })
     },
     fetchMemberInfo({ commit }, token) {
-        return axios.get('Member/info', { params: { token: token }})
+        return axios.get('Member/info', { params: { token: token } })
             .then((res) => {
                 commit(FETCH_MEMBER_INFO, res.data)
-        })
+            })
     },
     fetchMember({ commit }) {
         return axios.get('Admin/memberInfo')
@@ -124,5 +146,6 @@ export default {
             commit(FETCH_NOTICE_SEARCH_LIST, res.data)
         })
     }
+
 }
 

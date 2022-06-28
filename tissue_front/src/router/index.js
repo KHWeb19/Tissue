@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
+
 import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
 import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
@@ -19,6 +20,7 @@ import ConcertPage from '@/views/performance/ConcertPage.vue'
 import MusicalPage from '@/views/performance/MusicalPage.vue'
 import TheaterPage from '@/views/performance/TheaterPage.vue'
 import ExhibitionPage from '@/views/performance/ExhibitionPage.vue'
+import PerformanceDetailPage from '@/views/performance/PerformanceDetailPage.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -27,6 +29,7 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
+
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
 
@@ -34,12 +37,20 @@ import SearchPage from '../views/search/SearchPage.vue'
 
 // admin
 
-
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
 import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
+import MapPage from '@/views/map/MapPage.vue'
+import AreaPage from '@/views/area/AreaPage.vue'
+
+// event
+import EventRegisterPage from '@/views/event/EventRegisterPage.vue'
+import EventListPage from '@/views/event/EventListPage.vue'
+import EventReadPage from '@/views/event/EventReadPage.vue'
+import EventModifyPage from '@/views/event/EventModifyPage.vue'
+
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -151,6 +162,16 @@ const routes = [
     name: 'ExhibitionPage',
     component: ExhibitionPage
   },
+  {
+    path: '/performanceDetail/:performNo',
+    name: 'PerformanceDetailPage',
+    components: {
+      default: PerformanceDetailPage
+  },
+  props:{
+      default: true
+  }
+  },
   // (임지훈)
 
   // 유아림
@@ -246,8 +267,7 @@ const routes = [
     },
   // 유아림
 
-  // 공연장 (노서현)
- 
+  // 노서현
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
@@ -278,7 +298,47 @@ const routes = [
       default: true
      }
   },
-  // 공연장 (노서현)
+  {
+    path: '/mapPage',
+    name: 'MapPage',
+    component: MapPage
+  },
+  {
+    path: '/eventRegisterPage',
+    name: 'EventRegisterPage',
+    component: EventRegisterPage
+  },
+  {
+    path: '/eventListPage',
+    name: 'EventListPage',
+    component: EventListPage
+  },
+  {
+    path: '/eventReadPage/:eventNo',
+    name: 'EventReadPage',
+    components: {
+      default: EventReadPage
+    },
+     props: {
+      default: true
+     }
+  },
+  {
+    path: '/eventModifyPage/:eventNo',
+    name: 'EventModifyPage',
+    components: {
+      default: EventModifyPage
+    },
+     props: {
+      default: true
+     }
+  },
+  {
+    path: '/area',
+    name: 'AreaPage',
+    component: AreaPage
+  },
+  // 노서현
   
   {
     path: '/noticeRegister',
@@ -300,16 +360,16 @@ const routes = [
       default: true
     }
   },
-    {
-        path: '/noticeModify/:noticeNo',
-        name: 'NoticeModifyPage',
-        components: {
-            default: NoticeModifyPage
-        },
-        props: {
-            default: true
-        }
+  {
+    path: '/noticeModify/:noticeNo',
+    name: 'NoticeModifyPage',
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
     }
+  },
 ]
 
 const router = new VueRouter({

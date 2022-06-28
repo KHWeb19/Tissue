@@ -44,8 +44,7 @@
           this.$route.name != 'AdminMember'
         "
       >
-        <new-nav-bar-2 />
-        <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
+        <new-nav-bar-2 /> 
       </div>
       <v-main>
         <router-view />
@@ -74,7 +73,7 @@
         this.$route.name != 'AdminMember'
       "
     />
-    <join-footer
+    <join-footer 
       v-if="
         this.$route.name != 'KakaoOAuth' &&
         this.$route.name != 'GoogleOAuth' &&
@@ -107,31 +106,22 @@ export default {
     FooterArea,
     joinFooter,
     NewNavBar2,
-    AdminMain,
   },
   data() {
     return {
       url: null,
     };
   },
-  created() {
-    this.url = window.location.href;
-    if (this.url == "http://localhost:8080/") {
-      this.isHome = true;
-    } else {
-      this.isHome = false;
-    }
-  },
-};
+}
 </script>
 <style scoped>
 .v-application {
-  font-family: "Noto Sans KR", sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 @font-face {
-  font-family: "Noto Sans KR";
-  src: url("assets/font/NotoSansKR-Bold.otf");
-  font-weight: 500;
+    font-family: 'Noto Sans KR' ;
+    src: url('assets/font/NotoSansKR-Bold.otf');
+    font-weight: 500;
 }
 </style>
 

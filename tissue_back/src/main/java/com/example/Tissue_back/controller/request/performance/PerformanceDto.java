@@ -1,15 +1,14 @@
 package com.example.Tissue_back.controller.request.performance;
 
-import com.example.Tissue_back.entity.Performance;
+import com.example.Tissue_back.entity.performance.Performance;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -40,6 +39,8 @@ public class PerformanceDto {
 
     private String performer;
 
+    private Date performRegDate;
+
     public Performance toEntity() {
         return Performance.builder()
                 .performNo(performNo)
@@ -54,6 +55,7 @@ public class PerformanceDto {
                 .performCategory(performCategory)
                 .performGrade(performGrade)
                 .performer(performer)
+                .performRegDate(performRegDate)
                 .build();
     }
 }

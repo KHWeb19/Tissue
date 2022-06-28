@@ -4,7 +4,7 @@ import {
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
-  // performance
+    // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
     FETCH_CONCERT_LIST,
@@ -17,9 +17,13 @@ import {
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
-    FETCH_NOTICE_SEARCH_LIST
+    FETCH_NOTICE_SEARCH_LIST,
+    // event
+    FETCH_EVENT_LIST,
+    FETCH_EVENT,
 
 } from './mutation-types'
+
 
 export default{
     [FETCH_HALL_LIST](state, halls){
@@ -70,5 +74,12 @@ export default{
     },
     [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
         state.noticeSearchList = noticeSearchList
+    },
+    // event
+    [FETCH_EVENT_LIST] (state, events) {
+        state.events = events
+    },
+    [FETCH_EVENT] (state, event) {
+        state.event = event
     }
 }

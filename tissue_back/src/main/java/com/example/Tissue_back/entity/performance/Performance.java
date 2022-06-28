@@ -1,4 +1,4 @@
-package com.example.Tissue_back.entity;
+package com.example.Tissue_back.entity.performance;
 
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -68,6 +69,9 @@ public class Performance {
 
     @Column(name="perform_detail_img_path")
     private String performDetailImgPath;
+
+    @CreationTimestamp
+    private Date performRegDate;
 
     public void updatePerformance(PerformanceDto performanceDto) {
         this.performName = performanceDto.getPerformName();

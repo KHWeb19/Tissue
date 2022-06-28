@@ -1,7 +1,8 @@
-package com.example.Tissue_back.service;
+package com.example.Tissue_back.service.map;
 
-import com.example.Tissue_back.controller.request.performance.MapDto;
-import com.example.Tissue_back.entity.Map;
+
+import com.example.Tissue_back.controller.request.map.MapDto;
+import com.example.Tissue_back.entity.map.Map;
 
 import java.util.List;
 

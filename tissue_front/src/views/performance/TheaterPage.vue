@@ -1,6 +1,6 @@
 <template>
   <div>
-    <theater-form :theaterList="theaterList" />
+    <theater-form v-if="theaterList" :theaterList="theaterList" />
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   name: "TheaterPage",
   components: {
     TheaterForm,
+  },
+  created() {
+    this.$store.state.theaterList = null;
   },
   computed: {
     ...mapState(["theaterList"]),
