@@ -24,12 +24,13 @@
           lg="4"
           sm="6"
         >
-          <v-card width="400" height="390">
+          <v-card width="400">
             <div class="imgWrap">
-              <div class="pt-10">
+              <div class="hover pt-10">
                 <v-img
                   :src="require(`@/assets/coupon/${coupon.filename}`)"
                   class="img"
+                  @click="down(coupon.couponNo)"
                 >
                   <div class="couponPrice">
                     {{ coupon.couponPrice | comma }}
@@ -65,7 +66,7 @@
 
             <v-expand-transition>
               <div v-show="show">
-                <v-card-text class="pb-1 pt-1 subContent"
+                <v-card-text class="pb-3 pt-3 subContent"
                   ><b class="subTitle">사용 조건 :</b>
                   {{ coupon.couponCondition }}</v-card-text
                 >
@@ -243,4 +244,10 @@ export default {
   margin: auto;
   border-radius: 15px;
 }
+.hover:hover {
+    transform: scale(1.07);
+    transition: .5s;
+    cursor: pointer;
+}
+
 </style>
