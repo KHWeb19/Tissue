@@ -16,7 +16,7 @@
                           <v-input label="*아이디:">&emsp;{{ qna.qnaWriter}}</v-input>
                           <v-textarea label="*내용:" :value="qna.qnaContent" auto-grow flat solo readonly></v-textarea>
                           <v-input color="gray">{{ qna.qnaDate}}</v-input>
-                            <div id = "menu" v-if="this.$store.state.memberInfo.memberId === qna.qnaWriter">
+                            <div id = "menu" v-if="this.memberInfo.memberId === qna.qnaWriter">
                             <v-card-actions>
                               <v-spacer></v-spacer>
                               <router-link style="color: gray"

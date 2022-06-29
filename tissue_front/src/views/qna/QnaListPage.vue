@@ -69,8 +69,11 @@
               </v-tab>
             </v-tabs>
             <v-tabs-items v-model="tab">
-              <v-tab-item v-for="item in items" :key="item.tab">
-                <component v-bind:is="item.content"/>
+              <v-tab-item>
+                <qna-best-list v-if="qnaBestList && memberInfo" :qnaBestList="qnaBestList" :memberInfo="memberInfo"/>
+              </v-tab-item>
+              <v-tab-item>
+                <qna-list v-if="qnaList && memberInfo" :qnaList="qnaList" :memberInfo="memberInfo"/>
               </v-tab-item>
             </v-tabs-items>
   </v-card>
@@ -81,6 +84,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import QnaList from '@/components/qna/QnaList.vue'
 import QnaBestList from '@/components/qna/QnaBestList.vue'
 export default {
@@ -95,8 +99,24 @@ export default {
       items: [
         {tab: '자주묻는질문', content: QnaBestList },
         {tab: '1대1 문의하기', content: QnaList }
-      ]
+      ],
+      token: localStorage.getItem('token')
     }
+  },
+  computed: {
+    ...mapState(['qnaBestList', 'qnaList', 'memberInfo'])
+  },
+  created () {
+    this.fetchMemberRole(this.token)
+    console.log("this token: " + this.token)
+  },
+  mounted () {
+    this.fetchQnaBestList()
+    this.fetchQnaList()
+    this.fetchMemberRole(this.token)
+  },
+  methods : {
+    ...mapActions(['fetchQnaBestList', 'fetchQnaList', 'fetchMemberRole'])
   }
 }
 </script>

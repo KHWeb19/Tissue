@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <v-container>
-    <v-row justify="left">
+    <v-row>
       <v-col xs="18" sm="8" md="8">
         <v-card class="pa-3">
           <v-subheader style="dark">Tissue Ticket</v-subheader>
@@ -18,7 +18,7 @@
               </v-col>
             </div>
             <v-divider :inset="false"></v-divider><br>
-            <div>
+            <div v-if="memberInfo.roles != 'USER'">
               <textarea class="textareaComment" v-model="qnaCommentContent" type="text" placeholder="댓글을 입력하세요."></textarea>
               <div id ='btn'>
                 <v-btn id="BtnRegister" type="submit">댓글 등록</v-btn>
@@ -47,7 +47,6 @@ export default {
   data () {
     return {
       qnaCommentContent: '',
-      token: localStorage.getItem('token')
     }
   },
   methods: {

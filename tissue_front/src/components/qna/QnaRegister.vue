@@ -9,16 +9,19 @@
               </h1>
             </v-card-title><br><br>
             <div class="qnaRegisterForm">
-              <form @submit.prevent="onSubmit">
+              <v-form ref="form" @submit.prevent="onSubmit">
                   <v-select
-                      v-model="qnaCategory" label="카테고리" color="pink lighten-3" :items="categoryList"/>
+                      v-model="qnaCategory" label="카테고리" color="pink lighten-3" :items="categoryList"
+                      :rules="categotyRule"/>
                   <v-text-field
-                      v-model="qnaTitle" label="제목" color="pink lighten-3"/>
+                      v-model="qnaTitle" label="제목" color="pink lighten-3"
+                      :rules="titleRule"/>
                   <v-text-field
                       :value="memberInfo.memberId" label="작성자" color="pink lighten-3" readonly/>
                   <v-textarea
                       v-model="qnaContent" label="내용" counter outlined clearable
-                      row-height="60" clear-icon="mdi-close-circle" color="pink lighten-3" auto-grow/>
+                      row-height="60" clear-icon="mdi-close-circle" color="pink lighten-3" auto-grow
+                      :rules="contentRule"/>
                    <v-radio-group v-model="radios" row>
                         <v-radio
                             label="비밀글로 작성하기" :value="true" checked="checked"/>
@@ -28,7 +31,7 @@
                   <div id ='btn'>
                       <v-btn class="white--text" id="BtnRegister" type="submit">등록</v-btn>
                   </div><br><br>
-              </form>
+              </v-form>
             </div>
             </v-card>
           </v-col>
@@ -50,20 +53,36 @@ export default {
       qnaCategory: '',
       categoryList : [ '공연문의', '결제/예매 문의', '환불/취소 문의', '기타'],
       qnaTitle: '',
-      qnaWriter: this.$store.state.memberInfo.memberId,
+      qnaWriter: this.memberInfo.memberId,
       qnaContent: '',
       radios: '',
       //qnaSecret: '',
       qnaPw: '',
       qnaCheck: false,
+      categotyRule: [
+                v => !!v || '카테고리를 선택해주세요.'
+            ],
+      titleRule: [
+                v => !!v || '제목을 입력해주세요.',
+                v => !(v.length >= 70) || '더이상 입력할 수 없습니다.'
+            ],
+      contentRule: [
+                v => !!v || '내용을 입력해주세요.'
+            ],
       token: localStorage.getItem('token')
     }
   },
   methods: {
     onSubmit () {
-        const { qnaCategory, qnaTitle, qnaWriter, qnaContent, radios, qnaPw, qnaCheck } = this
-        const qnaSecret = ( radios == true ? true : false)
-        this.$emit('submit', { qnaCategory, qnaTitle, qnaWriter, qnaContent, qnaSecret, qnaPw, qnaCheck })
+      const validate = this.$refs.form.validate()
+      const { qnaCategory, qnaTitle, qnaContent, radios, qnaPw, qnaCheck } = this
+      const qnaSecret = ( radios == true ? true : false)
+
+      if (validate) {
+          this.$emit('submit', { qnaCategory, qnaTitle, qnaContent, qnaSecret, qnaPw, qnaCheck })
+        } else {
+          alert('항목을 모두 작성하세요!')
+        }
     }
   }
 }

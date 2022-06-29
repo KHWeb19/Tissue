@@ -13,10 +13,11 @@ import {
     FETCH_NOTICE,
     FETCH_QNA_LIST,
     FETCH_QNA,
+    FETCH_MEMBER_ROLE,
     FETCH_QNA_COMMENT_LIST,
     FETCH_QNA_BEST_LIST,
-    FETCH_QNA_BEST
-    
+    FETCH_QNA_BEST,
+
     FETCH_MEMBER_INFO,
     FETCH_MEMBER
 
@@ -88,6 +89,12 @@ export default {
             commit(FETCH_QNA, res.data)
           })
     },
+    fetchMemberRole ({ commit }, token) {
+      return axios.get('qnaBest/getRole', {params: {token: token}})
+        .then((res) => {
+          commit(FETCH_MEMBER_ROLE, res.data)
+        })
+    },
     fetchQnaCommentList ({ commit }, qnaCommentNo) {
     return axios.get(`qnaComment/${qnaCommentNo}`)
       .then((res) => {
@@ -118,7 +125,7 @@ export default {
                 commit(FETCH_MEMBER, res.data)
         })
     },
-    
+
 }
 
 

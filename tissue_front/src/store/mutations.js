@@ -15,10 +15,11 @@ import {
     FETCH_QNA,
     FETCH_QNA_COMMENT_LIST,
     FETCH_QNA_BEST_LIST,
-    FETCH_QNA_BEST
+    FETCH_QNA_BEST,
 
     FETCH_MEMBER_INFO,
-    FETCH_MEMBER
+    FETCH_MEMBER,
+    FETCH_MEMBER_ROLE
 
 
 } from './mutation-types'
@@ -54,11 +55,15 @@ export default{
     [FETCH_QNA] (state, qna) {
         state.qna = qna
     },
+    [FETCH_MEMBER_ROLE] (state, memberInfo) {
+        state.memberInfo = memberInfo
+    },
     [FETCH_QNA_COMMENT_LIST] (state, qnaComments) {
         state.qnaComments = qnaComments
     },
-    [FETCH_QNA_BEST_LIST] (state, qnaBestList) {
+    [FETCH_QNA_BEST_LIST] (state, qnaBestList, memberInfo) {
         state.qnaBestList = qnaBestList
+        state.memberInfo = memberInfo
     },
     [FETCH_QNA_BEST] (state, qnaBest) {
         state.qnaBest = qnaBest

@@ -50,7 +50,7 @@
             </template>
                   <template v-slot:[`item.qnaTitle`]="{ item }">
 
-                    <td v-if="item.qnaSecret === true" text @click="editItem(item)">
+                    <td v-if="item.qnaSecret === true && memberInfo.roles == 'USER'" text @click="editItem(item)">
                       <v-icon  style="color: black">
                         mdi-lock-outline
                       </v-icon>
@@ -79,12 +79,15 @@
 
 <script>
 import axios from 'axios'
-import { mapActions, mapState } from 'vuex'
 export default {
   name: 'QnaList',
   props: {
     qnaList: {
       type: Array
+    },
+    memberInfo: {
+      type: Object,
+      required: true
     }
   },
   data () {
@@ -96,8 +99,8 @@ export default {
       headers: [
           { text: '답변', value: 'qnaCheck', width: '10%' },
           { text: '구분', value: 'qnaCategory', width: '15%' },
-          { text: '제목', value: 'qnaTitle', width: '50%' },
-          { text: '작성자', value: 'qnaWriter', width: '10%' },
+          { text: '제목', value: 'qnaTitle', width: '45%' },
+          { text: '작성자', value: 'qnaWriter', width: '15%' },
           { text: '등록일', value: 'qnaDate', width: '20%' }
       ],
       keyword: '',
@@ -106,7 +109,7 @@ export default {
       editedIndex: -1,
       editedItem: {
         qnaNo: ''
-      },
+      }
     }
   },
   watch: {
@@ -116,14 +119,7 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState(['qnaList'])
-  },
-  mounted () {
-    this.fetchQnaList()
-  },
   methods: {
-    ...mapActions(['fetchQnaList']),
     editItem (item) {
       this.editedIndex = this.qnaList.indexOf(item)
       this.editedItem = Object.assign({}, item)
@@ -138,7 +134,6 @@ export default {
           const { qnaPw } = this
           let result = await axios.get('qna/CheckQnaPw', { params: { qnaNo, qnaPw }})
           if (result.data == true) {
-            alert('비밀번호가 일치합니다.')
             this.$router.replace({
               name: 'QnaReadPage',
               params: { qnaNo: this.editedItem.qnaNo }

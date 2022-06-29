@@ -1,7 +1,7 @@
 <template>
     <div class="background">
-        <qna-read v-if="qna" :qna="qna"/>
-        <qna-comment @submit="onSubmit" :memberInfo="memberInfo" :qnaComments="qnaComments"/><br>
+        <qna-read v-if="qna && memberInfo" :qna="qna" :memberInfo="memberInfo"/>
+        <qna-comment @submit="onSubmit" v-if="qnaComments && memberInfo" :memberInfo="memberInfo" :qnaComments="qnaComments"/><br>
     </div>
 </template>
 
@@ -33,6 +33,7 @@ export default {
   mounted () {
     this.fetchQnaCommentList(this.qnaNo)
     this.fetchMemberInfo(this.token)
+    this.fetchMemberRole(this.token)
   },
   created () {
     this.fetchQna(this.qnaNo)
@@ -40,9 +41,11 @@ export default {
         alert('요청 실패..')
         this.$router.back()
     })
+    this.fetchMemberInfo(this.token)
+    this.fetchMemberRole(this.token)
   },
   methods: {
-    ...mapActions(['fetchQna', 'fetchQnaCommentList']),
+    ...mapActions(['fetchQna', 'fetchQnaCommentList', 'fetchMemberInfo', 'fetchMemberRole']),
     onSubmit (payload) {
       const { qnaCommentContent } = payload
       axios.post(`qnaComment/${this.qnaNo}`, { qnaCommentContent })

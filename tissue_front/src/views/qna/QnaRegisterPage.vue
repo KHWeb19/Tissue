@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <qna-register @submit="onSubmit" :memberInfo="memberInfo"/>
+        <qna-register @submit="onSubmit" v-if="memberInfo" :memberInfo="memberInfo"/>
     </div>
 </template>
 
@@ -27,8 +27,8 @@ export default {
   methods: {
     ...mapActions(['fetchMemberInfo']),
     onSubmit (payload) {
-      const {qnaCategory, qnaTitle, qnaWriter, qnaContent, qnaSecret, qnaPw, qnaCheck} = payload
-      axios.post('qna/register', {qnaCategory, qnaTitle, qnaWriter, qnaContent, qnaSecret, qnaPw, qnaCheck })
+      const {qnaCategory, qnaTitle, qnaContent, qnaSecret, qnaPw, qnaCheck} = payload
+      axios.post('qna/register', {qnaCategory, qnaTitle, qnaWriter : this.memberInfo.memberId, qnaContent, qnaSecret, qnaPw, qnaCheck })
         .then(() => {
           alert('게시물 등록 성공')
           this.$router.replace({
