@@ -60,8 +60,7 @@
         </table>
             <v-btn plain router-link :to="{ name: 'PerformanceRegisterPage' }">
                 <v-icon>mdi-clipboard-edit-outline</v-icon>
-            </v-btn>  
-
+            </v-btn> 
     </v-container>
 </template>
 
@@ -79,6 +78,9 @@ export default {
 </script>
 
 <style scoped>
+.board-list {
+    margin-top: 5%;
+}
 .background {
     background-color: rgb(241, 241, 241);
 }

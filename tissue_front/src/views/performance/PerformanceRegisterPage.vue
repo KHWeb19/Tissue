@@ -27,15 +27,15 @@
                             </div>
                             <div>
                                 <label>S석가격</label>
-                                <v-text-field outlined v-model="performPriceS" type="text" required></v-text-field>
+                                <v-text-field outlined v-model="performPriceS" type="text"></v-text-field>
                             </div>
                             <div>
                                 <label>R석가격</label>
-                                <v-text-field outlined v-model="performPriceR" type="text" required></v-text-field>
+                                <v-text-field outlined v-model="performPriceR" type="text"></v-text-field>
                             </div>
                             <div>
                                 <label>vip석가격</label>
-                                <v-text-field outlined v-model="performPriceVip" type="text" required></v-text-field>
+                                <v-text-field outlined v-model="performPriceVip" type="text"></v-text-field>
                             </div>
                             <div>
                                 <label>지역</label>
@@ -65,7 +65,7 @@
                                     <label>ThumNail
                                         <input type="file" ref="file" id="file" @change="thumbNailUpload"/>
                                     </label> 
-                                    <div class="file-preview-container">
+                                    <div v-if="file" class="file-preview-container">
                                             <div class="file-preview-wrapper">
                                                 <div class="file-close-button" @click="thumbNailDeleteButton">
                                                     x

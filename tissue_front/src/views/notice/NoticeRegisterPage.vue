@@ -5,9 +5,11 @@
 </template>
 
 <script>
-import axios from "axios";
-import NoticeRegister from "@/components/notice/NoticeRegister.vue";
-//axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+
+import axios from 'axios'
+import NoticeRegister from '@/components/notice/NoticeRegister.vue'
+
 export default {
   name: "NoticeRegisterPage",
   components: {

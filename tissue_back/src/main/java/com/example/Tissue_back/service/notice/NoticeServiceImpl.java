@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service.notice;
 
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.notice.Notice;
 import com.example.Tissue_back.repository.notice.NoticeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -102,5 +103,11 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public int updateNoticeView (Long noticeNo) {
         return noticeRepository.updateNoticeView(noticeNo);
+    }
+
+    @Override
+    public List<Notice> search(String keyword) {
+        List<Notice> findList = noticeRepository.findByNoticeTitleContaining(keyword);
+        return findList;
     }
 }

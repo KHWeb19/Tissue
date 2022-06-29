@@ -1,5 +1,7 @@
 package com.example.Tissue_back.controller;
 
+import com.example.Tissue_back.controller.request.performance.KeywordDto;
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.notice.Notice;
 import com.example.Tissue_back.service.notice.NoticeService;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +62,14 @@ public class NoticeController {
         log.info("Notice Delete");
 
         noticeService.remove(noticeNo);
+    }
+
+    // 검색 (유아림)
+    @PostMapping("/search")
+    public List<Notice> searchList (@RequestBody KeywordDto keywordDto) {
+        log.info("=== search ===" + keywordDto);
+        String keyword = keywordDto.getKeyword();
+        return noticeService.search(keyword);
     }
 
 
