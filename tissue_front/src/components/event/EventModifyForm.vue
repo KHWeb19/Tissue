@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <v-container><br><br><br>
+            <v-container><br>
                 <v-row>
                     <v-col>
                         <img :src="require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)"/>

@@ -1,5 +1,5 @@
 <template>
-    <area-main-form :performances="performances" :mapList="mapList"/>
+    <area-main-form v-if="performances" :performances="performances" :mapList="mapList"/>
 </template>
 
 <script>
@@ -17,6 +17,9 @@ export default {
         }
     },
     created() {
+        this.$store.state.performances = null;
+    },
+    mounted() {
         this.fetchPerformanceList()
         this.getMapList()
     },

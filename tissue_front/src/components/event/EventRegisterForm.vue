@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <v-container><br><br><br>
+            <v-container>
                     <v-row>
                         <v-col>
                             <form>
