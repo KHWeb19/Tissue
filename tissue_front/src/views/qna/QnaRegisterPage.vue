@@ -22,13 +22,13 @@ export default {
     ...mapState(['memberInfo'])
   },
   created () {
-    this.fetchMemberInfo(this.token)
+    this.fetchMemberRole(this.token)
   },
   methods: {
-    ...mapActions(['fetchMemberInfo']),
+    ...mapActions(['fetchMemberRole']),
     onSubmit (payload) {
       const {qnaCategory, qnaTitle, qnaContent, qnaSecret, qnaPw, qnaCheck} = payload
-      axios.post('qna/register', {qnaCategory, qnaTitle, qnaWriter : this.memberInfo.memberId, qnaContent, qnaSecret, qnaPw, qnaCheck })
+      axios.post('qna/register', {qnaCategory, qnaTitle, qnaWriter : this.memberInfo.sub, qnaContent, qnaSecret, qnaPw, qnaCheck })
         .then(() => {
           alert('게시물 등록 성공')
           this.$router.replace({

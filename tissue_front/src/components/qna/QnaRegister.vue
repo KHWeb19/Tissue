@@ -17,7 +17,7 @@
                       v-model="qnaTitle" label="제목" color="pink lighten-3"
                       :rules="titleRule"/>
                   <v-text-field
-                      :value="memberInfo.memberId" label="작성자" color="pink lighten-3" readonly/>
+                      :value="memberInfo.sub" label="작성자" color="pink lighten-3" readonly/>
                   <v-textarea
                       v-model="qnaContent" label="내용" counter outlined clearable
                       row-height="60" clear-icon="mdi-close-circle" color="pink lighten-3" auto-grow
@@ -53,7 +53,6 @@ export default {
       qnaCategory: '',
       categoryList : [ '공연문의', '결제/예매 문의', '환불/취소 문의', '기타'],
       qnaTitle: '',
-      qnaWriter: this.memberInfo.memberId,
       qnaContent: '',
       radios: '',
       //qnaSecret: '',

@@ -32,7 +32,6 @@ export default {
   },
   mounted () {
     this.fetchQnaCommentList(this.qnaNo)
-    this.fetchMemberInfo(this.token)
     this.fetchMemberRole(this.token)
   },
   created () {
@@ -41,16 +40,16 @@ export default {
         alert('요청 실패..')
         this.$router.back()
     })
-    this.fetchMemberInfo(this.token)
     this.fetchMemberRole(this.token)
+
   },
   methods: {
-    ...mapActions(['fetchQna', 'fetchQnaCommentList', 'fetchMemberInfo', 'fetchMemberRole']),
+    ...mapActions(['fetchQna', 'fetchQnaCommentList', 'fetchMemberRole']),
     onSubmit (payload) {
       const { qnaCommentContent } = payload
       axios.post(`qnaComment/${this.qnaNo}`, { qnaCommentContent })
         .then(() => {
-          alert('댓글 작성 성공!')
+          alert('QnA 답변을 등록하였습니다.')
           this.$router.go()
         })
         .catch(() => {
