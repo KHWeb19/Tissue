@@ -17,6 +17,7 @@ import {
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
+    FETCH_SEARCH_LIST2,
     FETCH_NOTICE_SEARCH_LIST,
     // event
     FETCH_EVENT_LIST,
@@ -71,6 +72,9 @@ export default{
     },
     [FETCH_SEARCH_LIST](state, searchList) {
         state.searchList = searchList
+    },
+    [FETCH_SEARCH_LIST2](state, searchList) {
+        state.searchList2 = searchList
     },
     [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
         state.noticeSearchList = noticeSearchList

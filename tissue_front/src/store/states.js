@@ -17,6 +17,7 @@ export default {
     memberInfo: {},
     member: [],
     searchList: [],
+    searchList2:[],
     noticeSearchList: [],
     // 유아림
 

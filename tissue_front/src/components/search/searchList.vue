@@ -1,12 +1,12 @@
 <template>
     <v-container class="searchBox">
-        <v-tabs color="blue lighten-3" centered height="70px" class="mb-10">
+        <v-tabs color="blue lighten-3" centered height="70px" class="mb-10" v-model="active_tab">
             <v-tab v-for="item in items" :key="item.name" class="tab"
             @click=item.value>
                 {{ item.name }} {{ item.count }}
             </v-tab>
         </v-tabs>
-        <div v-if ="whole">
+        <div v-if="whole">
             <div class="listSize" v-for="search in searchList" :key="search.performNo">
                 <v-row justify="center">
                     <v-col cols="2">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div v-else>
-            <div class="listSize" v-for="search in copyList" :key="search.performNo">
+            <div class="listSize" v-for="search in searchList2" :key="search.performNo">
                 <v-row justify="center">
                     <v-col cols="2">
                         <v-img :src="require(`../../assets/thumbNail/${search.performThumbnail}`)"
@@ -71,22 +71,29 @@ export default {
             type: Array,
             required: true,
         },
+        searchList2: {
+            type: Array,
+            required: true
+        },
         noticeSearchList: {
             type: Array,
             required: true
+        },
+    },
+    watch: {
+        searchList () {
+            this.active_tab = 0
+            this.whole = true
         }
     },
     data () {
         return {
-            origin: this.searchList,
             items :[
-                {name : '통합검색', value: () => { this.fetchOrigin() }, count:''},
-                {name : '콘서트', value: () => {
-                     this.fetchConcert()
-                }, count: ''},
-                {name : '뮤지컬', value: () => { this.fetchMusical()}, count:''},
-                {name : '연극', value: () => { this.fetchTheater()}, count:''},
-                {name : '전시회', value: () => { this.fetchExhibition()}, count:''}
+                {name : '통합검색', value: () => { this.fetchOrigin() }},
+                {name : '콘서트', value: () => { this.fetchConcert()}},
+                {name : '뮤지컬', value: () => { this.fetchMusical()}},
+                {name : '연극', value: () => { this.fetchTheater()}},
+                {name : '전시회', value: () => { this.fetchExhibition()}}
             ],
             headers :[
                 {text : '카테고리', value:'noticeCategory', width:100},
@@ -94,13 +101,13 @@ export default {
                 {text : '날짜', value:'noticeDate', width:100}
             ],
             countC: '',
-            whole: true
+            whole: true,
+            active_tab:0
         }
     },
-    computed :{
-        copyList () {
-            return this.origin
-        },
+    created() {
+        this.copy=this.searchList
+        console.log(this.copy)
     },
     methods: {
         fetchOrigin() {
@@ -108,45 +115,44 @@ export default {
         },
         fetchConcert() {
             this.whole = false
-            this.origin = []
+            let origin = []
             for (let i = 0; i<this.searchList.length; i++) {
                 if (this.searchList[i].performCategory == '콘서트') {
-                    this.origin.push(this.searchList[i])
+                    origin.push(this.searchList[i])
+                    console.log(this.searchList[i])
                 }
-                this.$emit('search', this.origin)
-                console.log(this.origin)
             }
+            this.$emit('update:searchList2', origin)
         },
         fetchMusical() {
             this.whole = false
-            this.origin = []
+            let origin = []
             for (let i = 0; i<this.searchList.length; i++) {
                 if (this.searchList[i].performCategory == '뮤지컬') {
-                    this.origin.push(this.searchList[i])
+                    origin.push(this.searchList[i])
                 }
-                console.log(this.origin)
             }
+            this.$emit('update:searchList2', origin)
         },
         fetchTheater() {
             this.whole = false
-            this.origin = []
+            let origin = []
             for (let i = 0; i<this.searchList.length; i++) {
                 if (this.searchList[i].performCategory == '연극') {
-                    this.origin.push(this.searchList[i])
+                    origin.push(this.searchList[i])
                 }
-                console.log(this.origin)
-                this.searchLis. this.origin
             }
+            this.$emit('update:searchList2', origin)
         },
         fetchExhibition() {
             this.whole = false
-            this.origin = []
+            let origin = []
             for (let i = 0; i<this.searchList.length; i++) {
                 if (this.searchList[i].performCategory == '전시회') {
-                    this.origin.push(this.searchList[i])
+                    origin.push(this.searchList[i])
                 }
-                console.log(this.origin)
             }
+            this.$emit('update:searchList2', origin)
         }
     }
 }
