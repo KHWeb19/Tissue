@@ -66,6 +66,22 @@
         >
           관람후기
         </div>
+        <div class="reviewWrap">
+          <div class="reviewBox">
+            <div style="width: 70%">
+              <div class="reviewTitle">
+                {{ "이벤트 제목" }}
+              </div>
+              <div class="reviewDes">{{ "이벤트 설명" }}</div>
+              <v-divider style="margin-right: 20px"></v-divider>
+              <div>
+                <div>-이벤트 기간</div>
+                <div>{{ "이벤트 시작일" }} ~ {{ "이벤트 종료일" }}</div>
+              </div>
+            </div>
+            <div>이미지</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -131,5 +147,26 @@ export default {
   width: 1000px;
   margin: auto;
   padding-bottom: 30px;
+}
+.reviewWrap {
+  height: 450px;
+  background-color: #e3f2fd;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.reviewBox {
+  padding: 50px;
+  display: flex;
+}
+.reviewTitle {
+  border-bottom: 2px solid black;
+  font-size: 28px;
+  padding-bottom: 7px;
+  margin-right: 20px;
+}
+.reviewDes {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 15px;
 }
 </style>
