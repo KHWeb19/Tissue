@@ -46,6 +46,7 @@
                     small
                     dense
                     hover
+                    readonly
                     class="mr-3 pt-0"
                   ></v-rating>
                   <b style="color: skyblue" class="mr-3">{{ "4.1" }}</b>
@@ -95,12 +96,7 @@
               <div class="wrapSubTitle">
                 <div class="performSubTitle pt-2">혜택</div>
                 <div class="text-center">
-                  <v-dialog
-                    v-model="dialog"
-                    width="450"
-                    hide-overlay
-                    content-class="elevation-2"
-                  >
+                  <v-dialog v-model="couponDialog" width="450" hide-overlay>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
                         color="transparent"
@@ -116,7 +112,7 @@
                           >)
                         </div>
                       </v-btn>
-                      | 회원등급할인가
+                      |
                     </template>
 
                     <v-card
@@ -134,7 +130,7 @@
                             color="black"
                             icon
                             style="margin-left: 120px"
-                            @click="dialog = false"
+                            @click="couponDialog = false"
                           >
                             X
                           </v-btn>
@@ -165,7 +161,7 @@
                                   {{ coupon.couponName }}
                                 </td>
                                 <td class="text-center">
-                                  {{ coupon.couponPrice }}
+                                  {{ coupon.couponPrice | comma }}
                                 </td>
                                 <td class="text-center">
                                   <v-btn
@@ -175,6 +171,71 @@
                                     >다운하기</v-btn
                                   >
                                 </td>
+                              </tr>
+                            </tbody>
+                          </template>
+                        </v-simple-table>
+                      </div>
+                    </v-card>
+                  </v-dialog>
+                </div>
+                <div class="text-center">
+                  <v-dialog v-model="memberDialog" width="450" hide-overlay>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="transparent"
+                        text
+                        v-bind="attrs"
+                        v-on="on"
+                        style="padding: 0"
+                      >
+                        <div class="font15">회원등급할인가</div>
+                      </v-btn>
+                    </template>
+
+                    <v-card
+                      v-if="this.availableCoupon.length != 0"
+                      height="100%"
+                    >
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <div style="padding: 25px">
+                          회원 등급 할인 혜택입니다.
+                        </div>
+                        <div>
+                          <v-btn
+                            color="black"
+                            icon
+                            style="margin-left: 120px"
+                            @click="memberDialog = false"
+                          >
+                            X
+                          </v-btn>
+                        </div>
+                      </div>
+                      <div>
+                        <v-simple-table
+                          style="
+                            width: 400px;
+                            margin: auto;
+                            padding-bottom: 20px;
+                          "
+                        >
+                          <template v-slot:default>
+                            <thead>
+                              <tr style="background-color: #90caf9">
+                                <th class="text-center">회원등급</th>
+                                <th class="text-center">할인</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="grade in memberGrade"
+                                :key="grade.grade"
+                              >
+                                <td class="text-center">{{ grade.grade }}</td>
+                                <td class="text-center">{{ grade.sale }}%</td>
                               </tr>
                             </tbody>
                           </template>
@@ -222,7 +283,12 @@ export default {
   data() {
     return {
       availableCoupon: [],
-      dialog: false,
+      memberGrade: [
+        { grade: "일반", sale: 5 },
+        { grade: "VIP", sale: 10 },
+      ],
+      couponDialog: false,
+      memberDialog: false,
       rating: 4,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
