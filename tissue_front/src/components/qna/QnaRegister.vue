@@ -1,5 +1,5 @@
 <template>
-    <div class="background"><br><br><br>
+    <div class="background">
       <v-row justify="center">
         <v-col xs="20" sm="10" md="10">
           <v-card><br>
@@ -15,7 +15,7 @@
                   <v-text-field
                       v-model="qnaTitle" label="제목" color="pink lighten-3"/>
                   <v-text-field
-                      v-model="qnaWriter" label="작성자" color="pink lighten-3"/>
+                      :value="memberInfo.memberId" label="작성자" color="pink lighten-3" readonly/>
                   <v-textarea
                       v-model="qnaContent" label="내용" counter outlined clearable
                       row-height="60" clear-icon="mdi-close-circle" color="pink lighten-3" auto-grow/>
@@ -39,17 +39,24 @@
 <script>
 export default {
   name: 'QnaRegister',
+  props: {
+    memberInfo: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       qnaCategory: '',
       categoryList : [ '공연문의', '결제/예매 문의', '환불/취소 문의', '기타'],
       qnaTitle: '',
-      qnaWriter: '',
+      qnaWriter: this.$store.state.memberInfo.memberId,
       qnaContent: '',
       radios: '',
       //qnaSecret: '',
       qnaPw: '',
-      qnaCheck: false
+      qnaCheck: false,
+      token: localStorage.getItem('token')
     }
   },
   methods: {

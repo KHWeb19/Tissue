@@ -1,18 +1,31 @@
 <template>
     <div align="center">
-        <qna-register @submit="onSubmit"/>
+        <qna-register @submit="onSubmit" :memberInfo="memberInfo"/>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import QnaRegister from '@/components/qna/QnaRegister.vue'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'QnaRegisterPage',
   components: {
     QnaRegister
   },
+  data() {
+    return {
+      token: localStorage.getItem('token')
+    }
+  },
+  computed: {
+    ...mapState(['memberInfo'])
+  },
+  created () {
+    this.fetchMemberInfo(this.token)
+  },
   methods: {
+    ...mapActions(['fetchMemberInfo']),
     onSubmit (payload) {
       const {qnaCategory, qnaTitle, qnaWriter, qnaContent, qnaSecret, qnaPw, qnaCheck} = payload
       axios.post('qna/register', {qnaCategory, qnaTitle, qnaWriter, qnaContent, qnaSecret, qnaPw, qnaCheck })

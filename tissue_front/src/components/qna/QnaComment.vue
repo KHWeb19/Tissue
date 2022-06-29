@@ -18,9 +18,11 @@
               </v-col>
             </div>
             <v-divider :inset="false"></v-divider><br>
+            <div>
               <textarea class="textareaComment" v-model="qnaCommentContent" type="text" placeholder="댓글을 입력하세요."></textarea>
-            <div id ='btn'>
-            <v-btn id="BtnRegister" type="submit">댓글 등록</v-btn>
+              <div id ='btn'>
+                <v-btn id="BtnRegister" type="submit">댓글 등록</v-btn>
+              </div>
             </div>
         </v-card>
       </v-col>
@@ -36,11 +38,16 @@ export default {
   props: {
     qnaComments: {
       type: Array
+    },
+    memberInfo: {
+      type: Object,
+      required: true
     }
   },
   data () {
     return {
       qnaCommentContent: '',
+      token: localStorage.getItem('token')
     }
   },
   methods: {

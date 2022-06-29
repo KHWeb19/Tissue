@@ -1,7 +1,7 @@
 <template>
     <div class="background">
         <qna-read v-if="qna" :qna="qna"/>
-        <qna-comment @submit="onSubmit" :qnaComments="qnaComments"/><br>
+        <qna-comment @submit="onSubmit" :memberInfo="memberInfo" :qnaComments="qnaComments"/><br>
     </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
     QnaRead,
     QnaComment
   },
+  data() {
+    return {
+      token: localStorage.getItem('token')
+    }
+  },
   props: {
     qnaNo: {
       type: String,
@@ -23,10 +28,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(['qna', 'qnaComments'])
+    ...mapState(['qna', 'qnaComments', 'memberInfo'])
   },
   mounted () {
     this.fetchQnaCommentList(this.qnaNo)
+    this.fetchMemberInfo(this.token)
   },
   created () {
     this.fetchQna(this.qnaNo)
