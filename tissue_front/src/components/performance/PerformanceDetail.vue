@@ -46,6 +46,7 @@
                     small
                     dense
                     hover
+                    readonly
                     class="mr-3 pt-0"
                   ></v-rating>
                   <b style="color: skyblue" class="mr-3">{{ "4.1" }}</b>
@@ -95,12 +96,7 @@
               <div class="wrapSubTitle">
                 <div class="performSubTitle pt-2">혜택</div>
                 <div class="text-center">
-                  <v-dialog
-                    v-model="dialog"
-                    width="450"
-                    hide-overlay
-                    content-class="elevation-2"
-                  >
+                  <v-dialog v-model="couponDialog" width="450" hide-overlay>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
                         color="transparent"
@@ -116,7 +112,6 @@
                           >)
                         </div>
                       </v-btn>
-                      | 회원등급할인가
                     </template>
 
                     <v-card
@@ -134,7 +129,7 @@
                             color="black"
                             icon
                             style="margin-left: 120px"
-                            @click="dialog = false"
+                            @click="couponDialog = false"
                           >
                             X
                           </v-btn>
@@ -165,7 +160,7 @@
                                   {{ coupon.couponName }}
                                 </td>
                                 <td class="text-center">
-                                  {{ coupon.couponPrice }}
+                                  {{ coupon.couponPrice | comma }}
                                 </td>
                                 <td class="text-center">
                                   <v-btn
@@ -183,23 +178,204 @@
                     </v-card>
                   </v-dialog>
                 </div>
+                <v-divider vertical class="ml-3 mr-3"></v-divider>
+                <div class="text-center">
+                  <v-dialog v-model="memberDialog" width="450" hide-overlay>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="transparent"
+                        text
+                        v-bind="attrs"
+                        v-on="on"
+                        style="padding: 0"
+                      >
+                        <div class="font15">회원등급할인가</div>
+                      </v-btn>
+                    </template>
+
+                    <v-card
+                      v-if="this.availableCoupon.length != 0"
+                      height="100%"
+                    >
+                      <div
+                        style="display: flex; justify-content: space-between"
+                      >
+                        <div style="padding: 25px">
+                          회원 등급 할인 혜택입니다.
+                        </div>
+                        <div>
+                          <v-btn
+                            color="black"
+                            icon
+                            style="margin-left: 120px"
+                            @click="memberDialog = false"
+                          >
+                            X
+                          </v-btn>
+                        </div>
+                      </div>
+                      <div>
+                        <v-simple-table
+                          style="
+                            width: 400px;
+                            margin: auto;
+                            padding-bottom: 20px;
+                          "
+                        >
+                          <template v-slot:default>
+                            <thead>
+                              <tr style="background-color: #90caf9">
+                                <th class="text-center">회원등급</th>
+                                <th class="text-center">할인</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="grade in memberGrade"
+                                :key="grade.grade"
+                              >
+                                <td class="text-center">{{ grade.grade }}</td>
+                                <td class="text-center">{{ grade.sale }}%</td>
+                              </tr>
+                            </tbody>
+                          </template>
+                        </v-simple-table>
+                      </div>
+                    </v-card>
+                  </v-dialog>
+                </div>
               </div>
-              <v-divider></v-divider>
-              <div>
-                <div>배송정보</div>
-                <div>현장 수령만 가능</div>
+
+              <div
+                class="pt-3 pb-3"
+                style="
+                  border-top: 2px solid black;
+                  border-bottom: 2px solid black;
+                "
+              >
+                <div class="font15">배송정보</div>
+                <div style="font-size: 14px">현장 수령만 가능</div>
               </div>
-              <v-divider></v-divider>
             </div>
           </div>
-          <div>
-            <div>날짜/시간 선택</div>
-            <v-divider></v-divider>
-            <v-date-picker v-model="picker" locale="ko-KR"></v-date-picker>
+          <div style="display: flex">
+            <div class="wrapReserveBox">
+              <div style="margin: 25px">
+                <div
+                  style="
+                    border-bottom: 2px solid black;
+                    font-size: 18px;
+                    padding-top: 5px;
+                    padding-bottom: 20px;
+                  "
+                >
+                  날짜/시간 선택
+                </div>
+                <div style="display: flex">
+                  <div style="width: 50%">
+                    <v-date-picker
+                      v-model="picker"
+                      locale="ko-KR"
+                      no-title
+                      color="blue lighten-3"
+                    ></v-date-picker>
+                  </div>
+                  <div style="margin: 25px; width: 50%">
+                    <v-btn
+                      text
+                      class="performTime"
+                      @click="changeBackgroundColor = !changeBackgroundColor"
+                      :style="{
+                        backgroundColor: changeBackgroundColor
+                          ? 'skyblue !important'
+                          : '',
+                        color: changeBackgroundColor
+                          ? 'white !important'
+                          : 'black',
+                      }"
+                      >1회 오후 2시 00분</v-btn
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wrapSeatCount">
+              <div style="margin: 25px">
+                <div
+                  style="
+                    border-bottom: 2px solid black;
+                    font-size: 18px;
+                    padding-top: 5px;
+                    padding-bottom: 20px;
+                  "
+                >
+                  예매 가능 좌석
+                </div>
+                <div class="remainSeatBox">
+                  <div class="wrapPriceGrade">
+                    <div class="gradeText">S석</div>
+                    <b style="color: #f48fb1">{{
+                      performance.performPriceS | comma
+                    }}</b
+                    >원 <b>(잔여: {{ 1 }}석)</b>
+                  </div>
+                  <div class="wrapPriceGrade">
+                    <div class="gradeText">R석</div>
+                    <b style="color: #f48fb1">{{
+                      performance.performPriceR | comma
+                    }}</b
+                    >원 <b>(잔여: {{ 1 }}석)</b>
+                  </div>
+                  <div class="wrapPriceGrade">
+                    <div class="gradeText">VIP석</div>
+                    <b style="color: #f48fb1">{{
+                      performance.performPriceVip | comma
+                    }}</b
+                    >원 <b>(잔여: {{ 1 }}석)</b>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <v-btn color="blue lighten-3" class="white--text">예매하기</v-btn>
+          <div style="display: flex; justify-content: center">
+            <router-link
+              :to="{
+                name: 'TicketingPage',
+                params: { performNo: performance.performNo.toString() },
+              }"
+            >
+              <v-btn
+                color="blue lighten-3"
+                class="reserveBtn white--text"
+                width="230"
+                height="50"
+                >예매하기</v-btn
+              >
+            </router-link>
           </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-tabs
+            color="blue lighten-3"
+            height="55px"
+            hide-slider
+            active-class="tab_active"
+          >
+            <v-tab
+              v-for="item in items"
+              :key="item.name"
+              style="font-size: 18px; width: 180px"
+              >{{ item.name }}</v-tab
+            >
+            <v-tab-item v-for="n in 2" :key="n">
+              <performance-detail-comp
+                v-if="n == 1"
+                :performance="performance"
+              />
+            </v-tab-item>
+          </v-tabs>
         </v-col>
       </v-row>
     </v-container>
@@ -207,6 +383,8 @@
 </template>
 
 <script>
+import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
+
 export default {
   name: "PerformanceDetail",
   props: {
@@ -219,10 +397,20 @@ export default {
       required: true,
     },
   },
+  components: {
+    PerformanceDetailComp,
+  },
   data() {
     return {
       availableCoupon: [],
-      dialog: false,
+      memberGrade: [
+        { grade: "일반", sale: 5 },
+        { grade: "VIP", sale: 10 },
+      ],
+      items: [{ name: "상세정보" }, { name: "유의사항" }],
+      changeBackgroundColor: false,
+      couponDialog: false,
+      memberDialog: false,
       rating: 4,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -285,10 +473,45 @@ export default {
 .gradeText {
   text-align: center;
   width: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .downBtn {
   border: 1px solid pink;
   display: inline-block;
+}
+.wrapReserveBox {
+  width: 55%;
+  height: 380px;
+  border: 1px solid #90caf9;
+}
+.wrapSeatCount {
+  width: 45%;
+  height: 380px;
+  border: 1px solid #90caf9;
+  border-left: none;
+}
+.performTime {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  text-align: center;
+  border: 1px solid lightgrey;
+  margin: auto;
+}
+.remainSeatBox {
+  margin-top: 25px;
+  width: 100%;
+  height: 200px;
+  border: 1px solid lightgrey;
+  padding: 25px;
+}
+.reserveBtn {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: white;
+  font-size: 20px;
+}
+.tab_active {
+  border-top: 3px solid skyblue;
 }
 </style>

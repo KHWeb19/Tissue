@@ -32,14 +32,6 @@
         <h4>{{ performance.performPriceS }}원</h4>
         <h4>{{ performance.performPriceR }}원</h4>
         <h4>{{ performance.performPriceVip }}원</h4>
-        <router-link
-          :to="{
-            name: 'TicketingPage',
-            params: { performNo: performance.performNo.toString() },
-          }"
-        >
-          <v-btn>예매하기</v-btn></router-link
-        >
       </v-col>
     </v-row>
     <hr class="mt-5 mb-5" />
