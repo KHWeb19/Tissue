@@ -62,7 +62,10 @@ export default {
     },
     methods: {
         ...mapActions(['fetchSearchList','fetchNoticeSearchList']),
+
         async search() {
+            this.fetchSearchList(this.keyword2),
+            this.fetchNoticeSearchList(this.keyword2)
             this.$router.push({name: 'SearchPage', params: { keyword: this.keyword2 }})
         }
     }
