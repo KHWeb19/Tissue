@@ -1,12 +1,16 @@
 package com.example.Tissue_back.entity.performance;
 
+
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
+import com.example.Tissue_back.entity.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,6 +18,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -92,4 +97,8 @@ public class Performance {
     //임지훈
     @Column
     private String hallName;
+
+    @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Review> reviewList;
 }
