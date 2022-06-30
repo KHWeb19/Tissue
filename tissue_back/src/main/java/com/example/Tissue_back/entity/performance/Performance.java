@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -90,7 +91,6 @@ public class Performance {
         this.performer = performanceDto.getPerformer();
     }
 
-
     //임지훈
     @Column
     private String hallName;
@@ -102,5 +102,7 @@ public class Performance {
     @JsonIgnore
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private Set<Likes> like = new HashSet<>();
+    private Set<Likes> performLike = new HashSet<>();
+
+
 }
