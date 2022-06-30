@@ -1,12 +1,12 @@
 package com.example.Tissue_back.entity.performance;
 
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,6 +14,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -92,4 +94,13 @@ public class Performance {
     //임지훈
     @Column
     private String hallName;
+
+    // 유아림
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @JsonIgnore
+    @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<Likes> like = new HashSet<>();
 }
