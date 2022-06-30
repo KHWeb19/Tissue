@@ -66,8 +66,10 @@
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
                     <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'"/>
+                    <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
                 </v-row>
             </v-main>
+            <v-btn @click="test"></v-btn>
         </div>
 </template>
 
@@ -78,8 +80,9 @@ import MyPageCoupon from './MyPageCoupon.vue'
 import GradeDialog from './GradeDialog.vue'
 import MileageDialog from './MileageDialog.vue'
 import MyPageQnA from './MyPageQnA.vue'
+import MyPageStar from './MyPageStar.vue'
 export default {
-  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA },
+  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA, MyPageStar },
     name: 'MyPageNavi',
     props:{
         memberInfo: {
@@ -95,7 +98,7 @@ export default {
             ],
             items: [
                 { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
-                { title: 'My 찜목록', icon: 'mdi-star' },
+                { title: 'My 찜목록', icon: 'mdi-star', route:'/myPage/star' },
                 { title: 'My 예매 내역', icon: 'mdi-book' },
                 { title: 'My QnA', icon: 'mdi-chat-question', route:'/myPage/qna'},
                 { title: 'My 후기', icon: 'mdi-pencil' },
@@ -127,6 +130,9 @@ export default {
                 this.dialog[1].value = true
             }
         },
+        test () {
+            console.log(this.memberInfo.likes)
+        }
     }
 }
 </script>

@@ -19,6 +19,8 @@ import {
     FETCH_SEARCH_LIST,
     FETCH_SEARCH_LIST2,
     FETCH_NOTICE_SEARCH_LIST,
+    FETCH_PERFORMANCE_LIKE,
+    FETCH_MY_LIKE,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -78,6 +80,12 @@ export default{
     },
     [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
         state.noticeSearchList = noticeSearchList
+    },
+    [FETCH_PERFORMANCE_LIKE](state, likeList) {
+        state.likeList = likeList
+    },
+    [FETCH_MY_LIKE](state, myLike) {
+        state.myLike = myLike
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {

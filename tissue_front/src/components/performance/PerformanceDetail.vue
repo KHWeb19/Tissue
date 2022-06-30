@@ -32,9 +32,10 @@
               ></v-img>
               <div class="additionFunc mb-5 mt-5">
                 <div>
-                  <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+                  <v-btn icon v-if="this.likeMember === true" @click="dislike" color="red"><v-icon>mdi-heart</v-icon></v-btn>
+                  <v-btn icon v-else @click="like" color="grey"><v-icon>mdi-heart</v-icon></v-btn>
                   <span class="font15"
-                    ><b style="color: skyblue" class="mr-3">{{ "123" }} </b
+                    ><b style="color: skyblue" class="mr-3">{{ likeList.length }} </b
                     >Likes
                   </span>
                 </div>
@@ -384,6 +385,8 @@
 
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
+import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
   name: "PerformanceDetail",
@@ -396,6 +399,10 @@ export default {
       type: Array,
       required: true,
     },
+    likeList: {
+        type: Array,
+        required: true,
+    }
   },
   components: {
     PerformanceDetailComp,
@@ -415,6 +422,7 @@ export default {
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+      likeMember: false,
     };
   },
 
@@ -423,7 +431,9 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
-
+  created() {
+      this.checkMember()
+  },
   mounted() {
     for (let i = 0; i < this.couponList.length; i++) {
       if (
@@ -432,7 +442,57 @@ export default {
         this.availableCoupon.push(this.couponList[i]);
       }
     }
+
   },
+  methods: {
+      ...mapActions(['fetchPerformanceLike']),
+      checkMember () {
+          let token = localStorage.getItem('token')
+          if(token != null){
+            axios.get('likes/member' , { params:{token:token} })
+            .then((res) => {
+                for (let i = 0; i <this.likeList.length; i++){
+                    console.log(res.data)
+
+                    if(this.likeList[i].member.memberNo === res.data) {
+                        return this.likeMember = true
+                    }
+                }
+                return this.likeMember = false
+            })
+          }
+      },
+        like() {
+          let performNo = this.performance.performNo
+          let token = localStorage.getItem('token')
+          if(token != null) {
+            axios.post('likes/register', {performNo, token})
+            .then ((res)=> {
+                this.$emit('update:likeList', res.data)
+                alert("해당 공연이 찜되셨습니다.")
+                this.checkMember()
+            })
+            .catch((res) => {
+                console.log(res.message)
+            })
+          } else {
+              alert("로그인이 필요합니다.")
+          }
+      },
+      dislike() {
+          let performNo = this.performance.performNo
+          let token = localStorage.getItem('token')
+          axios.delete('likes/delete', { params:{performNo: performNo, token: token}})
+          .then((res) => {
+              this.$emit('update:likeList', res.data)
+              alert("찜이 취소되었습니다.")
+              this.checkMember()
+          })
+          .catch((res) => {
+              console.log(res.message)
+          })
+      }
+  }
 };
 </script>
 

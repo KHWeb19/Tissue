@@ -21,6 +21,8 @@ import {
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
     FETCH_NOTICE_SEARCH_LIST,
+    FETCH_PERFORMANCE_LIKE,
+    FETCH_MY_LIKE,
 
     // event
     FETCH_EVENT_LIST,
@@ -144,6 +146,18 @@ export default {
         return axios.post('notice/search', { keyword })
             .then((res) => {
             commit(FETCH_NOTICE_SEARCH_LIST, res.data)
+        })
+    },
+    fetchPerformanceLike({ commit }, performNo) {
+        return axios.get(`likes/${performNo}`)
+            .then((res) => {
+                commit(FETCH_PERFORMANCE_LIKE, res.data)
+        })
+    },
+    fetchMyLike({ commit }, memberNo) {
+        return axios.get(`likes/my/${memberNo}`)
+            .then((res) => {
+            commit(FETCH_MY_LIKE, res.data)
         })
     }
 

@@ -19,6 +19,8 @@ export default {
     searchList: [],
     searchList2:[],
     noticeSearchList: [],
+    likeList: [],
+    myLike:[],
     // 유아림
 
 

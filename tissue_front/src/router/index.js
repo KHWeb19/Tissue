@@ -256,6 +256,12 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/myPage/star',
+        name: 'MyPageStar',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/search/:keyword',
         name: 'SearchPage',
         components: {
