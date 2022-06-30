@@ -10,7 +10,7 @@
             </ul> -->
 
             <v-tabs class="tabs mt-5" fixed-tabs background-color="blue lighten-3" dark>
-                <v-tab v-for="tab in tabs" :key="tab" @click="onClickTab(tab)">
+                <v-tab v-for="tab in tabs" :key="tab.index" @click="onClickTab(tab)">
                     {{ tab.name }}
                 </v-tab>
             </v-tabs>
@@ -35,10 +35,11 @@
                 <v-container class="pt-0" fluid>
                     <v-row>
                         <v-card-subtitle>장르</v-card-subtitle>
-                        <v-checkbox label="콘서트" hide-details dense></v-checkbox>
-                        <v-checkbox label="뮤지컬" hide-details dense></v-checkbox>
-                        <v-checkbox label="연극" hide-details dense></v-checkbox>
-                        <v-checkbox label="전시회" hide-details dense></v-checkbox>
+                        <v-checkbox v-model="checkConcert"  label="콘서트" hide-details dense></v-checkbox>
+                        <v-checkbox v-model="checkMusical" label="뮤지컬" hide-details dense></v-checkbox>
+                        <v-checkbox v-model="checkPlay" label="연극" hide-details dense></v-checkbox>
+                        <v-checkbox v-model="checkExhibition" label="전시회" hide-details dense></v-checkbox>
+                        <v-btn @click="applyFilter" color="blue lighten-3">적용</v-btn>
                     </v-row>
                 </v-container>
             </v-card>
@@ -241,14 +242,68 @@ export default {
             tabs: [{name:'전체'}, {name:'서울'}, {name:'경기/인천'}, {name:'대전/충청/강원'}, 
                 {name:'부산/대구/울산/경상'}, {name:'광주/전라'}, {name:'제주'}], 
             detailSearch: false,
+            checked: [],
+            // checkedList: []
+            checkConcert: false,
+            checkMusical: false,
+            checkPlay: false,
+            checkExhibition: false,
         }
     },
     methods: {
         onClickTab(tab) {
             this.selectedTab = tab
         },
+        applyFilter() {
+            if(this.checkConcert) {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match('콘서트')
+                })
+                return this.copyPerformList
+           }
+
+           this.checkConcert = false
+
+             if(this.checkMusical) {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match('뮤지컬')
+                })
+                return this.copyPerformList
+           }
+
+           this.checkMusical = false
+
+             if(this.checkPlay) {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match('연극')
+                })
+                return this.copyPerformList
+           }
+
+           this.checkPlay = false
+
+             if(this.checkExhibition) {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match('전시회')
+                })
+                return this.copyPerformList
+           }
+
+           this.checkExhibition = false
+        
+        /* v-model="checked"로 배열로 선언했을 때 
+           console.log(this.checked)
+
+           for(let i=0; i < this.checked.length; i++) {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match(this.checked[i])
+                })
+
+                return this.copyPerformList
+           } */
+
+        },
         sortRecent() {
-            console.log(this.copyPerformList)
             this.copyPerformList.sort(function (a, b) {
                 return new Date(a.performStart) - new Date(b.performStart)
             })
@@ -257,7 +312,7 @@ export default {
             this.copyPerformList.sort(function (a, b) {
                 return new Date(a.performEnd) - new Date(b.performEnd)
             })
-        }
+        },
     },
     created() {
         this.selectedTab = this.tabs[0]
