@@ -5,7 +5,7 @@ import com.example.Tissue_back.entity.qna.Qna;
 import java.util.List;
 
 public interface QnaService {
-    public void register (Qna qna);
+    public void register (Qna qna, Long memberNo);
     public List<Qna> list();
     public Qna read (Long qnaNo);
     public void modify (Qna qnaNo);
@@ -14,4 +14,6 @@ public interface QnaService {
     public Boolean checkSecret (Long qnaNo);
     //비밀번호 일치 여부 확인
     public Boolean checkQnaPw (Integer qnaNo, String qnaPw);
+
+
 }

@@ -21,10 +21,12 @@ public class QnaController {
     private QnaService service;
 
     @PostMapping("/register")
-    public void QnaRegister (@Validated @RequestBody Qna qna){
+    public void QnaRegister (@Validated @RequestBody Qna qna,
+                             @RequestParam(value = "memberNo") Long memberNo){
+
         log.info("Qna Register");
 
-        service.register(qna);
+        service.register(qna, memberNo);
     }
 
     @GetMapping("/list")
@@ -62,10 +64,22 @@ public class QnaController {
         return qna;
     }
 
+    @PutMapping("/qnaCheck/{qnaNo}")
+    public Qna QnaCheckModify (@PathVariable("qnaNo") Long qnaNo,
+                                @RequestBody Qna qna) {
+        log.info("Qna Check Modify");
+
+        qna.setQnaNo(qnaNo);
+        service.modify(qna);
+
+        return qna;
+    }
+
     @DeleteMapping("/delete/{qnaNo}")
     public void QnaDelete (@PathVariable("qnaNo") Long qnaNo, Qna qna) throws Exception {
         log.info("QnaDelete");
 
         service.remove(qnaNo);
     }
+
 }

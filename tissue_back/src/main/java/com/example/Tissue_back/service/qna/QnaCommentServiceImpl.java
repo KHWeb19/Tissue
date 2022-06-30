@@ -27,6 +27,14 @@ public class QnaCommentServiceImpl implements QnaCommentService {
 
         qnaComment.setQna(findQna.get());
         commentRepository.save(qnaComment);
+
+        //댓글 등록시 자동으로 QNA Check : false -> true로 변경
+        log.info("Enter QnaRepository");
+        Qna qna = findQna.get();
+        log.info("QnaCheck = true");
+        qna.setQnaCheck(true);
+
+        qnaRepository.save(qna);
     }
 
     @Override
@@ -41,16 +49,4 @@ public class QnaCommentServiceImpl implements QnaCommentService {
         commentRepository.deleteById(qnaCommentNo);
     }
 
-    @Override
-    public Boolean checkSecret (Long qnaNo) {
-        Optional<Qna> checkQnaNo = qnaRepository.findById(qnaNo);
-
-        if(checkQnaNo.get().getQnaSecret()) {
-            log.info("Secret == True");
-            return true;
-        } else {
-            log.info("Secret == False");
-            return false;
-        }
-    }
 }

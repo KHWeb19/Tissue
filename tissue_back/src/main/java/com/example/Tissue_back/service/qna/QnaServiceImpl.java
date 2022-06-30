@@ -1,7 +1,10 @@
 package com.example.Tissue_back.service.qna;
 
+import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.qna.Qna;
+import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.qna.QnaRepository;
+import com.example.Tissue_back.service.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -21,10 +24,27 @@ public class QnaServiceImpl implements QnaService{
     private QnaRepository repository;
 
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SecurityService securityService;
+
+
     @Override
-    public void register (Qna qna) {
+    public void register (Qna qna, Long memberNo) {
+        /*String memberId = securityService.getMemberId(token);
+
+        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+
+        qna.setMember(findMember.get());
+
+        repository.save(qna);*/
+
+        Optional<Member> findMember = memberRepository.findById(memberNo);
+        qna.setMember(findMember.get());
         repository.save(qna);
     }
 
@@ -35,7 +55,9 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public Qna read (Long qnaNo){
+
         Optional<Qna> maybeReadQna = repository.findById(qnaNo);
+
 
         if(maybeReadQna.equals(Optional.empty())) {
             log.info("Can't read board");
@@ -79,9 +101,6 @@ public class QnaServiceImpl implements QnaService{
             log.info("Password Wrong!");
             return false;
         }
-
-
-
 
     }
 }

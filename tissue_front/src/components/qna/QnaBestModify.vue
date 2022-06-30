@@ -1,5 +1,5 @@
 <template>
-    <div class="background"><br><br><br>
+    <div class="background">
                   <form @submit.prevent="onSubmit">
       <v-row justify="center">
         <v-col xs="20" sm="10" md="10">
