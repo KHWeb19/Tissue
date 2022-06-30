@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service.performance;
 
+import com.example.Tissue_back.entity.event.Event;
 import com.example.Tissue_back.entity.performance.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,5 +17,6 @@ public interface PerformanceService {
 
     public List<Performance> categoryList(String category);
     public List<Performance> search(String keyword);
+    public Event eventRead(Long performNo);
 
 }
