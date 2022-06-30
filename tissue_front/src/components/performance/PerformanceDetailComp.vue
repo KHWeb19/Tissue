@@ -415,21 +415,27 @@ export default {
     },
 
     registerReview() {
-      const { reviewWriter, reviewContent, reviewRating } = this;
+      let token = localStorage.getItem("token");
 
-      axios
-        .post(`http://localhost:7777/review/register/${this.performNo}`, {
-          reviewWriter,
-          reviewContent,
-          reviewRating,
-        })
-        .then(() => {
-          alert("후기 등록 성공");
-          this.$router.go();
-        })
-        .catch(() => {
-          alert("실패");
-        });
+      const { reviewContent, reviewRating } = this;
+      console.log(token);
+      if (token != null) {
+        axios
+          .post(`http://localhost:7777/review/register/${this.performNo}`, {
+            params: { token: token },
+            reviewContent,
+            reviewRating,
+          })
+          .then(() => {
+            alert("후기 등록 성공");
+            this.$router.go();
+          })
+          .catch(() => {
+            alert("실패");
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+      }
     },
   },
 };

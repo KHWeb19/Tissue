@@ -4,6 +4,7 @@ import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.review.ReviewRepository;
+import com.example.Tissue_back.service.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,15 @@ public class ReviewServiceImpl implements ReviewService{
     @Autowired
     private PerformanceRepository performanceRepository;
 
-    @Override
-    public void register(Review review, Long performNo) {
-        Optional<Performance> findPerformance = performanceRepository.findById(performNo);
+    @Autowired
+    private SecurityService securityService;
 
+    @Override
+    public void register(Review review, Long performNo, String token) {
+        Optional<Performance> findPerformance = performanceRepository.findById(performNo);
+        String memberId = securityService.getMemberId(token);
+
+        review.setReviewWriter(memberId);
         review.setPerformance(findPerformance.get());
 
         reviewRepository.save(review);

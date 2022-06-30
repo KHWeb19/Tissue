@@ -18,9 +18,10 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping("register/{performNo}")
-    public void reviewRegister(@Validated @RequestBody Review review, @PathVariable("performNo")Long performNo){
-        log.info("reviewRegister()" + performNo);
+    public void reviewRegister(@Validated @RequestBody Review review, @PathVariable("performNo")Long performNo,
+                               @RequestParam(value="token") String token){
+        log.info("reviewRegister()" + performNo + token);
 
-        reviewService.register(review,performNo);
+        reviewService.register(review,performNo, token);
     }
 }
