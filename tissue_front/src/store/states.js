@@ -13,6 +13,7 @@ export default {
     theaterList: [],
     exhibitionList: [],
     performanceEvent: null,
+    reviewList: [],
 
 
     notices: [],

@@ -14,6 +14,7 @@ import {
     FETCH_THEATER_LIST,
     FETCH_EXHIBITION_LIST,
     FETCH_PERFORMANCE_EVENT,
+    FETCH_REVIEW_LIST,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -90,6 +91,13 @@ export default {
             commit(FETCH_PERFORMANCE_EVENT, res.data)
         })
       },
+      fetchPerformanceReviewList({commit},performNo) {
+        return axios.get(`http://localhost:7777//review/list/${performNo}`)
+        .then((res)=>{
+            commit(FETCH_REVIEW_LIST,res.data)
+        })
+    },
+
    // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')

@@ -117,6 +117,7 @@
                     <v-card
                       v-if="this.availableCoupon.length != 0"
                       height="100%"
+                      style="border: 1px solid black"
                     >
                       <div
                         style="display: flex; justify-content: space-between"
@@ -196,6 +197,7 @@
                     <v-card
                       v-if="this.availableCoupon.length != 0"
                       height="100%"
+                      style="border: 1px solid black"
                     >
                       <div
                         style="display: flex; justify-content: space-between"
@@ -371,7 +373,7 @@
             >
             <v-tab-item v-for="n in 2" :key="n">
               <performance-detail-comp
-                v-if="n == 1"
+                v-if="n == 1 && performanceEvent"
                 :performance="performance"
                 :performanceEvent="performanceEvent"
               />
