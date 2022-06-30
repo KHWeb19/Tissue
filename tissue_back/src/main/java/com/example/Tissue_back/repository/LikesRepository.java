@@ -15,4 +15,5 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findByMemberAndPerformance (Member member, Performance performance);
 
     List<Likes> findByPerformance (Performance performance);
+    List<Likes> findByMember (Member member);
 }

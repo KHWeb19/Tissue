@@ -9,4 +9,5 @@ public interface LikesService {
     public List<Likes> iLike (LikesDto likesDto);
     public List<Likes> iDislike (String token, Long performNo);
     public List<Likes> howLikes (Long performNo);
+    public List<Likes> myLikes (Long memberNo);
 }

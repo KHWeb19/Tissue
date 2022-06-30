@@ -51,4 +51,10 @@ public class LikesController {
         Claims no = securityService.getRole(token);
         return Long.valueOf(String.valueOf(no.get("memberNo")));
     }
+
+    @GetMapping("my/{memberNo}")
+    public List<Likes> getMyLike (@PathVariable("memberNo") Long memberNo) {
+        log.info("my like");
+        return service.myLikes(memberNo);
+    }
 }

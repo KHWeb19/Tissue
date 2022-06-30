@@ -86,4 +86,14 @@ public class LikesServiceImpl implements LikesService {
 
     }
 
+    @Override
+    public List<Likes> myLikes (Long memberNo) {
+        log.info("myLikes()");
+        Optional<Member> getMember= memberRepository.findById(memberNo);
+
+        Member member = getMember.get();
+
+        return likeRepository.findByMember(member);
+    }
+
 }
