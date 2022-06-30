@@ -16,7 +16,7 @@ public class SecurityService {
 
     private final String secretKey = "lalatissuetissuetissue20220620lala";
 
-    public String createToken(String memberId, Role roles, long expTime) {
+    public String createToken(String memberId, Long memberNo, Role roles, long expTime) {
         if(expTime <= 0) {
             throw new RuntimeException("만료시간이 0보다 커야함");
         }
@@ -29,6 +29,7 @@ public class SecurityService {
 
         Claims claims = Jwts.claims().setSubject(memberId);
         claims.put("roles", roles);
+        claims.put("memberNo", memberNo);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -43,8 +44,8 @@ public class SecurityService {
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .build()
-                .parseClaimsJws(token).getBody().getSubject()
-;    }
+                .parseClaimsJws(token).getBody().getSubject();
+    }
 
     public Claims getRole (String token) {
         return Jwts.parserBuilder()

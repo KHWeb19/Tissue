@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -99,5 +101,6 @@ public class Performance {
     @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     private Set<Likes> like = new HashSet<>();
 }
