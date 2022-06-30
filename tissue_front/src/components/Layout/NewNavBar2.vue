@@ -40,6 +40,8 @@
           <v-text-field
             hide-details
             append-icon="mdi-magnify"
+            @click:append="search"
+            v-model="keyword"
             single-line
             filled
             dense
@@ -71,23 +73,25 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "NewNavBar2",
   data() {
     return {
       isScroll: false,
       mainLinks: [
-        { text: "콘서트", route: "a" },
-        { text: "뮤지컬", route: "b" },
-        { text: "연극", route: "c" },
-        { text: "전시회", route: "d" },
+        { text: "콘서트", route: "/concert" },
+        { text: "뮤지컬", route: "/musical" },
+        { text: "연극", route: "/theater" },
+        { text: "전시회", route: "/exhibition" },
       ],
       subLinks: [
-        { text: "지역", route: "ㄱ" },
+        { text: "지역", route: "area" },
         { text: "랭킹", route: "ㄴ" },
-        { text: "이벤트/쿠폰", route: "event" },
+        { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: localStorage.getItem("token"),
+      keyword:''
     };
   },
   mounted() {
@@ -116,6 +120,7 @@ export default {
     this.token = localStorage.getItem("token");
   },
   methods: {
+    ...mapActions(['fetchSearchList', 'fetchNoticeSearchList']),
     goHome() {
       this.$router.push("/");
     },
@@ -129,12 +134,19 @@ export default {
     },
     goToMyPage() {
       if (this.token != null) {
-        this.$router.go({ name: "myPageView" });
+        this.$router.push("/myPage");
       } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");
       }
     },
+    search() {
+        console.log(this.keyword)
+        this.fetchSearchList(this.keyword),
+        this.fetchNoticeSearchList(this.keyword)
+        this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
+        this.keyword=''
+    }
   },
 };
 </script>

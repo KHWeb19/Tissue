@@ -1,16 +1,22 @@
-import axios from 'axios'
 import {
+
     FETCH_HALL_LIST,
     FETCH_HALL,
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
+
       // performance
     FETCH_PERFORMANCE_LIST,
     FETCH_PERFORMANCE,
+    FETCH_CONCERT_LIST,
+    FETCH_MUSICAL_LIST,
+    FETCH_THEATER_LIST,
+    FETCH_EXHIBITION_LIST,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
+
     FETCH_QNA_LIST,
     FETCH_QNA,
     FETCH_MEMBER_ROLE,
@@ -19,14 +25,23 @@ import {
     FETCH_QNA_BEST,
 
     FETCH_MEMBER_INFO,
-    FETCH_MEMBER
+    FETCH_MEMBER,
+    FETCH_SEARCH_LIST,
+    FETCH_NOTICE_SEARCH_LIST,
+
+    // event
+    FETCH_EVENT_LIST,
+    FETCH_EVENT,
+
 
 
 } from './mutation-types'
 
-//import router from '@/router'
+// import Vue from 'vue'
+import axios from 'axios'
 
 export default {
+
     fetchHallList({commit}) {
         return axios.get('http://localhost:7777/hall/list')
         .then((res)=>{
@@ -52,6 +67,30 @@ export default {
             commit(FETCH_COUPON,res.data)
         })
     },
+    fetchConcertList({ commit }) {
+        return axios.get('http://localhost:7777/performance/concertList')
+                .then((res) => {
+                    commit(FETCH_CONCERT_LIST, res.data)
+                })
+    },
+    fetchMusicalList({ commit }) {
+        return axios.get('http://localhost:7777/performance/musicalList')
+                .then((res) => {
+                    commit(FETCH_MUSICAL_LIST, res.data)
+                })
+    },
+    fetchTheaterList({ commit }) {
+        return axios.get('http://localhost:7777/performance/theaterList')
+                .then((res) => {
+                    commit(FETCH_THEATER_LIST, res.data)
+                })
+    },
+    fetchExhibitionList({ commit }) {
+        return axios.get('http://localhost:7777/performance/exhibitionList')
+                .then((res) => {
+                    commit(FETCH_EXHIBITION_LIST, res.data)
+                })
+    },
    // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')
@@ -76,6 +115,20 @@ export default {
           .then((res) => {
             commit(FETCH_NOTICE, res.data)
           })
+      },
+
+    // event
+    fetchEventList({ commit }) {
+      return axios.get('http://localhost:7777/event/list')
+              .then((res) => {
+                  commit(FETCH_EVENT_LIST, res.data)
+              })
+    },
+    fetchEvent({ commit }, eventNo) {
+      return axios.get(`http://localhost:7777/event/${eventNo}`)
+      .then((res) => {
+          commit(FETCH_EVENT, res.data)
+      })
     },
     fetchQnaList ({ commit }) {
         return axios.get('qna/list')
@@ -114,10 +167,10 @@ export default {
           })
     },
     fetchMemberInfo({ commit }, token) {
-        return axios.get('Member/info', { params: { token: token }})
+        return axios.get('Member/info', { params: { token: token } })
             .then((res) => {
                 commit(FETCH_MEMBER_INFO, res.data)
-        })
+            })
     },
     fetchMember({ commit }) {
         return axios.get('Admin/memberInfo')
@@ -125,6 +178,18 @@ export default {
                 commit(FETCH_MEMBER, res.data)
         })
     },
+    fetchSearchList({ commit }, keyword) {
+        return axios.post('performance/search', { keyword })
+            .then((res) => {
+            commit(FETCH_SEARCH_LIST, res.data)
+        })
+    },
+    fetchNoticeSearchList({ commit }, keyword) {
+        return axios.post('notice/search', { keyword })
+            .then((res) => {
+            commit(FETCH_NOTICE_SEARCH_LIST, res.data)
+        })
+    }
 
 }
 

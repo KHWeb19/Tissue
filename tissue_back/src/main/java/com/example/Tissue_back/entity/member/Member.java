@@ -1,16 +1,17 @@
 package com.example.Tissue_back.entity.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
+import com.example.Tissue_back.entity.coupon.Coupon;
+import com.example.Tissue_back.entity.performance.Likes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.*;
 
 @Data
 @Entity
@@ -63,4 +64,17 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @Builder.Default
+    private List<Coupon> coupons = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private Set<Likes> likes = new HashSet<>();
+
 }

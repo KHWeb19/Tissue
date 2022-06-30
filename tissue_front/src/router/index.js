@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 메인페이지 (임지훈)
 import Home from '../views/Home.vue'
+
 import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
 import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
@@ -9,12 +10,17 @@ import HallReadPage from '@/views/hall/HallReadPage.vue'
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
-import AdminMainPage from '@/views/Admin/AdminMainPage.vue'
 import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
 import CouponListPage from '@/views/coupon/CouponListPage.vue'
 import CouponModifyPage from '@/views/coupon/CouponModifyPage.vue'
 
 import EventMainPage from '@/views/event/EventMainPage.vue'
+
+import ConcertPage from '@/views/performance/ConcertPage.vue'
+import MusicalPage from '@/views/performance/MusicalPage.vue'
+import TheaterPage from '@/views/performance/TheaterPage.vue'
+import ExhibitionPage from '@/views/performance/ExhibitionPage.vue'
+import PerformanceDetailPage from '@/views/performance/PerformanceDetailPage.vue'
 
 import MemberJoinPage2 from '../views/member/MemberJoinPage2.vue'
 import MemberJoinPage from '../views/member/MemberJoinPage.vue'
@@ -23,17 +29,28 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
+
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
 
-// admin
+import SearchPage from '../views/search/SearchPage.vue'
 
+// admin
 
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
 import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
+import MapPage from '@/views/map/MapPage.vue'
+import AreaPage from '@/views/area/AreaPage.vue'
+
+// event
+import EventRegisterPage from '@/views/event/EventRegisterPage.vue'
+import EventListPage from '@/views/event/EventListPage.vue'
+import EventReadPage from '@/views/event/EventReadPage.vue'
+import EventModifyPage from '@/views/event/EventModifyPage.vue'
+
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -51,6 +68,16 @@ import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
 
 
 Vue.use(VueRouter)
+
+const requireLogin = () => (to, from, next) => {
+    let token = localStorage.getItem('token')
+    if (token !== null) {
+        return next()
+    } else {
+        alert('로그인이 필요한 서비스입니다.')
+        router.push("/")
+    }
+} 
 
 const routes = [
   // 메인페이지 (임지훈)
@@ -96,8 +123,8 @@ const routes = [
   },
   {
     path: '/Admin',
-    name: 'AdminMainPage',
-    component: AdminMainPage
+    name: 'AdminMember',
+    component: AdminMember
   },
   {
     path: '/couponRegister',
@@ -124,7 +151,37 @@ const routes = [
     name: 'EventMainPage',
     component: EventMainPage
   },
-  // 메인페이지 (임지훈)
+  {
+    path: '/concert',
+    name: 'ConcertPage',
+    component: ConcertPage
+  },
+  {
+    path: '/musical',
+    name: 'MusicalPage',
+    component: MusicalPage
+  },
+  {
+    path: '/theater',
+    name: 'TheaterPage',
+    component: TheaterPage
+  },
+  {
+    path: '/exhibition',
+    name: 'ExhibitionPage',
+    component: ExhibitionPage
+  },
+  {
+    path: '/performanceDetail/:performNo',
+    name: 'PerformanceDetailPage',
+    components: {
+      default: PerformanceDetailPage
+  },
+  props:{
+      default: true
+  }
+  },
+  // (임지훈)
 
   // 유아림
   {
@@ -170,7 +227,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/modify',
@@ -180,7 +238,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/signOut',
@@ -190,22 +249,34 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/myPage/coupon',
         name: 'MyPageCoupon',
-        component: MyPageView
+        component: MyPageView,
+        beforeEnter: requireLogin()
     },
     {
-        path: '/Admin/member',
-        name: 'AdminMember',
-        component: AdminMember 
+        path: '/myPage/qna',
+        name: 'MyPageQnA',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/search/:keyword',
+        name: 'SearchPage',
+        components: {
+            default: SearchPage
+        },
+        props: {
+            default: true
+        }
     },
   // 유아림
 
-  // 공연장 (노서현)
- 
+  // 노서현
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
@@ -236,8 +307,48 @@ const routes = [
       default: true
      }
   },
-  // 공연장 (노서현)
-
+  {
+    path: '/mapPage',
+    name: 'MapPage',
+    component: MapPage
+  },
+  {
+    path: '/eventRegisterPage',
+    name: 'EventRegisterPage',
+    component: EventRegisterPage
+  },
+  {
+    path: '/eventListPage',
+    name: 'EventListPage',
+    component: EventListPage
+  },
+  {
+    path: '/eventReadPage/:eventNo',
+    name: 'EventReadPage',
+    components: {
+      default: EventReadPage
+    },
+     props: {
+      default: true
+     }
+  },
+  {
+    path: '/eventModifyPage/:eventNo',
+    name: 'EventModifyPage',
+    components: {
+      default: EventModifyPage
+    },
+     props: {
+      default: true
+     }
+  },
+  {
+    path: '/area',
+    name: 'AreaPage',
+    component: AreaPage
+  },
+  // 노서현
+  
   {
     path: '/noticeRegister',
     name: 'NoticeRegisterPage',
@@ -258,16 +369,17 @@ const routes = [
       default: true
     }
   },
-    {
-        path: '/noticeModify/:noticeNo',
-        name: 'NoticeModifyPage',
-        components: {
-            default: NoticeModifyPage
-        },
-        props: {
-            default: true
-        }
+  {
+    path: '/noticeModify/:noticeNo',
+    name: 'NoticeModifyPage',
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
     }
+    },
+
   {
     path: '/qnaRegister',
     name: 'QnaRegisterPage',
@@ -313,6 +425,7 @@ const routes = [
       default: true
     }
   }
+  },
 ]
 
 const router = new VueRouter({

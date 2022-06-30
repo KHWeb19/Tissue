@@ -32,14 +32,6 @@
         <h4>{{ performance.performPriceS }}원</h4>
         <h4>{{ performance.performPriceR }}원</h4>
         <h4>{{ performance.performPriceVip }}원</h4>
-        <router-link
-          :to="{
-            name: 'TicketingPage',
-            params: { performNo: performance.performNo.toString() },
-          }"
-        >
-          <v-btn>예매하기</v-btn></router-link
-        >
       </v-col>
     </v-row>
     <hr class="mt-5 mb-5" />
@@ -120,21 +112,32 @@
     </div>
 
     <hr class="mt-5 mb-5" />
-            <div align="center">
-             <v-row>
-                <v-col v-if="showMap">
-                    <v-col> {{ name }} </v-col>
-                    <v-col> {{ address }} ({{ phone }}) </v-col>
-                    <naver-maps :height="500" :width="1000" :mapOptions="mapOptions"></naver-maps>
-                    <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng"></naver-marker>
-                </v-col>
-            </v-row>
-            </div>
+    <div align="center">
+      <v-row>
+        <v-col v-if="showMap">
+          <v-col> {{ name }} </v-col>
+          <v-col> {{ address }} ({{ phone }}) </v-col>
+          <naver-maps
+            :height="500"
+            :width="1000"
+            :mapOptions="mapOptions"
+          ></naver-maps>
+          <naver-marker
+            :lat="mapOptions.lat"
+            :lng="mapOptions.lng"
+          ></naver-marker>
+        </v-col>
+      </v-row>
+    </div>
 
-            <div align="center">
-                <v-btn plain router-link :to="{ name: 'PerformanceModifyPage', params: { performNo } }">
-                    수정
-                </v-btn>
+    <div align="center">
+      <v-btn
+        plain
+        router-link
+        :to="{ name: 'PerformanceModifyPage', params: { performNo } }"
+      >
+        수정
+      </v-btn>
 
       <v-btn plain @click="onDelete"> 삭제 </v-btn>
 
@@ -151,66 +154,77 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
 export default {
-    name: 'PerformanceReadPage',
-    data(){
-        return {
-           performNo: '',
-           mapOptions: {
-                lat: null,
-                lng: null,
-                zoom: 17,
-            },
-            showMap: false,
-            name: null,
-            address: null,
-            phone: null,
-            url: null
-            // showPlace: false
-        }
-    },
-    computed: {
-        ...mapState(['performance'])
-    },
-    created () {
-       this.performNo = this.$route.params.performNo
-    },
-     mounted() {
-        this.fetchPerformance(this.performNo)
-                .catch(() => {
-                    alert('게시물 요청 실패!')
-                    this.$router.push()
-                })
+  name: "PerformanceReadPage",
+  data() {
+    return {
+      performNo: "",
+      mapOptions: {
+        lat: null,
+        lng: null,
+        zoom: 17,
+      },
+      showMap: false,
+      name: null,
+      address: null,
+      phone: null,
+      url: null,
+      // showPlace: false
+    };
+  },
+  computed: {
+    ...mapState(["performance"]),
+  },
+  created() {
+    this.performNo = this.$route.params.performNo;
+  },
+  mounted() {
+    this.fetchPerformance(this.performNo).catch(() => {
+      alert("게시물 요청 실패!");
+      this.$router.push();
+    });
     this.fetchMap(this.performNo);
   },
   methods: {
     ...mapActions(["fetchPerformance"]),
-        onDelete () {
-            const { performNo, performThumbnail, performDetailImg1, performDetailImg2, performDetailImg3, performDetailImg4, performDetailImg5 } = this.performance
-            axios.delete(`performance/${performNo}`, { performThumbnail, performDetailImg1, performDetailImg2, performDetailImg3, performDetailImg4, performDetailImg5 })
-                    .then(() => {
-                        alert('삭제 성공!')
-                        this.$router.push({ name: 'PerformanceListPage' })
-                    })
-                    .catch(() => {
-                        alert('삭제 실패! 문제 발생!')
-                    })
-        },
-       fetchMap (performNo) {
-            axios.get(`map/read/${performNo}`)
-                .then(res => {
-                    const map = res.data
-                    console.log(map)
+    onDelete() {
+      const {
+        performNo,
+        performThumbnail,
+        performDetailImg1,
+        performDetailImg2,
+        performDetailImg3,
+        performDetailImg4,
+        performDetailImg5,
+      } = this.performance;
+      axios
+        .delete(`performance/${performNo}`, {
+          performThumbnail,
+          performDetailImg1,
+          performDetailImg2,
+          performDetailImg3,
+          performDetailImg4,
+          performDetailImg5,
+        })
+        .then(() => {
+          alert("삭제 성공!");
+          this.$router.push({ name: "PerformanceListPage" });
+        })
+        .catch(() => {
+          alert("삭제 실패! 문제 발생!");
+        });
+    },
+    fetchMap(performNo) {
+      axios.get(`map/read/${performNo}`).then((res) => {
+        const map = res.data;
+        console.log(map);
         this.mapOptions.lat = map.y;
         this.mapOptions.lng = map.x;
         this.name = map.name;
         this.address = map.address;
         this.phone = map.phone;
         this.url = map.url;
-                   if (map.y != 0) {
-                    this.showMap = true
-                    }
-            })
-
+        if (map.y != 0) {
+          this.showMap = true;
         }
       });
     },

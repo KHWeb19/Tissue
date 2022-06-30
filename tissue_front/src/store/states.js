@@ -1,13 +1,13 @@
 export default {
 
-    halls: [],
-    hall: null,
-
-    couponList:[],
-    coupon: null,
-
     performances: [],
-    performance: null,
+    performance: {},
+
+    concertList: [],
+    musicalList: [],
+    theaterList: [],
+    exhibitionList: [],
+
 
     notices: [],
     notice: null,
@@ -16,12 +16,18 @@ export default {
     qna: null,
     qnaComments: [],
     qnaBestList: [],
-    qnaBest: null
-    
+    qnaBest: null,
+
     // 유아림
     memberInfo: {},
-    member:[]
+    member: [],
+    searchList: [],
+    searchList2:[],
+    noticeSearchList: [],
     // 유아림
 
+
+    events: [],
+    event: {}
 }
 

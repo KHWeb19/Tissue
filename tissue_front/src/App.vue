@@ -16,7 +16,7 @@
           this.$route.name == 'AdminMember'
         "
       >
-        <admin-main />
+        <admin-navi />
       </div>
       <div
         v-if="
@@ -44,7 +44,7 @@
           this.$route.name != 'AdminMember'
         "
       >
-        <new-nav-bar-2 />
+        <new-nav-bar-2 /> 
         <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
       </div>
       <v-main>
@@ -74,7 +74,7 @@
         this.$route.name != 'AdminMember'
       "
     />
-    <join-footer
+    <join-footer 
       v-if="
         this.$route.name != 'KakaoOAuth' &&
         this.$route.name != 'GoogleOAuth' &&
@@ -100,38 +100,30 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-import AdminMain from "@/components/Admin/AdminMain.vue";
+import AdminNavi from '@/components/Admin/AdminNavi.vue';
 export default {
   name: "App",
   components: {
     FooterArea,
     joinFooter,
     NewNavBar2,
-    AdminMain,
+    AdminNavi,
   },
   data() {
     return {
       url: null,
     };
   },
-  created() {
-    this.url = window.location.href;
-    if (this.url == "http://localhost:8080/") {
-      this.isHome = true;
-    } else {
-      this.isHome = false;
-    }
-  },
-};
+}
 </script>
 <style scoped>
 .v-application {
-  font-family: "Noto Sans KR", sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 @font-face {
-  font-family: "Noto Sans KR";
-  src: url("assets/font/NotoSansKR-Bold.otf");
-  font-weight: 500;
+    font-family: 'Noto Sans KR' ;
+    src: url('assets/font/NotoSansKR-Bold.otf');
+    font-weight: 500;
 }
 </style>
 
