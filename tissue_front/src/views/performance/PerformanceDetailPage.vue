@@ -1,9 +1,10 @@
 <template>
   <div>
     <performance-detail
-      v-if="performance"
+      v-if="performance && performanceEvent"
       :performance="performance"
       :couponList="couponList"
+      :performanceEvent="performanceEvent"
     />
   </div>
 </template>
@@ -24,14 +25,19 @@ export default {
     },
   },
   computed: {
-    ...mapState(["performance", "couponList"]),
+    ...mapState(["performance", "couponList", "performanceEvent"]),
   },
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
+    this.fetchPerformanceEvent(this.performNo);
   },
   methods: {
-    ...mapActions(["fetchPerformance", "fetchCouponList"]),
+    ...mapActions([
+      "fetchPerformance",
+      "fetchCouponList",
+      "fetchPerformanceEvent",
+    ]),
   },
 };
 </script>

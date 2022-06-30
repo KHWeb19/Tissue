@@ -373,6 +373,7 @@
               <performance-detail-comp
                 v-if="n == 1"
                 :performance="performance"
+                :performanceEvent="performanceEvent"
               />
             </v-tab-item>
           </v-tabs>
@@ -394,6 +395,10 @@ export default {
     },
     couponList: {
       type: Array,
+      required: true,
+    },
+    performanceEvent: {
+      type: Object,
       required: true,
     },
   },

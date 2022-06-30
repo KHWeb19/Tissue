@@ -13,6 +13,7 @@ import {
     FETCH_MUSICAL_LIST,
     FETCH_THEATER_LIST,
     FETCH_EXHIBITION_LIST,
+    FETCH_PERFORMANCE_EVENT,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -83,6 +84,12 @@ export default {
                     commit(FETCH_EXHIBITION_LIST, res.data)
                 })
     },
+    fetchPerformanceEvent({ commit }, performNo) {
+        return axios.get(`http://localhost:7777/performance/event/${performNo}`)
+        .then((res) => {
+            commit(FETCH_PERFORMANCE_EVENT, res.data)
+        })
+      },
    // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')
