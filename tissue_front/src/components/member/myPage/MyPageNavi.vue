@@ -56,8 +56,14 @@
                         <v-row>
                             <v-divider class="mt-3 mr-10"/>
                         </v-row>
-                        <v-row class="infoValue mt-15">
-                            {{ info.value }}
+                        <v-row v-if="info.title === '회원 등급 >'" class="infoValue mt-15">
+                            {{ memberInfo.memberGrade }}
+                        </v-row>
+                        <v-row v-else-if="info.title === '사용 가능 쿠폰 >'" class="infoValue mt-15">
+                            {{ couponsLength }}
+                        </v-row>
+                        <v-row v-else class="infoValue mt-15">
+                            {{ memberInfo.memberMileage }}
                         </v-row>
                     </v-col>
                 </v-row>
@@ -87,6 +93,9 @@ export default {
         memberInfo: {
             type:Object,
             required: true
+        },
+        couponsLength: {
+            type: Number
         }
     },
     data () {
@@ -104,15 +113,15 @@ export default {
                 { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
             ],
             infos: [
-                { title: '회원 등급 >', value: this.memberInfo.memberGrade, 
+                { title: '회원 등급 >', 
                     clickAction:() =>{
                         this.showPage(1)
                 } },
-                { title: '사용 가능 쿠폰 >', value: this.memberInfo.coupons.length, 
+                { title: '사용 가능 쿠폰 >', 
                     clickAction:() => {
                         this.showPage(2)}
                 },
-                { title: '마일리지 >', value: this.memberInfo.memberMileage, 
+                { title: '마일리지 >', 
                     clickAction:() => {
                         this.showPage(3)
                 } } 
