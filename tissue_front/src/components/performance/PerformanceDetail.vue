@@ -39,17 +39,24 @@
                   </span>
                 </div>
                 <div class="wrapRating pt-1">
-                  <v-rating
-                    v-model="rating"
-                    background-color="orange lighten-3"
-                    color="orange"
-                    small
-                    dense
-                    hover
-                    readonly
-                    class="mr-3 pt-0"
-                  ></v-rating>
-                  <b style="color: skyblue" class="mr-3">{{ "4.1" }}</b>
+                  <v-btn
+                    color="transparent"
+                    text
+                    @click="scrollReview"
+                    id="scrollBtn"
+                  >
+                    <v-rating
+                      v-model="rating"
+                      background-color="orange lighten-3"
+                      color="orange"
+                      small
+                      dense
+                      hover
+                      readonly
+                      class="mr-3 pb-4"
+                    ></v-rating>
+                  </v-btn>
+                  <b style="color: skyblue" class="mr-3">{{ "4" }}</b>
                   Reviews
                 </div>
               </div>
@@ -373,9 +380,15 @@
             >
             <v-tab-item v-for="n in 2" :key="n">
               <performance-detail-comp
-                v-if="n == 1 && performanceEvent"
+                v-if="n == 1"
                 :performance="performance"
+              />
+              <performance-review
+                v-if="n == 1 && reviewList && performanceEvent"
+                :reviewList="reviewList"
                 :performanceEvent="performanceEvent"
+                :performance="performance"
+                class="reviewBox"
               />
             </v-tab-item>
           </v-tabs>
@@ -387,6 +400,7 @@
 
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
+import PerformanceReview from "@/components/performance/PerformanceReview.vue";
 
 export default {
   name: "PerformanceDetail",
@@ -403,9 +417,14 @@ export default {
       type: Object,
       required: true,
     },
+    reviewList: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
     PerformanceDetailComp,
+    PerformanceReview,
   },
   data() {
     return {
@@ -418,7 +437,7 @@ export default {
       changeBackgroundColor: false,
       couponDialog: false,
       memberDialog: false,
-      rating: 4,
+      rating: 0,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -439,6 +458,17 @@ export default {
         this.availableCoupon.push(this.couponList[i]);
       }
     }
+  },
+
+  methods: {
+    scrollReview() {
+      const btn = document.getElementById("scrollBtn");
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(".reviewBox").scrollIntoView(true);
+      });
+    },
   },
 };
 </script>

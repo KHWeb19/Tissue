@@ -5,6 +5,7 @@
       :performance="performance"
       :couponList="couponList"
       :performanceEvent="performanceEvent"
+      :reviewList="reviewList"
     />
   </div>
 </template>
@@ -25,18 +26,25 @@ export default {
     },
   },
   computed: {
-    ...mapState(["performance", "couponList", "performanceEvent"]),
+    ...mapState([
+      "performance",
+      "couponList",
+      "performanceEvent",
+      "reviewList",
+    ]),
   },
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
     this.fetchPerformanceEvent(this.performNo);
+    this.fetchPerformanceReviewList(this.performNo);
   },
   methods: {
     ...mapActions([
       "fetchPerformance",
       "fetchCouponList",
       "fetchPerformanceEvent",
+      "fetchPerformanceReviewList",
     ]),
   },
 };

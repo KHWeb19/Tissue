@@ -91,8 +91,8 @@ export default {
             commit(FETCH_PERFORMANCE_EVENT, res.data)
         })
       },
-      fetchPerformanceReviewList({commit},performNo) {
-        return axios.get(`http://localhost:7777//review/list/${performNo}`)
+    fetchPerformanceReviewList({commit},performNo) {
+        return axios.get(`http://localhost:7777/review/list/${performNo}`)
         .then((res)=>{
             commit(FETCH_REVIEW_LIST,res.data)
         })
