@@ -69,7 +69,6 @@
                     <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
                 </v-row>
             </v-main>
-            <v-btn @click="test"></v-btn>
         </div>
 </template>
 
@@ -130,9 +129,6 @@ export default {
                 this.dialog[1].value = true
             }
         },
-        test () {
-            console.log(this.memberInfo.likes)
-        }
     }
 }
 </script>
@@ -146,7 +142,7 @@ export default {
 .statusBox {
     position: inherit;
     height: 205px;
-    background: rgb(220, 240, 248);
+    background: #d6edff;
 }
 .status{
     font-size:23pt;
