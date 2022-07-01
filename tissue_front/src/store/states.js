@@ -1,5 +1,10 @@
 export default {
 
+    halls: [],
+    hall: null,
+    couponList:[],
+    coupon: null,
+
     performances: [],
     performance: {},
 
@@ -7,6 +12,8 @@ export default {
     musicalList: [],
     theaterList: [],
     exhibitionList: [],
+    performanceEvent: null,
+    reviewList: [],
 
 
     notices: [],

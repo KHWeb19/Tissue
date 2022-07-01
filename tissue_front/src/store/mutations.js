@@ -12,6 +12,8 @@ import {
     FETCH_MUSICAL_LIST,
     FETCH_THEATER_LIST,
     FETCH_EXHIBITION_LIST,
+    FETCH_PERFORMANCE_EVENT,
+    FETCH_REVIEW_LIST,
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -61,6 +63,12 @@ export default{
     },
     [FETCH_EXHIBITION_LIST] (state, exhibitionList) {
         state.exhibitionList = exhibitionList
+    },
+    [FETCH_PERFORMANCE_EVENT] (state, performanceEvent) {
+        state.performanceEvent = performanceEvent
+    },
+    [FETCH_REVIEW_LIST] (state, reviewList) {
+        state.reviewList = reviewList
     },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances

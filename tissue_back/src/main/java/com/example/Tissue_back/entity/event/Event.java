@@ -40,4 +40,17 @@ public class Event {
     @CreationTimestamp
     private Date eventRegDate;
 
+    @Column
+    private String eventContent;
+
+    @Column
+    private String eventGoods;
+
+    @Column
+    private Integer eventWinnerCnt;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate eventWinnerDate;
+
 }
