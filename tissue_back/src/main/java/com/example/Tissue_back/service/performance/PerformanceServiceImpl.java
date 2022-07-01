@@ -203,7 +203,7 @@ public class PerformanceServiceImpl implements PerformanceService{
     public Event eventRead(Long performNo) {
         //공연장번호를 가지고 이벤트Db에서 찾아야함
         Event find = eventRepository.findEventWithPerformNo(performNo);
-        log.info(String.valueOf("find: "+find));
+        //log.info(String.valueOf("find: "+find));
         return eventRepository.findEventWithPerformNo(performNo);
     }
 
