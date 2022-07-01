@@ -1,6 +1,10 @@
 <template>
     <v-container class="couponMain">
-      <v-row no-gutters>
+      <v-row v-if="coupons.length == 0">
+            <v-icon large color="red">mdi-exclamation-thick</v-icon>
+            <span style="font-size:17pt">사용 가능한 쿠폰이 없습니다.</span>
+      </v-row>
+      <v-row v-else no-gutters>
         <v-col
           v-for="coupon in coupons"
           :key="coupon.couponNo"

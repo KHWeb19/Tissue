@@ -15,7 +15,10 @@
                 </v-row>
             </div>
             <hr class="myHr mb-8 mt-3" color="#90CAF9">
-            <div class="mr-10" v-for="like in myLike" :key="like.memberNo">
+            <div v-if="myLike.length == 0">
+                <span class="ml-10">찜 목록이 없습니다.</span>
+            </div>
+            <div v-else class="mr-10" v-for="like in myLike" :key="like.memberNo">
                 <v-row justify="start">
                     <v-btn icon  @click="dislike(like.performance.performNo)" color="red"><v-icon>mdi-heart</v-icon></v-btn>
                     <v-col cols="2" sm="2" xl="3" md="2">
