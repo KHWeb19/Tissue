@@ -2,7 +2,8 @@
     <v-container class="couponMain">
       <v-row v-if="coupons.length == 0">
             <v-icon large color="red">mdi-exclamation-thick</v-icon>
-            <span style="font-size:17pt">사용 가능한 쿠폰이 없습니다.</span>
+            <span style="font-size:17pt" class="mr-10">사용 가능한 쿠폰이 없습니다.</span>
+            <v-btn depressed color="blue lighten-3" dark @click="goPage"> 다운하러 가기 </v-btn>
       </v-row>
       <v-row v-else no-gutters>
         <v-col
@@ -57,6 +58,11 @@ export default {
     props: {
         coupons: {
             type: Array
+        }
+    },
+    methods: {
+        goPage() {
+            this.$router.push("/event")
         }
     }
 }
