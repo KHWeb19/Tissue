@@ -19,7 +19,10 @@
     <v-container class="mt-7 mb-10">
         <div>
             <v-row justify="center">
-                <search-list :searchList="searchList" :noticeSearchList="noticeSearchList"/>
+                <search-list :searchList="searchList" 
+                :searchList2="searchList2"
+                :noticeSearchList="noticeSearchList" 
+                @update:searchList2="searchList2 = $event"/>
             </v-row>
         </div>
     </v-container>
@@ -38,7 +41,7 @@
 
 <script>
 import searchList from '@/components/search/searchList.vue'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
   components: { searchList },
     name:'SearchPage',
@@ -50,11 +53,16 @@ export default {
     },
     data () {
         return {
-            keyword2:''
+            keyword2:'',
         }
     },
     computed: {
-        ...mapState(['searchList','noticeSearchList'])
+        searchList2: {
+            ...mapState({get:'searchList2'}),
+            ...mapMutations({set:'FETCH_SEARCH_LIST2'})
+        },
+        ...mapState(['searchList', 'noticeSearchList']),
+
     },
     created () {
         this.fetchSearchList(this.keyword),
@@ -62,7 +70,10 @@ export default {
     },
     methods: {
         ...mapActions(['fetchSearchList','fetchNoticeSearchList']),
+
         async search() {
+            this.fetchSearchList(this.keyword2),
+            this.fetchNoticeSearchList(this.keyword2)
             this.$router.push({name: 'SearchPage', params: { keyword: this.keyword2 }})
         }
     }

@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "NewNavBar2",
   data() {
@@ -119,6 +120,7 @@ export default {
     this.token = localStorage.getItem("token");
   },
   methods: {
+    ...mapActions(['fetchSearchList', 'fetchNoticeSearchList']),
     goHome() {
       this.$router.push("/");
     },
@@ -140,6 +142,8 @@ export default {
     },
     search() {
         console.log(this.keyword)
+        this.fetchSearchList(this.keyword),
+        this.fetchNoticeSearchList(this.keyword)
         this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
         this.keyword=''
     }

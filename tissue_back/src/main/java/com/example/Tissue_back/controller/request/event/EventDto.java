@@ -22,5 +22,9 @@ public class EventDto {
     private LocalDate eventStart;
     private LocalDate eventEnd;
     private Date eventRegDate;
+    private String eventContent;
+    private String eventGoods;
+    private Integer eventWinnerCnt;
+    private LocalDate eventWinnerDate;
 
 }

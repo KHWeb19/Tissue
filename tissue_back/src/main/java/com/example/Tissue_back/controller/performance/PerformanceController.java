@@ -3,6 +3,7 @@ package com.example.Tissue_back.controller.performance;
 
 import com.example.Tissue_back.controller.request.performance.KeywordDto;
 
+import com.example.Tissue_back.entity.event.Event;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.service.performance.PerformanceService;
@@ -148,6 +149,14 @@ public class PerformanceController {
         log.info("=== search ===" + keywordDto);
         String keyword = keywordDto.getKeyword();
         return performanceService.search(keyword);
+    }
+
+    //임지훈 (상세페이지 이벤트)
+    @GetMapping("/event/{performNo}")
+    public Event eventRead(@PathVariable("performNo")Long performNo){
+        log.info("eventRead()" + performNo);
+
+        return performanceService.eventRead(performNo);
     }
 
 }

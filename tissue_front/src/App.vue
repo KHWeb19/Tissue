@@ -44,7 +44,7 @@
           this.$route.name != 'AdminMember'
         "
       >
-        <new-nav-bar-2 /> 
+        <new-nav-bar-2 />
         <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
       </div>
       <v-main>
@@ -74,7 +74,7 @@
         this.$route.name != 'AdminMember'
       "
     />
-    <join-footer 
+    <join-footer
       v-if="
         this.$route.name != 'KakaoOAuth' &&
         this.$route.name != 'GoogleOAuth' &&
@@ -100,7 +100,7 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-import AdminNavi from '@/components/Admin/AdminNavi.vue';
+import AdminNavi from "@/components/Admin/AdminNavi.vue";
 export default {
   name: "App",
   components: {
@@ -114,16 +114,15 @@ export default {
       url: null,
     };
   },
-}
+};
 </script>
 <style scoped>
 .v-application {
-    font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 @font-face {
-    font-family: 'Noto Sans KR' ;
-    src: url('assets/font/NotoSansKR-Bold.otf');
-    /* font-weight: 500; */
+  font-family: "Noto Sans KR";
+  src: url("assets/font/NotoSansKR-Bold.otf");
 }
 </style>
 

@@ -1,7 +1,9 @@
 package com.example.Tissue_back.service.performance;
 
 
+import com.example.Tissue_back.entity.event.Event;
 import com.example.Tissue_back.entity.performance.Performance;
+import com.example.Tissue_back.repository.event.EventRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import java.util.UUID;
 public class PerformanceServiceImpl implements PerformanceService{
     @Autowired
     private PerformanceRepository performanceRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Override
     public Performance register(Performance performance, List<MultipartFile> fileList, MultipartFile file) throws Exception {
@@ -192,6 +197,14 @@ public class PerformanceServiceImpl implements PerformanceService{
     public List<Performance> search(String keyword) {
         List<Performance> findList = performanceRepository.findByPerformNameContaining(keyword);
         return findList;
+    }
+
+    @Override
+    public Event eventRead(Long performNo) {
+        //공연장번호를 가지고 이벤트Db에서 찾아야함
+        Event find = eventRepository.findEventWithPerformNo(performNo);
+        //log.info(String.valueOf("find: "+find));
+        return eventRepository.findEventWithPerformNo(performNo);
     }
 
 }
