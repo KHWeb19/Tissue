@@ -16,6 +16,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -112,6 +113,8 @@ public class Performance {
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     @Fetch(FetchMode.SUBSELECT)
     private List<Review> reviewList;
+
+
 
     // 유아림
     @EqualsAndHashCode.Exclude

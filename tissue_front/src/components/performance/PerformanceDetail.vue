@@ -46,7 +46,7 @@
                     id="scrollBtn"
                   >
                     <v-rating
-                      v-model="rating"
+                      :value="reviewSumAvg"
                       background-color="orange lighten-3"
                       color="orange"
                       small
@@ -56,7 +56,7 @@
                       class="mr-3 pb-4"
                     ></v-rating>
                   </v-btn>
-                  <b style="color: skyblue" class="mr-3">{{ "4" }}</b>
+                  <b style="color: skyblue" class="mr-3">{{ reviewSumAvg }}</b>
                   Reviews
                 </div>
               </div>
@@ -175,6 +175,7 @@
                                     text
                                     color="pink lighten-3"
                                     class="downBtn"
+                                    @click="down(coupon.couponNo)"
                                     >다운하기</v-btn
                                   >
                                 </td>
@@ -401,6 +402,7 @@
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
 import PerformanceReview from "@/components/performance/PerformanceReview.vue";
+import axios from "axios";
 
 export default {
   name: "PerformanceDetail",
@@ -441,7 +443,23 @@ export default {
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+
+      reviewAvg: "",
     };
+  },
+
+  computed: {
+    reviewSumAvg() {
+      let sum = 0;
+      let avg = 0;
+      for (let i = 0; i < this.reviewList.length; i++) {
+        sum = sum + this.reviewList[i].reviewRating;
+      }
+      avg = sum / this.reviewList.length;
+
+      console.log("평균" + avg);
+      return avg;
+    },
   },
 
   filters: {
@@ -468,6 +486,30 @@ export default {
         e.preventDefault();
         document.querySelector(".reviewBox").scrollIntoView(true);
       });
+    },
+
+    down(couponNo) {
+      let token = localStorage.getItem("token");
+
+      if (token != null) {
+        axios
+          .get(`coupon/download/${couponNo}`, { params: { token: token } })
+          .then((res) => {
+            if (res.data == true) {
+              alert("쿠폰이 발행되었습니다.");
+            } else {
+              alert("이미 발행된 쿠폰입니다.");
+            }
+
+            this.couponDialog = false;
+          })
+          .catch(() => {
+            console.log("에러");
+            console.log(couponNo, token);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+      }
     },
   },
 };
