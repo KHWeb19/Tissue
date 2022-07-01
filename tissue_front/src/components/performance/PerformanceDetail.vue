@@ -402,6 +402,10 @@ export default {
     likeList: {
         type: Array,
         required: true,
+    },
+    likeMember: {
+        type:Boolean,
+        required: true
     }
   },
   components: {
@@ -422,7 +426,6 @@ export default {
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      likeMember: false,
     };
   },
 
@@ -430,9 +433,6 @@ export default {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
-  },
-  created() {
-      this.checkMember()
   },
   mounted() {
     for (let i = 0; i < this.couponList.length; i++) {
@@ -455,10 +455,10 @@ export default {
                     console.log(res.data)
 
                     if(this.likeList[i].member.memberNo === res.data) {
-                        return this.likeMember = true
+                        return this.$emit('update:likeMember', true)
                     }
                 }
-                return this.likeMember = false
+                return this.$emit('update:likeMember', false)
             })
           }
       },

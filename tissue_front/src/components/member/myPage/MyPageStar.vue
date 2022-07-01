@@ -16,22 +16,22 @@
             </div>
             <hr class="myHr mb-8 mt-3" color="#90CAF9">
             <div class="mr-10" v-for="like in myLike" :key="like.memberNo">
-                <v-row justify="center">
+                <v-row justify="start">
                     <v-btn icon  @click="dislike(like.performance.performNo)" color="red"><v-icon>mdi-heart</v-icon></v-btn>
-                    <v-col cols="2" sm="2" xl="3">
+                    <v-col cols="2" sm="2" xl="3" md="2">
                         <v-img :src="require(`@/assets/thumbNail/${like.performance.performThumbnail}`)"
                         contain class="ml-2" width="100"
                         >
                         </v-img>
                     </v-col>
-                    <v-col cols="5" sm="6" xl="6" class="mt-12">
+                    <v-col cols="5" sm="6" xl="6" md="6" class="mt-12">
                         <router-link :to="{name:'PerformanceDetailPage', params: { performNo: like.performance.perfromNo }}"
                         style="color:black">
                         {{ like.performance.performName }}
                         </router-link>
                     </v-col>
                     <v-divider vertical class="ml-5 mt-6 mr-8" style="height:120px"/>
-                    <v-col cols="3" sm="3" xl="2" class="mt-12">
+                    <v-col cols="3" sm="2" xl="2" md="3" class="mt-12">
                         {{ like.performance.performStart }} ~ {{ like.performance.performEnd }}
                     </v-col>
                 </v-row>
