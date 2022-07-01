@@ -25,16 +25,17 @@
           lg="4"
           sm="6"
         >
-        <router-link style="color: black" :to="{ name: 'PerformanceReadPage', params: { performNo: event.performance.performNo} }">
+       
           <div width="500" height="450">
             <div class="imgWrap">
               <div class="pt-10">
-                <v-img
-                  :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)"
-                  class="img"
-                >
-                    <h1 class="imgText" v-if="event.eventCategory === '기대평'">기대평 이벤트</h1>
-                    <h1 class="reviewImgText" v-else> 관람후기 이벤트</h1>
+                <v-img :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img">
+                  <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage' }">
+                    <h1 class="imgText" style="color:black">기대평 이벤트</h1>
+                  </router-link>
+                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
+                    <h1 class="reviewImgText" style="color:black"> 관람후기 이벤트 </h1>
+                  </router-link>
                 </v-img>
               </div>
             </div>
@@ -58,7 +59,7 @@
                 <h2 class="ddayTxt">{{dday.result}}일 남음</h2>
             </div>
           </div>
-        </router-link>
+
         </v-col>
         
       </v-row>
@@ -221,8 +222,8 @@ export default {
   margin: auto;
 }
 .imgText {
-    font-size: 20px;
-    padding: 5px 10px;
+  font-size: 20px;
+  padding: 5px 10px;
 	background-color: #BCAAA4;
 	text-align: center;
 	top: 85%;

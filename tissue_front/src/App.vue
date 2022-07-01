@@ -123,7 +123,7 @@ export default {
 @font-face {
     font-family: 'Noto Sans KR' ;
     src: url('assets/font/NotoSansKR-Bold.otf');
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 </style>
 

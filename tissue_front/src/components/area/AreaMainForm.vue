@@ -3,55 +3,55 @@
         <v-container>
             <h1>지역별 공연</h1>
 
-            <!-- <ul class="tabs">
-                <li v-for="tab in tabs" v-bind:class="{active : tab === selectedTab}" :key="tab.index" @click="onClickTab(tab)">
-                    {{ tab.name }}
-                </li>
-            </ul> -->
-
-            <v-tabs class="tabs mt-5" fixed-tabs background-color="blue lighten-3" dark>
-                <v-tab v-for="tab in tabs" :key="tab.index" @click="onClickTab(tab)">
+            <v-tabs class="areaBox mt-5" fixed-tabs background-color="transparent" dark height="80px">
+                <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
+                <v-tab v-for="tab in tabs" :key="tab.index" @click="onClickTab(tab)" class="black--text">
                     {{ tab.name }}
                 </v-tab>
             </v-tabs>
 
             <br><br>
 
-            <v-card style="width: 100%" class="detailSearchBox">
+            <v-card style="width: 100%" class="detailSearchBox" flat>
                 <v-row>
                     <v-card-title class="detailSearchTxt">
                         상세검색
-                        <v-icon v-if="!detailSearch">mdi-plus</v-icon>
-                        <v-icon v-else>mdi-minus</v-icon>
+                        <v-icon v-if="!detailSearch" @click="detailSearch = true">mdi-plus</v-icon>
+                        <v-icon v-else @click="detailSearch = false">mdi-minus</v-icon>
                     </v-card-title>
                     <v-spacer/>
                     <v-card-title>
-                        <v-tabs>
-                            <v-tab @click="sortRecent">최신순</v-tab>
-                            <v-tab @click="sortEnd">종료임박순</v-tab>
+                        <v-tabs color="blue lighten-3" background-color="transparent">
+                            <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
+                            <v-tab class="sortbtn black--text" @click="sortRecent">최신순</v-tab>
+                            <v-tab class="sortbtn black--text" @click="sortEnd">종료임박순</v-tab>
                         </v-tabs>
                     </v-card-title>
                 </v-row>
-                <v-container class="pt-0" fluid>
-                    <v-row>
-                        <v-card-subtitle>장르</v-card-subtitle>
-                        <v-checkbox v-model="checkConcert"  label="콘서트" hide-details dense></v-checkbox>
-                        <v-checkbox v-model="checkMusical" label="뮤지컬" hide-details dense></v-checkbox>
-                        <v-checkbox v-model="checkPlay" label="연극" hide-details dense></v-checkbox>
-                        <v-checkbox v-model="checkExhibition" label="전시회" hide-details dense></v-checkbox>
-                        <v-btn @click="applyFilter" color="blue lighten-3">적용</v-btn>
-                    </v-row>
-                </v-container>
+                <v-card-actions v-if="detailSearch">
+                    <v-container class="pt-0" fluid>
+                        <div class="categoryBox" >
+                            <div >
+                                <v-row justify="center" class="categoryList" >
+                                    <v-checkbox v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
+                                    <v-checkbox v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
+                                    <v-checkbox v-model="checked" value="연극" label="연극"></v-checkbox>
+                                    <v-checkbox v-model="checked" value="전시회" label="전시회"></v-checkbox>    
+                                </v-row>
+                            </div>
+                        </div>
+                        <v-btn @click="applyFilter" class="mr-3" color="blue lighten-3">적용</v-btn>
+                        <v-btn @click="resetFilter" color="transparent">초기화</v-btn>
+                    </v-container>
+                </v-card-actions>
             </v-card>
 
 
             <div class="countBox">
-                현재 예매가능한 공연은
-                <b style="color: skyblue">{{ performances.length }}개</b>
-                입니다.
+                 현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList.length }}개</b>입니다.
             </div>
 
-            <div v-if="selectedTab === tabs[0]">
+            <div v-show="selectedTab === tabs[0]">
                 <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <v-card class="mx-auto" max-width="216" height="410" flat>
@@ -73,7 +73,7 @@
                     </v-col>
                 </v-row>
             </div>
-            <div v-if="selectedTab === tabs[1]">
+            <div v-show="selectedTab === tabs[1]">
                  <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[1].name == perform.performArea">
@@ -97,9 +97,9 @@
                     </v-col>
                 </v-row>
             </div>
-             <div v-if="selectedTab === tabs[2]">
+             <div v-show="selectedTab === tabs[2]">
                  <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
+                    <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[2].name == perform.performArea">
                             <v-card class="mx-auto" max-width="216" height="410" flat>
                                 <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
@@ -121,7 +121,7 @@
                     </v-col>
                 </v-row>
             </div>
-            <div v-if="selectedTab === tabs[3]">
+            <div v-show="selectedTab === tabs[3]">
                  <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[3].name == perform.performArea">
@@ -145,7 +145,7 @@
                     </v-col>
                 </v-row>
             </div>
-            <div v-if="selectedTab === tabs[4]">
+            <div v-show="selectedTab === tabs[4]">
                  <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[4].name == perform.performArea">
@@ -169,7 +169,7 @@
                     </v-col>
                 </v-row>
             </div>
-            <div v-if="selectedTab === tabs[5]">
+            <div v-show="selectedTab === tabs[5]">
                  <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[5].name == perform.performArea">
@@ -193,7 +193,7 @@
                     </v-col>
                 </v-row>
             </div>
-            <div v-if="selectedTab === tabs[6]">
+            <div v-show="selectedTab === tabs[6]">
                  <v-row>
                     <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
                         <div v-if="tabs[6].name == perform.performArea">
@@ -238,16 +238,12 @@ export default {
         return {
             originalPerformList: [...this.performances],
             copyPerformList: this.performances,
+            copyPerformList2: this.performances,
             selectedTab: '', 
             tabs: [{name:'전체'}, {name:'서울'}, {name:'경기/인천'}, {name:'대전/충청/강원'}, 
                 {name:'부산/대구/울산/경상'}, {name:'광주/전라'}, {name:'제주'}], 
             detailSearch: false,
-            checked: [],
-            // checkedList: []
-            checkConcert: false,
-            checkMusical: false,
-            checkPlay: false,
-            checkExhibition: false,
+            checked: '',
         }
     },
     methods: {
@@ -255,43 +251,37 @@ export default {
             this.selectedTab = tab
         },
         applyFilter() {
-            if(this.checkConcert) {
+            if(this.checked == '콘서트') {
                 this.copyPerformList = this.copyPerformList.filter(e => {
-                    return e.performCategory.match('콘서트')
+                    return e.performCategory.match(this.checked)
                 })
                 return this.copyPerformList
            }
 
-           this.checkConcert = false
-
-             if(this.checkMusical) {
+            if(this.checked == '뮤지컬') {
                 this.copyPerformList = this.copyPerformList.filter(e => {
-                    return e.performCategory.match('뮤지컬')
+                    return e.performCategory.match(this.checked)
                 })
                 return this.copyPerformList
            }
 
-           this.checkMusical = false
-
-             if(this.checkPlay) {
+            if(this.checked == '연극') {
                 this.copyPerformList = this.copyPerformList.filter(e => {
-                    return e.performCategory.match('연극')
+                    return e.performCategory.match(this.checked)
                 })
                 return this.copyPerformList
            }
 
-           this.checkPlay = false
-
-             if(this.checkExhibition) {
+            if(this.checked == '전시회') {
                 this.copyPerformList = this.copyPerformList.filter(e => {
-                    return e.performCategory.match('전시회')
+                    return e.performCategory.match(this.checked)
                 })
                 return this.copyPerformList
            }
 
-           this.checkExhibition = false
+           
         
-        /* v-model="checked"로 배열로 선언했을 때 
+        /* v-model="checked" 배열로 선언했을 때 --> 첫번째 인덱스의 결과만 나옴
            console.log(this.checked)
 
            for(let i=0; i < this.checked.length; i++) {
@@ -302,6 +292,10 @@ export default {
                 return this.copyPerformList
            } */
 
+        },
+        resetFilter() {
+            this.checked = ''
+            this.copyPerformList2 = [...this.originalPerformList]
         },
         sortRecent() {
             this.copyPerformList.sort(function (a, b) {
@@ -321,6 +315,12 @@ export default {
 </script>
 
 <style scoped>
+/* .areaBox{
+border: 2px solid;
+border-collapse: separate;
+border-color: #90CAF9;
+font-size: 20px;
+} */
 .performTitle {
   font-size: 20px;
   justify-content: center;
@@ -337,7 +337,18 @@ card-subtitle {
   text-align: center;
   font-size: 20px;
 }
+.categoryBox{
+    background-color: white;
+    height: 130px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.detailSearchBox{
+    background-color: rgb(241, 241, 241) ;
+}
 .detailSearchTxt{
+    margin-left: 5px;
     font-size: 15px;
     font-weight: 100;
 }
