@@ -55,11 +55,12 @@ public class QnaController {
 
     @PutMapping("/{qnaNo}")
     public Qna QnaModify (@PathVariable("qnaNo") Long qnaNo,
-                              @RequestBody Qna qna) {
+                          @RequestBody Qna qna,
+                          @RequestParam(value = "memberNo") Long memberNo) {
         log.info("Qna Modify ");
 
         qna.setQnaNo(qnaNo);
-        service.modify(qna);
+        service.modify(qna, memberNo);
 
         return qna;
     }
@@ -70,7 +71,7 @@ public class QnaController {
         log.info("Qna Check Modify");
 
         qna.setQnaNo(qnaNo);
-        service.modify(qna);
+        service.checkModifyTrue(qna);
 
         return qna;
     }

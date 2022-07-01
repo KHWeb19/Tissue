@@ -45,6 +45,14 @@ public class QnaCommentServiceImpl implements QnaCommentService {
     }
 
     @Override
+    public void modify (QnaComment qnaComment, Long qnaNo) {
+
+        Optional<Qna> findQna = qnaRepository.findById(qnaNo);
+        qnaComment.setQna(findQna.get());
+        commentRepository.save(qnaComment);
+    }
+
+    @Override
     public void delete (Long qnaCommentNo) {
         commentRepository.deleteById(qnaCommentNo);
     }

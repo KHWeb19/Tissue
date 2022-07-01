@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Slf4j
@@ -39,6 +40,18 @@ public class QnaCommentController {
             return service.list(qnaNo);
         }*/
         return service.list(qnaNo);
+    }
+
+    @PutMapping("{qnaCommentNo}")
+    public QnaComment CommentModify ( @PathVariable("qnaCommentNo") Long qnaCommentNo,
+                                      @RequestBody QnaComment qnaComment,
+                                      @RequestParam(value = "qnaNo") Long qnaNo) {
+        log.info("CommentModify");
+
+        qnaComment.setQnaCommentNo(qnaCommentNo);
+        service.modify(qnaComment, qnaNo);
+
+        return qnaComment;
     }
 
     @DeleteMapping("/{qnaCommentNo}")

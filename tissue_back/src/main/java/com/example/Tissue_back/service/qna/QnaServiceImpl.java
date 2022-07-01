@@ -67,7 +67,15 @@ public class QnaServiceImpl implements QnaService{
     }
 
     @Override
-    public void modify (Qna qna) {
+    public void modify (Qna qna, Long memberNo) {
+
+        Optional<Member> findMember = memberRepository.findById(memberNo);
+        qna.setMember(findMember.get());
+        repository.save(qna);
+    }
+
+    @Override
+    public void checkModifyTrue (Qna qna) {
         repository.save(qna);
     }
 
