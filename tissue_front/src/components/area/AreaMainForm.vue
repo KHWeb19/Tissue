@@ -47,6 +47,9 @@
             </v-card>
 
 
+            <div class="countBox" v-if="checked">
+                 현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList2.length }}개</b>입니다.
+            </div>
             <div class="countBox">
                  현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList.length }}개</b>입니다.
             </div>
@@ -238,7 +241,7 @@ export default {
         return {
             originalPerformList: [...this.performances],
             copyPerformList: this.performances,
-            copyPerformList2: this.performances,
+            copyPerformList2: this.copyPerformList,
             selectedTab: '', 
             tabs: [{name:'전체'}, {name:'서울'}, {name:'경기/인천'}, {name:'대전/충청/강원'}, 
                 {name:'부산/대구/울산/경상'}, {name:'광주/전라'}, {name:'제주'}], 

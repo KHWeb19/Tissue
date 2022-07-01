@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-card class="mb-10">
+    <v-card class="commentBox mb-10" flat>
       <!-- 댓글 등록 --> 
       <expectation-register-form :eventNo="eventNo" :memberInfo="memberInfo"/>
 
-      <v-card v-if="!expectList || (Array.isArray(expectList) && expectList.length ===0)" 
-        class="pa-5" flat>
+      <!-- 댓글 리스트 --> 
+      <v-card v-if="!expectList || (Array.isArray(expectList) && expectList.length ===0)" class="pa-5" flat>
         <p class="ma-2">등록된 기대평이 없습니다.</p>
       </v-card>
 
@@ -128,5 +128,7 @@ export default {
 </script>
 
 <style scoped>
-
+/* .commentBox {
+  background-color: rgb(241, 241, 241) ;
+} */
 </style>
