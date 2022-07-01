@@ -33,6 +33,10 @@ public class EventServiceImpl implements EventService{
         event.setEventStart(eventDto.getEventStart());
         event.setEventEnd(eventDto.getEventEnd());
         event.setPerformance(performance);
+        event.setEventContent(eventDto.getEventContent());
+        event.setEventGoods(eventDto.getEventGoods());
+        event.setEventWinnerCnt(eventDto.getEventWinnerCnt());
+        event.setEventWinnerDate(eventDto.getEventWinnerDate());
 
         eventRepository.save(event);
     }
@@ -68,6 +72,10 @@ public class EventServiceImpl implements EventService{
         event.setEventStart(eventDto.getEventStart());
         event.setEventEnd(eventDto.getEventEnd());
         event.setPerformance(performance);
+        event.setEventContent(eventDto.getEventContent());
+        event.setEventGoods(eventDto.getEventGoods());
+        event.setEventWinnerCnt(eventDto.getEventWinnerCnt());
+        event.setEventWinnerDate(eventDto.getEventWinnerDate());
 
         eventRepository.save(event);
 

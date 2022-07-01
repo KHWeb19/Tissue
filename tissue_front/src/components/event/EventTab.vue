@@ -17,7 +17,7 @@
           <v-divider></v-divider>
         </v-col>
       </v-row>
-      
+
       <v-row class="mt-5 mb-5">
         <v-col
           v-for="event in paginatedData"
@@ -25,42 +25,53 @@
           lg="4"
           sm="6"
         >
-        <router-link style="color: black" :to="{ name: 'PerformanceReadPage', params: { performNo: event.performance.performNo} }">
-          <div width="500" height="450">
-            <div class="imgWrap">
-              <div class="pt-10">
-                <v-img
-                  :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)"
-                  class="img"
-                >
-                    <h1 class="imgText" v-if="event.eventCategory === '기대평'">기대평 이벤트</h1>
-                    <h1 class="reviewImgText" v-else> 관람후기 이벤트</h1>
-                </v-img>
+          <router-link
+            style="color: black"
+            :to="{
+              name: 'PerformanceDetailPage',
+              params: { performNo: event.performance.performNo },
+            }"
+          >
+            <div width="500" height="450">
+              <div class="imgWrap">
+                <div class="pt-10">
+                  <v-img
+                    :src="
+                      require(`@/assets/thumbNail/${event.performance.performThumbnail}`)
+                    "
+                    class="img"
+                  >
+                    <h1 class="imgText" v-if="event.eventCategory === '기대평'">
+                      기대평 이벤트
+                    </h1>
+                    <h1 class="reviewImgText" v-else>관람후기 이벤트</h1>
+                  </v-img>
+                </div>
               </div>
-            </div>
 
-            <v-card-title class="eventCategory mt-3 blue--text text--lighten-3" style="font-weight: lighter">
+              <v-card-title
+                class="eventCategory mt-3 blue--text text--lighten-3"
+                style="font-weight: lighter"
+              >
                 {{ event.eventCategory }}
-            </v-card-title>
-            <v-card-subtitle class="eventTitle mt-5">
+              </v-card-title>
+              <v-card-subtitle class="eventTitle mt-5">
                 {{ event.eventTitle }}
-            </v-card-subtitle>
+              </v-card-subtitle>
 
-            
-            <v-card-text class="pb-3 pt-3 subContent">
+              <v-card-text class="pb-3 pt-3 subContent">
                 <b class="subTitle"></b> 이벤트 기간: {{ event.eventStart }} ~
                 {{ event.eventEnd }}
-            </v-card-text>
-          </div>
-          <div v-for="dday in fetchDdayCount" :key="dday.eventNo">
-            <div v-if="event.eventNo == dday.eventNo">
-                <v-progress-linear :value="dday.result"></v-progress-linear>
-                <h2 class="ddayTxt">{{dday.result}}일 남음</h2>
+              </v-card-text>
             </div>
-          </div>
-        </router-link>
+            <div v-for="dday in fetchDdayCount" :key="dday.eventNo">
+              <div v-if="event.eventNo == dday.eventNo">
+                <v-progress-linear :value="dday.result"></v-progress-linear>
+                <h2 class="ddayTxt">{{ dday.result }}일 남음</h2>
+              </div>
+            </div>
+          </router-link>
         </v-col>
-        
       </v-row>
 
       <v-row>
@@ -95,7 +106,6 @@
 </template>
 
 <script>
-
 export default {
   name: "EventTab",
   props: {
@@ -134,15 +144,18 @@ export default {
       return this.eventPageArray.slice(start, end);
     },
     fetchDdayCount() {
-        const resultList = []
-        for(let i=0; i < this.eventPageArray.length; i++) {
-            var Dday = new Date(this.eventPageArray[i].eventEnd);  //이벤트마감일
-            var now = new Date() // 현재 시스템 날짜 
-            var gap = now.getTime() - Dday.getTime();  
-            resultList.push({ eventNo: this.eventPageArray[i].eventNo, result: Math.floor(gap / (1000 * 60 * 60 * 24)) * -1})
-        }
-        return resultList
-    }
+      const resultList = [];
+      for (let i = 0; i < this.eventPageArray.length; i++) {
+        var Dday = new Date(this.eventPageArray[i].eventEnd); //이벤트마감일
+        var now = new Date(); // 현재 시스템 날짜
+        var gap = now.getTime() - Dday.getTime();
+        resultList.push({
+          eventNo: this.eventPageArray[i].eventNo,
+          result: Math.floor(gap / (1000 * 60 * 60 * 24)) * -1,
+        });
+      }
+      return resultList;
+    },
   },
   methods: {
     nextPage() {
@@ -151,10 +164,8 @@ export default {
     prevPage() {
       this.pageNum -= 1;
     },
-    
   },
 };
-
 </script>
 
 <style scoped>
@@ -204,7 +215,7 @@ export default {
 .subContent {
   clear: right;
   font-size: 13px;
-  line-height: 21px;    
+  line-height: 21px;
   color: #999;
 }
 /* .imgWrap {
@@ -221,34 +232,34 @@ export default {
   margin: auto;
 }
 .imgText {
-    font-size: 20px;
-    padding: 5px 10px;
-	background-color: #BCAAA4;
-	text-align: center;
-	top: 85%;
-	/* left: 50%; */
+  font-size: 20px;
+  padding: 5px 10px;
+  background-color: #bcaaa4;
+  text-align: center;
+  top: 85%;
+  /* left: 50%; */
 }
-.reviewImgText{
-    font-size: 20px;
-    padding: 5px 10px;
-	background-color: #B0BEC5;
-	text-align: center;
-	top: 85%;
-	/* left: 50%; */
+.reviewImgText {
+  font-size: 20px;
+  padding: 5px 10px;
+  background-color: #b0bec5;
+  text-align: center;
+  top: 85%;
+  /* left: 50%; */
 }
-.eventCategory{
-  width : 74px;
+.eventCategory {
+  width: 74px;
   height: 38px;
   font-size: 13px;
   border-style: solid;
-  border-color: #90CAF9;
+  border-color: #90caf9;
   padding-bottom: 0px;
   padding-top: 0px;
   text-align: center;
 }
-.eventTitle{
+.eventTitle {
   font-size: 18px;
-  line-height: 21px;    
+  line-height: 21px;
 }
 .ddayTxt {
   font-size: 13px;

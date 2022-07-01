@@ -1,8 +1,17 @@
 package com.example.Tissue_back.entity.performance;
 
+
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
+
+import com.example.Tissue_back.entity.review.Review;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
@@ -15,8 +24,12 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+
+import java.util.*;
+
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @NoArgsConstructor
@@ -94,6 +107,15 @@ public class Performance {
     //임지훈
     @Column
     private String hallName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate performShowDate;
+
+    @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Review> reviewList;
+
+
 
     // 유아림
     @EqualsAndHashCode.Exclude

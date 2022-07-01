@@ -40,17 +40,24 @@
                   </span>
                 </div>
                 <div class="wrapRating pt-1">
-                  <v-rating
-                    v-model="rating"
-                    background-color="orange lighten-3"
-                    color="orange"
-                    small
-                    dense
-                    hover
-                    readonly
-                    class="mr-3 pt-0"
-                  ></v-rating>
-                  <b style="color: skyblue" class="mr-3">{{ "4.1" }}</b>
+                  <v-btn
+                    color="transparent"
+                    text
+                    @click="scrollReview"
+                    id="scrollBtn"
+                  >
+                    <v-rating
+                      :value="reviewSumAvg"
+                      background-color="orange lighten-3"
+                      color="orange"
+                      small
+                      dense
+                      hover
+                      readonly
+                      class="mr-3 pb-4"
+                    ></v-rating>
+                  </v-btn>
+                  <b style="color: skyblue" class="mr-3">{{ reviewSumAvg }}</b>
                   Reviews
                 </div>
               </div>
@@ -118,6 +125,7 @@
                     <v-card
                       v-if="this.availableCoupon.length != 0"
                       height="100%"
+                      style="border: 1px solid black"
                     >
                       <div
                         style="display: flex; justify-content: space-between"
@@ -168,6 +176,7 @@
                                     text
                                     color="pink lighten-3"
                                     class="downBtn"
+                                    @click="down(coupon.couponNo)"
                                     >다운하기</v-btn
                                   >
                                 </td>
@@ -197,6 +206,7 @@
                     <v-card
                       v-if="this.availableCoupon.length != 0"
                       height="100%"
+                      style="border: 1px solid black"
                     >
                       <div
                         style="display: flex; justify-content: space-between"
@@ -278,7 +288,11 @@
                       v-model="picker"
                       locale="ko-KR"
                       no-title
+                      :min="performance.performStart"
+                      :max="performance.performEnd"
                       color="blue lighten-3"
+                      :allowed-dates="allowedDates"
+                      :show-current="false"
                     ></v-date-picker>
                   </div>
                   <div style="margin: 25px; width: 50%">
@@ -350,6 +364,7 @@
                 class="reserveBtn white--text"
                 width="230"
                 height="50"
+                :disabled="clickDate"
                 >예매하기</v-btn
               >
             </router-link>
@@ -375,6 +390,13 @@
                 v-if="n == 1"
                 :performance="performance"
               />
+              <performance-review
+                v-if="n == 1 && reviewList && performanceEvent"
+                :reviewList="reviewList"
+                :performanceEvent="performanceEvent"
+                :performance="performance"
+                class="reviewBox"
+              />
             </v-tab-item>
           </v-tabs>
         </v-col>
@@ -385,6 +407,7 @@
 
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
+import PerformanceReview from "@/components/performance/PerformanceReview.vue";
 import axios from 'axios';
 import { mapActions } from 'vuex';
 
@@ -406,10 +429,19 @@ export default {
     likeMember: {
         type:Boolean,
         required: true
-    }
+    },
+    performanceEvent: {
+      type: Object,
+      required: true,
+    },
+    reviewList: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
     PerformanceDetailComp,
+    PerformanceReview,
   },
   data() {
     return {
@@ -422,11 +454,28 @@ export default {
       changeBackgroundColor: false,
       couponDialog: false,
       memberDialog: false,
-      rating: 4,
+      rating: 0,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+
+      reviewAvg: "",
+      clickDate: true,
     };
+  },
+
+  computed: {
+    reviewSumAvg() {
+      let sum = 0;
+      let avg = 0;
+      for (let i = 0; i < this.reviewList.length; i++) {
+        sum = sum + this.reviewList[i].reviewRating;
+      }
+      avg = sum / this.reviewList.length;
+
+      console.log("평균" + avg);
+      return avg;
+    },
   },
 
   filters: {
@@ -491,7 +540,46 @@ export default {
           .catch((res) => {
               console.log(res.message)
           })
+      },
+      scrollReview() {
+      const btn = document.getElementById("scrollBtn");
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(".reviewBox").scrollIntoView(true);
+      });
+    },
+    down(couponNo) {
+      let token = localStorage.getItem("token");
+
+      if (token != null) {
+        axios
+          .get(`coupon/download/${couponNo}`, { params: { token: token } })
+          .then((res) => {
+            if (res.data == true) {
+              alert("쿠폰이 발행되었습니다.");
+            } else {
+              alert("이미 발행된 쿠폰입니다.");
+            }
+
+            this.couponDialog = false;
+          })
+          .catch(() => {
+            console.log("에러");
+            console.log(couponNo, token);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
       }
+    },
+    allowedDates(val) {
+      let show = this.performance.performShowDate;
+      console.log(parseInt(val.split("-")[2], 10));
+      if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
+        return true;
+      }
+      return false;
+    },
   }
 };
 </script>

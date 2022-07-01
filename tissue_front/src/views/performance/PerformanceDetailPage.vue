@@ -1,13 +1,15 @@
 <template>
   <div>
     <performance-detail
-      v-if="performance"
+      v-if="performance && performanceEvent"
       :performance="performance"
       :couponList="couponList"
       :likeList="likeList"
       :likeMember="likeMember"
       @update:likeList="likeList = $event"
       @update:likeMember="likeMember = $event"
+      :performanceEvent="performanceEvent"
+      :reviewList="reviewList"
     />
   </div>
 </template>
@@ -38,16 +40,28 @@ export default {
           ...mapState({get:'likeList'}),
           ...mapMutations({set:'FETCH_PERFORMANCE_LIKE'})
       },
-    ...mapState(["performance", "couponList"]),
+    ...mapState([
+      "performance",
+      "couponList",
+      "performanceEvent",
+      "reviewList",
+    ]),
   },
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
     this.fetchPerformanceLike(this.performNo);
     this.checkMember()
+    this.fetchPerformanceEvent(this.performNo);
+    this.fetchPerformanceReviewList(this.performNo);
   },
   methods: {
-    ...mapActions(["fetchPerformance", "fetchCouponList", "fetchPerformanceLike"]),
+    ...mapActions([
+      "fetchPerformance", 
+      "fetchCouponList", 
+      "fetchPerformanceLike", 
+      "fetchPerformanceEvent",
+      "fetchPerformanceReviewList",]),
      checkMember () {
           let token = localStorage.getItem('token')
           if(token != null){
@@ -64,6 +78,5 @@ export default {
             })
           }
      }
-  },
 };
 </script>
