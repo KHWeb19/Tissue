@@ -65,7 +65,7 @@
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
-                    <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'"/>
+                    <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'" :memberNo="memberInfo.memberNo"/>
                     <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
                 </v-row>
             </v-main>

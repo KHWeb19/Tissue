@@ -4,7 +4,10 @@ import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.qna.Qna;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+import java.util.List;
 
 public interface MemberService {
 
@@ -17,5 +20,6 @@ public interface MemberService {
     public Boolean checkPw (LoginDto check);
     public void modify (MemberDto memberDto);
     public Boolean remove (Long memberNo, String checkPw);
+    public List<Qna> myQna (Long memberNo);
 
 }

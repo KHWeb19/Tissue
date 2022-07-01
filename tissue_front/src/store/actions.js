@@ -30,6 +30,7 @@ import {
     FETCH_NOTICE_SEARCH_LIST,
     FETCH_PERFORMANCE_LIKE,
     FETCH_MY_LIKE,
+    FETCH_MY_QNA,
 
     // event
     FETCH_EVENT_LIST,
@@ -203,6 +204,12 @@ export default {
             .then((res) => {
             commit(FETCH_MY_LIKE, res.data)
         })
+    },
+    fetchMyQna({ commit }, memberNo) {
+        return axios.get(`Member/myQna/${memberNo}`)
+            .then((res => {
+                commit(FETCH_MY_QNA, res.data)
+        }))
     }
 
 }

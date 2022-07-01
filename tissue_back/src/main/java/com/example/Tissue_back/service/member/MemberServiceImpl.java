@@ -4,7 +4,9 @@ import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.repository.member.MemberRepository;
+import com.example.Tissue_back.repository.qna.QnaRepository;
 import com.example.Tissue_back.service.PhoneCheckService;
 import com.example.Tissue_back.service.member.MemberService;
 import com.example.Tissue_back.service.security.SecurityService;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,6 +35,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private QnaRepository qnaRepository;
 
     @Override
     public void register(MemberDto memberDto) {
@@ -186,5 +192,16 @@ public class MemberServiceImpl implements MemberService {
             repository.deleteById(Long.valueOf(memberNo));
             return true;
         }
+    }
+
+    @Override
+    public List<Qna> myQna (Long memberNo) {
+
+        Optional<Member> findMember = repository.findById(memberNo);
+        Member member = findMember.get();
+        log.info("Qna()" + member);
+        List<Qna> get= qnaRepository.findByMember(member);
+        log.info("Qna()" + get);
+        return get;
     }
 }

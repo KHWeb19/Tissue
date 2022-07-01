@@ -24,13 +24,14 @@ import {
 
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
-    FETCH_MEMBER_ROLE
+    FETCH_MEMBER_ROLE,
 
     FETCH_SEARCH_LIST,
     FETCH_SEARCH_LIST2,
     FETCH_NOTICE_SEARCH_LIST,
     FETCH_PERFORMANCE_LIKE,
     FETCH_MY_LIKE,
+    FETCH_MY_QNA,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -115,6 +116,9 @@ export default{
     },
     [FETCH_MY_LIKE](state, myLike) {
         state.myLike = myLike
+    },
+    [FETCH_MY_QNA](state, myQna) {
+        state.myQna = myQna
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {
