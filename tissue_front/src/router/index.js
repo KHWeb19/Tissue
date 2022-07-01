@@ -338,9 +338,14 @@ const routes = [
     component: AreaPage
   },
   {
-    path: '/expectation',
+    path: '/expectation/:eventNo',
     name: 'ExpectationPage',
-    component: ExpectationPage
+    components: {
+      default: ExpectationPage
+    },
+    props: {
+      default: true
+    }
   },
 
   // 노서현

@@ -30,7 +30,7 @@
             <div class="imgWrap">
               <div class="pt-10">
                 <v-img :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img">
-                  <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage' }">
+                  <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage', params: { eventNo: event.eventNo} }">
                     <h1 class="imgText" style="color:black">기대평 이벤트</h1>
                   </router-link>
                   <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
