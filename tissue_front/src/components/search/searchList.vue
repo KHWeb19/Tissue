@@ -58,6 +58,14 @@
             <v-data-table
             :headers="headers"
             :items="noticeSearchList">
+
+            <template v-slot:[`item.noticeTitle`]="{ item }">
+                <router-link
+                    style="color: black"
+                    :to="{ name: 'NoticeReadPage', params: { noticeNo: item.noticeNo } }">
+                    {{ item.noticeTitle }}
+                </router-link>
+            </template>
             </v-data-table>
         </div>
     </v-container>
@@ -97,7 +105,7 @@ export default {
             ],
             headers :[
                 {text : '카테고리', value:'noticeCategory', width:100},
-                {text : '제목', value:'noticeTitle'},
+                {text : '제목', value:'noticeTitle', width:300},
                 {text : '날짜', value:'noticeDate', width:100}
             ],
             countC: '',

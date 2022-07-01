@@ -1,6 +1,6 @@
 <template>
-    <v-container class="searchBox">
-        <div>
+    <v-container>
+        <div class="searchBox">
             <div class="listTitle">
                 <v-row justify="center" class="ml-2">
                     <v-col cols="4">
@@ -142,8 +142,7 @@ export default {
 }
 .searchBox {
     zoom: 0.75;
-    justify-content: center;
-    align-items: center;
+    transform: translate(0%, -8%);
 }
 .myHr {
     margin-right:3%;

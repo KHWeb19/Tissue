@@ -199,9 +199,9 @@ public class MemberServiceImpl implements MemberService {
 
         Optional<Member> findMember = repository.findById(memberNo);
         Member member = findMember.get();
-        log.info("Qna()" + member);
+//        log.info("Qna()" + member);
         List<Qna> get= qnaRepository.findByMember(member);
-        log.info("Qna()" + get);
+//        log.info("Qna()" + get);
         return get;
     }
 }
