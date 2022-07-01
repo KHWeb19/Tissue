@@ -17,6 +17,13 @@ import {
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
 
+    FETCH_QNA_LIST,
+    FETCH_QNA,
+    FETCH_MEMBER_ROLE,
+    FETCH_QNA_COMMENT_LIST,
+    FETCH_QNA_BEST_LIST,
+    FETCH_QNA_BEST,
+
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
@@ -27,6 +34,7 @@ import {
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+
 
 
 } from './mutation-types'
@@ -42,7 +50,7 @@ export default {
             commit(FETCH_HALL_LIST,res.data)
         })
     },
-    
+
     fetchHall({commit},hallNo) {
         return axios.get(`http://localhost:7777/hall/${hallNo}`)
         .then((res)=>{
@@ -98,12 +106,12 @@ export default {
             commit(FETCH_PERFORMANCE, res.data)
         })
     },
-  fetchNoticeList ({ commit }) {
+    fetchNoticeList ({ commit }) {
         return axios.get('http://localhost:7777/notice/list')
           .then((res) => {
             commit(FETCH_NOTICE_LIST, res.data)
           })
-      },
+    },
     fetchNotice ({ commit }, noticeNo) {
         return axios.get(`http://localhost:7777/notice/${noticeNo}`)
           .then((res) => {
@@ -123,6 +131,42 @@ export default {
       .then((res) => {
           commit(FETCH_EVENT, res.data)
       })
+    },
+    fetchQnaList ({ commit }) {
+        return axios.get('qna/list')
+          .then((res) => {
+            commit(FETCH_QNA_LIST, res.data)
+          })
+    },
+    fetchQna ({ commit }, qnaNo) {
+        return axios.get(`qna/${qnaNo}`)
+          .then((res) => {
+            commit(FETCH_QNA, res.data)
+          })
+    },
+    fetchMemberRole ({ commit }, token) {
+      return axios.get('qnaBest/getRole', {params: {token: token}})
+        .then((res) => {
+          commit(FETCH_MEMBER_ROLE, res.data)
+        })
+    },
+    fetchQnaCommentList ({ commit }, qnaCommentNo) {
+    return axios.get(`qnaComment/${qnaCommentNo}`)
+      .then((res) => {
+        commit(FETCH_QNA_COMMENT_LIST, res.data)
+      })
+    },
+    fetchQnaBestList ({ commit }) {
+        return axios.get('qnaBest/list')
+          .then((res) => {
+            commit(FETCH_QNA_BEST_LIST, res.data)
+          })
+    },
+    fetchQnaBest ({ commit }, qnaBestNo) {
+        return axios.get(`qnaBest/${qnaBestNo}`)
+          .then((res) => {
+            commit(FETCH_QNA_BEST, res.data)
+          })
     },
     fetchMemberInfo({ commit }, token) {
         return axios.get('Member/info', { params: { token: token } })
@@ -162,4 +206,5 @@ export default {
     }
 
 }
+
 

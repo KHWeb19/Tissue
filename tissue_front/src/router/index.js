@@ -57,6 +57,15 @@ import NoticeListPage from '../views/notice/NoticeListPage.vue'
 import NoticeReadPage from '../views/notice/NoticeReadPage.vue'
 import NoticeModifyPage from '../views/notice/NoticeModifyPage.vue'
 
+import QnaRegisterPage from '../views/qna/QnaRegisterPage.vue'
+import QnaListPage from '../views/qna/QnaListPage.vue'
+import QnaReadPage from '../views/qna/QnaReadPage.vue'
+import QnaModifyPage from '../views/qna/QnaModifyPage.vue'
+
+import QnaBestRegisterPage from '../views/qna/QnaBestRegisterPage.vue'
+import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -375,6 +384,53 @@ const routes = [
     props: {
       default: true
     }
+    },
+
+  {
+    path: '/qnaRegister',
+    name: 'QnaRegisterPage',
+    component: QnaRegisterPage
+  },
+  {
+    path: '/qnaList',
+    name: 'QnaListPage',
+    component: QnaListPage
+  },
+  {
+    path: '/qnaRead/:qnaNo',
+    name: 'QnaReadPage',
+    components: {
+      default: QnaReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/qnaModify/:qnaNo',
+    name: 'QnaModifyPage',
+    components: {
+      default: QnaModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/qnaBestRegister',
+    name: 'QnaBestRegisterPage',
+    component: QnaBestRegisterPage
+  },
+  {
+    path: '/qnaBestModify/:qnaBestNo',
+    name: 'QnaBestModifyPage',
+    components: {
+      default: QnaBestModifyPage
+    },
+    props: {
+      default: true
+    }
+  }
   },
 ]
 
