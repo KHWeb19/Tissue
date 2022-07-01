@@ -109,6 +109,8 @@ public class Performance {
     @Column
     private String hallName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate performShowDate;
 
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     @Fetch(FetchMode.SUBSELECT)

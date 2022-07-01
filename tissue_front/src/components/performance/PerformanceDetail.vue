@@ -287,7 +287,11 @@
                       v-model="picker"
                       locale="ko-KR"
                       no-title
+                      :min="performance.performStart"
+                      :max="performance.performEnd"
                       color="blue lighten-3"
+                      :allowed-dates="allowedDates"
+                      :show-current="false"
                     ></v-date-picker>
                   </div>
                   <div style="margin: 25px; width: 50%">
@@ -359,6 +363,7 @@
                 class="reserveBtn white--text"
                 width="230"
                 height="50"
+                :disabled="clickDate"
                 >예매하기</v-btn
               >
             </router-link>
@@ -445,6 +450,7 @@ export default {
         .substr(0, 10),
 
       reviewAvg: "",
+      clickDate: true,
     };
   },
 
@@ -510,6 +516,15 @@ export default {
       } else {
         alert("로그인이 필요합니다.");
       }
+    },
+
+    allowedDates(val) {
+      let show = this.performance.performShowDate;
+      console.log(parseInt(val.split("-")[2], 10));
+      if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
+        return true;
+      }
+      return false;
     },
   },
 };
