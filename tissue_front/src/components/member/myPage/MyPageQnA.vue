@@ -30,7 +30,7 @@
               </template>
         </v-data-table>
         <v-pagination
-            class="qnaPg"
+            class="mt-10"
             v-model="page"
             :length="pageCount"
             total-visible="5"
@@ -53,7 +53,7 @@ export default {
         return {
             page: 1,
       pageCount: 0,
-      itemsPerPage: 10,
+      itemsPerPage: 7,
             headers: [
                 {text:'답변', value:'qnaCheck', width:'10%'},
                 {text:'구분', value:'qnaCategory', width:'100'},

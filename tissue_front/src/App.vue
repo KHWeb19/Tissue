@@ -51,6 +51,7 @@
         <router-view />
       </v-main>
     </v-main>
+
     <footer-area
       v-if="
         this.$route.name != 'GoogleOAuth' &&
@@ -92,6 +93,7 @@
         this.$route.name != 'AdminMember'
       "
     />
+
   </v-app>
 </template>
 
@@ -124,6 +126,7 @@ export default {
   font-family: "Noto Sans KR";
   src: url("assets/font/NotoSansKR-Bold.otf");
 }
+
 </style>
 
 <style>

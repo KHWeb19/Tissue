@@ -61,7 +61,7 @@
                         </v-row>
                     </v-col>
                 </v-row>
-                <v-row class="main mb-15 pb-15">
+                <v-row class="main  pb-8">
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
@@ -140,7 +140,8 @@ export default {
     width: 100%;
 }
 .statusBox {
-    position: inherit;
+    position: relative;
+    margin-bottom:5%;
     height: 205px;
     background: #d6edff;
 }
@@ -148,10 +149,9 @@ export default {
     font-size:23pt;
 }
 .main {
-    position: relative;
+    position: inherit;
     left: 65%;
-    top: 30%;
-    transform: translate(-60%, -30%);
+    transform: translate(-60%);
 }
 .infoValue{
     font-size:25pt;

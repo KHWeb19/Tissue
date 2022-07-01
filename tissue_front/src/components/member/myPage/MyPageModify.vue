@@ -114,7 +114,7 @@
                     </v-row>
                 </v-form>
             </div>
-        <div v-else>
+        <div v-else class="rePw">
             <v-container>
             <v-row justify="center" class="mb-5" style="font-size:15pt">
                 비밀번호를 다시 한번 입력해주세요.
@@ -280,5 +280,9 @@ export default {
 .label{
     background: rgb(241, 241, 241);
     text-align: center;
+}
+.rePw{
+    position: relative;
+    top:35%;
 }
 </style>

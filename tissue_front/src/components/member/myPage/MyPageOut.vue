@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="mt-10">
         <v-row justify="center">
             <div style="font-size:20pt">
                 <v-icon large color="red">mdi-exclamation-thick</v-icon> 

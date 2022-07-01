@@ -18,7 +18,7 @@
             <div v-if="myLike.length == 0">
                 <span class="ml-10">찜 목록이 없습니다.</span>
             </div>
-            <div v-else class="mr-10" v-for="like in myLike" :key="like.memberNo">
+            <div v-else class="mr-10" v-for="like in myLike" :key="like.performance.memberNo">
                 <v-row justify="start">
                     <v-btn icon  @click="dislike(like.performance.performNo)" color="red"><v-icon>mdi-heart</v-icon></v-btn>
                     <v-col cols="2" sm="2" xl="3" md="2">
@@ -28,7 +28,7 @@
                         </v-img>
                     </v-col>
                     <v-col cols="5" sm="6" xl="6" md="6" class="mt-12">
-                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: like.performance.perfromNo }}"
+                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: like.performance.performNo.toString() }}"
                         style="color:black">
                         {{ like.performance.performName }}
                         </router-link>
@@ -120,6 +120,7 @@ export default {
         },
         dislike(performNo) {
           let token = localStorage.getItem('token')
+          console.log(performNo)
           axios.delete('likes/delete', { params:{performNo: performNo, token: token}})
           .then(() => {
               alert("찜이 취소되었습니다.")
@@ -142,7 +143,6 @@ export default {
 }
 .searchBox {
     zoom: 0.75;
-    transform: translate(0%, -8%);
 }
 .myHr {
     margin-right:3%;

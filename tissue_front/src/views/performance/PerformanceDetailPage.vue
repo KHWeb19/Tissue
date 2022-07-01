@@ -1,15 +1,15 @@
 <template>
   <div>
     <performance-detail
-      v-if="performance && performanceEvent"
+      v-if="performance || performanceEvent"
       :performance="performance"
       :couponList="couponList"
       :likeList="likeList"
       :likeMember="likeMember"
-      @update:likeList="likeList = $event"
-      @update:likeMember="likeMember = $event"
       :performanceEvent="performanceEvent"
       :reviewList="reviewList"
+      @update:likeList="likeList = $event"
+      @update:likeMember="likeMember = $event"
     />
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
       "fetchCouponList", 
       "fetchPerformanceLike", 
       "fetchPerformanceEvent",
-      "fetchPerformanceReviewList",]),
+      "fetchPerformanceReviewList"]),
      checkMember () {
           let token = localStorage.getItem('token')
           if(token != null){
@@ -78,5 +78,6 @@ export default {
             })
           }
      }
-};
+  }
+}
 </script>
