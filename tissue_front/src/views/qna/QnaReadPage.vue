@@ -1,20 +1,23 @@
 <template>
     <div class="background">
         <qna-read v-if="qna && memberInfo" :qna="qna" :memberInfo="memberInfo"/>
-        <qna-comment @submit="onSubmit" v-if="qnaComments && memberInfo" :memberInfo="memberInfo" :qnaComments="qnaComments"/><br>
+        <qna-comment-list @submit="editQnA" v-if="qnaComments && memberInfo" :memberInfo="memberInfo" :qnaComments="qnaComments"/>
+        <qna-comment-register @submit="onSubmit" v-if="memberInfo" :memberInfo="memberInfo"/><br>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import QnaRead from '@/components/qna/QnaRead.vue'
-import QnaComment from '@/components/qna/QnaComment.vue'
+import QnaRead from '@/components/qna/qna/QnaRead.vue'
+import QnaCommentList from '@/components/qna/qnaComment/QnaCommentList.vue'
+import QnaCommentRegister from '@/components/qna/qnaComment/QnaCommentRegister.vue'
 export default {
   name: 'QnaReadPage',
   components: {
     QnaRead,
-    QnaComment
+    QnaCommentList,
+    QnaCommentRegister
   },
   data() {
     return {
@@ -23,7 +26,7 @@ export default {
   },
   props: {
     qnaNo: {
-      type: String,
+      type: Number,
       required: true
     }
   },
@@ -40,13 +43,14 @@ export default {
         alert('요청 실패..')
         this.$router.back()
     })
+    //this.fetchQnaCommentList(this.qnaCommentNo)
     this.fetchMemberRole(this.token)
 
   },
   methods: {
     ...mapActions(['fetchQna', 'fetchQnaCommentList', 'fetchMemberRole']),
-    onSubmit (payload) {
-      const { qnaCommentContent } = payload
+    onSubmit (payloads) {
+      const { qnaCommentContent } = payloads
       axios.post(`qnaComment/${this.qnaNo}`, { qnaCommentContent })
         .then(() => {
           alert('QnA 답변을 등록하였습니다.')
@@ -55,7 +59,19 @@ export default {
         .catch(() => {
           alert('문제 발생')
         })
-    }
+    },
+    editQnA (payload) {
+      console.log(this.qna.qnaNo)
+      const { qnaCommentContent, qnaCommentNo } = payload
+      axios.put(`qnaComment/${qnaCommentNo}`, { qnaCommentContent, qnaCommentNo }, { params: { qnaNo: this.qna.qnaNo }})
+        .then(() => {
+          alert('1:1 답변이 수정되었습니다.')
+          this.$router.go()
+        })
+        .catch(() => {
+          alert('Comment Modify Fail')
+        })
+      }
   }
 }
 </script>

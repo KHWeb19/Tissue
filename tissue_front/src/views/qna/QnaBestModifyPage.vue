@@ -7,7 +7,7 @@
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import QnaBestModify from '@/components/qna/QnaBestModify.vue'
+import QnaBestModify from '@/components/qna/qnaBest/QnaBestModify.vue'
 export default {
   name: 'QnaBestModifyPage',
   components: {

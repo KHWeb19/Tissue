@@ -6,7 +6,7 @@
 
 <script>
 import axios from 'axios'
-import QnaBestRegister from '@/components/qna/QnaBestRegister.vue'
+import QnaBestRegister from '@/components/qna/qnaBest/QnaBestRegister.vue'
 export default {
   name: 'QnaBestRegisterPage',
   components: {

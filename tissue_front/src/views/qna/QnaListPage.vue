@@ -85,8 +85,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import QnaList from '@/components/qna/QnaList.vue'
-import QnaBestList from '@/components/qna/QnaBestList.vue'
+import QnaList from '@/components/qna/qna/QnaList.vue'
+import QnaBestList from '@/components/qna/qnaBest/QnaBestList.vue'
 export default {
   name: 'QnaListPage.vue',
   components: {
