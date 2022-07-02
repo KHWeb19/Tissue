@@ -1,5 +1,8 @@
 <template>
     <v-container>
+        <span class="ml-3" style="font-size:20pt;"> My 찜목록 </span>
+        <p/>
+        <hr color="#90CAF9" width="95%">
         <div class="searchBox">
             <div class="listTitle">
                 <v-row justify="center" class="ml-2">
@@ -145,7 +148,7 @@ export default {
     zoom: 0.75;
 }
 .myHr {
-    margin-right:3%;
+    width:95%;
 }
 .btn-cover {
   margin-top: 80px;

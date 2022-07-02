@@ -1,5 +1,8 @@
 <template>
     <v-container>
+        <span class="ml-3" style="font-size:20pt;"> My Qna </span>
+        <p/>
+        <hr color="#90CAF9" width="95%">
         <v-data-table
         class="qnaMain mr-10"
         :headers="headers"
@@ -78,5 +81,7 @@ export default {
 </script>
 
 <style scoped>
-
+.title{
+    font-size: 25pt;
+}
 </style>
