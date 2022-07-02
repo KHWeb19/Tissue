@@ -254,32 +254,33 @@ export default {
             this.selectedTab = tab
         },
         applyFilter() {
+            // if(this.copyPerformList.area == "서울") splice 쓰기 
             if(this.checked == '콘서트') {
-                this.copyPerformList = this.copyPerformList.filter(e => {
+                this.copyPerformList2 = this.copyPerformList2.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList
+                return this.copyPerformList2
            }
 
             if(this.checked == '뮤지컬') {
-                this.copyPerformList = this.copyPerformList.filter(e => {
+                this.copyPerformList2 = this.copyPerformList2.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList
+                return this.copyPerformList2
            }
 
             if(this.checked == '연극') {
-                this.copyPerformList = this.copyPerformList.filter(e => {
+                this.copyPerformList2 = this.copyPerformList2.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList
+                return this.copyPerformList2
            }
 
             if(this.checked == '전시회') {
-                this.copyPerformList = this.copyPerformList.filter(e => {
+                this.copyPerformList2 = this.copyPerformList2.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList
+                return this.copyPerformList2
            }
 
            

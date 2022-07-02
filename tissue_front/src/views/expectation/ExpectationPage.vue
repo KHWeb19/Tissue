@@ -32,9 +32,9 @@
                     <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventEnd" readonly></v-text-field>
                 </div>
                 <div align="center">
-                    <div class="to-detail-page" style="font-size:20px">
+                    <div class="to-detail-page" style="font-size:16px">
                         <router-link :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
-                        <p style="color:black">공연정보 보러가기</p>
+                        <p style="color:white">공연정보 보러가기</p>
                         </router-link>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            token: localStorage.getItem('token'),
+
         }
     },
     components: {
@@ -72,11 +72,10 @@ export default {
         ...mapState(['event', 'memberInfo'])
     },
     methods: {
-        ...mapActions(['fetchEvent', 'fetchMemberInfo'])
+        ...mapActions(['fetchEvent'])
     },
     created() {
         this.fetchEvent(this.eventNo)
-        this.fetchMemberInfo(this.token)
     }
 }
 </script>
@@ -98,6 +97,7 @@ h1 {
     background-color: #F48FB1;
     /* border: 1px solid; */
     border-radius: 50px;
+    padding : 10px 0;
 }
 p {
     margin-top:5px;

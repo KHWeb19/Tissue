@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="commentBox mb-10" flat>
-      <!-- 댓글 등록 --> 
+      <!-- 댓글 등록 (로그인 여부 판단해야함)-->
       <expectation-register-form :eventNo="eventNo" :memberInfo="memberInfo"/>
 
       <!-- 댓글 리스트 --> 
@@ -30,7 +30,7 @@
               
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
-                <v-btn v-if="memberInfo.memberId == expect.id" v-on="on" icon> <!-- v-if="memberInfo.id == expect.id" 멤버 아이디랑 일치하면 보이는 것 추가하기 0701-->
+                <v-btn v-if="memberInfo.memberId === expect.id" v-on="on" icon> <!-- v-if="memberInfo.id == expect.id" 멤버 아이디랑 일치하면 보이는 것 추가하기 0701-->
                   <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
@@ -93,12 +93,13 @@ export default {
     memberInfo: {
       type:Object,
       required: true
-    }
+    },
   },
   data () {
     return {
       dialog: false,
-      expectNo: null
+      expectNo: null,
+      token: localStorage.getItem('token'),
     }
   },
   computed: {
