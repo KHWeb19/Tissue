@@ -16,7 +16,7 @@
                         </v-img>
                     </v-col>
                     <v-col cols="6" class="mt-12">
-                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: search.perfromNo }}"
+                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: search.performNo.toString() }}"
                         style="color:black">
                         {{ search.performName }}
                         </router-link>
@@ -39,7 +39,7 @@
                         </v-img>
                     </v-col>
                     <v-col cols="6" class="mt-12">
-                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: search.perfromNo }}"
+                        <router-link :to="{name:'PerformanceDetailPage', params: { performNo: search.performNo.toString() }}"
                         style="color:black">
                         {{ search.performName }}
                         </router-link>
