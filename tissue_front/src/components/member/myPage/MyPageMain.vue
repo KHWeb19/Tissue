@@ -1,11 +1,13 @@
 <template>
-<div>
+    <v-container class="pt-5">
         <div class="tem1">
             <v-row class="menuTitle ml-5">
                 <v-icon class="mr-5" color="pink lighten-3" large>mdi-check-bold</v-icon>
                 최근 예매 내역
+                <v-spacer/>
+                        <router-link class="more mt-4 mr-16" :to="{name:'MyPageQnA'}"> 더보기 ></router-link>
             </v-row>
-            <hr class="hrLine mt-6 mb-5" color='#90CAF9' width="92%" >
+            <hr class="hrLine mt-6 mb-5" color='#90CAF9' width="94%" >
             <v-data-table style="zoom:0.9"
             hide-default-footer
             hide-default-header
@@ -74,7 +76,8 @@
                 </v-col>
             </v-row>
         </div>
-</div>
+
+    </v-container>
 </template>
 
 <script>

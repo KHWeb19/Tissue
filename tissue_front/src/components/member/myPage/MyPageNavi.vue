@@ -68,14 +68,12 @@
                     </v-col>
                 </v-row>
                 <v-row class="main pb-8">
-                    <v-col>
                     <my-page-main v-if="this.$route.name == 'MyPageView'" :memberNo="memberInfo.memberNo"/>
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
                     <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'" :memberNo="memberInfo.memberNo"/>
                     <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
-                    </v-col>
                 </v-row>
             </v-main>
         </div>
@@ -156,7 +154,7 @@ export default {
     position: relative;
     margin-bottom:5%;
     height: 205px;
-    width:100%;
+    width:101%;
     background: #d6edff;
 }
 .status{

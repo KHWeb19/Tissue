@@ -397,6 +397,7 @@
                 :performance="performance"
                 class="reviewBox"
               />
+              <perform-caution v-if="n ==2"/>
             </v-tab-item>
           </v-tabs>
         </v-col>
@@ -410,6 +411,7 @@ import PerformanceDetailComp from "@/components/performance/PerformanceDetailCom
 import PerformanceReview from "@/components/performance/PerformanceReview.vue";
 import axios from 'axios';
 import { mapActions } from 'vuex';
+import PerformCaution from './PerformCaution.vue';
 
 export default {
   name: "PerformanceDetail",
@@ -442,6 +444,7 @@ export default {
   components: {
     PerformanceDetailComp,
     PerformanceReview,
+    PerformCaution
   },
   data() {
     return {
