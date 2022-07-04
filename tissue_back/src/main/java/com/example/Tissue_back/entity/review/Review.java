@@ -32,6 +32,6 @@ public class Review {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "performance_performNo")
+    @JoinColumn(name = "performNo")
     private Performance performance;
 }

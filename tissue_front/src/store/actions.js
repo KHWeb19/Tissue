@@ -98,14 +98,19 @@ export default {
     },
     fetchPerformanceEvent({ commit }, performNo) {
         return axios.get(`http://localhost:7777/performance/event/${performNo}`)
-        .then((res) => {
-            commit(FETCH_PERFORMANCE_EVENT, res.data)
+            .then((res) => {
+                if (res.data != '') {
+                    commit(FETCH_PERFORMANCE_EVENT, res.data)
+                } else {
+                    commit(FETCH_PERFORMANCE_EVENT, null)
+                }
         })
       },
     fetchPerformanceReviewList({commit},performNo) {
         return axios.get(`http://localhost:7777/review/list/${performNo}`)
         .then((res)=>{
-            commit(FETCH_REVIEW_LIST,res.data)
+            commit(FETCH_REVIEW_LIST, res.data)
+            console.log(res.data)
         })
     },
 

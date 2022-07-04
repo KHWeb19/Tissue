@@ -391,7 +391,7 @@
                 :performance="performance"
               />
               <performance-review
-                v-if="n == 1 && reviewList && performanceEvent"
+                v-if="n == 1"
                 :reviewList="reviewList"
                 :performanceEvent="performanceEvent"
                 :performance="performance"
@@ -434,7 +434,7 @@ export default {
     },
     performanceEvent: {
       type: Object,
-      required: true,
+      required: false,
     },
     reviewList: {
       type: Array,
@@ -504,8 +504,6 @@ export default {
             axios.get('likes/member' , { params:{token:token} })
             .then((res) => {
                 for (let i = 0; i <this.likeList.length; i++){
-                    console.log(res.data)
-
                     if(this.likeList[i].member.memberNo === res.data) {
                         return this.$emit('update:likeMember', true)
                     }
