@@ -5,7 +5,7 @@
 
             <v-tabs class="areaBox mt-5" fixed-tabs background-color="transparent" dark height="80px">
                 <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
-                <v-tab v-for="tab in tabs" :key="tab.index" @click="onClickTab(tab)" class="black--text">
+                <v-tab v-for="tab in tabs" :key="tab.name" @click=tab.value class="black--text">
                     {{ tab.name }}
                 </v-tab>
             </v-tabs>
@@ -33,193 +33,43 @@
                         <div class="categoryBox" >
                             <div >
                                 <v-row justify="center" class="categoryList" >
-                                    <v-checkbox v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
-                                    <v-checkbox v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
-                                    <v-checkbox v-model="checked" value="연극" label="연극"></v-checkbox>
+                                    <v-checkbox class="mr-5"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
+                                    <v-checkbox class="mr-5" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
+                                    <v-checkbox class="mr-5" v-model="checked" value="연극" label="연극"></v-checkbox>
                                     <v-checkbox v-model="checked" value="전시회" label="전시회"></v-checkbox>    
                                 </v-row>
                             </div>
                         </div>
                         <v-btn @click="applyFilter" class="mr-3" color="blue lighten-3">적용</v-btn>
-                        <v-btn @click="resetFilter" color="transparent">초기화</v-btn>
+                        <v-btn @click="fetchAll" color="transparent">초기화</v-btn>
                     </v-container>
                 </v-card-actions>
             </v-card>
 
-
-            <div class="countBox" v-if="checked">
-                 현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList2.length }}개</b>입니다.
-            </div>
             <div class="countBox">
                  현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList.length }}개</b>입니다.
             </div>
 
-            <div v-show="selectedTab === tabs[0]">
-                <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <v-card class="mx-auto" max-width="216" height="410" flat>
-                        <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                        <v-card-title class="performTitle mb-1">
-                            {{ perform.performName }}
-                        </v-card-title>
-                        <v-card-subtitle class="performSub pb-0">
-                            {{ perform.performStart }} ~
-                            {{ perform.performEnd }}</v-card-subtitle>
-                        <div v-for="map in mapList" :key="map.mapNo">
-                            <div v-if="perform.performNo == map.performNo">
-                                <v-card-subtitle  class="performSub pt-0">
-                                    {{ map.name }}
-                                </v-card-subtitle>
+            <v-row>
+                <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
+                        <v-card class="mx-auto" max-width="216" height="450" flat>
+                            <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
+                            <v-card-title class="performTitle mb-1">
+                                {{ perform.performName }}
+                            </v-card-title>
+                            <v-card-subtitle class="performSub pb-0">
+                                {{ perform.performStart }} ~
+                                {{ perform.performEnd }}</v-card-subtitle>
+                            <div v-for="map in mapList" :key="map.mapNo">
+                                <div v-if="perform.performNo == map.performNo">
+                                    <v-card-subtitle  class="performSub pt-0">
+                                        {{ map.name }}
+                                    </v-card-subtitle>
+                                </div>
                             </div>
-                        </div>
                         </v-card>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-show="selectedTab === tabs[1]">
-                 <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[1].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-             <div v-show="selectedTab === tabs[2]">
-                 <v-row>
-                    <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[2].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-show="selectedTab === tabs[3]">
-                 <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[3].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-show="selectedTab === tabs[4]">
-                 <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[4].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-show="selectedTab === tabs[5]">
-                 <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[5].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-show="selectedTab === tabs[6]">
-                 <v-row>
-                    <v-col v-for="perform in copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[6].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
@@ -241,67 +91,96 @@ export default {
         return {
             originalPerformList: [...this.performances],
             copyPerformList: this.performances,
-            copyPerformList2: this.copyPerformList,
             selectedTab: '', 
-            tabs: [{name:'전체'}, {name:'서울'}, {name:'경기/인천'}, {name:'대전/충청/강원'}, 
-                {name:'부산/대구/울산/경상'}, {name:'광주/전라'}, {name:'제주'}], 
+            tabs: [
+                    {name:'전체', value: () => { this.fetchAll() }}, 
+                    {name:'서울', value: () => { this.fetchSeoul() }}, 
+                    {name:'경기/인천', value: () => { this.fetchIncheon() }}, 
+                    {name:'대전/충청/강원', value: () => { this.fetchDaejeon() }}, 
+                    {name:'부산/대구/울산/경상', value: () => { this.fetchBusan() }}, 
+                    {name:'광주/전라', value: () => { this.fetchGwangju() }}, 
+                    {name:'제주', value: () => { this.fetchJeju() }}
+                ],
             detailSearch: false,
             checked: '',
         }
     },
     methods: {
-        onClickTab(tab) {
-            this.selectedTab = tab
+        fetchAll() {
+            this.selectedTab = this.tabs[0]
+            this.checked = ''
+            this.copyPerformList = [...this.originalPerformList]
+        },
+        fetchSeoul() {
+              this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('서울')
+                })
+        },
+        fetchIncheon() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('경기/인천')
+                })
+        },
+        fetchDaejeon() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('대전/충청/강원')
+                })
+        },
+        fetchBusan() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                        return e.performArea.match('부산/대구/울산/경상')
+                    })
+        },
+        fetchGwangju() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('광주/전라')
+                })
+        },
+        fetchJeju() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('제주')
+                })
         },
         applyFilter() {
-            // if(this.copyPerformList.area == "서울") splice 쓰기 
             if(this.checked == '콘서트') {
-                this.copyPerformList2 = this.copyPerformList2.filter(e => {
+                this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList2
+                return this.copyPerformList
            }
 
             if(this.checked == '뮤지컬') {
-                this.copyPerformList2 = this.copyPerformList2.filter(e => {
+                this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList2
+                return this.copyPerformList
            }
 
             if(this.checked == '연극') {
-                this.copyPerformList2 = this.copyPerformList2.filter(e => {
+                this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList2
+                return this.copyPerformList
            }
 
             if(this.checked == '전시회') {
-                this.copyPerformList2 = this.copyPerformList2.filter(e => {
+                this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performCategory.match(this.checked)
                 })
-                return this.copyPerformList2
-           }
-
-           
-        
-        /* v-model="checked" 배열로 선언했을 때 --> 첫번째 인덱스의 결과만 나옴
-           console.log(this.checked)
-
-           for(let i=0; i < this.checked.length; i++) {
-                this.copyPerformList = this.copyPerformList.filter(e => {
-                    return e.performCategory.match(this.checked[i])
-                })
-
                 return this.copyPerformList
-           } */
-
+           }
         },
-        resetFilter() {
-            this.checked = ''
-            this.copyPerformList2 = [...this.originalPerformList]
-        },
-        sortRecent() {
+        sortRecent() {     
             this.copyPerformList.sort(function (a, b) {
                 return new Date(a.performStart) - new Date(b.performStart)
             })
@@ -326,7 +205,7 @@ border-color: #90CAF9;
 font-size: 20px;
 } */
 .performTitle {
-  font-size: 20px;
+  font-size: 18px;
   justify-content: center;
   color: black;
 }
@@ -347,6 +226,7 @@ card-subtitle {
     width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
+    padding : 50px 0;
 }
 .detailSearchBox{
     background-color: rgb(241, 241, 241) ;
