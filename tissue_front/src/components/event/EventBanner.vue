@@ -1,23 +1,14 @@
 <template>
-    <v-container class="mt-10">
+    <div class="mt-10 mb-10">
         <swiper class="swiper" :options="swiperOption">
-            <swiper-slide>
-                광고1
-            </swiper-slide>
-            <swiper-slide>
-                광고2
-            </swiper-slide>
-            <swiper-slide>
-                광고3
-            </swiper-slide>
-            <swiper-slide>
-                광고4
+            <swiper-slide v-for="img in eventImgs" :key="img.name">
+                <img :src="require(`@/assets/event/${img.name}`)" height="350">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
-    </v-container>
+    </div>
 </template>
 
 <script>
@@ -33,17 +24,18 @@ export default {
     data () {
         return {
             swiperOption: {
-                loop: true,
+                autoHeight:true,
+                loop:true,
                 effect: 'coverflow',
-                grabCursor: true,
                 centeredSlides: true,
                 slidesPerView: 'auto',
+                spaceBetween: 150,
                 coverflowEffect: {
                     rotation: 50,
                     stretch: 0,
-                    depth: 50,
+                    depth: 100,
                     // 회전을 많이 먹이고 싶은 경우 높이도록 한다.
-                    modifier: 0.3,
+                    modifier: 0.5,
                     slideShadows: true
                 },
                 pagination: {
@@ -58,9 +50,14 @@ export default {
                 prevEl: '.swiper-button-prev' 
                 } 
             },
+            eventImgs: [
+                {name:'ev_mv_NO.jpg'},
+                {name:'ev_mv_3.png'},
+                {name:'ev_chicken.jpg'},
+                {name:'ev_sns.jpg'}
+            ]
         }
     }
-
 }
 </script>
 
@@ -77,14 +74,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 700px;
-        height: 330px;
+        width: 800px;
         text-align: center;
-        font-weight: bold;
-        font-size: 1.7rem;
-        background-color: rgb(178, 220, 247);
-        background-position: center;
-        background-size: cover;
     }
     .swiper-button-next,
     .swiper-button-prev {
