@@ -1,7 +1,7 @@
 <template>
   <div>
     <performance-detail
-      v-if="performance && performanceEvent"
+      v-if="performance"
       :performance="performance"
       :couponList="couponList"
       :performanceEvent="performanceEvent"
@@ -33,6 +33,7 @@ export default {
       "reviewList",
     ]),
   },
+
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();

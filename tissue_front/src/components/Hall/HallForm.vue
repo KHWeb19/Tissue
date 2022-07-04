@@ -68,7 +68,9 @@
                   }"
                 ></div>
                 <span class="ml-3"> {{ item.grade }} </span>
-                <span class="ml-3">{{ gradePrice[index].price }} 원</span>
+                <span class="ml-3"
+                  >{{ gradePrice[index].price | comma }} 원</span
+                >
                 <span class="ml-3">({{ seatGradeCnt[index].cnt }} 석) </span>
               </div>
             </div>
@@ -81,7 +83,7 @@
           </div>
           <div class="ml-2 mt-2 infoTitle">결제 금액</div>
           <div class="showSelectPrice">
-            <div>{{ selectPrice }} 원</div>
+            <div>{{ selectPrice | comma }} 원</div>
           </div>
           <div class="mt-3">
             <v-btn rounded class="white--text" color="blue lighten-3"
@@ -137,6 +139,12 @@ export default {
       seatGradeCnt: [{ cnt: 0 }, { cnt: 0 }, { cnt: 0 }],
       selectPrice: 0,
     };
+  },
+
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
   },
 
   created() {

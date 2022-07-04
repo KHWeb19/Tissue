@@ -473,6 +473,10 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
+  created() {
+    this.availableCoupon = [];
+    //this.couponList = [];
+  },
 
   mounted() {
     for (let i = 0; i < this.couponList.length; i++) {
@@ -519,12 +523,16 @@ export default {
     },
 
     allowedDates(val) {
-      let show = this.performance.performShowDate;
-      console.log(parseInt(val.split("-")[2], 10));
-      if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
-        return true;
+      if (this.performance.performShowDate != null) {
+        let show = this.performance.performShowDate;
+
+        if (
+          parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)
+        ) {
+          return true;
+        }
+        return false;
       }
-      return false;
     },
   },
 };
