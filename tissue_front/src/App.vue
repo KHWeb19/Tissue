@@ -13,7 +13,11 @@
           this.$route.name == 'CouponRegisterPage' ||
           this.$route.name == 'CouponListPage' ||
           this.$route.name == 'CouponModifyPage' ||
-          this.$route.name == 'AdminMember'
+          this.$route.name == 'AdminMember' ||
+          this.$route.name == 'EventListPage' ||
+          this.$route.name == 'EventRegisterPage' ||
+          this.$route.name == 'EventReadPage' ||
+          this.$route.name == 'EventModifyPage'
         "
       >
         <admin-navi />
@@ -41,7 +45,11 @@
           this.$route.name != 'CouponRegisterPage' &&
           this.$route.name != 'CouponListPage' &&
           this.$route.name != 'CouponModifyPage' &&
-          this.$route.name != 'AdminMember'
+          this.$route.name != 'AdminMember' &&
+          this.$route.name != 'EventListPage' &&
+          this.$route.name != 'EventRegisterPage' &&
+          this.$route.name != 'EventReadPage' &&
+          this.$route.name != 'EventModifyPage'
         "
       >
         <new-nav-bar-2 />
@@ -72,7 +80,11 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
     <join-footer
@@ -90,7 +102,11 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
 

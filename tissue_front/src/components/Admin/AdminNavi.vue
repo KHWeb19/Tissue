@@ -64,7 +64,7 @@ export default {
           route: "/performanceListPage",
         },
         { title: "공연장 관리", icon: "mdi-town-hall", route: "/hallList" },
-        { title: "이벤트 관리", icon: "mdi-calendar-question" },
+        { title: "이벤트 관리", icon: "mdi-calendar-question", route: "/eventListPage" },
         {
           title: "쿠폰 관리",
           icon: "mdi-ticket-percent",

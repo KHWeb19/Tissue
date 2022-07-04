@@ -1,5 +1,10 @@
 <template>
-    <div>
+    <v-container>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 이벤트 관리
+            </v-toolbar-title>
+        </v-app-bar>
         <v-container><br><br><br>
             <v-row>
                 <v-col>
@@ -25,16 +30,16 @@
                 </v-col>
             </v-row>
             <br>
-            <div>
-                <v-btn class="mr-5" color="blue lighten-3" dark router-link :to="{ name: 'EventModifyPage', params: { eventNo: event.eventNo } }">
+            <v-row justify="center" class="mt-7 mb-10">
+                <v-btn class="mr-5" large color="blue lighten-3" dark router-link :to="{ name: 'EventModifyPage', params: { eventNo: event.eventNo } }">
                     수정
                 </v-btn>
-                <v-btn color="blue lighten-3" dark @click="onDelete(event.eventNo)">
+                <v-btn color="blue lighten-3" large dark @click="onDelete(event.eventNo)">
                     삭제
                 </v-btn>
-            </div>
+            </v-row>
         </v-container>
-    </div>
+    </v-container>
 </template>
 
 <script>
