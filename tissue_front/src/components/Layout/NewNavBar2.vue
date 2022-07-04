@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="menubar2">
-      <v-toolbar height="80px" elevation="0">
+      <v-toolbar height="83px" elevation="0">
         <v-toolbar-title>
           <router-link to="/">
             <div>
-              <div class="header_logo" @click="goHome"><h1>Tissue</h1></div>
+              <div class="header_logo" @click="goHome">
+                  <span style="color:skyblue">T</span><span style="color:pink">issue</span></div>
             </div>
           </router-link>
         </v-toolbar-title>
@@ -47,17 +48,17 @@
             dense
             rounded
             color="black"
-            class="mt-5 mr-10"
+            class="mt-6 mr-10"
           />
-          <v-btn icon class="mr-3 sub_tab_icon" @click="goToMyPage">
+          <v-btn icon class="mr-3 mt-1 sub_tab_icon" @click="goToMyPage">
             <v-icon color="black" large>mdi-account-outline</v-icon>
           </v-btn>
-          <div class="mt-4" v-if="token">
+          <div class="mt-5" v-if="token">
             <v-btn icon class="sub_tab_icon mr-8" @click="logout">
               <v-icon color="black" large>mdi-logout</v-icon>
             </v-btn>
           </div>
-          <div class="mt-4" v-else>
+          <div class="mt-5" v-else>
             <v-btn
               icon
               class="sub_tab_icon mr-8"
@@ -73,6 +74,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapActions } from 'vuex';
 export default {
   name: "NewNavBar2",
@@ -102,7 +104,8 @@ export default {
       this.$route.name != "MemberJoinPage" &&
       this.$route.name != "MemberJoinPage2" &&
       this.$route.name != "MemberFindIdPage" &&
-      this.$route.name != "MemberFindPwPage"
+      this.$route.name != "MemberFindPwPage" &&
+      this.$route.name != "PerformanceDetailPage"
     ) {
       window.addEventListener("scroll", function () {
         let a = document.getElementsByClassName("menubar2");
@@ -134,7 +137,14 @@ export default {
     },
     goToMyPage() {
       if (this.token != null) {
-        this.$router.push("/myPage");
+          axios.get('Admin/role',{params: {token: this.token}})
+          .then((res) => {
+              if(res.data == true){
+                  this.$router.push("/Admin")
+              }else {
+                  this.$router.push("/myPage")
+              }
+          })
       } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");
@@ -160,15 +170,16 @@ export default {
 }
 
 .header_logo {
-  color: black;
-  font-weight: bold;
   margin-left: 50px;
+  font-family: 'Pacifico', cursive;
+  font-size: 40pt;
 }
 
 .header_main_item {
   color: black;
   font-weight: bold;
   font-size: 18px;
+  margin-top:3px;
 }
 .header_main_item::before {
   display: none;
@@ -176,6 +187,7 @@ export default {
 .header_sub_item {
   color: black;
   font-size: 14px;
+  margin-top:3px;
 }
 .header_sub_item::before {
   display: none;
@@ -185,6 +197,7 @@ export default {
   height: 3px;
   background: skyblue;
   margin-right: 10px;
+  margin-top:3px;
 }
 .sub_tab_icon::before {
   display: none;
