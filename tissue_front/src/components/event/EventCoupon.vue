@@ -244,7 +244,7 @@ export default {
   width: 100%;
   height: 208px;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 .img {
   width: 272px;
