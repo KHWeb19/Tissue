@@ -79,36 +79,26 @@
                 <span class="infoTitle">할인 금액</span>
                 <div class="d-flex">
                   <div class="titleInfo">할인 쿠폰</div>
-                  <div
-                    class="salePrice"
-                    v-if="this.radioGroup.couponPrice == undefined"
-                  >
-                    - 0 원
-                  </div>
-                  <div class="salePrice" v-else>
-                    - {{ this.radioGroup.couponPrice | comma }} 원
+
+                  <div class="salePrice">
+                    - {{ this.couponSalePrice | comma }} 원
                   </div>
                 </div>
                 <div class="d-flex">
                   <div class="titleInfo">마일리지</div>
                   <div class="salePrice">
-                    - {{ this.inputMileage | comma }} 원
+                    - {{ this.mileageSalePrice | comma }} 원
                   </div>
                 </div>
                 <span class="infoTitle">총 할인액</span>
-                <div class="salePrice" v-if="this.radioGroup.couponPrice">
-                  {{
-                    (this.inputMileage + this.radioGroup.couponPrice) | comma
-                  }}
-                  원
-                </div>
-                <div class="salePrice" v-else>
-                  {{ this.inputMileage | comma }}
+
+                <div class="salePrice">
+                  {{ finalSalePrice | comma }}
                   원
                 </div>
                 <span class="infoTitle">총 금액</span>
                 <div class="salePrice">
-                  {{ (tempSelectPriceInfoCopy - this.inputMileage) | comma }}
+                  {{ (this.tempSelectPriceInfoCopy - finalSalePrice) | comma }}
                   원
                 </div>
               </div>
@@ -198,6 +188,7 @@
                       <div>{{ memberInfo.memberMileage | comma }} 원</div>
                       <div class="d-flex">
                         <v-text-field
+                          type="number"
                           v-model="inputMileage"
                           color="pink lighten-3"
                           suffix="원"
@@ -210,7 +201,9 @@
                           ><v-icon>mdi-close-circle-outline</v-icon></v-btn
                         >
                       </div>
-
+                      <v-btn color="blue lighten-3" @click="useSelectMileage"
+                        >적용용</v-btn
+                      >
                       <v-btn color="blue lighten-3" @click="useAllMileage"
                         >전액 사용</v-btn
                       >
@@ -303,7 +296,8 @@ export default {
       radioGroup: 0,
       inputMileage: 0,
       filterCouponList: [],
-      finalPrice: 0,
+      couponSalePrice: 0,
+      mileageSalePrice: 0,
     };
   },
 
@@ -315,6 +309,13 @@ export default {
 
   computed: {
     ...mapState(["hall"]),
+
+    finalSalePrice() {
+      return Number(this.couponSalePrice) + Number(this.mileageSalePrice);
+    },
+    finalPrice() {
+      return this.tempSelectPriceInfoCopy - this.finalSalePrice;
+    },
   },
   created() {
     //this.$store.state.hall = null;
@@ -358,8 +359,8 @@ export default {
       }
     },
     goStep3() {
-      this.finalPrice = this.tempSelectPriceInfoCopy - this.inputMileage;
       console.log(this.finalPrice);
+
       this.e1 = 3;
     },
     backStep1() {
@@ -371,6 +372,7 @@ export default {
 
     selectCoupon() {
       this.tempSelectPriceInfoCopy = this.tempSelectPriceInfo;
+      this.couponSalePrice = 0;
 
       if (this.radioGroup.couponCondition == "10만원 이상") {
         if (this.tempSelectPriceInfo < 100000) {
@@ -401,18 +403,27 @@ export default {
         }
       }
 
-      this.tempSelectPriceInfoCopy -= this.radioGroup.couponPrice;
+      this.couponSalePrice = this.radioGroup.couponPrice;
     },
 
     resetCoupon() {
-      this.tempSelectPriceInfoCopy = this.tempSelectPriceInfo;
+      this.couponSalePrice = 0;
       this.radioGroup = 0;
     },
-
+    useSelectMileage() {
+      if (this.inputMileage > this.memberInfo.memberMileage) {
+        alert("보유한 마일리지만 사용가능합니다.");
+        this.inputMileage = 0;
+        return;
+      }
+      this.mileageSalePrice = this.inputMileage;
+    },
     useAllMileage() {
-      this.inputMileage = this.memberInfo.memberMileage;
+      this.mileageSalePrice = this.memberInfo.memberMileage;
+      this.inputMileage = this.mileageSalePrice;
     },
     resetMileage() {
+      this.mileageSalePrice = 0;
       this.inputMileage = 0;
     },
   },
