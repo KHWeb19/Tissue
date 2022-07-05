@@ -8,4 +8,5 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     List<Review> findReviewByPerformance(Performance performance);
+    List<Review> findByReviewWriter(String memberId);
 }

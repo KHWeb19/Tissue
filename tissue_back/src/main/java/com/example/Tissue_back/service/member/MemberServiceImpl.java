@@ -3,10 +3,16 @@ package com.example.Tissue_back.service.member;
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
+import com.example.Tissue_back.controller.request.review.MyReviewDto;
+import com.example.Tissue_back.controller.request.review.ReviewDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.qna.Qna;
+import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.repository.member.MemberRepository;
+import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.qna.QnaRepository;
+import com.example.Tissue_back.repository.review.ReviewRepository;
 import com.example.Tissue_back.service.PhoneCheckService;
 import com.example.Tissue_back.service.member.MemberService;
 import com.example.Tissue_back.service.security.SecurityService;
@@ -17,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -38,6 +45,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private QnaRepository qnaRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
+    @Autowired
+    private PerformanceRepository performanceRepository;
 
     @Override
     public void register(MemberDto memberDto) {
@@ -203,5 +214,32 @@ public class MemberServiceImpl implements MemberService {
         List<Qna> get= qnaRepository.findByMember(member);
 //        log.info("Qna()" + get);
         return get;
+    }
+
+    @Override
+    public List<MyReviewDto> myReview (Long memberNo) {
+        Optional<Member> findMember = repository.findById(memberNo);
+        Member member = findMember.get();
+
+        List<Review> getReview = reviewRepository.findByReviewWriter(member.getMemberId());
+        List<MyReviewDto> reviewDtoList = new ArrayList<>();
+
+        for (int i = 0; i <getReview.size(); i++) {
+            Review review = getReview.get(i);
+            Performance performance= review.getPerformance();
+            MyReviewDto reviewDto = new MyReviewDto();
+
+            reviewDto.setReviewNo(review.getReviewNo());
+            reviewDto.setReviewWriter(review.getReviewWriter());
+            reviewDto.setReviewContent(review.getReviewContent());
+            reviewDto.setReviewRegDate(review.getReviewRegDate());
+            reviewDto.setReviewRating(review.getReviewRating());
+            reviewDto.setPerformThumbnail(performance.getPerformThumbnail());
+            reviewDto.setPerformName(performance.getPerformName());
+
+            reviewDtoList.add(reviewDto);
+        }
+
+        return reviewDtoList;
     }
 }

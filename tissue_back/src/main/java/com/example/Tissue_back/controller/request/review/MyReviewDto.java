@@ -1,8 +1,9 @@
-package com.example.Tissue_back.entity.review;
+package com.example.Tissue_back.controller.request.review;
 
 import com.example.Tissue_back.entity.performance.Performance;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -11,27 +12,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 @Data
-@Entity
-public class Review {
+@NoArgsConstructor
+public class MyReviewDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewNo;
 
-    @Column
     private String reviewWriter;
 
-    @Column
     private String reviewContent;
 
-    @CreatedDate
-    private String reviewRegDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    private String reviewRegDate;
 
-    @Column
     private Integer reviewRating;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JsonIgnore
-    @JoinColumn(name = "performNo")
-    private Performance performance;
+    private String performThumbnail;
+
+    private String performName;
 }

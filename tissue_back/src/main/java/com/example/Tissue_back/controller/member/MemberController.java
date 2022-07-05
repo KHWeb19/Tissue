@@ -3,8 +3,10 @@ package com.example.Tissue_back.controller.member;
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
+import com.example.Tissue_back.controller.request.review.MyReviewDto;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.qna.Qna;
+import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -114,6 +116,13 @@ public class MemberController {
         log.info("my QnA List ===");
 
         return service.myQna(memberNo);
+    }
+
+    @GetMapping("/myReview/{memberNo}")
+    public List<MyReviewDto> myReview (@PathVariable("memberNo") Long memberNo) {
+        log.info("== my Review List ==");
+
+        return service.myReview(memberNo);
     }
 
 }
