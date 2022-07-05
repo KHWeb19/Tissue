@@ -271,6 +271,12 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/myPage/review',
+        name: 'MyPageReview',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/search/:keyword',
         name: 'SearchPage',
         components: {

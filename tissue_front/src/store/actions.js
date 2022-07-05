@@ -33,6 +33,7 @@ import {
     FETCH_PERFORMANCE_LIKE,
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
+    FETCH_MY_REVIEW,
 
     // event
     FETCH_EVENT_LIST,
@@ -222,6 +223,7 @@ export default {
     fetchMyLike({ commit }, memberNo) {
         return axios.get(`likes/my/${memberNo}`)
             .then((res) => {
+                console.log(res.data)
             commit(FETCH_MY_LIKE, res.data)
         })
     },
@@ -230,6 +232,13 @@ export default {
             .then((res => {
                 commit(FETCH_MY_QNA, res.data)
         }))
+    },
+    fetchMyReview({ commit }, memberNo) {
+        return axios.get(`Member/myReview/${memberNo}`)
+            .then((res => {
+                console.log(res.data)
+                commit(FETCH_MY_REVIEW, res.data)
+            }))
     }
 
 }

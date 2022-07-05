@@ -34,6 +34,7 @@ import {
     FETCH_PERFORMANCE_LIKE,
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
+    FETCH_MY_REVIEW,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -134,5 +135,8 @@ export default{
     },
     [FETCH_EVENT] (state, event) {
         state.event = event
+    },
+    [FETCH_MY_REVIEW](state, myReview) {
+        state.myReview = myReview
     }
 }

@@ -35,7 +35,7 @@
           class="mt-5 mb-5 ml-5"
         >
           <v-list-item-icon>
-            <v-icon class="pink--text">{{ item.icon }}</v-icon>
+            <v-icon color="pink lighten-3">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content style="height: 100%">

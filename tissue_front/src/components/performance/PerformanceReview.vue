@@ -238,7 +238,7 @@
                     <v-btn
                     width="150"
                     height="50"
-                    @click="registerReview"
+                    @click="registerReview(performance.performNo)"
                     color="blue lighten-3"
                     class="white--text mr-3"
                     style="font-size: 15px"
@@ -397,14 +397,14 @@ export default {
   },
 
   methods: {
-    registerReview() {
+    registerReview(performNo) {
       let token = localStorage.getItem("token");
 
       const { reviewContent, reviewRating } = this;
       console.log(token);
       if (token != null) {
         axios
-          .post(`http://localhost:7777/review/register/${this.performNo}`, {
+          .post(`http://localhost:7777/review/register/${performNo}`, {
             reviewWriter: token,
             reviewContent,
             reviewRating,
