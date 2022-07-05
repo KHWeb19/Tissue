@@ -102,7 +102,7 @@
               </div>
               <div class="wrapSubTitle">
                 <div class="performSubTitle pt-2">혜택</div>
-                <div class="text-center">
+                <div class="text-center" v-if="couponList && availableCoupon">
                   <v-dialog v-model="couponDialog" width="450" hide-overlay>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -187,6 +187,7 @@
                     </v-card>
                   </v-dialog>
                 </div>
+                <div v-else></div>
                 <v-divider vertical class="ml-3 mr-3"></v-divider>
                 <div class="text-center">
                   <v-dialog v-model="memberDialog" width="450" hide-overlay>
@@ -475,10 +476,7 @@ export default {
   },
   created() {
     this.availableCoupon = [];
-    //this.couponList = [];
-  },
 
-  mounted() {
     for (let i = 0; i < this.couponList.length; i++) {
       if (
         this.couponList[i].couponCategory == this.performance.performCategory
@@ -486,7 +484,10 @@ export default {
         this.availableCoupon.push(this.couponList[i]);
       }
     }
+    //this.couponList = [];
   },
+
+  mounted() {},
 
   methods: {
     scrollReview() {
