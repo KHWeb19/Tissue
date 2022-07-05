@@ -21,7 +21,7 @@ public class QnaComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long qnaCommentNo;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     @NotNull
     private String qnaCommentContent;
 
