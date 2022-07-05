@@ -466,7 +466,17 @@ export default {
       clickDate: true,
     };
   },
-
+  watch: {
+      performance () {
+            for (let i = 0; i < this.couponList.length; i++) {
+      if (
+        this.couponList[i].couponCategory == this.performance.performCategory
+      ) {
+        this.availableCoupon.push(this.couponList[i]);
+      }
+    }
+      }
+  },
   computed: {
     reviewSumAvg() {
       let sum = 0;
@@ -485,16 +495,6 @@ export default {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
-  },
-  mounted() {
-    for (let i = 0; i < this.couponList.length; i++) {
-      if (
-        this.couponList[i].couponCategory == this.performance.performCategory
-      ) {
-        this.availableCoupon.push(this.couponList[i]);
-      }
-    }
-
   },
   methods: {
       ...mapActions(['fetchPerformanceLike']),
