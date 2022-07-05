@@ -62,7 +62,6 @@ public class Performance {
     @Column(name="perform_price_vip")
     private int performPriceVip;
 
-
     private String performArea;
     private String performCategory;
     private String performGrade;

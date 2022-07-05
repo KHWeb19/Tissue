@@ -26,7 +26,7 @@ import {
 
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
-    FETCH_MEMBER_ROLE
+    FETCH_MEMBER_ROLE,
 
     FETCH_SEARCH_LIST,
     FETCH_SEARCH_LIST2,
@@ -34,6 +34,8 @@ import {
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 } from './mutation-types'
@@ -122,5 +124,11 @@ export default{
     },
     [FETCH_EVENT] (state, event) {
         state.event = event
+    },
+    [FETCH_EXPECT_LIST] (state, expectList) {
+        state.expectList = expectList
+    },
+    [FETCH_EXPECT] (state, expect) {
+        state.expect = expect
     }
 }

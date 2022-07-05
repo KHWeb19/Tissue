@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container><br><br><br>
+        <v-container><br>
             <v-row>
                 <v-col>
                     <img :src="require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)"/>
@@ -45,7 +45,7 @@ export default {
         event: {
             type: Object,
             required: true
-        }
+        },
     },
     data() {
         return {

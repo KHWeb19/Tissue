@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container><br><br><br><br>
+        <v-container>
             <h1 align="center">이벤트</h1>
                 <v-row class="btnReg"> 
                     <v-btn color="blue lighten-3" dark :to="{ name: 'EventRegisterPage' }">등록</v-btn>

@@ -1,15 +1,19 @@
 <template>
-    <area-main-form :performances="performances" :mapList="mapList"/>
+    <area-main-form v-if="performances" :performances="performances" 
+                    :mapList="mapList" />
 </template>
 
 <script>
 import axios from 'axios'
 import AreaMainForm from '@/components/area/AreaMainForm.vue'
+// import { mapActions, mapMutations, mapState } from 'vuex'
 import { mapActions, mapState } from 'vuex'
+
+
 export default {
     name: 'AreaPage',
     components: {
-        AreaMainForm
+        AreaMainForm,
     },
     data() {
         return {
@@ -17,11 +21,18 @@ export default {
         }
     },
     created() {
+        this.$store.state.performances = null;
+    },
+    mounted() {
         this.fetchPerformanceList()
         this.getMapList()
     },
     computed: {
-        ...mapState(['performances'])
+        ...mapState(['performances']),
+        // copyPerformances: {
+        //     ...mapState({get: 'copyPerformances'}),
+        //     ...mapMutations({set: 'FETCH_COPY_PERFORMANCE_LIST'})
+        // }
     },
     methods: {
         ...mapActions(['fetchPerformanceList']),

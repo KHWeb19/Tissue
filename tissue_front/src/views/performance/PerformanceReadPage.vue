@@ -29,9 +29,17 @@
         <h4>{{ performance.performGrade }}</h4>
         <h4>{{ performance.performStart }}</h4>
         <h4>{{ performance.performer }}</h4>
-        <h4>{{ performance.performPriceS }}원</h4>
-        <h4>{{ performance.performPriceR }}원</h4>
-        <h4>{{ performance.performPriceVip }}원</h4>
+        <h4>{{ performance.performPriceS | comma }}원</h4>
+        <h4>{{ performance.performPriceR | comma }}원</h4>
+        <h4>{{ performance.performPriceVip | comma }}원</h4>
+        <router-link
+          :to="{
+            name: 'TicketingPage',
+            params: { performNo: performance.performNo.toString() },
+          }"
+        >
+          <v-btn>예매하기</v-btn></router-link
+        >
       </v-col>
     </v-row>
     <hr class="mt-5 mb-5" />
@@ -171,6 +179,11 @@ export default {
       // showPlace: false
     };
   },
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+  },
   computed: {
     ...mapState(["performance"]),
   },
@@ -252,8 +265,8 @@ table {
 
 .img {
   position: relative;
-  max-height: 500px;
-  max-width: 500px;
+  max-height: 100%;
+  max-width: 100;
   /* margin-top: 5%; */
 }
 
