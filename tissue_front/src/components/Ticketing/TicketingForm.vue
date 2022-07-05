@@ -186,7 +186,7 @@
                             <th width="100">조건</th>
                             <th width="70">사용</th>
                           </tr>
-                          <tr v-if="filterCouponList">
+                          <tr v-if="filterCouponList.length == 0">
                             <td colspan="4" class="tableTd">
                               보유한 쿠폰이 없습니다.
                             </td>
@@ -263,7 +263,11 @@
 
               <v-stepper-content step="3">
                 <v-card flat>
-                  <payment :finalPrice="finalPrice" />
+                  <payment
+                    :finalPrice="finalPrice"
+                    :memberInfo="memberInfo"
+                    :performance="performance"
+                  />
                 </v-card>
                 <div style="float: right">
                   <v-btn color="blue lighten-3" text @click="e1 = 2">

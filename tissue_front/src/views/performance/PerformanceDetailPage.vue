@@ -1,9 +1,7 @@
 <template>
   <div>
     <performance-detail
-
       v-if="performance || performanceEvent"
-
       :performance="performance"
       :couponList="couponList"
       :likeList="likeList"
@@ -19,8 +17,7 @@
 <script>
 import PerformanceDetail from "@/components/performance/PerformanceDetail.vue";
 import { mapActions, mapMutations, mapState } from "vuex";
-import axios from 'axios';
-
+import axios from "axios";
 export default {
   name: "PerformanceDetailPage",
   components: {
@@ -33,15 +30,15 @@ export default {
     },
   },
   data() {
-      return {
-          likeMember: false
-      }
+    return {
+      likeMember: false,
+    };
   },
   computed: {
-      likeList: {
-          ...mapState({get:'likeList'}),
-          ...mapMutations({set:'FETCH_PERFORMANCE_LIKE'})
-      },
+    likeList: {
+      ...mapState({ get: "likeList" }),
+      ...mapMutations({ set: "FETCH_PERFORMANCE_LIKE" }),
+    },
     ...mapState([
       "performance",
       "couponList",
@@ -49,38 +46,36 @@ export default {
       "reviewList",
     ]),
   },
-
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
     this.fetchPerformanceLike(this.performNo);
-    this.checkMember()
+    this.checkMember();
     this.fetchPerformanceEvent(this.performNo);
     this.fetchPerformanceReviewList(this.performNo);
   },
   methods: {
     ...mapActions([
-      "fetchPerformance", 
-      "fetchCouponList", 
-      "fetchPerformanceLike", 
+      "fetchPerformance",
+      "fetchCouponList",
+      "fetchPerformanceLike",
       "fetchPerformanceEvent",
-      "fetchPerformanceReviewList"]),
-     checkMember () {
-          let token = localStorage.getItem('token')
-          if(token != null){
-            axios.get('likes/member' , { params:{token:token} })
-            .then((res) => {
-                for (let i = 0; i <this.likeList.length; i++){
-                    console.log(res.data)
-
-                    if(this.likeList[i].member.memberNo === res.data) {
-                        return this.likeMember = true
-                    }
-                }
-                return this.likeMember = false
-            })
+      "fetchPerformanceReviewList",
+    ]),
+    checkMember() {
+      let token = localStorage.getItem("token");
+      if (token != null) {
+        axios.get("likes/member", { params: { token: token } }).then((res) => {
+          for (let i = 0; i < this.likeList.length; i++) {
+            console.log(res.data);
+            if (this.likeList[i].member.memberNo === res.data) {
+              return (this.likeMember = true);
+            }
           }
-     }
-  }
-}
+          return (this.likeMember = false);
+        });
+      }
+    },
+  },
+};
 </script>
