@@ -466,7 +466,17 @@ export default {
       clickDate: true,
     };
   },
-
+  watch: {
+      performance () {
+            for (let i = 0; i < this.couponList.length; i++) {
+      if (
+        this.couponList[i].couponCategory == this.performance.performCategory
+      ) {
+        this.availableCoupon.push(this.couponList[i]);
+      }
+    }
+      }
+  },
   computed: {
     reviewSumAvg() {
       let sum = 0;
@@ -476,7 +486,7 @@ export default {
       }
       avg = sum / this.reviewList.length;
 
-      console.log("평균" + avg);
+    //   console.log("평균" + avg);
       return avg;
     },
   },
@@ -485,16 +495,6 @@ export default {
     comma(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
-  },
-  mounted() {
-    for (let i = 0; i < this.couponList.length; i++) {
-      if (
-        this.couponList[i].couponCategory == this.performance.performCategory
-      ) {
-        this.availableCoupon.push(this.couponList[i]);
-      }
-    }
-
   },
   methods: {
       ...mapActions(['fetchPerformanceLike']),
@@ -575,7 +575,7 @@ export default {
     },
     allowedDates(val) {
       let show = this.performance.performShowDate;
-      console.log(parseInt(val.split("-")[2], 10));
+    //   console.log(parseInt(val.split("-")[2], 10));
       if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
         return true;
       }

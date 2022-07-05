@@ -7,4 +7,6 @@ import java.util.List;
 public interface ReviewService {
     public void register(Long performNo, ReviewDto reviewDto);
     public List<Review> list(Long performNo);
+    public void modify (Review review, String performName);
+    public void delete (Long reviewNo);
 }

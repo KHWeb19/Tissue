@@ -37,6 +37,7 @@
       <div style="border-bottom: 2px solid black"></div>
 
       <div align="center" class="mb-10">
+        <div v-if="showMap">
         <div style="padding-top: 30px; padding-bottom: 30px">
           <span style="font-size: 35px"> {{ name }}</span>
         </div>
@@ -45,7 +46,6 @@
         </div>
         <div align="center" style="z-index: -1">
           <div>
-            <div v-if="showMap">
               <naver-maps
                 :height="500"
                 :width="1000"
@@ -74,10 +74,8 @@ export default {
       required: true,
     },
   },
-
   data() {
     return {
-      performNo: "",
       mapOptions: {
         lat: null,
         lng: null,
@@ -90,15 +88,16 @@ export default {
       url: null,
     };
   },
-  created() {
-    this.performNo = this.performance.performNo;
-  },
-  mounted() {
-    this.fetchMap(this.performNo);
+  watch: {
+      performance () {
+          this.fetchMap(this.performance.performNo)
+      },
   },
   methods: {
     fetchMap(performNo) {
-      axios.get(`map/read/${performNo}`).then((res) => {
+      axios.get(`map/read/${performNo}`)
+      .then((res) => {
+        console.log(performNo)
         const map = res.data;
         console.log(map);
         this.mapOptions.lat = map.y;
@@ -110,7 +109,10 @@ export default {
         if (map.y != 0) {
           this.showMap = true;
         }
-      });
+      })
+      .catch (() =>  {
+          alert("오류")
+      })
     },
   },
 };
