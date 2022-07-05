@@ -68,8 +68,7 @@ export default {
             axios.get('likes/member' , { params:{token:token} })
             .then((res) => {
                 for (let i = 0; i <this.likeList.length; i++){
-                    console.log(res.data)
-
+                  
                     if(this.likeList[i].member.memberNo === res.data) {
                         return this.likeMember = true
                     }
