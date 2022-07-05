@@ -31,10 +31,17 @@ export default {
     searchList: [],
     searchList2:[],
     noticeSearchList: [],
+    likeList: [],
+    myLike: [],
+    myQna: [],
+    myReview:[],
     // 유아림
 
 
     events: [],
-    event: {}
+    event: {},
+    
+    expectList: [],
+    expect: {}
 }
 

@@ -62,7 +62,6 @@ public class Performance {
     @Column(name="perform_price_vip")
     private int performPriceVip;
 
-
     private String performArea;
     private String performCategory;
     private String performGrade;
@@ -104,7 +103,6 @@ public class Performance {
         this.performer = performanceDto.getPerformer();
     }
 
-
     //임지훈
     @Column
     private String hallName;
@@ -125,6 +123,7 @@ public class Performance {
     @JsonIgnore
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private Set<Likes> like = new HashSet<>();
+    private Set<Likes> performLike = new HashSet<>();
+
 
 }

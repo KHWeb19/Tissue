@@ -31,9 +31,15 @@ import {
     FETCH_SEARCH_LIST,
     FETCH_SEARCH_LIST2,
     FETCH_NOTICE_SEARCH_LIST,
+    FETCH_PERFORMANCE_LIKE,
+    FETCH_MY_LIKE,
+    FETCH_MY_QNA,
+    FETCH_MY_REVIEW,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 } from './mutation-types'
@@ -116,11 +122,29 @@ export default{
     [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
         state.noticeSearchList = noticeSearchList
     },
+    [FETCH_PERFORMANCE_LIKE](state, likeList) {
+        state.likeList = likeList
+    },
+    [FETCH_MY_LIKE](state, myLike) {
+        state.myLike = myLike
+    },
+    [FETCH_MY_QNA](state, myQna) {
+        state.myQna = myQna
+    },
     // event
     [FETCH_EVENT_LIST] (state, events) {
         state.events = events
     },
     [FETCH_EVENT] (state, event) {
         state.event = event
+    },
+    [FETCH_MY_REVIEW](state, myReview) {
+        state.myReview = myReview
+    },
+    [FETCH_EXPECT_LIST] (state, expectList) {
+        state.expectList = expectList
+    },
+    [FETCH_EXPECT] (state, expect) {
+        state.expect = expect
     }
 }

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-toolbar height="80px" color="transparent" elevation="0" class="menubar">
+    <v-toolbar height="83px" color="transparent" elevation="0" class="menubar">
       <v-toolbar-title>
         <router-link to="/">
           <div>
-            <div class="header_logo"><h1>Tissue</h1></div>
+            <div class="header_logo">Tissue</div>
           </div>
         </router-link>
       </v-toolbar-title>
@@ -46,17 +46,17 @@
           dense
           rounded
           dark
-          class="mt-5 mr-10"
+          class="mt-7 mr-10"
         />
-        <v-btn icon class="sub_tab_icon mr-3" @click="goToMyPage">
+        <v-btn icon class="sub_tab_icon mr-3 mt-2" @click="goToMyPage">
           <v-icon color="white" large>mdi-account-outline</v-icon>
         </v-btn>
-        <div class="mt-4" v-if="token">
+        <div class="mt-6" v-if="token">
           <v-btn icon class="sub_tab_icon mr-8" @click="logout">
             <v-icon color="white" large>mdi-logout</v-icon>
           </v-btn>
         </div>
-        <div class="mt-4" v-else>
+        <div class="mt-6" v-else>
           <v-btn
             icon
             class="sub_tab_icon mr-8"
@@ -84,9 +84,9 @@ export default {
         { text: "전시회", route: "/exhibition" },
       ],
       subLinks: [
-        { text: "지역", route: "ㄱ" },
+        { text: "지역", route: "/area" },
         { text: "랭킹", route: "ㄴ" },
-        { text: "이벤트/쿠폰", route: "event" },
+        { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: "",
       keyword:''
@@ -136,14 +136,16 @@ export default {
 
 .header_logo {
   color: white;
-  font-weight: bold;
   margin-left: 50px;
+  font-family: 'Pacifico', cursive;
+  font-size: 40pt;
 }
 
 .header_main_item {
   color: white;
   font-weight: bold;
   font-size: 18px;
+  margin-top:5px;
 }
 .header_main_item::before {
   display: none;
@@ -151,6 +153,7 @@ export default {
 .header_sub_item {
   color: white;
   font-size: 14px;
+  margin-top:5px;
 }
 .header_sub_item::before {
   display: none;
@@ -160,6 +163,7 @@ export default {
   height: 3px;
   background: skyblue;
   margin-right: 10px;
+  margin-top:5px;
 }
 .sub_tab_icon::before {
   display: none;

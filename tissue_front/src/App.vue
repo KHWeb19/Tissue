@@ -13,7 +13,11 @@
           this.$route.name == 'CouponRegisterPage' ||
           this.$route.name == 'CouponListPage' ||
           this.$route.name == 'CouponModifyPage' ||
-          this.$route.name == 'AdminMember'
+          this.$route.name == 'AdminMember' ||
+          this.$route.name == 'EventListPage' ||
+          this.$route.name == 'EventRegisterPage' ||
+          this.$route.name == 'EventReadPage' ||
+          this.$route.name == 'EventModifyPage'
         "
       >
         <admin-navi />
@@ -41,7 +45,11 @@
           this.$route.name != 'CouponRegisterPage' &&
           this.$route.name != 'CouponListPage' &&
           this.$route.name != 'CouponModifyPage' &&
-          this.$route.name != 'AdminMember'
+          this.$route.name != 'AdminMember' &&
+          this.$route.name != 'EventListPage' &&
+          this.$route.name != 'EventRegisterPage' &&
+          this.$route.name != 'EventReadPage' &&
+          this.$route.name != 'EventModifyPage'
         "
       >
         <new-nav-bar-2 />
@@ -51,6 +59,7 @@
         <router-view />
       </v-main>
     </v-main>
+
     <footer-area
       v-if="
         this.$route.name != 'GoogleOAuth' &&
@@ -71,7 +80,11 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
     <join-footer
@@ -89,9 +102,14 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
+
   </v-app>
 </template>
 
@@ -124,6 +142,7 @@ export default {
   font-family: "Noto Sans KR";
   src: url("assets/font/NotoSansKR-Bold.otf");
 }
+
 </style>
 
 <style>

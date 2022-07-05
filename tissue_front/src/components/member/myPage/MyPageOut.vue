@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="mt-10">
         <v-row justify="center">
             <div style="font-size:20pt">
                 <v-icon large color="red">mdi-exclamation-thick</v-icon> 
@@ -88,6 +88,7 @@ export default {
 
 <style scoped>
 .content{
+    font-family: 'Nanum Gothic', sans-serif !important;
     border:1px solid rgb(189, 189, 189);
     background-color: rgb(241, 241, 241);
     margin-top:50px;

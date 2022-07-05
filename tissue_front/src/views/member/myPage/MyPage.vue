@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <my-page-navi :memberInfo="memberInfo"/> 
+        <my-page-navi :memberInfo="memberInfo" :couponsLength="couponsLength"/> 
     </v-container>
 </template>
 <script>
@@ -17,10 +17,14 @@ export default {
     },
     computed: {
         ...mapState(['memberInfo']),
+        couponsLength : {
+            get() {
+                return this.memberInfo.coupons.length
+            }
+        }
     },
     created () {
         this.fetchMemberInfo(this.token)
-
     },
     methods: {
         ...mapActions(['fetchMemberInfo']),

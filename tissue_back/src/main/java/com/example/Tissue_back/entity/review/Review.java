@@ -30,8 +30,8 @@ public class Review {
     @Column
     private Integer reviewRating;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JsonIgnore
-    @JoinColumn(name = "performance_performNo")
+    @JoinColumn(name = "performNo")
     private Performance performance;
 }
