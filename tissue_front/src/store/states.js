@@ -39,6 +39,9 @@ export default {
 
 
     events: [],
-    event: {}
+    event: {},
+    
+    expectList: [],
+    expect: {}
 }
 

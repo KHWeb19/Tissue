@@ -38,6 +38,8 @@ import {
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 
@@ -239,7 +241,19 @@ export default {
                 console.log(res.data)
                 commit(FETCH_MY_REVIEW, res.data)
             }))
-    }
+    },
+    fetchExpectList({ commit }, eventNo) {
+        return axios.get(`http://localhost:7777/expectation/read/${eventNo}`)
+                .then(res => {
+                    commit(FETCH_EXPECT_LIST, res.data)
+                })
+    },
+    fetchExpect ({commit}, expectNo) {
+        return axios.get(`http://localhost:7777/expectation/read/only/${expectNo}`)
+                .then((res) => {
+                    commit(FETCH_EXPECT, res.data)
+                })
+    },
 
 }
 

@@ -50,7 +50,7 @@ export default {
         event: {
             type: Object,
             required: true
-        }
+        },
     },
     data() {
         return {

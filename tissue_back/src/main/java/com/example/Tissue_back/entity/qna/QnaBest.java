@@ -25,7 +25,7 @@ public class QnaBest {
     @NotNull
     private String qnaBestTitle;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     @NotNull
     private String qnaBestContent;
 

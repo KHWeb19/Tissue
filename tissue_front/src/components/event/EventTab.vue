@@ -25,29 +25,19 @@
           lg="4"
           sm="6"
         >
-          <router-link
-            style="color: black"
-            :to="{
-              name: 'PerformanceDetailPage',
-              params: { performNo: event.performance.performNo },
-            }"
-          >
-            <div width="500" height="450">
-              <div class="imgWrap">
-                <div class="pt-10">
-                  <v-img
-                    :src="
-                      require(`@/assets/thumbNail/${event.performance.performThumbnail}`)
-                    "
-                    class="img"
-                  >
-                    <h1 class="imgText" v-if="event.eventCategory === '기대평'">
-                      기대평 이벤트
-                    </h1>
-                    <h1 class="reviewImgText" v-else>관람후기 이벤트</h1>
-                  </v-img>
+          <div width="500" height="450">
+            <div class="imgWrap">
+              <div class="pt-10">
+                <v-img :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img">
+                  <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage', params: { eventNo: event.eventNo} }">
+                    <h1 class="imgText" style="color:black">기대평 이벤트</h1>
+                  </router-link>
+                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
+                    <h1 class="reviewImgText" style="color:black"> 관람후기 이벤트 </h1>
+                  </router-link>
+                </v-img>
                 </div>
-              </div>
+            </div>
 
               <v-card-title
                 class="eventCategory mt-3 blue--text text--lighten-3"
@@ -70,7 +60,6 @@
                 <h2 class="ddayTxt">{{ dday.result }}일 남음</h2>
               </div>
             </div>
-          </router-link>
         </v-col>
       </v-row>
 
@@ -234,10 +223,10 @@ export default {
 .imgText {
   font-size: 20px;
   padding: 5px 10px;
-  background-color: #bcaaa4;
-  text-align: center;
-  top: 85%;
-  /* left: 50%; */
+	background-color: #BCAAA4;
+	text-align: center;
+	top: 85%;
+	/* left: 50%; */
 }
 .reviewImgText {
   font-size: 20px;

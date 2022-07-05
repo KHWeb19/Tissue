@@ -30,7 +30,7 @@
                             mdi-pencil
                           </v-icon>
                             </router-link>
-                          <v-icon style="color: red" @click="editItem(qnaBest.qnaBestNo)">mdi-delete</v-icon>
+                          <v-icon style="color: red" @click="dialog = true">mdi-delete</v-icon>
                       </v-row>
                    </div>
                           <v-dialog
@@ -46,7 +46,7 @@
                                           <v-btn class="white--text" color="#D3D3D3" @click="dialog = false">
                                             취소
                                           </v-btn>
-                                          <v-btn class="white--text" color="#F48FB1" @click="onDelete(editedItem.qnaBestNo)">
+                                          <v-btn class="white--text" color="#F48FB1" @click="onDelete(qnaBest.qnaBestNo)">
                                             삭제
                                           </v-btn>
                                           <v-spacer></v-spacer>
@@ -96,6 +96,7 @@ export default {
   },
   methods: {
     editItem (qnaBestNo) {
+      console.log(qnaBestNo)
       this.editedIndex = this.qnaBestList.indexOf(qnaBestNo)
       this.editedItem = Object.assign({}, qnaBestNo)
       this.dialog = true

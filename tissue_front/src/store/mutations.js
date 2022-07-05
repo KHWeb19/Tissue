@@ -38,6 +38,8 @@ import {
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 } from './mutation-types'
@@ -138,5 +140,11 @@ export default{
     },
     [FETCH_MY_REVIEW](state, myReview) {
         state.myReview = myReview
+    },
+    [FETCH_EXPECT_LIST] (state, expectList) {
+        state.expectList = expectList
+    },
+    [FETCH_EXPECT] (state, expect) {
+        state.expect = expect
     }
 }

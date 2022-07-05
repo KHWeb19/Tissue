@@ -96,7 +96,6 @@
             </div>
           </v-col>
         </v-row>
-
         <br />
 
         <v-row justify="start" no-gutters class="ml-5">
