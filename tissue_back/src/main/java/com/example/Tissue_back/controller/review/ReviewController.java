@@ -32,4 +32,17 @@ public class ReviewController {
 
         return reviewService.list(performNo);
     }
+
+    @PutMapping("/modify/{performName}")
+    public void modify (@Validated @RequestBody Review review, @PathVariable("performName") String performName) {
+        log.info("review Modify ==" + performName);
+
+        reviewService.modify(review, performName);
+    }
+
+    @DeleteMapping("/delete/{reviewNo}")
+    public void delete (@PathVariable Long reviewNo){
+        log.info("review Delete ==");
+        reviewService.delete(reviewNo);
+    }
 }
