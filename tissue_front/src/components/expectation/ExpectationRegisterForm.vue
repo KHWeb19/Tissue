@@ -10,7 +10,7 @@
           <v-textarea v-model="expectContent" label="기대평" placeholder="내용작성해주세요." clearable auto-grow outlined
             color="pink lighten-3" style="padding-top: 12px; width: 100%"/>
           <div align="center" style="margin: 25px">
-            <v-btn width="150" height="50" @click="addComment" 
+            <v-btn width="150" height="50" @click="[addComment(), addMileage()]" 
               color="blue lighten-3" class="white--text mr-3" style="font-size: 15px">
               등록
             </v-btn>
@@ -65,7 +65,18 @@ export default {
       }).catch(res => {
         alert(res)
       })
-      
+    },
+    addMileage () {
+      console.log(this.memberInfo.memberMileage)
+
+      const memberMileage = this.memberInfo.memberMileage + 3000
+
+      axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
+          .then(() => {
+            
+            console.log('마일리지 적립!', memberMileage)
+          })
+
     }
   }
 }

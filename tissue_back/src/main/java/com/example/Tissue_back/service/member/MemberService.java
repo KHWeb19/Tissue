@@ -18,4 +18,6 @@ public interface MemberService {
     public void modify (MemberDto memberDto);
     public Boolean remove (Long memberNo, String checkPw);
 
+    public void addMileage(Member member);
+
 }

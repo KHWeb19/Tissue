@@ -3,14 +3,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <div
-            style="
-              text-align: center;
-              font-size: 30px;
-              font-weight: lighter;
-              margin: 30px;
-            "
-          >
+          <div style="text-align: center; font-size: 30px; font-weight: lighter; margin: 30px;">
             <b style="font-size: 45px; font-weight: bold">E</b> V E N T &nbsp;
             <b style="font-size: 45px; font-weight: bold">Z</b> O N E
           </div>
@@ -19,12 +12,7 @@
       </v-row>
 
       <v-row class="mt-5 mb-5">
-        <v-col
-          v-for="event in paginatedData"
-          :key="event.eventNo"
-          lg="4"
-          sm="6"
-        >
+        <v-col v-for="event in paginatedData" :key="event.eventNo" lg="4" sm="6">
           <div width="500" height="450">
             <div class="imgWrap">
               <div class="pt-10">
@@ -39,10 +27,7 @@
                 </div>
             </div>
 
-              <v-card-title
-                class="eventCategory mt-3 blue--text text--lighten-3"
-                style="font-weight: lighter"
-              >
+              <v-card-title class="eventCategory mt-3 blue--text text--lighten-3" style="font-weight: lighter">
                 {{ event.eventCategory }}
               </v-card-title>
               <v-card-subtitle class="eventTitle mt-5">
@@ -66,25 +51,12 @@
       <v-row>
         <v-col>
           <div class="btn-cover">
-            <v-btn
-              rounded
-              :disabled="pageNum === 0"
-              @click="prevPage"
-              class="page-btn"
-              color="blue lighten-3"
-            >
+            <v-btn rounded :disabled="pageNum === 0" @click="prevPage" class="page-btn" color="blue lighten-3">
               이전
             </v-btn>
-            <span class="page-count"
-              >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
+            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
             >
-            <v-btn
-              rounded
-              :disabled="pageNum >= pageCount - 1"
-              @click="nextPage"
-              class="page-btn"
-              color="blue lighten-3"
-            >
+            <v-btn rounded :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn" color="blue lighten-3">
               다음
             </v-btn>
           </div>

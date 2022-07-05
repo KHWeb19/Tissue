@@ -52,6 +52,7 @@
 
             <v-row>
                 <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
+                    <router-link :to="{ name: 'PerformanceDetailPage', params: { performNo: perform.performNo} }">
                         <v-card class="mx-auto" max-width="216" height="450" flat>
                             <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
                             <v-card-title class="performTitle mb-1">
@@ -68,6 +69,7 @@
                                 </div>
                             </div>
                         </v-card>
+                    </router-link>
                 </v-col>
             </v-row>
         </v-container>
@@ -112,7 +114,9 @@ export default {
             this.copyPerformList = [...this.originalPerformList]
         },
         fetchSeoul() {
-              this.copyPerformList = this.copyPerformList.filter(e => {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performArea.match('서울')
                 })
         },

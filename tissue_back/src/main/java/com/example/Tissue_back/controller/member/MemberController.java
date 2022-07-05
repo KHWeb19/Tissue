@@ -106,4 +106,11 @@ public class MemberController {
         return service.remove(memberNo, checkPw);
     }
 
+    @PostMapping("/addMileage")
+    public void addMileage (@RequestBody Member member) {
+        log.info("add mileage()");
+
+        service.addMileage(member);
+    }
+
 }

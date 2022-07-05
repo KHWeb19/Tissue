@@ -6,7 +6,7 @@
 
       <!-- 댓글 리스트 --> 
       <v-card v-if="!expectList || (Array.isArray(expectList) && expectList.length ===0)" class="pa-5" flat>
-        <p class="ma-2">등록된 기대평이 없습니다.</p>
+        <div align="center" style="color:#F48FB1; font-size:15px">등록된 기대평이 없습니다.</div>
       </v-card>
 
       <v-card v-else v-for="expect in expectList" :key="expect.expectNo" class="mx-4"  flat>
@@ -30,20 +30,17 @@
               
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
-                <v-btn v-if="memberInfo.memberId === expect.id" v-on="on" icon> <!-- v-if="memberInfo.id == expect.id" 멤버 아이디랑 일치하면 보이는 것 추가하기 0701-->
+                <v-btn v-if="memberInfo.memberId == expect.id" v-on="on" icon> <!-- v-if="memberInfo.id == expect.id" 멤버 아이디랑 일치하면 보이는 것 추가하기 0701-->
                   <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
               <v-list>
-
                 <expectation-modify-form :expectNo="expect.expectNo" :eventNo="eventNo" :memberInfo="memberInfo"/>
-
                 <v-list-item @click="removeDialog(expect.expectNo)">
                   삭제
                 </v-list-item>
               </v-list>
             </v-menu>
-            
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
@@ -108,6 +105,9 @@ export default {
   mounted () {
     this.fetchExpectList(this.eventNo)
   },
+  created() {
+
+    },
   methods: {
     ...mapActions([ 'fetchExpectList', 'fetchExpect' ]),
     removeDialog (expectNo) {
@@ -129,7 +129,5 @@ export default {
 </script>
 
 <style scoped>
-/* .commentBox {
-  background-color: rgb(241, 241, 241) ;
-} */
+
 </style>

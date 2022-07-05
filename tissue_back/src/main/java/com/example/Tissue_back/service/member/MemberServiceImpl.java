@@ -187,4 +187,15 @@ public class MemberServiceImpl implements MemberService {
             return true;
         }
     }
+
+    @Override
+    public void addMileage(Member member) {
+        Optional<Member> optionalMember = repository.findByMemberId(member.getMemberId());
+
+        Member member1 = optionalMember.get();
+
+        member1.setMemberMileage(member.getMemberMileage());
+
+        repository.save(member1);
+    }
 }

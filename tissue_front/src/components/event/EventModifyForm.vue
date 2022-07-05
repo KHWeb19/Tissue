@@ -179,8 +179,9 @@ export default {
 
 <style scoped>
 img {
-  position: relative;
-  max-height: 500px;
-  max-width: 500px;
+   position: relative;
+   height: 100%;
+    width: 100%;
 }
+
 </style>
