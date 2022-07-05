@@ -3,6 +3,7 @@ package com.example.Tissue_back.entity.review;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.format.FormatStyle;
 
 @Data
 @Entity
+@DynamicUpdate
 public class Review {
 
     @Id
@@ -30,8 +32,8 @@ public class Review {
     @Column
     private Integer reviewRating;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JsonIgnore
-    @JoinColumn(name = "performance_performNo")
+    @JoinColumn(name = "performNo")
     private Performance performance;
 }

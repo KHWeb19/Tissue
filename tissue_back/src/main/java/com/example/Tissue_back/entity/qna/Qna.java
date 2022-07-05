@@ -31,7 +31,7 @@ public class Qna {
     @NotNull
     private String qnaTitle;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     @NotNull
     private String qnaContent;
 

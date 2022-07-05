@@ -1,7 +1,10 @@
 <template>
     <v-container fluid>
         <div v-if="visible">
-            <v-form ref="form">
+            <span class="ml-3" style="font-size:20pt;"> My 정보수정 </span>
+            <p/>
+            <hr color="#90CAF9" width="95%">
+            <v-form ref="form" class="mt-10">
                 <v-row justify="center">
                     <v-col cols="3" class="label">
                         아이디
@@ -114,7 +117,7 @@
                     </v-row>
                 </v-form>
             </div>
-        <div v-else>
+        <div v-else class="rePw">
             <v-container>
             <v-row justify="center" class="mb-5" style="font-size:15pt">
                 비밀번호를 다시 한번 입력해주세요.
@@ -280,5 +283,9 @@ export default {
 .label{
     background: rgb(241, 241, 241);
     text-align: center;
+}
+.rePw{
+    position: relative;
+    top:35%;
 }
 </style>

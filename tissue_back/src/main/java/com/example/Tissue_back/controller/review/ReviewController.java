@@ -19,17 +19,30 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping("register/{performNo}")
+    @PostMapping("/register/{performNo}")
     public void reviewRegister(@Validated @RequestBody ReviewDto reviewDto, @PathVariable("performNo")Long performNo){
         log.info("reviewRegister()" + performNo + reviewDto);
 
         reviewService.register(performNo, reviewDto);
     }
 
-    @GetMapping("list/{performNo}")
+    @GetMapping("/list/{performNo}")
     public List<Review> reviewList(@PathVariable("performNo")Long performNo){
         log.info("reviewList()" + performNo);
 
         return reviewService.list(performNo);
+    }
+
+    @PutMapping("/modify/{performName}")
+    public void modify (@Validated @RequestBody Review review, @PathVariable("performName") String performName) {
+        log.info("review Modify ==" + performName);
+
+        reviewService.modify(review, performName);
+    }
+
+    @DeleteMapping("/delete/{reviewNo}")
+    public void delete (@PathVariable Long reviewNo){
+        log.info("review Delete ==");
+        reviewService.delete(reviewNo);
     }
 }

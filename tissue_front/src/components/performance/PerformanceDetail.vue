@@ -32,9 +32,10 @@
               ></v-img>
               <div class="additionFunc mb-5 mt-5">
                 <div>
-                  <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+                  <v-btn icon v-if="this.likeMember === true" @click="dislike" color="red"><v-icon>mdi-heart</v-icon></v-btn>
+                  <v-btn icon v-else @click="like" color="grey"><v-icon>mdi-heart</v-icon></v-btn>
                   <span class="font15"
-                    ><b style="color: skyblue" class="mr-3">{{ "123" }} </b
+                    ><b style="color: skyblue" class="mr-3">{{ likeList.length }} </b
                     >Likes
                   </span>
                 </div>
@@ -390,12 +391,13 @@
                 :performance="performance"
               />
               <performance-review
-                v-if="n == 1 && reviewList && performanceEvent"
+                v-if="n == 1"
                 :reviewList="reviewList"
                 :performanceEvent="performanceEvent"
                 :performance="performance"
                 class="reviewBox"
               />
+              <perform-caution v-if="n ==2"/>
             </v-tab-item>
           </v-tabs>
         </v-col>
@@ -407,7 +409,9 @@
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
 import PerformanceReview from "@/components/performance/PerformanceReview.vue";
-import axios from "axios";
+import axios from 'axios';
+import { mapActions } from 'vuex';
+import PerformCaution from './PerformCaution.vue';
 
 export default {
   name: "PerformanceDetail",
@@ -420,9 +424,17 @@ export default {
       type: Array,
       required: true,
     },
+    likeList: {
+        type: Array,
+        required: true,
+    },
+    likeMember: {
+        type:Boolean,
+        required: true
+    },
     performanceEvent: {
       type: Object,
-      required: true,
+      required: false,
     },
     reviewList: {
       type: Array,
@@ -432,6 +444,7 @@ export default {
   components: {
     PerformanceDetailComp,
     PerformanceReview,
+    PerformCaution
   },
   data() {
     return {
@@ -453,7 +466,17 @@ export default {
       clickDate: true,
     };
   },
-
+  watch: {
+      performance () {
+            for (let i = 0; i < this.couponList.length; i++) {
+      if (
+        this.couponList[i].couponCategory == this.performance.performCategory
+      ) {
+        this.availableCoupon.push(this.couponList[i]);
+      }
+    }
+      }
+  },
   computed: {
     reviewSumAvg() {
       let sum = 0;
@@ -463,7 +486,7 @@ export default {
       }
       avg = sum / this.reviewList.length;
 
-      console.log("평균" + avg);
+    //   console.log("평균" + avg);
       return avg;
     },
   },
@@ -473,19 +496,53 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
-
-  mounted() {
-    for (let i = 0; i < this.couponList.length; i++) {
-      if (
-        this.couponList[i].couponCategory == this.performance.performCategory
-      ) {
-        this.availableCoupon.push(this.couponList[i]);
-      }
-    }
-  },
-
   methods: {
-    scrollReview() {
+      ...mapActions(['fetchPerformanceLike']),
+      checkMember () {
+          let token = localStorage.getItem('token')
+          if(token != null){
+            axios.get('likes/member' , { params:{token:token} })
+            .then((res) => {
+                for (let i = 0; i <this.likeList.length; i++){
+                    if(this.likeList[i].member.memberNo === res.data) {
+                        return this.$emit('update:likeMember', true)
+                    }
+                }
+                return this.$emit('update:likeMember', false)
+            })
+          }
+      },
+        like() {
+          let performNo = this.performance.performNo
+          let token = localStorage.getItem('token')
+          if(token != null) {
+            axios.post('likes/register', {performNo, token})
+            .then ((res)=> {
+                this.$emit('update:likeList', res.data)
+                alert("해당 공연이 찜되셨습니다.")
+                this.checkMember()
+            })
+            .catch((res) => {
+                console.log(res.message)
+            })
+          } else {
+              alert("로그인이 필요합니다.")
+          }
+      },
+      dislike() {
+          let performNo = this.performance.performNo
+          let token = localStorage.getItem('token')
+          axios.delete('likes/delete', { params:{performNo: performNo, token: token}})
+          .then((res) => {
+              this.$emit('update:likeList', res.data)
+              alert("찜이 취소되었습니다.")
+              this.checkMember()
+          })
+          .catch((res) => {
+              console.log(res.message)
+          })
+      },
+      scrollReview() {
       const btn = document.getElementById("scrollBtn");
 
       btn.addEventListener("click", function (e) {
@@ -493,7 +550,6 @@ export default {
         document.querySelector(".reviewBox").scrollIntoView(true);
       });
     },
-
     down(couponNo) {
       let token = localStorage.getItem("token");
 
@@ -517,16 +573,15 @@ export default {
         alert("로그인이 필요합니다.");
       }
     },
-
     allowedDates(val) {
       let show = this.performance.performShowDate;
-      console.log(parseInt(val.split("-")[2], 10));
+    //   console.log(parseInt(val.split("-")[2], 10));
       if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
         return true;
       }
       return false;
     },
-  },
+  }
 };
 </script>
 

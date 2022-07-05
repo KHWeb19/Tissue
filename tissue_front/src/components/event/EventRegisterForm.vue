@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 이벤트 관리
+        </v-toolbar-title>
+    </v-app-bar>
     <form @submit.prevent="onSubmit">
       <v-container
         ><br /><br /><br />
@@ -103,14 +108,14 @@
 
         <br />
 
-        <v-row>
-          <v-btn color="blue lighten-3" dark @click="onSubmit" value="Upload">
+        <v-row justify="center" class="mb-5">
+          <v-btn color="blue lighten-3" dark @click="onSubmit" value="Upload" x-large>
             등록
           </v-btn>
         </v-row>
       </v-container>
     </form>
-  </div>
+  </v-container>
 </template>
 
 <script>

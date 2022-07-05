@@ -1,6 +1,11 @@
 <template>
     <div>
-        <v-container>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 이벤트 관리
+            </v-toolbar-title>
+        </v-app-bar>
+        <v-container style="padding:50px"><br><br><br><br>
             <h1 align="center">이벤트</h1>
                 <v-row class="btnReg"> 
                     <v-btn color="blue lighten-3" dark :to="{ name: 'EventRegisterPage' }">등록</v-btn>

@@ -1,10 +1,15 @@
 <template>
-  <div>
+  <v-container>
+    <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3">
+            📌 이벤트 관리
+        </v-toolbar-title>
+    </v-app-bar>
     <form @submit.prevent="onSubmit">
       <v-container
         ><br /><br /><br />
         <v-row>
-          <v-col>
+          <v-col cols="5">
             <img
               :src="
                 require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)
@@ -93,10 +98,11 @@
         </v-row>
         <br />
 
-        <div>
-          <v-btn color="mr-3 blue lighten-3" dark type="submit">수정완료</v-btn>
+        <v-row justify="start" no-gutters class="ml-5">
+          <v-btn color="mr-3 blue lighten-3" dark type="submit" large>수정완료</v-btn>
           <v-btn
             color="blue lighten-3"
+            large
             dark
             router-link
             :to="{
@@ -106,10 +112,10 @@
           >
             취소
           </v-btn>
-        </div>
+        </v-row>
       </v-container>
     </form>
-  </div>
+  </v-container>
 </template>
 
 <script>
