@@ -19,14 +19,14 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping("register/{performNo}")
+    @PostMapping("/register/{performNo}")
     public void reviewRegister(@Validated @RequestBody ReviewDto reviewDto, @PathVariable("performNo")Long performNo){
         log.info("reviewRegister()" + performNo + reviewDto);
 
         reviewService.register(performNo, reviewDto);
     }
 
-    @GetMapping("list/{performNo}")
+    @GetMapping("/list/{performNo}")
     public List<Review> reviewList(@PathVariable("performNo")Long performNo){
         log.info("reviewList()" + performNo);
 

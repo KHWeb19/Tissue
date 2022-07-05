@@ -264,6 +264,18 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/myPage/star',
+        name: 'MyPageStar',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/myPage/review',
+        name: 'MyPageReview',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/search/:keyword',
         name: 'SearchPage',
         components: {
@@ -434,7 +446,7 @@ const routes = [
     props: {
       default: true
     }
-  },
+  }
 ]
 
 const router = new VueRouter({

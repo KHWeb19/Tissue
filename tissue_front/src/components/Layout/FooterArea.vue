@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-footer dark padless style="display: block">
+    <v-footer dark padless style="display: block;">
       <v-card flat tile class="white lighten-1 black--text text-center">
         <div class="footer_box">
           <div class="footer_left">

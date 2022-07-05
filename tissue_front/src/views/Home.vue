@@ -1,7 +1,6 @@
 <template>
   <div>
     <new-nav-bar />
-
     <div>
       <v-carousel
         height="100%"

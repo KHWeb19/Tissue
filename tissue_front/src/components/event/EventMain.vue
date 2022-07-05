@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>슬라이더 구역</div>
+    <div><event-banner/></div>
     <v-container>
       <div class="titleCategory">
         <v-tabs color="blue lighten-3" centered height="70px">
@@ -22,12 +22,14 @@ import EventCoupon from "@/components/event/EventCoupon.vue";
 import EventTab from "@/components/event/EventTab.vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
+import EventBanner from './EventBanner.vue';
 
 export default {
   name: "EventMain",
   components: {
     EventCoupon,
-    EventTab
+    EventTab,
+    EventBanner
   },
   data() {
     return {

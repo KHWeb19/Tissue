@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="border-top: 2px solid black">
-      <div class="performInfo">공연 정보</div>
+      <div class="performInfo mb-15">공연 정보</div>
       <div class="performDetailImg">
         <v-img
           v-if="this.performance.performDetailImg1 != null"
