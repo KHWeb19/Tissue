@@ -1,8 +1,11 @@
 package com.example.Tissue_back.service.ticketing;
 
 import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
+import com.example.Tissue_back.entity.coupon.Coupon;
+import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.repository.coupon.CouponRepository;
 import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.ticketing.TicketingRepository;
@@ -22,6 +25,9 @@ public class TicketingServiceImpl implements TicketingService{
 
     @Autowired
     private PerformanceRepository performanceRepository;
+
+    @Autowired
+    private CouponRepository couponRepository;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -48,6 +54,22 @@ public class TicketingServiceImpl implements TicketingService{
 
         //사용마일리지 차감
         memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+
+
         //사용 쿠폰 사용여부 변경 로직 작성필요
+        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+
+        Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
+
+        Coupon coupon = whatCoupon.get();
+        Member member = findMember.get();
+
+        log.info("----"+member.getCoupons());
+
+        member.getCoupons().remove(coupon);
+        member.getUsed_coupons().add(coupon);
+
+        memberRepository.save(member);
+
     }
 }
