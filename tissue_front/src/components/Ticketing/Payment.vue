@@ -172,9 +172,7 @@ export default {
               })
               .then(() => {
                 alert("DB 저장 완료");
-                this.$router.push(
-                  `/performanceDetail/${this.performance.performNo}`
-                );
+                this.$router.push("/");
               });
           } else {
             console.log("결제 실패");
