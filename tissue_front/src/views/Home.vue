@@ -16,11 +16,14 @@
     </div>
 
     <div class="side_bar">
+        <router-link :to="{ name : 'EventMainPage' }" >
       <v-img
         :src="require('@/assets/event.png')"
         max-width="150px"
         max-height="150px"
+        style="zoom:0.85"
       />
+        </router-link>
     </div>
 
     <v-container>
@@ -164,6 +167,8 @@ export default {
   background-color: transparent;
   z-index: 2;
   border-radius: 80px;
+  margin-top:25px;
+
 }
 .content_title {
   font-size: 50px;

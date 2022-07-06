@@ -113,7 +113,6 @@ export default {
         return axios.get(`http://localhost:7777/review/list/${performNo}`)
         .then((res)=>{
             commit(FETCH_REVIEW_LIST, res.data)
-            console.log(res.data)
         })
     },
 

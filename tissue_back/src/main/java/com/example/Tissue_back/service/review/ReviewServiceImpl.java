@@ -41,9 +41,6 @@ public class ReviewServiceImpl implements ReviewService{
         review.setReviewRating(reviewDto.getReviewRating());
         review.setPerformance(reviewDto.getPerformance());
 
-
-
-
         reviewRepository.save(review);
     }
 
@@ -52,5 +49,19 @@ public class ReviewServiceImpl implements ReviewService{
         Performance performance = performanceRepository.findById(performNo).get();
 
         return reviewRepository.findReviewByPerformance(performance);
+    }
+
+    @Override
+    public void modify (Review review, String performName) {
+        Performance performance = performanceRepository.findByPerformName(performName);
+        review.setPerformance(performance);
+        log.info("modify()");
+
+        reviewRepository.save(review);
+    }
+
+    @Override
+    public void delete (Long reviewNo) {
+        reviewRepository.deleteById(reviewNo);
     }
 }

@@ -75,7 +75,7 @@ export default {
           return (this.likeMember = false);
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
