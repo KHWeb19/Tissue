@@ -22,7 +22,7 @@
                 <v-col>
                     <div class="expect-detail-wrap">
                         <hr class="mt-10 mb-10">
-                        <div class="expect-content" align="center" style="font-size:18px">
+                        <div class="expect-content" align="center" style="font-size:18px; word-break: keep-all">
                             {{ event.eventContent }}
                         </div>
                         <hr class="mt-10 mb-10">
@@ -58,6 +58,8 @@
             <!-- 댓글영역 -->
             <expectation-read-form :eventNo="eventNo" :memberInfo="memberInfo"/>
 
+
+
         </v-container>
     </div>
 </template>
@@ -91,7 +93,7 @@ export default {
 
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
-    }
+    },
 }
 </script>
 
