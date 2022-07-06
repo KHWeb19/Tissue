@@ -12,14 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class TissueBackApplicationTests {
 
 
-	@Autowired
-	HallService hallService;
-	@Autowired
-	HallSeatService hallSeatService;
 
-	Hall hall = new Hall();
 	@Test
-	void 홀등록테스트() {
+	void 좌석배열반환테스트() {
 
 	}
 
