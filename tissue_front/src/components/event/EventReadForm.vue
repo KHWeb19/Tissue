@@ -16,6 +16,14 @@
                         <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventTitle" readonly></v-text-field>
                     </div>
                     <div>
+                        <label>설명</label>
+                        <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventContent" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>경품</label>
+                        <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventGoods" readonly></v-text-field>
+                    </div>
+                    <div>
                         <label>카테고리</label>
                         <v-text-field outlined  color="pink lighten-3" type="text" :value="event.eventCategory" readonly></v-text-field>
                     </div>
@@ -26,6 +34,14 @@
                     <div>
                         <label>종료일</label>
                         <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventEnd" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>당첨자 발표일</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventWinnerDate" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>당첨 인원</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventWinnerCnt" readonly></v-text-field>
                     </div>
                 </v-col>
             </v-row>
@@ -75,7 +91,7 @@ export default {
 <style scoped>
 img {
    position: relative;
-    max-height: 500px;
-    max-width: 500px;
+   height: 100%;
+    width: 100%;
 }
 </style>

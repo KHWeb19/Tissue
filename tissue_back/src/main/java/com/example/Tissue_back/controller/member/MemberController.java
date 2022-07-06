@@ -111,12 +111,21 @@ public class MemberController {
         return service.remove(memberNo, checkPw);
     }
 
+    @PostMapping("/addMileage")
+    public void addMileage (@RequestBody Member member) {
+        log.info("add mileage()");
+
+        service.addMileage(member);
+
+    }
+    
     @GetMapping("/myQna/{memberNo}")
     public List<Qna> myQna (@PathVariable("memberNo") Long memberNo) {
         log.info("my QnA List ===");
 
         return service.myQna(memberNo);
     }
+    
 
     @GetMapping("/myReview/{memberNo}")
     public List<MyReviewDto> myReview (@PathVariable("memberNo") Long memberNo) {
