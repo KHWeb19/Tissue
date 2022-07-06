@@ -45,6 +45,9 @@ public class TicketingServiceImpl implements TicketingService{
         ticketing.setSeatNameArr(ticketingDto.getSeatNameArr());
 
         ticketingRepository.save(ticketing);
+
+        //사용마일리지 차감
         memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+        //사용 쿠폰 사용여부 변경 로직 작성필요
     }
 }
