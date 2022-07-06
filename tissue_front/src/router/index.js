@@ -447,6 +447,7 @@ const routes = [
       default: true
     }
   }
+
 ]
 
 const router = new VueRouter({

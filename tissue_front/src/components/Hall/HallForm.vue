@@ -17,8 +17,8 @@
                 </tr>
               </table>
             </div>
-            <div>
-              <table v-if="dataTable" style="margin: auto">
+            <div style="display: flex; justify-content: center">
+              <table v-if="dataTable" style="">
                 <tr
                   v-for="(line, index) in dataTable"
                   :key="index"
@@ -37,12 +37,18 @@
                         :cell-index="indexes"
                       ></div>
                       <div v-if="hall.rowCnt <= 5">
-                        <div v-if="indexes == 0" style="width: 50px"></div>
-                        <div v-if="indexes == 3" style="width: 50px"></div>
+                        <div v-if="indexes == 0" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 2"
+                          style="width: 20px"
+                        ></div>
                       </div>
                       <div v-if="hall.rowCnt > 5">
-                        <div v-if="indexes == 2" style="width: 50px"></div>
-                        <div v-if="indexes == 7" style="width: 50px"></div>
+                        <div v-if="indexes == 2" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 3"
+                          style="width: 20px"
+                        ></div>
                       </div>
                     </div>
                   </td>
@@ -67,21 +73,31 @@
                     mediumpurple: item.color == 'mediumpurple',
                   }"
                 ></div>
-                <span class="ml-3"> {{ item.grade }} </span>
-                <span class="ml-3">{{ gradePrice[index].price }} 원</span>
-                <span class="ml-3">({{ seatGradeCnt[index].cnt }} 석) </span>
+                <span class="ml-3" style="font-size: 13px">
+                  {{ item.grade }}
+                </span>
+                <span class="ml-3" style="font-size: 13px"
+                  >{{ gradePrice[index].price | comma }} 원</span
+                >
+                <span class="ml-3" style="font-size: 13px"
+                  >({{ seatGradeCnt[index].cnt }} 석)
+                </span>
               </div>
             </div>
           </div>
           <div class="ml-2 mt-2 infoTitle">선택한 좌석</div>
           <div class="showSelectSeat">
-            <span v-for="(index, show) in showSelectInfo" :key="show">
-              {{ index.info }}
+            <span
+              v-for="(index, show) in showSelectInfo"
+              :key="show"
+              style="font-size: 13px"
+            >
+              {{ index.info }} <br />
             </span>
           </div>
           <div class="ml-2 mt-2 infoTitle">결제 금액</div>
           <div class="showSelectPrice">
-            <div>{{ selectPrice }} 원</div>
+            <div>{{ selectPrice | comma }} 원</div>
           </div>
           <div class="mt-3">
             <v-btn rounded class="white--text" color="blue lighten-3"
@@ -137,6 +153,12 @@ export default {
       seatGradeCnt: [{ cnt: 0 }, { cnt: 0 }, { cnt: 0 }],
       selectPrice: 0,
     };
+  },
+
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
   },
 
   created() {
@@ -208,7 +230,7 @@ export default {
         this.hall.seats[row * this.hall.colCnt + col].seatGrade
       );
 
-      let temp = `${row + 1}열 ${col + 1}번, `;
+      let temp = `${row + 1}열 ${col + 1}번 `;
       let priceGradeTemp =
         this.hall.seats[row * this.hall.colCnt + col].seatGrade;
 
@@ -218,6 +240,7 @@ export default {
           this.showSelectInfo.push({
             info: temp,
             grade: this.dataTable[row][col].grade,
+            seatName: row * this.hall.colCnt + col + 1,
           });
           if (priceGradeTemp == "R") {
             this.selectPrice += this.performance.performPriceR;
@@ -315,18 +338,18 @@ export default {
 
 <style scoped>
 .lightsalmon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: lightsalmon;
 }
 .lightgreen {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: lightgreen;
 }
 .mediumpurple {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: mediumpurple;
 }
 .grey {
@@ -338,8 +361,8 @@ export default {
   border-radius: 15px;
   margin: 5px;
   margin-right: 0;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
 }
 
 .stage {
@@ -349,42 +372,44 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 300px;
+  width: 300px;
+  height: 150px;
   background-color: lightgrey;
   margin-bottom: 30px;
 }
 
 .showSelectSeat {
-  width: 390px;
+  width: 250px;
   height: 100px;
   border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
+  overflow: auto;
 }
 .showSelectPrice {
-  width: 390px;
-  height: 100px;
+  width: 250px;
+  height: 50px;
   border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
 
 .showCol {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   margin: 5px;
   margin-right: 0;
-  padding-top: 12px;
+  padding-top: 2px;
+  font-size: 12px;
 }
 .showSeatPrice {
-  width: 390px;
+  width: 250px;
   height: 200px;
   border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
 }
 .infoTitle {
-  font-size: 20px;
+  font-size: 15px;
 }
 </style>
