@@ -240,6 +240,7 @@ export default {
           this.showSelectInfo.push({
             info: temp,
             grade: this.dataTable[row][col].grade,
+            seatName: row * this.hall.colCnt + col + 1,
           });
           if (priceGradeTemp == "R") {
             this.selectPrice += this.performance.performPriceR;

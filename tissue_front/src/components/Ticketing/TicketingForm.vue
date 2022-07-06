@@ -207,7 +207,7 @@
                               {{ coupon.couponCondition }}
                             </td>
                             <td class="tableTd">
-                              <v-radio-group v-model="radioGroup">
+                              <v-radio-group v-model="selectCouponInfo">
                                 <v-radio
                                   :value="coupon"
                                   @click="selectCoupon"
@@ -267,14 +267,14 @@
                     :finalPrice="finalPrice"
                     :memberInfo="memberInfo"
                     :performance="performance"
+                    :mileageSalePrice="mileageSalePrice"
+                    :selectCouponInfo="selectCouponInfo"
+                    :tempSelectSeatInfo="tempSelectSeatInfo"
                   />
                 </v-card>
                 <div style="float: right">
                   <v-btn color="blue lighten-3" text @click="e1 = 2">
                     이전 단계
-                  </v-btn>
-                  <v-btn color="blue lighten-3" text @click="e1 = 4">
-                    결제 하기
                   </v-btn>
                 </div>
               </v-stepper-content>
@@ -319,7 +319,7 @@ export default {
       tempSelectSeatInfo: "",
       tempSelectPriceInfo: 0,
       tempSelectPriceInfoCopy: 0,
-      radioGroup: 0,
+      selectCouponInfo: 0,
       inputMileage: 0,
       filterCouponList: [],
       couponSalePrice: 0,
@@ -386,6 +386,7 @@ export default {
     },
     goStep3() {
       console.log(this.finalPrice);
+      console.log(this.tempSelectSeatInfo);
 
       this.e1 = 3;
     },
@@ -400,41 +401,41 @@ export default {
       this.tempSelectPriceInfoCopy = this.tempSelectPriceInfo;
       this.couponSalePrice = 0;
 
-      if (this.radioGroup.couponCondition == "10만원 이상") {
+      if (this.selectCouponInfo.couponCondition == "10만원 이상") {
         if (this.tempSelectPriceInfo < 100000) {
-          this.radioGroup = false;
+          this.selectCouponInfo = false;
           alert("조건 X");
           return;
         }
       }
-      if (this.radioGroup.couponCondition == "5만원 이상") {
+      if (this.selectCouponInfo.couponCondition == "5만원 이상") {
         if (this.tempSelectPriceInfo < 50000) {
-          this.radioGroup = false;
+          this.selectCouponInfo = false;
           alert("조건 X");
           return;
         }
       }
-      if (this.radioGroup.couponCondition == "3만원 이상") {
+      if (this.selectCouponInfo.couponCondition == "3만원 이상") {
         if (this.tempSelectPriceInfo < 30000) {
-          this.radioGroup = false;
+          this.selectCouponInfo = false;
           alert("조건 X");
           return;
         }
       }
-      if (this.radioGroup.couponCondition == "1만원 이상") {
+      if (this.selectCouponInfo.couponCondition == "1만원 이상") {
         if (this.tempSelectPriceInfo < 10000) {
-          this.radioGroup = false;
+          this.selectCouponInfo = false;
           alert("조건 X");
           return;
         }
       }
 
-      this.couponSalePrice = this.radioGroup.couponPrice;
+      this.couponSalePrice = this.selectCouponInfo.couponPrice;
     },
 
     resetCoupon() {
       this.couponSalePrice = 0;
-      this.radioGroup = 0;
+      this.selectCouponInfo = 0;
     },
     useSelectMileage() {
       if (this.inputMileage > this.memberInfo.memberMileage) {

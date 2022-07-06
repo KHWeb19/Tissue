@@ -35,23 +35,36 @@
         <br />
       </div>
     </div>
-    <div style="display: flex; font-size: 15px">
-      <v-checkbox
-        v-model="checkbox1"
-        label="취소수수료 및 취소기한을 확인하였으며, 동의합니다."
-      ></v-checkbox>
-      <v-checkbox
-        v-model="checkbox2"
-        label="제3자 정보제공 내용에 동의합니다."
-      ></v-checkbox>
+    <div style="display: flex; justify-content: center">
+      <v-checkbox v-model="checkbox1" class="mr-1">
+        <template v-slot:label>
+          <span style="font-size: 12px"
+            >취소수수료 및 취소기한을 확인하였으며, 동의합니다.</span
+          >
+        </template>
+      </v-checkbox>
+      <v-checkbox v-model="checkbox2" class="ml-1">
+        <template v-slot:label>
+          <span style="font-size: 12px">제3자 정보제공 내용에 동의합니다.</span>
+        </template>
+      </v-checkbox>
     </div>
+
     <section class="payBox">
-      <div @click="PaymentBtn">결제</div>
+      <v-btn
+        width="200px"
+        color="blue lighten-3"
+        large
+        @click="PaymentBtn"
+        :disabled="checkbox1 == false || checkbox2 == false"
+        >결제</v-btn
+      >
     </section>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 const { IMP } = window;
 
 export default {
@@ -76,6 +89,13 @@ export default {
       type: Object,
       required: true,
     },
+    selectCouponInfo: {},
+    mileageSalePrice: {
+      type: Number,
+    },
+    tempSelectSeatInfo: {
+      required: true,
+    },
   },
 
   created() {
@@ -86,6 +106,36 @@ export default {
   methods: {
     PaymentBtn: function () {
       this.price = this.finalPrice;
+      let seatNameArr = [];
+      for (let i = 0; i < this.tempSelectSeatInfo.length; i++) {
+        seatNameArr.push(this.tempSelectSeatInfo[i].seatName);
+      }
+      console.log(seatNameArr);
+
+      let today = new Date();
+
+      let year = today.getFullYear(); // 년도
+      let month = today.getMonth() + 1; // 월
+      let date = today.getDate(); // 날짜
+      let hours = today.getHours(); // 시
+      let minutes = today.getMinutes(); // 분
+      let seconds = today.getSeconds();
+
+      let createUid =
+        year +
+        "-" +
+        month +
+        "-" +
+        date +
+        "/" +
+        hours +
+        "-" +
+        minutes +
+        "-" +
+        seconds +
+        "//" +
+        this.memberInfo.memberNo;
+      console.log(createUid);
 
       IMP.init("imp38099687");
 
@@ -94,9 +144,9 @@ export default {
           // param
           pg: "html5_inicis",
           pay_method: "card",
-          merchant_uid: "123",
+          merchant_uid: createUid,
           name: this.performance.performName,
-          amount: this.price,
+          amount: 100,
           buyer_email: this.memberInfo.memberEmail,
           buyer_name: this.memberInfo.memberName,
           buyer_tel: this.memberInfo.memberPhone,
@@ -108,6 +158,24 @@ export default {
           console.log(rsp);
           if (rsp.success) {
             console.log("결제 성공");
+
+            let token = localStorage.getItem("token");
+
+            axios
+              .post("http://localhost:7777/ticketing/register", {
+                memberId: token,
+                performNo: this.performance.performNo,
+                seatNameArr: seatNameArr,
+                usedMileage: this.mileageSalePrice,
+                usedCouponNo: this.selectCouponInfo.couponNo,
+                finalPrice: this.price,
+              })
+              .then(() => {
+                alert("DB 저장 완료");
+                this.$router.push(
+                  `/performanceDetail/${this.performance.performNo}`
+                );
+              });
           } else {
             console.log("결제 실패");
           }
