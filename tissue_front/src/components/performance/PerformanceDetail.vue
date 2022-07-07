@@ -32,10 +32,19 @@
               ></v-img>
               <div class="additionFunc mb-5 mt-5">
                 <div>
-                  <v-btn icon v-if="this.likeMember === true" @click="dislike" color="red"><v-icon>mdi-heart</v-icon></v-btn>
-                  <v-btn icon v-else @click="like" color="grey"><v-icon>mdi-heart</v-icon></v-btn>
+                  <v-btn
+                    icon
+                    v-if="this.likeMember === true"
+                    @click="dislike"
+                    color="red"
+                    ><v-icon>mdi-heart</v-icon></v-btn
+                  >
+                  <v-btn icon v-else @click="like" color="grey"
+                    ><v-icon>mdi-heart</v-icon></v-btn
+                  >
                   <span class="font15"
-                    ><b style="color: skyblue" class="mr-3">{{ likeList.length }} </b
+                    ><b style="color: skyblue" class="mr-3"
+                      >{{ likeList.length }} </b
                     >Likes
                   </span>
                 </div>
@@ -103,7 +112,7 @@
               </div>
               <div class="wrapSubTitle">
                 <div class="performSubTitle pt-2">혜택</div>
-                <div class="text-center">
+                <div class="text-center" v-if="couponList && availableCoupon">
                   <v-dialog v-model="couponDialog" width="450" hide-overlay>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -188,6 +197,7 @@
                     </v-card>
                   </v-dialog>
                 </div>
+                <div v-else></div>
                 <v-divider vertical class="ml-3 mr-3"></v-divider>
                 <div class="text-center">
                   <v-dialog v-model="memberDialog" width="450" hide-overlay>
@@ -397,7 +407,7 @@
                 :performance="performance"
                 class="reviewBox"
               />
-              <perform-caution v-if="n ==2"/>
+              <perform-caution v-if="n == 2" />
             </v-tab-item>
           </v-tabs>
         </v-col>
@@ -409,9 +419,9 @@
 <script>
 import PerformanceDetailComp from "@/components/performance/PerformanceDetailComp.vue";
 import PerformanceReview from "@/components/performance/PerformanceReview.vue";
-import axios from 'axios';
-import { mapActions } from 'vuex';
-import PerformCaution from './PerformCaution.vue';
+import axios from "axios";
+import { mapActions } from "vuex";
+import PerformCaution from "./PerformCaution.vue";
 
 export default {
   name: "PerformanceDetail",
@@ -425,12 +435,12 @@ export default {
       required: true,
     },
     likeList: {
-        type: Array,
-        required: true,
+      type: Array,
+      required: true,
     },
     likeMember: {
-        type:Boolean,
-        required: true
+      type: Boolean,
+      required: true,
     },
     performanceEvent: {
       type: Object,
@@ -444,7 +454,7 @@ export default {
   components: {
     PerformanceDetailComp,
     PerformanceReview,
-    PerformCaution
+    PerformCaution,
   },
   data() {
     return {
@@ -467,27 +477,30 @@ export default {
     };
   },
   watch: {
-      performance () {
-            for (let i = 0; i < this.couponList.length; i++) {
-      if (
-        this.couponList[i].couponCategory == this.performance.performCategory
-      ) {
-        this.availableCoupon.push(this.couponList[i]);
+    performance() {
+      for (let i = 0; i < this.couponList.length; i++) {
+        if (
+          this.couponList[i].couponCategory == this.performance.performCategory
+        ) {
+          this.availableCoupon.push(this.couponList[i]);
+        }
       }
-    }
-      }
+    },
   },
   computed: {
     reviewSumAvg() {
       let sum = 0;
       let avg = 0;
-      for (let i = 0; i < this.reviewList.length; i++) {
-        sum = sum + this.reviewList[i].reviewRating;
-      }
-      avg = sum / this.reviewList.length;
+      if (this.reviewList.length != 0) {
+        for (let i = 0; i < this.reviewList.length; i++) {
+          sum = sum + this.reviewList[i].reviewRating;
+        }
+        avg = sum / this.reviewList.length;
 
-    //   console.log("평균" + avg);
-      return avg;
+        console.log("평균" + avg);
+        return Number(avg);
+      }
+      return Number(avg);
     },
   },
 
@@ -496,53 +509,57 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
+
   methods: {
-      ...mapActions(['fetchPerformanceLike']),
-      checkMember () {
-          let token = localStorage.getItem('token')
-          if(token != null){
-            axios.get('likes/member' , { params:{token:token} })
-            .then((res) => {
-                for (let i = 0; i <this.likeList.length; i++){
-                    if(this.likeList[i].member.memberNo === res.data) {
-                        return this.$emit('update:likeMember', true)
-                    }
-                }
-                return this.$emit('update:likeMember', false)
-            })
+    ...mapActions(["fetchPerformanceLike"]),
+    checkMember() {
+      let token = localStorage.getItem("token");
+      if (token != null) {
+        axios.get("likes/member", { params: { token: token } }).then((res) => {
+          for (let i = 0; i < this.likeList.length; i++) {
+            if (this.likeList[i].member.memberNo === res.data) {
+              return this.$emit("update:likeMember", true);
+            }
           }
-      },
-        like() {
-          let performNo = this.performance.performNo
-          let token = localStorage.getItem('token')
-          if(token != null) {
-            axios.post('likes/register', {performNo, token})
-            .then ((res)=> {
-                this.$emit('update:likeList', res.data)
-                alert("해당 공연이 찜되셨습니다.")
-                this.checkMember()
-            })
-            .catch((res) => {
-                console.log(res.message)
-            })
-          } else {
-              alert("로그인이 필요합니다.")
-          }
-      },
-      dislike() {
-          let performNo = this.performance.performNo
-          let token = localStorage.getItem('token')
-          axios.delete('likes/delete', { params:{performNo: performNo, token: token}})
+          return this.$emit("update:likeMember", false);
+        });
+      }
+    },
+    like() {
+      let performNo = this.performance.performNo;
+      let token = localStorage.getItem("token");
+      if (token != null) {
+        axios
+          .post("likes/register", { performNo, token })
           .then((res) => {
-              this.$emit('update:likeList', res.data)
-              alert("찜이 취소되었습니다.")
-              this.checkMember()
+            this.$emit("update:likeList", res.data);
+            alert("해당 공연이 찜되셨습니다.");
+            this.checkMember();
           })
           .catch((res) => {
-              console.log(res.message)
-          })
-      },
-      scrollReview() {
+            console.log(res.message);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    },
+    dislike() {
+      let performNo = this.performance.performNo;
+      let token = localStorage.getItem("token");
+      axios
+        .delete("likes/delete", {
+          params: { performNo: performNo, token: token },
+        })
+        .then((res) => {
+          this.$emit("update:likeList", res.data);
+          alert("찜이 취소되었습니다.");
+          this.checkMember();
+        })
+        .catch((res) => {
+          console.log(res.message);
+        });
+    },
+    scrollReview() {
       const btn = document.getElementById("scrollBtn");
 
       btn.addEventListener("click", function (e) {
@@ -574,14 +591,18 @@ export default {
       }
     },
     allowedDates(val) {
-      let show = this.performance.performShowDate;
-    //   console.log(parseInt(val.split("-")[2], 10));
-      if (parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)) {
-        return true;
+      if (this.performance.performShowDate != null) {
+        let show = this.performance.performShowDate;
+
+        if (
+          parseInt(val.split("-")[2], 10) == parseInt(show.split("-")[2], 10)
+        ) {
+          return true;
+        }
+        return false;
       }
-      return false;
     },
-  }
+  },
 };
 </script>
 

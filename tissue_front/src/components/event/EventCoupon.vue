@@ -21,7 +21,7 @@
         <v-col
           v-for="(coupon, index) in paginatedData"
           :key="coupon.couponNo"
-          lg="4"
+          lg="3"
           sm="6"
         >
           <v-card width="400">
@@ -65,7 +65,6 @@
             <v-divider></v-divider>
 
             <v-expand-transition>
-
               <div v-show="showData[index].show">
                 <v-card-text class="pb-1 pt-1 subContent"
                   ><b class="subTitle">사용 조건 :</b>
@@ -252,9 +251,8 @@ export default {
   border-radius: 15px;
 }
 .hover:hover {
-    transform: scale(1.07);
-    transition: .5s;
-    cursor: pointer;
+  transform: scale(1.07);
+  transition: 0.5s;
+  cursor: pointer;
 }
-
 </style>

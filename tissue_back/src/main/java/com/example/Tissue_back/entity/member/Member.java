@@ -70,6 +70,11 @@ public class Member {
     @Builder.Default
     private List<Coupon> coupons = new ArrayList<>();
 
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @Builder.Default
+    private List<Coupon> used_coupons = new ArrayList<>();
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
