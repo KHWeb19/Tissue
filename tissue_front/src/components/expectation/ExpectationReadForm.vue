@@ -32,36 +32,34 @@
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
                 <v-btn v-if="memberInfo.memberId == expect.id" v-on="on" icon> 
-                  <v-icon>mdi-dots-vertical</v-icon>
+                  <v-icon small>mdi-pencil</v-icon>
                 </v-btn>
               </template>
               <v-list>
                 <expectation-modify-form :expectNo="expect.expectNo" :eventNo="eventNo" :memberInfo="memberInfo"/>
-                <v-list-item @click="removeDialog(expect.expectNo)">
+                <v-list-item @click="removeDialog(expect.expectNo)" style="font-size:15px; color:#F48FB1">
                   삭제
                 </v-list-item>
               </v-list>
             </v-menu>
+            
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
       </v-card>
 
-      <v-dialog v-model="dialog" max-width="350">
+      <v-dialog v-model="dialog" width="300">
         <v-card>
-          <v-card-title>
-            <p>정말 삭제하시겠습니까?</p>
+          <v-card-title style="font-size:15px">
+           삭제하시겠습니까?
           </v-card-title>
-
-          <v-card-text></v-card-text>
-
           <v-card-actions>
-            <v-btn @click="btnCancle" text >
-              Cancle
+            <v-btn @click="btnCancle" text style="color:#F48FB1">
+              취소
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn @click="btnRemove" text>
-              Delete
+            <v-btn @click="btnRemove" text style="color:#F48FB1">
+              삭제
             </v-btn>
           </v-card-actions>
         </v-card>
