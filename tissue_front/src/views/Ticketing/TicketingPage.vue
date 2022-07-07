@@ -5,6 +5,7 @@
       :performance="performance"
       :coupons="memberInfo.coupons"
       :memberInfo="memberInfo"
+      :ticketingList="ticketingList"
     />
   </div>
 </template>
@@ -30,13 +31,17 @@ export default {
     },
   },
   computed: {
-    ...mapState(["performance", "memberInfo"]),
+    ...mapState(["performance", "memberInfo", "ticketingList"]),
   },
   created() {
     this.fetchMemberInfo(this.token);
   },
   methods: {
-    ...mapActions(["fetchPerformance", "fetchMemberInfo"]),
+    ...mapActions([
+      "fetchPerformance",
+      "fetchMemberInfo",
+      "fetchTicketingList",
+    ]),
   },
   mounted() {
     this.fetchPerformance(this.performNo)
@@ -45,6 +50,15 @@ export default {
       })
       .catch(() => {
         alert("게시물 요청 실패!");
+        this.$router.push();
+      });
+
+    this.fetchTicketingList(this.performance.performNo)
+      .then(() => {
+        alert("예매좌석 요청 성공");
+      })
+      .catch(() => {
+        alert("예매좌석 요청 실패");
         this.$router.push();
       });
   },

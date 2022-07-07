@@ -110,7 +110,6 @@ export default {
       for (let i = 0; i < this.tempSelectSeatInfo.length; i++) {
         seatNameArr.push(this.tempSelectSeatInfo[i].seatName);
       }
-      console.log(seatNameArr);
 
       let today = new Date();
 

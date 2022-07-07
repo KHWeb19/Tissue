@@ -143,6 +143,7 @@
                     v-if="hall"
                     :hall="hall"
                     :performance="performance"
+                    :ticketingList="ticketingList"
                     v-on:showSelectInfo="showSelectInfo"
                     v-on:selectPrice="selectPrice"
                   />
@@ -307,6 +308,10 @@ export default {
     },
     memberInfo: {
       type: Object,
+      required: true,
+    },
+    ticketingList: {
+      type: Array,
       required: true,
     },
   },
