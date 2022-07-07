@@ -1,6 +1,7 @@
 import {
     FETCH_HALL_LIST,
     FETCH_HALL,
+    FETCH_TICKETING_LIST,
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
@@ -51,6 +52,9 @@ export default{
     },
     [FETCH_HALL](state, hall) {
         state.hall = hall
+    },
+    [FETCH_TICKETING_LIST](state, ticketingList) {
+        state.ticketingList = ticketingList
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList

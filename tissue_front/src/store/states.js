@@ -4,6 +4,7 @@ export default {
     hall: null,
     couponList:[],
     coupon: null,
+    ticketingList:[],
 
     performances: [],
     performance: {},
