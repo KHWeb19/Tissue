@@ -1,6 +1,7 @@
 <template>
-        <div class="flex" >
-            <v-navigation-drawer permanent  height="">
+        <div class="flex">
+            <div>
+            <v-navigation-drawer permanent  height="100%" >
                 <v-list-item>
                     <v-list-item-content>
                         <v-list-item-title class="text-h3 mt-8 ml-5" >
@@ -33,6 +34,7 @@
                     </v-list-item>
                 </v-list>
             </v-navigation-drawer>
+            </div>
             <v-main class="ml-3" >
                 <v-row class="statusBox">
                     <v-col class="mt-8 ml-10"
@@ -67,7 +69,7 @@
                         </v-row>
                     </v-col>
                 </v-row>
-                <v-row class="main pb-8">
+                <v-row class="main1 pb-8">
                     <my-page-main v-if="this.$route.name == 'MyPageView'" :memberNo="memberInfo.memberNo"/>
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
@@ -75,6 +77,7 @@
                     <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'" :memberNo="memberInfo.memberNo"/>
                     <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
                     <my-page-review v-if="this.$route.name =='MyPageReview'" :memberNo="memberInfo.memberNo"/>
+                    <my-page-ticket v-if="this.$route.name == 'MyPageTicket'" :memberNo="memberNo"/>
                 </v-row>
             </v-main>
         </div>
@@ -90,8 +93,9 @@ import MyPageQnA from './MyPageQnA.vue'
 import MyPageStar from './MyPageStar.vue'
 import MyPageMain from './MyPageMain.vue'
 import MyPageReview from './MyPageReview.vue'
+import MyPageTicket from './MyPageTicket.vue'
 export default {
-  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA, MyPageStar, MyPageMain, MyPageReview },
+  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA, MyPageStar, MyPageMain, MyPageReview, MyPageTicket },
     name: 'MyPageNavi',
     props:{
         memberInfo: {
@@ -111,7 +115,7 @@ export default {
             items: [
                 { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
                 { title: 'My 찜목록', icon: 'mdi-star', route:'/myPage/star' },
-                { title: 'My 예매 내역', icon: 'mdi-book' },
+                { title: 'My 예매내역', icon: 'mdi-book', route:'/myPage/ticket'},
                 { title: 'My QnA', icon: 'mdi-chat-question', route:'/myPage/qna'},
                 { title: 'My 후기', icon: 'mdi-pencil', route:'/myPage/review' },
                 { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
@@ -156,13 +160,12 @@ export default {
     position: relative;
     margin-bottom:5%;
     height: 205px;
-    width:101%;
     background: #d6edff;
 }
 .status{
     font-size:23pt;
 }
-.main {
+.main1 {
     position: inherit;
     left: 65%;
     transform: translate(-60%);

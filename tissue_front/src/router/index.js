@@ -276,6 +276,12 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/myPage/ticket',
+        name: 'MyPageTicket',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/search/:keyword',
         name: 'SearchPage',
         components: {

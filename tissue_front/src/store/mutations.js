@@ -35,6 +35,7 @@ import {
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
+    FETCH_MY_TICKET,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -130,6 +131,9 @@ export default{
     },
     [FETCH_MY_QNA](state, myQna) {
         state.myQna = myQna
+    },
+    [FETCH_MY_TICKET](state, myTicket) {
+        state.myTicket = myTicket
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {

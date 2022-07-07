@@ -34,7 +34,8 @@ export default {
     likeList: [],
     myLike: [],
     myQna: [],
-    myReview:[],
+    myReview: [],
+    myTicket:[],
     // 유아림
 
 

@@ -34,6 +34,7 @@ import {
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
+    FETCH_MY_TICKET,
 
     // event
     FETCH_EVENT_LIST,
@@ -240,6 +241,13 @@ export default {
                 console.log(res.data)
                 commit(FETCH_MY_REVIEW, res.data)
             }))
+    },
+    fetchMyTicket({ commit }, memberNo) {
+        return axios.get(`Member/myTicket/${memberNo}`)
+            .then((res) => {
+                console.log(res.data)
+                commit(FETCH_MY_TICKET, res.data)
+        })
     },
     fetchExpectList({ commit }, eventNo) {
         return axios.get(`http://localhost:7777/expectation/read/${eventNo}`)
