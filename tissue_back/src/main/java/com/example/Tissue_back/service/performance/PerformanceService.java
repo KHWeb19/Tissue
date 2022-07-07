@@ -19,4 +19,6 @@ public interface PerformanceService {
     public List<Performance> search(String keyword);
     public Event eventRead(Long performNo);
 
+    public List<Performance> mainList(String performcategory);
+
 }

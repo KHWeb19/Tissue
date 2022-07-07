@@ -207,4 +207,11 @@ public class PerformanceServiceImpl implements PerformanceService{
         return eventRepository.findEventWithPerformNo(performNo);
     }
 
+    @Override
+    public List<Performance> mainList (String performCategory) {
+        log.info("main fetch New List" + performCategory);
+        return performanceRepository.findTop6ByPerformCategoryOrderByPerformNoDesc(performCategory);
+
+    }
+
 }

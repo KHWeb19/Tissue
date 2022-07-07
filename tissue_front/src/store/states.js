@@ -34,7 +34,12 @@ export default {
     likeList: [],
     myLike: [],
     myQna: [],
-    myReview:[],
+    myReview: [],
+    myTicket: [],
+    newConcert: [],
+    newMusical: [],
+    newTheater: [],
+    newExhibition:[],
     // 유아림
 
 
