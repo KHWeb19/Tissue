@@ -5,15 +5,19 @@ import com.example.Tissue_back.entity.coupon.Coupon;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.entity.ticketing.TicketingSeat;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
 import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.ticketing.TicketingRepository;
+import com.example.Tissue_back.repository.ticketing.TicketingSeatRepository;
 import com.example.Tissue_back.service.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +26,9 @@ public class TicketingServiceImpl implements TicketingService{
 
     @Autowired
     private TicketingRepository ticketingRepository;
+
+    @Autowired
+    private TicketingSeatRepository ticketingSeatRepository;
 
     @Autowired
     private PerformanceRepository performanceRepository;
@@ -39,6 +46,7 @@ public class TicketingServiceImpl implements TicketingService{
     public void register(TicketingDto ticketingDto) {
         String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
+
         Ticketing ticketing = new Ticketing();
 
         ticketingDto.setMemberId(memberId);
@@ -51,33 +59,63 @@ public class TicketingServiceImpl implements TicketingService{
         ticketing.setSeatNameArr(ticketingDto.getSeatNameArr());
 
         ticketingRepository.save(ticketing);
+    }
 
+    @Override
+    public void registerTicketingSeats(TicketingDto ticketingDto) {
+        TicketingSeat ticketingSeat = new TicketingSeat();
+        String [] seatNameArr = ticketingDto.getSeatNameArr();
+        Optional<Ticketing> findTicketing = ticketingRepository.findBySeat(seatNameArr);
+
+
+
+        log.info("seatInfoGet");
+        log.info(String.valueOf(ticketingDto.getSeatNameArr().length));
+        log.info(ticketingDto.getSeatNameArr()[0]);
+        log.info(ticketingDto.getSeatNameArr()[1]);
+        log.info(ticketingDto.getSeatNameArr()[2]);
+
+        for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++){
+            ticketingSeat.setSeatName(ticketingDto.getSeatNameArr()[i]);
+            ticketingSeat.setTicketing(findTicketing.get());
+            ticketingSeatRepository.save(ticketingSeat);
+            ticketingSeat.setTicketingSeatNo(null);
+        }
+    }
+
+    @Override
+    public List<Ticketing> ticketingList(Long performNo) {
+
+
+        return null;
+    }
+
+    @Override
+    public void useMileage(TicketingDto ticketingDto) {
         //사용마일리지 차감
-        if(ticketingDto.getUsedMileage() != 0){
-            memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
-        }
+        String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
+        memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+    }
 
+    @Override
+    public void useCoupon(TicketingDto ticketingDto) {
         //사용 쿠폰 삭제 / 내역 저장
-        if(ticketingDto.getPerformNo() != null){
-            Optional<Member> findMember = memberRepository.findByMemberId(memberId);
 
-            Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
+        String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
-            Coupon coupon = whatCoupon.get();
-            Member member = findMember.get();
+        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
 
-            log.info("----"+member.getCoupons());
+        Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
 
-            member.getCoupons().remove(coupon);
-            member.getUsed_coupons().add(coupon);
+        Coupon coupon = whatCoupon.get();
+        Member member = findMember.get();
 
-            memberRepository.save(member);
-        }
+        log.info("----"+member.getCoupons());
 
+        member.getCoupons().remove(coupon);
+        member.getUsed_coupons().add(coupon);
 
-
-
-
+        memberRepository.save(member);
     }
 }
