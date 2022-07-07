@@ -53,23 +53,31 @@ public class TicketingServiceImpl implements TicketingService{
         ticketingRepository.save(ticketing);
 
         //사용마일리지 차감
-        memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+        if(ticketingDto.getUsedMileage() != 0){
+            memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+        }
 
 
-        //사용 쿠폰 사용여부 변경 로직 작성필요
-        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+        //사용 쿠폰 삭제 / 내역 저장
+        if(ticketingDto.getPerformNo() != null){
+            Optional<Member> findMember = memberRepository.findByMemberId(memberId);
 
-        Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
+            Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
 
-        Coupon coupon = whatCoupon.get();
-        Member member = findMember.get();
+            Coupon coupon = whatCoupon.get();
+            Member member = findMember.get();
 
-        log.info("----"+member.getCoupons());
+            log.info("----"+member.getCoupons());
 
-        member.getCoupons().remove(coupon);
-        member.getUsed_coupons().add(coupon);
+            member.getCoupons().remove(coupon);
+            member.getUsed_coupons().add(coupon);
 
-        memberRepository.save(member);
+            memberRepository.save(member);
+        }
+
+
+
+
 
     }
 }
