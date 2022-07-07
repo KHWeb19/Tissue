@@ -36,6 +36,11 @@ import {
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
     FETCH_MY_TICKET,
+
+    FETCH_NEW_CONCERT,
+    FETCH_NEW_MUSICAL,
+    FETCH_NEW_THEATER,
+    FETCH_NEW_EXHIBITION,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -134,6 +139,18 @@ export default{
     },
     [FETCH_MY_TICKET](state, myTicket) {
         state.myTicket = myTicket
+    },
+    [FETCH_NEW_CONCERT](state, newConcert) {
+        state.newConcert = newConcert
+    },
+    [FETCH_NEW_MUSICAL](state, newMusical) {
+        state.newMusical = newMusical
+    },
+    [FETCH_NEW_THEATER](state, newTheater) {
+        state.newTheater = newTheater
+    },
+    [FETCH_NEW_EXHIBITION](state, newExhibition) {
+        state.newExhibition = newExhibition
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {

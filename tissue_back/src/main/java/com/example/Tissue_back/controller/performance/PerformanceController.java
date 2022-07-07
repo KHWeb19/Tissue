@@ -151,7 +151,15 @@ public class PerformanceController {
         return performanceService.search(keyword);
     }
 
-    //임지훈 (상세페이지 이벤트)
+    // 최신 6개 가져오기 (유아림)
+    @GetMapping("/new/{performCategory}")
+    public List<Performance> mainNew (@PathVariable("performCategory")String performCategory) {
+        log.info ("== New 6 concert ==");
+
+        return performanceService.mainList(performCategory);
+    }
+
+   //임지훈 (상세페이지 이벤트)
     @GetMapping("/event/{performNo}")
     public Event eventRead(@PathVariable("performNo")Long performNo){
         log.info("eventRead()" + performNo);
