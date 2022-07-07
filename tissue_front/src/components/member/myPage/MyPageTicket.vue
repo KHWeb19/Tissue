@@ -8,8 +8,12 @@
             :items="myTicket"
             item-key="ticketing_no"
             :expanded.sync="expanded"
+            :single-expand="singleExpand"
             hide-default-footer
             show-expand
+            :items-per-page="7"
+            :page.sync="page"
+            @page-count="pageCount = $event"
         >
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
@@ -94,6 +98,14 @@
                 </td>
             </template>
         </v-data-table>
+        <v-pagination
+            class="mt-10"
+            v-model="page"
+            :length="pageCount"
+            total-visible="5"
+            color="pink lighten-3"
+            circle>
+        </v-pagination>
     </v-container>
 </template>
 
@@ -115,6 +127,9 @@ export default {
                 {text:'', value:'data-table-expand' ,width:'50'}
             ],
             expanded: [],
+            singleExpand: true,
+            page: 1,
+            pageCount: 0,
         }
     },
     computed: {
@@ -126,7 +141,7 @@ export default {
     methods: {
         ...mapActions(['fetchMyTicket']),
         cancleTicket() {
-            
+
         }
     }
 }
