@@ -236,7 +236,7 @@ export default {
             reviewRating: '',
             reviewNo:null,
             headers: [
-                {text:'썸네일', value:'performThumbnail'},
+                {text:'썸네일', value:'performThumbnail' ,width:'10'},
                 {text:'공연명', value:'performName', width:'170'},
                 {text:'후기', value:'reviewContent', width:'250'},
                 {text:'평점', value:'reviewRating',width:'100'},

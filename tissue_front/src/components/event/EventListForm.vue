@@ -19,13 +19,6 @@
                     :items-per-page="itemsPerPage"
                     @page-count="pageCount = $event"
                     >
-                     <!-- <template v-slot:[`item.noticeNecessary`]="{ item }">
-                      <v-icon style="color: skyblue"
-                        v-if="item.noticeNecessary === '필독'"
-                      >
-                        mdi-check-circle
-                      </v-icon>
-                  </template> -->
                     <template v-slot:[`item.eventTitle`]="{ item }">
                         <router-link style="color: black" :to="{ name: 'EventReadPage',
                                                 params: { eventNo: item.eventNo } }">

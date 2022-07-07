@@ -3,14 +3,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <div
-            style="
-              text-align: center;
-              font-size: 30px;
-              font-weight: lighter;
-              margin: 30px;
-            "
-          >
+          <div style="text-align: center; font-size: 30px; font-weight: lighter; margin: 30px;">
             <b style="font-size: 45px; font-weight: bold">E</b> V E N T &nbsp;
             <b style="font-size: 45px; font-weight: bold">Z</b> O N E
           </div>
@@ -19,12 +12,7 @@
       </v-row>
 
       <v-row class="mt-5 mb-5">
-        <v-col
-          v-for="event in paginatedData"
-          :key="event.eventNo"
-          lg="4"
-          sm="6"
-        >
+        <v-col v-for="event in paginatedData" :key="event.eventNo" lg="4" sm="6">
           <div width="500" height="450">
             <div class="imgWrap">
               <div class="pt-10">
@@ -39,24 +27,21 @@
                 </div>
             </div>
 
-              <v-card-title
-                class="eventCategory mt-3 blue--text text--lighten-3"
-                style="font-weight: lighter"
-              >
+              <v-card-title class="eventCategory mt-3 blue--text text--lighten-3">
                 {{ event.eventCategory }}
               </v-card-title>
               <v-card-subtitle class="eventTitle mt-5">
                 {{ event.eventTitle }}
               </v-card-subtitle>
 
-              <v-card-text class="pb-3 pt-3 subContent">
+              <v-card-text class="pb-5 pt-4 subContent">
                 <b class="subTitle"></b> 이벤트 기간: {{ event.eventStart }} ~
                 {{ event.eventEnd }}
               </v-card-text>
             </div>
             <div v-for="dday in fetchDdayCount" :key="dday.eventNo">
               <div v-if="event.eventNo == dday.eventNo">
-                <v-progress-linear :value="dday.result"></v-progress-linear>
+                <v-progress-linear :value="dday.result" ></v-progress-linear>
                 <h2 class="ddayTxt">{{ dday.result }}일 남음</h2>
               </div>
             </div>
@@ -66,25 +51,12 @@
       <v-row>
         <v-col>
           <div class="btn-cover">
-            <v-btn
-              rounded
-              :disabled="pageNum === 0"
-              @click="prevPage"
-              class="page-btn"
-              color="blue lighten-3"
-            >
+            <v-btn rounded :disabled="pageNum === 0" @click="prevPage" class="page-btn" color="blue lighten-3">
               이전
             </v-btn>
-            <span class="page-count"
-              >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
+            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
             >
-            <v-btn
-              rounded
-              :disabled="pageNum >= pageCount - 1"
-              @click="nextPage"
-              class="page-btn"
-              color="blue lighten-3"
-            >
+            <v-btn rounded :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn" color="blue lighten-3">
               다음
             </v-btn>
           </div>
@@ -223,7 +195,7 @@ export default {
 .imgText {
   font-size: 20px;
   padding: 5px 10px;
-	background-color: #BCAAA4;
+	background-color: #F8BBD0;
 	text-align: center;
 	top: 85%;
 	/* left: 50%; */
@@ -231,7 +203,7 @@ export default {
 .reviewImgText {
   font-size: 20px;
   padding: 5px 10px;
-  background-color: #b0bec5;
+  background-color: #BBDEFB;
   text-align: center;
   top: 85%;
   /* left: 50%; */

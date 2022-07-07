@@ -8,8 +8,13 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util. *;
 
+import java.util.List;
+
 public interface TicketingRepository extends JpaRepository<Ticketing, Long> {
 
     @Query("select t from Ticketing t where t.seatNameArr = :seatNameArr")
     Optional<Ticketing> findBySeat(@Param("seatNameArr") String [] seatNameArr);
+
+    List<Ticketing> findByMemberId (String memberId);
+
 }

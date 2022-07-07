@@ -238,7 +238,7 @@
                     <v-btn
                     width="150"
                     height="50"
-                    @click="registerReview(performance.performNo)"
+                    @click="[registerReview(performance.performNo), addMileage()]"
                     color="blue lighten-3"
                     class="white--text mr-3"
                     style="font-size: 15px"
@@ -316,7 +316,7 @@
 
 <script>
 import axios from "axios";
-
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: "PerformanceReview",
@@ -377,10 +377,14 @@ export default {
   },
 
   created() {
-    this.performNo = this.performance.performNo;
+    let token = localStorage.getItem('token')
+
+    this.performNo = this.performance.performNo
+    this.fetchMemberInfo(token)
   },
 
   computed: {
+    ...mapState(['memberInfo']),
     pageCount() {
       let listLeng = this.reviewList.length,
         listSize = this.pageSize,
@@ -397,6 +401,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['fetchMemberInfo']),
     registerReview(performNo) {
       let token = localStorage.getItem("token");
 
@@ -420,12 +425,20 @@ export default {
         alert("로그인이 필요합니다.");
       }
     },
-
     nextPage() {
       this.pageNum += 1;
     },
     prevPage() {
       this.pageNum -= 1;
+    },
+    addMileage () {
+      const memberMileage = this.memberInfo.memberMileage + 3000
+
+      axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
+          .then(() => {
+            console.log('마일리지 적립', memberMileage)
+            alert('후기 적립금 3,000원이 적립되었습니다!')
+          })
     },
   },
 };

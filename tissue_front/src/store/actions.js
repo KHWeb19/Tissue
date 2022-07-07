@@ -35,6 +35,12 @@ import {
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
+    FETCH_MY_TICKET,
+
+    FETCH_NEW_CONCERT,
+    FETCH_NEW_MUSICAL,
+    FETCH_NEW_THEATER,
+    FETCH_NEW_EXHIBITION,
 
     // event
     FETCH_EVENT_LIST,
@@ -246,6 +252,37 @@ export default {
             .then((res => {
                 console.log(res.data)
                 commit(FETCH_MY_REVIEW, res.data)
+            }))
+    },
+    fetchMyTicket({ commit }, memberNo) {
+        return axios.get(`Member/myTicket/${memberNo}`)
+            .then((res) => {
+                console.log(res.data)
+                commit(FETCH_MY_TICKET, res.data)
+        })
+    },
+    fetchNewConcert({ commit }, performCategory) {
+        return axios.get(`performance/new/${performCategory}`)
+            .then((res => {
+                commit(FETCH_NEW_CONCERT, res.data)
+        }))
+    },
+    fetchNewMusical({ commit }, performCategory) {
+        return axios.get(`performance/new/${performCategory}`)
+            .then((res => {
+                commit(FETCH_NEW_MUSICAL, res.data)
+            }))
+    },
+    fetchNewTheater({ commit }, performCategory) {
+        return axios.get(`performance/new/${performCategory}`)
+            .then((res => {
+                commit(FETCH_NEW_THEATER, res.data)
+            }))
+    },
+    fetchNewExhibition({ commit }, performCategory) {
+        return axios.get(`performance/new/${performCategory}`)
+            .then((res => {
+                commit(FETCH_NEW_EXHIBITION, res.data)
             }))
     },
     fetchExpectList({ commit }, eventNo) {

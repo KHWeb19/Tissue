@@ -1,9 +1,10 @@
 <template>
     <div align="center">
+        <area-banner/>
         <v-container>
-            <h1>지역별 공연</h1>
+            <span class="aTitle">지역별 공연</span>
 
-            <v-tabs class="areaBox mt-5" fixed-tabs background-color="transparent" dark height="80px">
+            <v-tabs class="areaBox mt-10" fixed-tabs background-color="transparent" dark height="80px">
                 <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
                 <v-tab v-for="tab in tabs" :key="tab.name" @click=tab.value class="black--text">
                     {{ tab.name }}
@@ -31,12 +32,12 @@
                 <v-card-actions v-if="detailSearch">
                     <v-container class="pt-0" fluid>
                         <div class="categoryBox" >
-                            <div >
-                                <v-row justify="center" class="categoryList" >
-                                    <v-checkbox class="mr-5"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
-                                    <v-checkbox class="mr-5" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
-                                    <v-checkbox class="mr-5" v-model="checked" value="연극" label="연극"></v-checkbox>
-                                    <v-checkbox v-model="checked" value="전시회" label="전시회"></v-checkbox>    
+                            <div class="category-select">
+                                <v-row justify="center" class="categoryList">
+                                    <v-checkbox class="checkBox"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="연극" label="연극"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="전시회" label="전시회"></v-checkbox>
                                 </v-row>
                             </div>
                         </div>
@@ -52,22 +53,29 @@
 
             <v-row>
                 <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
-                        <v-card class="mx-auto" max-width="216" height="450" flat>
+                        <v-card class="mx-auto" max-width="216" flat>
                             <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                            <v-card-title class="performTitle mb-1">
+                            <div class="performTitle mt-5">
+
                                 {{ perform.performName }}
-                            </v-card-title>
+                            </div>
+
                             <v-card-subtitle class="performSub pb-0">
                                 {{ perform.performStart }} ~
-                                {{ perform.performEnd }}</v-card-subtitle>
+                                {{ perform.performEnd }}</v-card-subtitle
+                            >
+                            <v-card-subtitle class="performSub pt-0">
+                                {{ perform.performArea }}</v-card-subtitle
+                            >
                             <div v-for="map in mapList" :key="map.mapNo">
                                 <div v-if="perform.performNo == map.performNo">
                                     <v-card-subtitle  class="performSub pt-0">
                                         {{ map.name }}
                                     </v-card-subtitle>
-                                </div>
+                            </div>
                             </div>
                         </v-card>
+                    </router-link>
                 </v-col>
             </v-row>
         </v-container>
@@ -75,7 +83,9 @@
 </template>
 
 <script>
+import AreaBanner from './AreaBanner.vue'
 export default {
+  components: { AreaBanner },
     name: 'AreaMainForm',
     props: {
         performances: {
@@ -112,7 +122,9 @@ export default {
             this.copyPerformList = [...this.originalPerformList]
         },
         fetchSeoul() {
-              this.copyPerformList = this.copyPerformList.filter(e => {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performArea.match('서울')
                 })
         },
@@ -206,17 +218,24 @@ font-size: 20px;
 } */
 .performTitle {
   font-size: 18px;
+  text-align: center;
   justify-content: center;
   color: black;
+  
 }
-card-subtitle {
-  font-weight: 100;
-  font-size: 15px;
+.performSub {
+  font-size: 13px;
   text-align: center;
-  color: #BDBDBD
+  font-family: 'Nanum Gothic', sans-serif !important;
+}
+.performSub {
+  font-family: 'Nanum Gothic', sans-serif !important;
+  font-size: 13px;
+  text-align: center;
 }
 .countBox {
-  margin: 50px;
+  margin-top:80px;
+  margin-bottom:80px;
   text-align: center;
   font-size: 20px;
 }
@@ -228,6 +247,13 @@ card-subtitle {
     margin-bottom: 30px;
     padding : 50px 0;
 }
+.category-select{
+    /* font-family: 'Nanum Gothic', sans-serif !important; */
+    font-size:30pt;
+}
+.checkBox {
+    margin-right: 80px;
+}
 .detailSearchBox{
     background-color: rgb(241, 241, 241) ;
 }
@@ -235,5 +261,8 @@ card-subtitle {
     margin-left: 5px;
     font-size: 15px;
     font-weight: 100;
+}
+.aTitle {
+    font-size:30pt;
 }
 </style>

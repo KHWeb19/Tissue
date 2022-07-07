@@ -10,11 +10,11 @@
         :cycle="true"
         :interval="3000"
       >
-        <v-carousel-item v-for="(image, i) in images" :key="i" :src="image.src">
+        <v-carousel-item v-for="(image, i) in images" :key="i" >
+            <img width="100%" :src="require(`@/assets/main/${image.name}`)">
         </v-carousel-item>
       </v-carousel>
     </div>
-
     <div class="side_bar">
         <router-link :to="{ name : 'EventMainPage' }" >
       <v-img
@@ -25,102 +25,186 @@
       />
         </router-link>
     </div>
-
-    <v-container>
       <v-row>
-        <v-col>
-          <div>
+          <v-col>
             <div class="content_title">
               <div
                 class="content_title_deco"
-                style="border-bottom: 5px solid red"
-              ></div>
-              TICKET OPEN
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid red"
-              ></div>
-            </div>
-            <div class="content_thumbnail">이미지</div>
-          </div>
-          <div>
-            <div class="content_title">
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid orange"
+                style="border-bottom: 5px solid #F48FB1"
               ></div>
               R A N K
               <div
                 class="content_title_deco"
-                style="border-bottom: 5px solid orange"
+                style="border-bottom: 5px solid #F48FB1"
               ></div>
             </div>
             <div class="content_thumbnail">이미지</div>
-          </div>
-          <div>
-            <div class="content_title">
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid yellowgreen"
-              ></div>
-              CONCERT
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid yellowgreen"
-              ></div>
-            </div>
-            <div class="content_thumbnail">이미지</div>
-          </div>
-          <div>
-            <div class="content_title">
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid lightskyblue"
-              ></div>
-              MUSICAL
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid lightskyblue"
-              ></div>
-            </div>
-            <div class="content_thumbnail">이미지</div>
-          </div>
-          <div>
-            <div class="content_title">
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid blue"
-              ></div>
-              THEATER
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid blue"
-              ></div>
-            </div>
-            <div class="content_thumbnail">이미지</div>
-          </div>
-          <div>
-            <div class="content_title">
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid plum"
-              ></div>
-              EXHIBITION
-              <div
-                class="content_title_deco"
-                style="border-bottom: 5px solid plum"
-              ></div>
-            </div>
-            <div class="content_thumbnail">이미지</div>
-          </div>
         </v-col>
+        </v-row>
+        <v-divider class="mt-13 mb-15"/>
+        <v-row justify="center">
+            <v-col class="ml-10 mr-10">
+                <div class="content_title">
+                    <div class="content_title_deco" style="border-bottom: 5px solid #90CAF9"></div>
+                        CONCERT
+                    <div class="content_title_deco" style="border-bottom: 5px solid #90CAF9"></div>
+                </div>
+                <div class="content_thumbnail">
+                    <v-row justify="center">
+                        <v-col v-for="perform in newConcert" :key="perform.title" cols="2">
+                            <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: perform.performNo.toString() },
+                                }"
+                            >
+                                <v-card class=" card mx-auto" max-width="216" flat>
+                                    <v-img
+                                    class="mb-8 hoverImg"
+                                        :src="
+                                        require(`@/assets/thumbNail/${perform.performThumbnail}`)
+                                        "
+                                        height="300px"
+                                    ></v-img>
+                                    <div class="performTitle">
+                                        {{ perform.performName }}
+                                    </div>
+                                </v-card>
+                            </router-link>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-col>
+        </v-row>
+        <v-divider class="mt-13 mb-15"/>
+        <v-row>
+            <v-col>
+                <div class="content_title">
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #F48FB1"
+                    ></div>
+                    MUSICAL
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #F48FB1"
+                    ></div>
+                </div>
+                <div class="content_thumbnail">
+                    <v-row justify="center">
+                        <v-col v-for="perform in newMusical" :key="perform.title" cols="2">
+                            <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: perform.performNo.toString() },
+                                }"
+                            >
+                                <v-card class="card mx-auto" max-width="216" flat>
+                                    <v-img
+                                    class="mb-8 hoverImg"
+                                        :src="
+                                        require(`@/assets/thumbNail/${perform.performThumbnail}`)
+                                        "
+                                        height="300px"
+                                    ></v-img>
+                                    <div class="performTitle2">
+                                        {{ perform.performName }}
+                                    </div>
+                                </v-card>
+                            </router-link>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-col>
+        </v-row>
+        <v-divider class="mt-13 mb-15"/>
+        <v-row>
+            <v-col>
+                <div class="content_title">
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #90CAF9"
+                    ></div>
+                    THEATER
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #90CAF9"
+                    ></div>
+                </div>
+                <div class="content_thumbnail">
+                    <v-row justify="center">
+                        <v-col v-for="perform in newTheater" :key="perform.title" cols="2">
+                            <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: perform.performNo.toString() },
+                                }"
+                            >
+                                <v-card class="card mx-auto" max-width="216" flat>
+                                    <v-img
+                                    class="mb-8 hoverImg"
+                                        :src="
+                                        require(`@/assets/thumbNail/${perform.performThumbnail}`)
+                                        "
+                                        height="300px"
+                                    ></v-img>
+                                    <div class="performTitle">
+                                        {{ perform.performName }}
+                                    </div>
+                                </v-card>
+                            </router-link>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-col>
+        </v-row>
+        <v-divider class="mt-13 mb-15"/>
+        <v-row>
+            <v-col>
+                <div class="content_title">
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #F48FB1"
+                    ></div>
+                    EXHIBITION
+                    <div
+                        class="content_title_deco"
+                        style="border-bottom: 5px solid #F48FB1"
+                    ></div>
+                </div>
+            <div class="content_thumbnail">
+                <v-row justify="center" class="mb-10">
+                        <v-col v-for="perform in newExhibition" :key="perform.title" cols="2">
+                            <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: perform.performNo.toString() },
+                                }"
+                            >
+                                <v-card class=" card mx-auto" max-width="216" flat>
+                                    <v-img
+                                    class="mb-8 hoverImg"
+                                        :src="
+                                        require(`@/assets/thumbNail/${perform.performThumbnail}`)
+                                        "
+                                        height="300px"
+                                    ></v-img>
+                                    <div class="performTitle2">
+                                        {{ perform.performName }}
+                                    </div>
+                                </v-card>
+                            </router-link>
+                        </v-col>
+                    </v-row>
+            </div>
+          </v-col>
       </v-row>
-    </v-container>
   </div>
 </template>
 
 <script>
 import NewNavBar from "@/components/Layout/NewNavBar.vue";
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: "HomeView",
@@ -130,23 +214,33 @@ export default {
 
   data() {
     return {
+      ...mapActions(['fetchConcertList','fetchMusicalList','fetchTheaterList','fetchExhibitionList']),
       // 이미지 크기는 1920 * 720 권장
       images: [
-        {
-          src: "http://tkfile.yes24.com/Upload2/Display/202205/20220509/wel_mv_42155.jpg/dims/quality/70/",
-        },
-        {
-          src: "http://tkfile.yes24.com/Upload2/Display/202203/20220304/wel_mv_41497.jpg/dims/quality/70/",
-        },
-        {
-          src: "http://tkfile.yes24.com/Upload2/Display/202205/20220510/wel_mv_42123_2.jpg/dims/quality/70/",
-        },
-        {
-          src: "http://tkfile.yes24.com/Upload2/Display/202204/20220406/wel_mv_NTN_82569c.jpg/dims/quality/70/",
-        },
+        { name: "main1.jpg" },
+        { name: "main2.jpg" },
+        { name: "main3.jpg" },
+        { name: "main4.jpg" },
+        { name: "main5.jpg" },
       ],
+      concertCnt: 0,
+      musicalCnt: 0,
+      theaterCnt: 0,
+      exhibitionCnt: 0
     };
   },
+  computed: {
+      ...mapState(['newConcert', 'newMusical', 'newTheater', 'newExhibition'])
+  },
+  mounted () {
+      this.fetchNewConcert('콘서트')
+      this.fetchNewMusical('뮤지컬')
+      this.fetchNewTheater('연극')
+      this.fetchNewExhibition('전시회')
+  },
+  methods: {
+      ...mapActions(['fetchNewConcert', 'fetchNewMusical', 'fetchNewTheater', 'fetchNewExhibition'])
+  }
 };
 </script>
 
@@ -176,9 +270,10 @@ export default {
   font-weight: bold;
   display: flex;
   justify-content: center;
+  font-family: 'Pacifico', cursive;
 }
 .content_thumbnail {
-  height: 200px;
+  margin-top:65px;
   text-align: center;
 }
 .content_title_deco {
@@ -186,5 +281,40 @@ export default {
   height: 55px;
   margin-right: 5px;
   margin-left: 5px;
+}
+/* .perform-img-wrap{
+    text-align:center;
+    display:table;
+    width:280px;
+    height:250px;
+} */
+.img-div {
+  display:table-cell;
+  vertical-align:middle;
+}
+.perform-img {
+  max-width:200px;
+  max-height:200px;
+}
+.peformName{
+  font-size: 18px;
+  line-height: 21px;
+}
+.card{
+    font-family: 'Nanum Gothic', sans-serif !important;
+}
+.card:hover  .hoverImg {
+  transform: scale(1.1);
+  transition: 0.3s;
+  cursor: pointer;
+  
+}
+.card:hover  .performTitle {
+    font-weight: bold;
+    color: #F48FB1;
+}
+.card:hover  .performTitle2 {
+    font-weight: bold;
+    color: #90CAF9;
 }
 </style>
