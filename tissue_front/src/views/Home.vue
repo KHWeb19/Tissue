@@ -16,14 +16,14 @@
       </v-carousel>
     </div>
     <div class="side_bar">
-        <router-link :to="{ name : 'EventMainPage' }" >
-      <v-img
-        :src="require('@/assets/event.png')"
-        max-width="150px"
-        max-height="150px"
-        style="zoom:0.85"
-      />
-        </router-link>
+      <router-link :to="{ name: 'EventMainPage' }">
+        <v-img
+          :src="require('@/assets/event.png')"
+          max-width="150px"
+          max-height="150px"
+          style="zoom: 0.85"
+        />
+      </router-link>
     </div>
       <v-row>
           <v-col>
@@ -257,12 +257,11 @@ export default {
   height: 150px;
   text-align: center;
   bottom: 10px;
-  top: 500px;
+  top: 700px;
   background-color: transparent;
   z-index: 2;
   border-radius: 80px;
-  margin-top:25px;
-
+  margin-top: 25px;
 }
 .content_title {
   font-size: 50px;

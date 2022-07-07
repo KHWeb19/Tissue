@@ -131,7 +131,6 @@ export default {
     },
     ticketingList: {
       type: Array,
-      required: true,
     },
   },
   data() {
@@ -167,7 +166,15 @@ export default {
   },
 
   created() {
-    this.ticketingListCopy = [...this.ticketingList];
+    console.log("3홀폼");
+    console.log(this.$store.state.ticketingList);
+    this.ticketingListCopy = [];
+
+    if (this.ticketingList.length == 0) {
+      this.ticketingListCopy = [{ ticketing: 0 }];
+    } else {
+      this.ticketingListCopy = this.ticketingList;
+    }
 
     this.dataTable = new Array(this.hall.rowCnt);
 
