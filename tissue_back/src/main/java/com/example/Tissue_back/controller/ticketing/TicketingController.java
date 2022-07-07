@@ -3,6 +3,7 @@ package com.example.Tissue_back.controller.ticketing;
 
 import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.entity.ticketing.TicketingSeat;
 import com.example.Tissue_back.service.ticketing.TicketingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class TicketingController {
     }
 
     @GetMapping("/{performNo}")
-    public List<Ticketing> ticketingList(@PathVariable("performNo")Long performNo){
+    public List<TicketingSeat> ticketingList(@PathVariable("performNo")Long performNo){
         log.info("ticketingList()" + performNo);
 
         return ticketingService.ticketingList(performNo);

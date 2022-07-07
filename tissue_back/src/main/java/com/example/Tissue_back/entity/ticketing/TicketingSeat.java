@@ -18,6 +18,9 @@ public class TicketingSeat {
     @Column
     private String seatName ;
 
+    @Column
+    private Long performNo;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "ticketing_ticketingNo")

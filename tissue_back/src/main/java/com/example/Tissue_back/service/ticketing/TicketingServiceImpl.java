@@ -68,26 +68,19 @@ public class TicketingServiceImpl implements TicketingService{
         Optional<Ticketing> findTicketing = ticketingRepository.findBySeat(seatNameArr);
 
 
-
-        log.info("seatInfoGet");
-        log.info(String.valueOf(ticketingDto.getSeatNameArr().length));
-        log.info(ticketingDto.getSeatNameArr()[0]);
-        log.info(ticketingDto.getSeatNameArr()[1]);
-        log.info(ticketingDto.getSeatNameArr()[2]);
-
         for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++){
             ticketingSeat.setSeatName(ticketingDto.getSeatNameArr()[i]);
             ticketingSeat.setTicketing(findTicketing.get());
+            ticketingSeat.setPerformNo(ticketingDto.getPerformNo());
             ticketingSeatRepository.save(ticketingSeat);
             ticketingSeat.setTicketingSeatNo(null);
         }
     }
 
     @Override
-    public List<Ticketing> ticketingList(Long performNo) {
+    public List<TicketingSeat> ticketingList(Long performNo) {
 
-
-        return null;
+        return ticketingSeatRepository.findByPerformNo(performNo);
     }
 
     @Override
