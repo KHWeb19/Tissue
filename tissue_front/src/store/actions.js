@@ -13,6 +13,8 @@ import {
     FETCH_MUSICAL_LIST,
     FETCH_THEATER_LIST,
     FETCH_EXHIBITION_LIST,
+    FETCH_PERFORMANCE_EVENT,
+    FETCH_REVIEW_LIST,
 
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -28,10 +30,16 @@ import {
     FETCH_MEMBER,
     FETCH_SEARCH_LIST,
     FETCH_NOTICE_SEARCH_LIST,
+    FETCH_PERFORMANCE_LIKE,
+    FETCH_MY_LIKE,
+    FETCH_MY_QNA,
+    FETCH_MY_REVIEW,
 
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 
@@ -91,6 +99,23 @@ export default {
                     commit(FETCH_EXHIBITION_LIST, res.data)
                 })
     },
+    fetchPerformanceEvent({ commit }, performNo) {
+        return axios.get(`http://localhost:7777/performance/event/${performNo}`)
+            .then((res) => {
+                if (res.data != '') {
+                    commit(FETCH_PERFORMANCE_EVENT, res.data)
+                } else {
+                    commit(FETCH_PERFORMANCE_EVENT, null)
+                }
+        })
+      },
+    fetchPerformanceReviewList({commit},performNo) {
+        return axios.get(`http://localhost:7777/review/list/${performNo}`)
+        .then((res)=>{
+            commit(FETCH_REVIEW_LIST, res.data)
+        })
+    },
+
    // peformance
     fetchPerformanceList({ commit }) {
         return axios.get('http://localhost:7777/performance/list')
@@ -189,7 +214,45 @@ export default {
             .then((res) => {
             commit(FETCH_NOTICE_SEARCH_LIST, res.data)
         })
-    }
+    },
+    fetchPerformanceLike({ commit }, performNo) {
+        return axios.get(`likes/${performNo}`)
+            .then((res) => {
+                commit(FETCH_PERFORMANCE_LIKE, res.data)
+        })
+    },
+    fetchMyLike({ commit }, memberNo) {
+        return axios.get(`likes/my/${memberNo}`)
+            .then((res) => {
+                console.log(res.data)
+            commit(FETCH_MY_LIKE, res.data)
+        })
+    },
+    fetchMyQna({ commit }, memberNo) {
+        return axios.get(`Member/myQna/${memberNo}`)
+            .then((res => {
+                commit(FETCH_MY_QNA, res.data)
+        }))
+    },
+    fetchMyReview({ commit }, memberNo) {
+        return axios.get(`Member/myReview/${memberNo}`)
+            .then((res => {
+                console.log(res.data)
+                commit(FETCH_MY_REVIEW, res.data)
+            }))
+    },
+    fetchExpectList({ commit }, eventNo) {
+        return axios.get(`http://localhost:7777/expectation/read/${eventNo}`)
+                .then(res => {
+                    commit(FETCH_EXPECT_LIST, res.data)
+                })
+    },
+    fetchExpect ({commit}, expectNo) {
+        return axios.get(`http://localhost:7777/expectation/read/only/${expectNo}`)
+                .then((res) => {
+                    commit(FETCH_EXPECT, res.data)
+                })
+    },
 
 }
 

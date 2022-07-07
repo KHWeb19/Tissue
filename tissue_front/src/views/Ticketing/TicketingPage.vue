@@ -1,6 +1,11 @@
 <template>
   <div>
-    <ticketing-form v-if="performance" :performance="performance" />
+    <ticketing-form
+      v-if="performance"
+      :performance="performance"
+      :coupons="memberInfo.coupons"
+      :memberInfo="memberInfo"
+    />
   </div>
 </template>
 
@@ -13,6 +18,11 @@ export default {
   components: {
     TicketingForm,
   },
+  data() {
+    return {
+      token: localStorage.getItem("token"),
+    };
+  },
   props: {
     performNo: {
       type: String,
@@ -20,10 +30,13 @@ export default {
     },
   },
   computed: {
-    ...mapState(["performance"]),
+    ...mapState(["performance", "memberInfo"]),
+  },
+  created() {
+    this.fetchMemberInfo(this.token);
   },
   methods: {
-    ...mapActions(["fetchPerformance"]),
+    ...mapActions(["fetchPerformance", "fetchMemberInfo"]),
   },
   mounted() {
     this.fetchPerformance(this.performNo)

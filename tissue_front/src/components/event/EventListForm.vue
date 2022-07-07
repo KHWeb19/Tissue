@@ -1,6 +1,11 @@
 <template>
     <div>
-        <v-container><br><br><br><br>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 이벤트 관리
+            </v-toolbar-title>
+        </v-app-bar>
+        <v-container style="padding:50px"><br><br><br><br>
             <h1 align="center">이벤트</h1>
                 <v-row class="btnReg"> 
                     <v-btn color="blue lighten-3" dark :to="{ name: 'EventRegisterPage' }">등록</v-btn>
@@ -14,13 +19,6 @@
                     :items-per-page="itemsPerPage"
                     @page-count="pageCount = $event"
                     >
-                     <!-- <template v-slot:[`item.noticeNecessary`]="{ item }">
-                      <v-icon style="color: skyblue"
-                        v-if="item.noticeNecessary === '필독'"
-                      >
-                        mdi-check-circle
-                      </v-icon>
-                  </template> -->
                     <template v-slot:[`item.eventTitle`]="{ item }">
                         <router-link style="color: black" :to="{ name: 'EventReadPage',
                                                 params: { eventNo: item.eventNo } }">

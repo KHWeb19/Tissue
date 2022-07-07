@@ -32,17 +32,18 @@
               params: { performNo: perform.performNo.toString() },
             }"
           >
-            <v-card class="mx-auto" max-width="216" height="410" flat>
+            <v-card class=" card mx-auto" max-width="216"  flat>
               <v-img
+              class="mb-5"
                 :src="
                   require(`../../assets/thumbNail/${perform.performThumbnail}`)
                 "
                 height="300px"
               ></v-img>
-
-              <v-card-title class="performTitle mb-1">
+            
+            <div class="performTitle">
                 {{ perform.performName }}
-              </v-card-title>
+            </div>
 
               <v-card-subtitle class="performSub pb-0">
                 {{ perform.performStart }} ~
@@ -114,12 +115,15 @@ export default {
   font-size: 20px;
 }
 .performTitle {
-  font-size: 30px;
+  font-size: 18px;
+  text-align: center;
   justify-content: center;
   color: black;
+  
 }
 .performSub {
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
+  font-family: 'Nanum Gothic', sans-serif !important;
 }
 </style>

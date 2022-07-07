@@ -12,6 +12,8 @@ import {
     FETCH_MUSICAL_LIST,
     FETCH_THEATER_LIST,
     FETCH_EXHIBITION_LIST,
+    FETCH_PERFORMANCE_EVENT,
+    FETCH_REVIEW_LIST,
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -24,14 +26,20 @@ import {
 
     FETCH_MEMBER_INFO,
     FETCH_MEMBER,
-    FETCH_MEMBER_ROLE
+    FETCH_MEMBER_ROLE,
 
     FETCH_SEARCH_LIST,
     FETCH_SEARCH_LIST2,
     FETCH_NOTICE_SEARCH_LIST,
+    FETCH_PERFORMANCE_LIKE,
+    FETCH_MY_LIKE,
+    FETCH_MY_QNA,
+    FETCH_MY_REVIEW,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
+    FETCH_EXPECT_LIST,
+    FETCH_EXPECT,
 
 
 } from './mutation-types'
@@ -61,6 +69,12 @@ export default{
     },
     [FETCH_EXHIBITION_LIST] (state, exhibitionList) {
         state.exhibitionList = exhibitionList
+    },
+    [FETCH_PERFORMANCE_EVENT] (state, performanceEvent) {
+        state.performanceEvent = performanceEvent
+    },
+    [FETCH_REVIEW_LIST] (state, reviewList) {
+        state.reviewList = reviewList
     },
     [FETCH_PERFORMANCE_LIST] (state, performances) {
         state.performances = performances
@@ -108,11 +122,29 @@ export default{
     [FETCH_NOTICE_SEARCH_LIST](state, noticeSearchList) {
         state.noticeSearchList = noticeSearchList
     },
+    [FETCH_PERFORMANCE_LIKE](state, likeList) {
+        state.likeList = likeList
+    },
+    [FETCH_MY_LIKE](state, myLike) {
+        state.myLike = myLike
+    },
+    [FETCH_MY_QNA](state, myQna) {
+        state.myQna = myQna
+    },
     // event
     [FETCH_EVENT_LIST] (state, events) {
         state.events = events
     },
     [FETCH_EVENT] (state, event) {
         state.event = event
+    },
+    [FETCH_MY_REVIEW](state, myReview) {
+        state.myReview = myReview
+    },
+    [FETCH_EXPECT_LIST] (state, expectList) {
+        state.expectList = expectList
+    },
+    [FETCH_EXPECT] (state, expect) {
+        state.expect = expect
     }
 }

@@ -3,8 +3,13 @@ package com.example.Tissue_back.service.member;
 import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
+import com.example.Tissue_back.controller.request.review.MyReviewDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.qna.Qna;
+import com.example.Tissue_back.entity.review.Review;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+import java.util.List;
 
 public interface MemberService {
 
@@ -17,5 +22,8 @@ public interface MemberService {
     public Boolean checkPw (LoginDto check);
     public void modify (MemberDto memberDto);
     public Boolean remove (Long memberNo, String checkPw);
+    public void addMileage(Member member);
+    public List<Qna> myQna (Long memberNo);
+    public List<MyReviewDto> myReview (Long memberNo);
 
 }

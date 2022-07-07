@@ -1,12 +1,22 @@
 package com.example.Tissue_back.entity.performance;
 
+
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
+
+import com.example.Tissue_back.entity.review.Review;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,8 +24,12 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+
+import java.util.*;
+
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @NoArgsConstructor
@@ -47,7 +61,6 @@ public class Performance {
     private int performPriceS;
     @Column(name="perform_price_vip")
     private int performPriceVip;
-
 
     private String performArea;
     private String performCategory;
@@ -90,10 +103,18 @@ public class Performance {
         this.performer = performanceDto.getPerformer();
     }
 
-
     //임지훈
     @Column
     private String hallName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate performShowDate;
+
+    @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Review> reviewList;
+
+
 
     // 유아림
     @EqualsAndHashCode.Exclude
@@ -102,5 +123,7 @@ public class Performance {
     @JsonIgnore
     @OneToMany(mappedBy = "performance", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    private Set<Likes> like = new HashSet<>();
+    private Set<Likes> performLike = new HashSet<>();
+
+
 }

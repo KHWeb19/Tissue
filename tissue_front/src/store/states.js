@@ -1,5 +1,10 @@
 export default {
 
+    halls: [],
+    hall: null,
+    couponList:[],
+    coupon: null,
+
     performances: [],
     performance: {},
 
@@ -7,6 +12,8 @@ export default {
     musicalList: [],
     theaterList: [],
     exhibitionList: [],
+    performanceEvent: null,
+    reviewList: [],
 
 
     notices: [],
@@ -24,10 +31,17 @@ export default {
     searchList: [],
     searchList2:[],
     noticeSearchList: [],
+    likeList: [],
+    myLike: [],
+    myQna: [],
+    myReview:[],
     // 유아림
 
 
     events: [],
-    event: {}
+    event: {},
+    
+    expectList: [],
+    expect: {}
 }
 

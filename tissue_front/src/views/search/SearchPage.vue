@@ -27,7 +27,7 @@
         </div>
     </v-container>
     <v-container class="footer" fluid>
-        <v-row justify="center" class="mb-5">
+        <v-row justify="center" class="mb-5"> 
             <span style="zoom:1.2">😥 &nbsp; </span> 
             <span class="mt-1"> 앗, 찾으시는 내용이 없으신가요? </span>
         </v-row>

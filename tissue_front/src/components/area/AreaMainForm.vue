@@ -1,133 +1,77 @@
 <template>
     <div align="center">
         <v-container>
-            <br><br><br><br>
             <h1>지역별 공연</h1>
 
-            <!-- <v-tabs class="tabs mt-5" 
-                v-bind:class="{active : tab === selectedTab}" 
-                @click="onClickTab(tab)" 
-                fixed-tabs background-color="blue lighten-3" dark>
-
-                <v-tab>전체</v-tab>
-                <v-tab>서울</v-tab>
-                <v-tab>경기/인천</v-tab>
-                <v-tab>대전/충청/강원</v-tab>
-                <v-tab>부산/대구/울산/경상</v-tab>
-                <v-tab>광주/전라</v-tab>
-                <v-tab>제주</v-tab>
-            </v-tabs> -->
-
-            <ul class="tabs">
-                <li v-for="tab in tabs" v-bind:class="{active : tab === selectedTab}" :key="tab.index" @click="onClickTab(tab)">
+            <v-tabs class="areaBox mt-5" fixed-tabs background-color="transparent" dark height="80px">
+                <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
+                <v-tab v-for="tab in tabs" :key="tab.name" @click=tab.value class="black--text">
                     {{ tab.name }}
-                </li>
-            </ul>
+                </v-tab>
+            </v-tabs>
 
-            <!-- <v-tabs class="tabs mt-5" v-bind:class="{active : tab === selectedTab}" :key="tab.index" @click="onClickTab(tab)"
-                fixed-tabs background-color="blue lighten-3" dark>
-            </v-tabs> -->
+            <br><br>
 
-            <br><br><br><br>
-            <p>상세검색 구역</p>
-            <br><br><br><br>
-            <h3>현재 예매 가능한 공연은 총  {{performances.length}} 개 입니다.</h3>
-            <br><br><br><br>
-
-            <div v-if="selectedTab === tabs[0]">
+            <v-card style="width: 100%" class="detailSearchBox" flat>
                 <v-row>
-                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
-                        <v-card class="mx-auto" max-width="216" height="410" flat>
-                        <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                        <v-card-title class="performTitle mb-1">
-                            {{ perform.performName }}
-                        </v-card-title>
-                        <v-card-subtitle class="performSub pb-0">
-                            {{ perform.performStart }} ~
-                            {{ perform.performEnd }}</v-card-subtitle>
-                        <div v-for="map in mapList" :key="map.mapNo">
-                            <div v-if="perform.performNo == map.performNo">
-                                <v-card-subtitle  class="performSub pt-0">
-                                    {{ map.name }}
-                                </v-card-subtitle>
+                    <v-card-title class="detailSearchTxt">
+                        상세검색
+                        <v-icon v-if="!detailSearch" @click="detailSearch = true">mdi-plus</v-icon>
+                        <v-icon v-else @click="detailSearch = false">mdi-minus</v-icon>
+                    </v-card-title>
+                    <v-spacer/>
+                    <v-card-title>
+                        <v-tabs color="blue lighten-3" background-color="transparent">
+                            <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
+                            <v-tab class="sortbtn black--text" @click="sortRecent">최신순</v-tab>
+                            <v-tab class="sortbtn black--text" @click="sortEnd">종료임박순</v-tab>
+                        </v-tabs>
+                    </v-card-title>
+                </v-row>
+                <v-card-actions v-if="detailSearch">
+                    <v-container class="pt-0" fluid>
+                        <div class="categoryBox" >
+                            <div class="category-select">
+                                <v-row justify="center" class="categoryList">
+                                    <v-checkbox class="checkBox"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="연극" label="연극"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="전시회" label="전시회"></v-checkbox>
+                                </v-row>
                             </div>
                         </div>
+                        <v-btn @click="applyFilter" class="mr-3" color="blue lighten-3">적용</v-btn>
+                        <v-btn @click="fetchAll" color="transparent">초기화</v-btn>
+                    </v-container>
+                </v-card-actions>
+            </v-card>
+
+            <div class="countBox">
+                 현재 예매가능한 공연은 <b style="color: skyblue">{{ copyPerformList.length }}개</b>입니다.
+            </div>
+
+            <v-row>
+                <v-col v-for="perform in this.copyPerformList" :key="perform.performNo" lg="3" sm="6">
+                    <router-link :to="{ name: 'PerformanceDetailPage', params: { performNo: perform.performNo} }">
+                        <v-card class="mx-auto" max-width="216" height="480" flat>
+                            <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
+                            <v-card-title class="performTitle mb-1" style="word-break: keep-all">
+                                {{ perform.performName }}
+                            </v-card-title>
+                            <v-card-subtitle class="performSub pb-0">
+                                {{ perform.performStart }} ~
+                                {{ perform.performEnd }}</v-card-subtitle>
+                            <div v-for="map in mapList" :key="map.mapNo">
+                                <div v-if="perform.performNo == map.performNo">
+                                    <v-card-subtitle  class="performSub pt-0">
+                                        {{ map.name }}
+                                    </v-card-subtitle>
+                                </div>
+                            </div>
                         </v-card>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-if="selectedTab === tabs[1]">
-                 <v-row>
-                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[1].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-             <div v-if="selectedTab === tabs[2]">
-                 <v-row>
-                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[2].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
-            <div v-if="selectedTab === tabs[3]">
-                 <v-row>
-                    <v-col v-for="perform in performances" :key="perform.performNo" lg="3" sm="6">
-                        <div v-if="tabs[3].name == perform.performArea">
-                            <v-card class="mx-auto" max-width="216" height="410" flat>
-                                <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
-                                <v-card-title class="performTitle mb-1">
-                                    {{ perform.performName }}
-                                </v-card-title>
-                                <v-card-subtitle class="performSub pb-0">
-                                    {{ perform.performStart }} ~
-                                    {{ perform.performEnd }}</v-card-subtitle>
-                                <div v-for="map in mapList" :key="map.mapNo">
-                                    <div v-if="perform.performNo == map.performNo">
-                                        <v-card-subtitle  class="performSub pt-0">
-                                            {{ map.name }}
-                                        </v-card-subtitle>
-                                    </div>
-                                </div>
-                            </v-card>
-                        </div>
-                    </v-col>
-                </v-row>
-            </div>
+                    </router-link>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
@@ -147,15 +91,109 @@ export default {
     },
     data() {
         return {
+            originalPerformList: [...this.performances],
+            copyPerformList: this.performances,
             selectedTab: '', 
-            tabs: [{name:'전체'}, {name:'서울'}, {name:'경기/인천'}, {name:'대전/충청/강원'}, 
-                {name:'부산/대구/울산/경상'}, {name:'광주/전라'}, {name:'제주'}], 
+            tabs: [
+                    {name:'전체', value: () => { this.fetchAll() }}, 
+                    {name:'서울', value: () => { this.fetchSeoul() }}, 
+                    {name:'경기/인천', value: () => { this.fetchIncheon() }}, 
+                    {name:'대전/충청/강원', value: () => { this.fetchDaejeon() }}, 
+                    {name:'부산/대구/울산/경상', value: () => { this.fetchBusan() }}, 
+                    {name:'광주/전라', value: () => { this.fetchGwangju() }}, 
+                    {name:'제주', value: () => { this.fetchJeju() }}
+                ],
+            detailSearch: false,
+            checked: '',
         }
     },
     methods: {
-        onClickTab(tab) {
-            this.selectedTab = tab
-        }
+        fetchAll() {
+            this.selectedTab = this.tabs[0]
+            this.checked = ''
+            this.copyPerformList = [...this.originalPerformList]
+        },
+        fetchSeoul() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('서울')
+                })
+        },
+        fetchIncheon() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('경기/인천')
+                })
+        },
+        fetchDaejeon() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('대전/충청/강원')
+                })
+        },
+        fetchBusan() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                        return e.performArea.match('부산/대구/울산/경상')
+                    })
+        },
+        fetchGwangju() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('광주/전라')
+                })
+        },
+        fetchJeju() {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performArea.match('제주')
+                })
+        },
+        applyFilter() {
+            if(this.checked == '콘서트') {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match(this.checked)
+                })
+                return this.copyPerformList
+           }
+
+            if(this.checked == '뮤지컬') {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match(this.checked)
+                })
+                return this.copyPerformList
+           }
+
+            if(this.checked == '연극') {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match(this.checked)
+                })
+                return this.copyPerformList
+           }
+
+            if(this.checked == '전시회') {
+                this.copyPerformList = this.copyPerformList.filter(e => {
+                    return e.performCategory.match(this.checked)
+                })
+                return this.copyPerformList
+           }
+        },
+        sortRecent() {     
+            this.copyPerformList.sort(function (a, b) {
+                return new Date(a.performStart) - new Date(b.performStart)
+            })
+        },
+        sortEnd() {
+            this.copyPerformList.sort(function (a, b) {
+                return new Date(a.performEnd) - new Date(b.performEnd)
+            })
+        },
     },
     created() {
         this.selectedTab = this.tabs[0]
@@ -164,15 +202,48 @@ export default {
 </script>
 
 <style scoped>
+/* .areaBox{
+border: 2px solid;
+border-collapse: separate;
+border-color: #90CAF9;
+font-size: 20px;
+} */
 .performTitle {
-  font-size: 20px;
+  font-size: 17px;
   justify-content: center;
   color: black;
 }
-card-subtitle {
-  font-weight: 100;
-  font-size: 15px;
+.performSub {
+  font-family: 'Nanum Gothic', sans-serif !important;
+  font-size: 13px;
   text-align: center;
-  color: #BDBDBD
+}
+.countBox {
+  margin: 50px;
+  text-align: center;
+  font-size: 20px;
+}
+.categoryBox{
+    background-color: white;
+    height: 130px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding : 50px 0;
+}
+.category-select{
+    /* font-family: 'Nanum Gothic', sans-serif !important; */
+    font-size:30pt;
+}
+.checkBox {
+    margin-right: 80px;
+}
+.detailSearchBox{
+    background-color: rgb(241, 241, 241) ;
+}
+.detailSearchTxt{
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: 100;
 }
 </style>

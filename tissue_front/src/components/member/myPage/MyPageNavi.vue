@@ -56,16 +56,25 @@
                         <v-row>
                             <v-divider class="mt-3 mr-10"/>
                         </v-row>
-                        <v-row class="infoValue mt-15">
-                            {{ info.value }}
+                        <v-row v-if="info.title === '회원 등급 >'" class="infoValue mt-15">
+                            {{ memberInfo.memberGrade }}
+                        </v-row>
+                        <v-row v-else-if="info.title === '사용 가능 쿠폰 >'" class="infoValue mt-15">
+                            {{ couponsLength }}
+                        </v-row>
+                        <v-row v-else class="infoValue mt-15">
+                            {{ memberInfo.memberMileage }}
                         </v-row>
                     </v-col>
                 </v-row>
-                <v-row class="main mb-15 pb-15">
+                <v-row class="main pb-8">
+                    <my-page-main v-if="this.$route.name == 'MyPageView'" :memberNo="memberInfo.memberNo"/>
                     <my-page-modify v-if="this.$route.name == 'MyPageModify'" :memberInfo="memberInfo" />
                     <my-page-out v-if="this.$route.name == 'MyPageOut'" :memberNo="memberInfo.memberNo" />
                     <my-page-coupon v-if="this.$route.name == 'MyPageCoupon'" :coupons="memberInfo.coupons"/>
-                    <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'"/>
+                    <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'" :memberNo="memberInfo.memberNo"/>
+                    <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
+                    <my-page-review v-if="this.$route.name =='MyPageReview'" :memberNo="memberInfo.memberNo"/>
                 </v-row>
             </v-main>
         </div>
@@ -78,13 +87,19 @@ import MyPageCoupon from './MyPageCoupon.vue'
 import GradeDialog from './GradeDialog.vue'
 import MileageDialog from './MileageDialog.vue'
 import MyPageQnA from './MyPageQnA.vue'
+import MyPageStar from './MyPageStar.vue'
+import MyPageMain from './MyPageMain.vue'
+import MyPageReview from './MyPageReview.vue'
 export default {
-  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA },
+  components: { MyPageModify, MyPageOut, MyPageCoupon, GradeDialog, MileageDialog, MyPageQnA, MyPageStar, MyPageMain, MyPageReview },
     name: 'MyPageNavi',
     props:{
         memberInfo: {
             type:Object,
             required: true
+        },
+        couponsLength: {
+            type: Number
         }
     },
     data () {
@@ -95,22 +110,22 @@ export default {
             ],
             items: [
                 { title: 'My 정보수정', icon: 'mdi-account', route:'/myPage/modify' },
-                { title: 'My 찜목록', icon: 'mdi-star' },
+                { title: 'My 찜목록', icon: 'mdi-star', route:'/myPage/star' },
                 { title: 'My 예매 내역', icon: 'mdi-book' },
                 { title: 'My QnA', icon: 'mdi-chat-question', route:'/myPage/qna'},
-                { title: 'My 후기', icon: 'mdi-pencil' },
+                { title: 'My 후기', icon: 'mdi-pencil', route:'/myPage/review' },
                 { title: '회원 탈퇴', icon: 'mdi-emoticon-confused', route:'/myPage/signOut'}
             ],
             infos: [
-                { title: '회원 등급 >', value: this.memberInfo.memberGrade, 
+                { title: '회원 등급 >', 
                     clickAction:() =>{
                         this.showPage(1)
                 } },
-                { title: '사용 가능 쿠폰 >', value: this.memberInfo.coupons.length, 
+                { title: '사용 가능 쿠폰 >', 
                     clickAction:() => {
                         this.showPage(2)}
                 },
-                { title: '마일리지 >', value: this.memberInfo.memberMileage, 
+                { title: '마일리지 >', 
                     clickAction:() => {
                         this.showPage(3)
                 } } 
@@ -138,18 +153,19 @@ export default {
     width: 100%;
 }
 .statusBox {
-    position: inherit;
+    position: relative;
+    margin-bottom:5%;
     height: 205px;
-    background: rgb(220, 240, 248);
+    width:101%;
+    background: #d6edff;
 }
 .status{
     font-size:23pt;
 }
 .main {
-    position: relative;
+    position: inherit;
     left: 65%;
-    top: 30%;
-    transform: translate(-60%, -30%);
+    transform: translate(-60%);
 }
 .infoValue{
     font-size:25pt;

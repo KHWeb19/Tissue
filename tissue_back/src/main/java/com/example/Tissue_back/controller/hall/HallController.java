@@ -45,6 +45,8 @@ public class HallController {
         return hallService.read(hallNo);
     }
 
+
+
     @DeleteMapping("/{hallNo}")
     public void hallRemove(@PathVariable("hallNo") Long hallNo){
         log.info("hallRemove()" + hallNo);

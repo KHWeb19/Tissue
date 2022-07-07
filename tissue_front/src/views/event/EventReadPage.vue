@@ -24,8 +24,6 @@ export default {
         }
     },
     created() {
-        console.log(this.event)
-
         this.fetchEvent(this.eventNo)
             .catch(() => {
                         alert('이벤트 게시물 요청 실패!')

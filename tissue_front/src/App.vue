@@ -13,7 +13,11 @@
           this.$route.name == 'CouponRegisterPage' ||
           this.$route.name == 'CouponListPage' ||
           this.$route.name == 'CouponModifyPage' ||
-          this.$route.name == 'AdminMember'
+          this.$route.name == 'AdminMember' ||
+          this.$route.name == 'EventListPage' ||
+          this.$route.name == 'EventRegisterPage' ||
+          this.$route.name == 'EventReadPage' ||
+          this.$route.name == 'EventModifyPage'
         "
       >
         <admin-navi />
@@ -41,16 +45,21 @@
           this.$route.name != 'CouponRegisterPage' &&
           this.$route.name != 'CouponListPage' &&
           this.$route.name != 'CouponModifyPage' &&
-          this.$route.name != 'AdminMember'
+          this.$route.name != 'AdminMember' &&
+          this.$route.name != 'EventListPage' &&
+          this.$route.name != 'EventRegisterPage' &&
+          this.$route.name != 'EventReadPage' &&
+          this.$route.name != 'EventModifyPage'
         "
       >
-        <new-nav-bar-2 /> 
+        <new-nav-bar-2 />
         <div v-if="this.$route.name != 'home'" style="height: 80px"></div>
       </div>
       <v-main>
         <router-view />
       </v-main>
     </v-main>
+
     <footer-area
       v-if="
         this.$route.name != 'GoogleOAuth' &&
@@ -71,10 +80,14 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
-    <join-footer 
+    <join-footer
       v-if="
         this.$route.name != 'KakaoOAuth' &&
         this.$route.name != 'GoogleOAuth' &&
@@ -89,9 +102,14 @@
         this.$route.name != 'CouponRegisterPage' &&
         this.$route.name != 'CouponListPage' &&
         this.$route.name != 'CouponModifyPage' &&
-        this.$route.name != 'AdminMember'
+        this.$route.name != 'AdminMember' &&
+        this.$route.name != 'EventListPage' &&
+        this.$route.name != 'EventRegisterPage' &&
+        this.$route.name != 'EventReadPage' &&
+        this.$route.name != 'EventModifyPage'
       "
     />
+
   </v-app>
 </template>
 
@@ -100,7 +118,7 @@
 import FooterArea from "@/components/Layout/FooterArea.vue";
 import NewNavBar2 from "@/components/Layout/NewNavBar2.vue";
 import joinFooter from "@/components/Layout/JoinFooter.vue";
-import AdminNavi from '@/components/Admin/AdminNavi.vue';
+import AdminNavi from "@/components/Admin/AdminNavi.vue";
 export default {
   name: "App",
   components: {
@@ -114,17 +132,17 @@ export default {
       url: null,
     };
   },
-}
+};
 </script>
 <style scoped>
 .v-application {
-    font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 @font-face {
-    font-family: 'Noto Sans KR' ;
-    src: url('assets/font/NotoSansKR-Bold.otf');
-    font-weight: 500;
+  font-family: "Noto Sans KR";
+  src: url("assets/font/NotoSansKR-Bold.otf");
 }
+
 </style>
 
 <style>

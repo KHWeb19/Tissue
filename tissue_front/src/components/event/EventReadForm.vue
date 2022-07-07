@@ -1,5 +1,10 @@
 <template>
-    <div>
+    <v-container>
+        <v-app-bar app elevation="3">
+            <v-toolbar-title class="ml-3">
+                📌 이벤트 관리
+            </v-toolbar-title>
+        </v-app-bar>
         <v-container><br><br><br>
             <v-row>
                 <v-col>
@@ -9,6 +14,14 @@
                     <div>
                         <label>제목</label>
                         <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventTitle" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>설명</label>
+                        <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventContent" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>경품</label>
+                        <v-text-field outlined color="pink lighten-3" type="text" :value="event.eventGoods" readonly></v-text-field>
                     </div>
                     <div>
                         <label>카테고리</label>
@@ -22,19 +35,27 @@
                         <label>종료일</label>
                         <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventEnd" readonly></v-text-field>
                     </div>
+                    <div>
+                        <label>당첨자 발표일</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventWinnerDate" readonly></v-text-field>
+                    </div>
+                    <div>
+                        <label>당첨 인원</label>
+                        <v-text-field  outlined color="pink lighten-3" type="text" :value="event.eventWinnerCnt" readonly></v-text-field>
+                    </div>
                 </v-col>
             </v-row>
             <br>
-            <div>
-                <v-btn class="mr-5" color="blue lighten-3" dark router-link :to="{ name: 'EventModifyPage', params: { eventNo: event.eventNo } }">
+            <v-row justify="center" class="mt-7 mb-10">
+                <v-btn class="mr-5" large color="blue lighten-3" dark router-link :to="{ name: 'EventModifyPage', params: { eventNo: event.eventNo } }">
                     수정
                 </v-btn>
-                <v-btn color="blue lighten-3" dark @click="onDelete(event.eventNo)">
+                <v-btn color="blue lighten-3" large dark @click="onDelete(event.eventNo)">
                     삭제
                 </v-btn>
-            </div>
+            </v-row>
         </v-container>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -45,7 +66,7 @@ export default {
         event: {
             type: Object,
             required: true
-        }
+        },
     },
     data() {
         return {
@@ -70,7 +91,7 @@ export default {
 <style scoped>
 img {
    position: relative;
-    max-height: 500px;
-    max-width: 500px;
+   height: 100%;
+    width: 100%;
 }
 </style>

@@ -35,8 +35,6 @@ import AdminMember from '../components/Admin/AdminMember.vue'
 
 import SearchPage from '../views/search/SearchPage.vue'
 
-// admin
-
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
 import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
@@ -51,6 +49,7 @@ import EventListPage from '@/views/event/EventListPage.vue'
 import EventReadPage from '@/views/event/EventReadPage.vue'
 import EventModifyPage from '@/views/event/EventModifyPage.vue'
 
+import ExpectationPage from '@/views/expectation/ExpectationPage.vue'
 
 import NoticeRegisterPage from '../views/notice/NoticeRegisterPage.vue'
 import NoticeListPage from '../views/notice/NoticeListPage.vue'
@@ -265,6 +264,18 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/myPage/star',
+        name: 'MyPageStar',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/myPage/review',
+        name: 'MyPageReview',
+        component: MyPageView,
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/search/:keyword',
         name: 'SearchPage',
         components: {
@@ -347,6 +358,17 @@ const routes = [
     name: 'AreaPage',
     component: AreaPage
   },
+  {
+    path: '/expectation/:eventNo',
+    name: 'ExpectationPage',
+    components: {
+      default: ExpectationPage
+    },
+    props: {
+      default: true
+    }
+  },
+
   // 노서현
   
   {
@@ -425,7 +447,7 @@ const routes = [
       default: true
     }
   }
-  },
+
 ]
 
 const router = new VueRouter({

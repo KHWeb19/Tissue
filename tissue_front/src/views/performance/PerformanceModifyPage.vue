@@ -23,6 +23,15 @@
               ></v-select>
             </div>
             <div>
+              <label>공연날짜</label>
+              <v-text-field
+                outlined
+                v-model="performShowDate"
+                type="Date"
+                required
+              ></v-text-field>
+            </div>
+            <div>
               <label>공연시작일</label>
               <v-text-field
                 outlined
@@ -253,6 +262,7 @@ export default {
 
       hallCopy: "",
       performHall: "",
+      performShowDate: "",
     };
   },
   created() {
@@ -269,6 +279,7 @@ export default {
     this.performGrade = this.performance.performGrade;
     this.performer = this.performance.performer;
     this.hallName = this.performance.hallName;
+    this.performShowDate = this.performance.performShowDate;
 
     this.hallCopy = this.$store.state.halls;
     console.log(this.performHall);
@@ -364,6 +375,7 @@ export default {
         performGrade: this.performGrade,
         performer: this.performer,
         hallName: this.performHall,
+        performShowDate: this.performShowDate,
       };
 
       formData.append(

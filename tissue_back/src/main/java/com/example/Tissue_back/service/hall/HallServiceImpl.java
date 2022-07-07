@@ -1,5 +1,6 @@
 package com.example.Tissue_back.service.hall;
 
+
 import com.example.Tissue_back.entity.hall.Hall;
 import com.example.Tissue_back.repository.hall.HallRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,15 +31,17 @@ public class HallServiceImpl implements HallService{
 
     @Override
     public Hall read(Long hallNo) {
-        Optional<Hall> maybeBoard = hallRepository.findById((hallNo));
+        Optional<Hall> maybeHall = hallRepository.findById((hallNo));
 
-        if (maybeBoard.equals(Optional.empty())){
+        if (maybeHall.equals(Optional.empty())){
             log.info("No board");
             return null;
         }
 
-        return maybeBoard.get();
+        return maybeHall.get();
     }
+
+
 
     @Override
     public void remove(Long hallNo) {
