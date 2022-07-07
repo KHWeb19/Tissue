@@ -32,12 +32,12 @@
                 <v-card-actions v-if="detailSearch">
                     <v-container class="pt-0" fluid>
                         <div class="categoryBox" >
-                            <div >
-                                <v-row justify="center" class="categoryList" >
-                                    <v-checkbox class="mr-5"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
-                                    <v-checkbox class="mr-5" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
-                                    <v-checkbox class="mr-5" v-model="checked" value="연극" label="연극"></v-checkbox>
-                                    <v-checkbox v-model="checked" value="전시회" label="전시회"></v-checkbox>    
+                            <div class="category-select">
+                                <v-row justify="center" class="categoryList">
+                                    <v-checkbox class="checkBox"  v-model="checked" value="콘서트" label="콘서트"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="뮤지컬" label="뮤지컬"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="연극" label="연극"></v-checkbox>
+                                    <v-checkbox class="checkBox" v-model="checked" value="전시회" label="전시회"></v-checkbox>
                                 </v-row>
                             </div>
                         </div>
@@ -56,6 +56,7 @@
                         <v-card class="mx-auto" max-width="216" flat>
                             <v-img :src="require(`../../assets/thumbNail/${perform.performThumbnail}`)" height="300px"></v-img>
                             <div class="performTitle mt-5">
+
                                 {{ perform.performName }}
                             </div>
 
@@ -74,6 +75,7 @@
                             </div>
                             </div>
                         </v-card>
+                    </router-link>
                 </v-col>
             </v-row>
         </v-container>
@@ -120,7 +122,9 @@ export default {
             this.copyPerformList = [...this.originalPerformList]
         },
         fetchSeoul() {
-              this.copyPerformList = this.copyPerformList.filter(e => {
+            this.copyPerformList = [...this.originalPerformList]
+
+            this.copyPerformList = this.copyPerformList.filter(e => {
                     return e.performArea.match('서울')
                 })
         },
@@ -224,11 +228,10 @@ font-size: 20px;
   text-align: center;
   font-family: 'Nanum Gothic', sans-serif !important;
 }
-card-subtitle {
-  font-weight: 100;
-  font-size: 15px;
+.performSub {
+  font-family: 'Nanum Gothic', sans-serif !important;
+  font-size: 13px;
   text-align: center;
-  color: #BDBDBD
 }
 .countBox {
   margin-top:80px;
@@ -243,6 +246,13 @@ card-subtitle {
     margin-top: 30px;
     margin-bottom: 30px;
     padding : 50px 0;
+}
+.category-select{
+    /* font-family: 'Nanum Gothic', sans-serif !important; */
+    font-size:30pt;
+}
+.checkBox {
+    margin-right: 80px;
 }
 .detailSearchBox{
     background-color: rgb(241, 241, 241) ;

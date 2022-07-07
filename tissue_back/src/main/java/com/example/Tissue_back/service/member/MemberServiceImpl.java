@@ -206,6 +206,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public void addMileage(Member member) {
+        Optional<Member> optionalMember = repository.findByMemberId(member.getMemberId());
+
+        Member member1 = optionalMember.get();
+
+        member1.setMemberMileage(member.getMemberMileage());
+
+        repository.save(member1);
+    }
+    
+
+    @Override
     public List<Qna> myQna (Long memberNo) {
 
         Optional<Member> findMember = repository.findById(memberNo);
@@ -215,6 +227,7 @@ public class MemberServiceImpl implements MemberService {
 //        log.info("Qna()" + get);
         return get;
     }
+
 
     @Override
     public List<MyReviewDto> myReview (Long memberNo) {

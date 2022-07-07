@@ -26,6 +26,7 @@ export default {
   methods: {
     ...mapActions(["fetchPerformanceList"]),
     onSubmit(payload) {
+      console.log('payload받은것', payload)
       const {
         performNo,
         eventTitle,

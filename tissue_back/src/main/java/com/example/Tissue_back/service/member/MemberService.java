@@ -22,7 +22,7 @@ public interface MemberService {
     public Boolean checkPw (LoginDto check);
     public void modify (MemberDto memberDto);
     public Boolean remove (Long memberNo, String checkPw);
-
+    public void addMileage(Member member);
     public List<Qna> myQna (Long memberNo);
     public List<MyReviewDto> myReview (Long memberNo);
 
