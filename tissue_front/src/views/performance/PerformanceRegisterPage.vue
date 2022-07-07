@@ -96,9 +96,6 @@
             </div>
             <div>
               <label>공연카테고리</label>
-              <!-- <select class="form-control" v-model="performCategory">
-                                    <option v-for="c in list" :key="c.index" :value="c.category">{{ c.category }}</option>
-                                </select> -->
               <v-select
                 v-model="performCategory"
                 :items="list"

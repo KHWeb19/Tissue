@@ -65,7 +65,6 @@ import QnaBestRegisterPage from '../views/qna/QnaBestRegisterPage.vue'
 import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
 
 
-
 Vue.use(VueRouter)
 
 const requireLogin = () => (to, from, next) => {
