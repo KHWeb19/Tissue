@@ -4,17 +4,22 @@ import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.controller.request.review.MyReviewDto;
-import com.example.Tissue_back.controller.request.review.ReviewDto;
+import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
+import com.example.Tissue_back.entity.coupon.Coupon;
+import com.example.Tissue_back.entity.map.Map;
 import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.entity.review.Review;
+import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.repository.coupon.CouponRepository;
+import com.example.Tissue_back.repository.map.MapRepository;
 import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.qna.QnaRepository;
 import com.example.Tissue_back.repository.review.ReviewRepository;
+import com.example.Tissue_back.repository.ticketing.TicketingRepository;
 import com.example.Tissue_back.service.PhoneCheckService;
-import com.example.Tissue_back.service.member.MemberService;
 import com.example.Tissue_back.service.security.SecurityService;
 import com.example.Tissue_back.util.RandomPassword;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -49,6 +51,12 @@ public class MemberServiceImpl implements MemberService {
     private ReviewRepository reviewRepository;
     @Autowired
     private PerformanceRepository performanceRepository;
+    @Autowired
+    private TicketingRepository ticketingRepository;
+    @Autowired
+    private CouponRepository couponRepository;
+    @Autowired
+    private MapRepository mapRepository;
 
     @Override
     public void register(MemberDto memberDto) {
@@ -254,5 +262,51 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return reviewDtoList;
+    }
+
+    @Override
+    public List<MyTicketDto> myTicket (Long memberNo) {
+
+        Optional<Member> findMember = repository.findById(memberNo);
+        Member member = findMember.get();
+
+        List<Ticketing> getTicket = ticketingRepository.findByMemberId(member.getMemberId());
+        List<MyTicketDto> ticketDtoList = new ArrayList<>();
+
+        for (int i = 0; i <getTicket.size(); i++) {
+            Ticketing ticketing = getTicket.get(i);
+
+            Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
+            Performance performance = getPerform.get();
+
+            Optional<Map> getMap = mapRepository.findById(ticketing.getPerformNo());
+            Map map = getMap.get();
+
+            MyTicketDto ticketDto = new MyTicketDto();
+
+            ticketDto.setTicketing_no(ticketing.getTicketingNo());
+            ticketDto.setFinal_price(ticketing.getFinalPrice());
+            ticketDto.setReg_date(ticketing.getReviewRegDate());
+
+            if(ticketing.getUsedCouponNo() != null) {
+                Optional<Coupon> getCoupon = couponRepository.findById(ticketing.getUsedCouponNo());
+                Coupon coupon = getCoupon.get();
+                ticketDto.setUsed_coupon(coupon.getCouponName());
+            }
+
+            if(ticketing.getUsedMileage() != null) {
+                ticketDto.setUsed_mileage(ticketing.getUsedMileage());
+            }
+
+            ticketDto.setSeat(ticketing.getSeatNameArr());
+            ticketDto.setPerformShowDate(performance.getPerformShowDate());
+            ticketDto.setPerformArea(map.getName());
+            ticketDto.setPerformThumbnail(performance.getPerformThumbnail());
+            ticketDto.setPerformName(performance.getPerformName());
+
+            ticketDtoList.add(ticketDto);
+        }
+
+        return ticketDtoList;
     }
 }
