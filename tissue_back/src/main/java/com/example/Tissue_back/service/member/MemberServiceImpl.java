@@ -359,11 +359,11 @@ public class MemberServiceImpl implements MemberService {
                     MyTicketDto ticketDto = new MyTicketDto();
 
                     ticketDto.setTicketing_no(ticketing.getTicketingNo());
-                    ticketDto.setReg_date(ticketing.getReviewRegDate());
+                    ticketDto.setReg_date(ticketing.getTicketingRegDate());
                     ticketDto.setSeat(ticketing.getSeatNameArr());
                     ticketDto.setPerformShowDate(performance.getPerformShowDate());
                     ticketDto.setPerformName(performance.getPerformName());
-            ticketDto.setStatus(ticketing.getStatus());
+                    ticketDto.setStatus(ticketing.getStatus());
 
             ticketDtoList.add(ticketDto);
         }
