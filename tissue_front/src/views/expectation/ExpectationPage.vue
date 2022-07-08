@@ -85,19 +85,18 @@ export default {
     computed: {
         ...mapState(['event', 'memberInfo'])
     },
-    // watch: {
-    //     memberInfo() {
-    //         this.memberInfo.memberId = ''
-    //     }
-    // },
     methods: {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-        // this.$store.state.expect.id = null
+        if(this.token === null) {
+            this.memberInfo.memberId = null
+        }
 
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
+
+        
     },
 }
 </script>

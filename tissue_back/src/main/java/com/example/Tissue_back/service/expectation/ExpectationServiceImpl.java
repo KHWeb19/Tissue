@@ -28,6 +28,7 @@ public class ExpectationServiceImpl implements ExpectationService {
 
     @Override
     public Boolean register(ExpectationDto expectationDto) throws Exception {
+        // 한 사람이 하나의 댓글만 달 수 있도록 해야 함
 
         log.info("get ID():" + expectationDto.getId()); // 기대평 등록한 아이디 맞게 들어옴
 
