@@ -38,4 +38,7 @@ public class Ticketing {
 
     @Column
     private Integer finalPrice;
+
+    @Column
+    public String status = "예매완료";
 }
