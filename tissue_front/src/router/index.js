@@ -8,6 +8,7 @@ import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import RefundPage from '@/views/refund/RefundPage.vue'
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
 import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
@@ -137,11 +138,17 @@ const routes = [
     component: PerformanceTest
   },
   {
+    path: '/refundList',
+    name: 'RefundPage',
+    component: RefundPage
+  },
+  {
     path: '/Admin',
     name: 'AdminMember',
     component: AdminMember, 
     beforeEnter: requireAdmin()
   },
+  
   {
     path: '/couponRegister',
     name: 'CouponRegisterPage',

@@ -17,7 +17,8 @@
           this.$route.name == 'EventListPage' ||
           this.$route.name == 'EventRegisterPage' ||
           this.$route.name == 'EventReadPage' ||
-          this.$route.name == 'EventModifyPage'
+          this.$route.name == 'EventModifyPage' ||
+          this.$route.name == 'RefundPage'
         "
       >
         <admin-navi />
@@ -49,7 +50,8 @@
           this.$route.name != 'EventListPage' &&
           this.$route.name != 'EventRegisterPage' &&
           this.$route.name != 'EventReadPage' &&
-          this.$route.name != 'EventModifyPage'
+          this.$route.name != 'EventModifyPage' &&
+          this.$route.name != 'RefundPage'
         "
       >
         <new-nav-bar-2 />
@@ -84,7 +86,8 @@
         this.$route.name != 'EventListPage' &&
         this.$route.name != 'EventRegisterPage' &&
         this.$route.name != 'EventReadPage' &&
-        this.$route.name != 'EventModifyPage'
+        this.$route.name != 'EventModifyPage' &&
+        this.$route.name != 'RefundPage'
       "
     />
     <join-footer
@@ -106,10 +109,10 @@
         this.$route.name != 'EventListPage' &&
         this.$route.name != 'EventRegisterPage' &&
         this.$route.name != 'EventReadPage' &&
-        this.$route.name != 'EventModifyPage'
+        this.$route.name != 'EventModifyPage' &&
+        this.$route.name != 'RefundPage'
       "
     />
-
   </v-app>
 </template>
 
@@ -142,7 +145,6 @@ export default {
   font-family: "Noto Sans KR";
   src: url("assets/font/NotoSansKR-Bold.otf");
 }
-
 </style>
 
 <style>
