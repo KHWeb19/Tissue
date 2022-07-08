@@ -7,13 +7,13 @@
       </v-toolbar>
 
       <div v-else>
-        <div v-if="click" align="center">
+        <div align="center">
           <v-textarea v-model="expectContent" placeholder="기대평을 작성해주세요."
             counter clearable auto-grow outlined color="pink lighten-3" 
             style="padding-top: 20px; width: 1000px;"
             :rules="[v => (v || '' ).length >= 30|| '30자 이상 작성해주세요.']"/>
           <div align="center" style="margin: 25px">
-            <v-btn  width="150" height="50" @click="[addComment(), addMileage()]" 
+            <v-btn  width="150" height="50" @click="addComment" 
               color="blue lighten-3" class="white--text mr-3" style="font-size: 15px">
               등록
             </v-btn>
@@ -35,7 +35,6 @@ export default {
     return {
       expectContent: null,
       token: localStorage.getItem('token'),
-      click: true
     }
   },
   props: {
@@ -56,31 +55,34 @@ export default {
       this.$router.push({ path: '/login'})
     },
     addComment () {
-       if(this.click) {
-        this.click = !this.click
-      } else {
-        console.log('중복됨!')
-      }
       
       const id = this.memberInfo.memberId
       const expectContent = this.expectContent
       const eventNo = this.eventNo
-      axios.post('http://localhost:7777/expectation/register', { id, expectContent, eventNo })
-        .then(() => { 
-        this.fetchExpectList(eventNo)
-        this.expectContent = null
-      }).catch(res => {
-        alert(res)
-      })
-    },
-    addMileage () {
-      const memberMileage = this.memberInfo.memberMileage + 3000
 
-      axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
-          .then(() => {
-            console.log('마일리지 적립', memberMileage)
-            alert('기대평 적립금 3,000원이 적립되었습니다!')
-          })
+      console.log(id, expectContent, eventNo)
+      axios.post('http://localhost:7777/expectation/register', { id, expectContent, eventNo })
+        .then((res) => { 
+          if(res.data == true) {  
+            alert("기대평이 등록되었습니다.")
+            this.fetchExpectList(eventNo)
+            this.expectContent = null
+
+            const memberMileage = this.memberInfo.memberMileage + 3000
+
+            axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
+                .then(() => {
+                  console.log('마일리지 적립', memberMileage)
+                  alert('기대평 적립금 3,000원이 적립되었습니다!')
+                })
+          }
+          else{
+            alert("기대평은 1회만 작성 가능합니다.")
+            this.$router.push({ path: '/event'})
+          }
+      }).catch(err => {
+        alert(err)
+      })
     }
   }
 }
