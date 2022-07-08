@@ -1,5 +1,7 @@
 package com.example.Tissue_back.repository.ticketing;
 
+import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +18,6 @@ public interface TicketingRepository extends JpaRepository<Ticketing, Long> {
     Optional<Ticketing> findBySeat(@Param("seatNameArr") String [] seatNameArr);
 
     List<Ticketing> findByMemberId (String memberId);
-
+    
+    List<Ticketing> findTop5ByMemberIdOrderByTicketingNoDesc(String memberId);
 }

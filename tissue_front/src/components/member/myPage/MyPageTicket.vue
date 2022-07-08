@@ -94,7 +94,7 @@
                             @click="cancleTicket(item.ticketing_no)">
                                 <strong>예매취소</strong>
                             </v-btn>
-                            <v-btn v-else
+                            <v-btn v-else-if="item.status === '취소 대기'"
                             small color="blue lighten-3" depressed disabled block
                                >
                             <strong>환불 대기</strong>
@@ -102,6 +102,23 @@
                         </v-row>
                     </div>
                 </td>
+            </template>
+            <template v-slot:[`item.status`]="{ item }">
+              <v-chip color="pink lighten-3"
+                outlined
+                v-if="item.status === '예매완료'">
+                  예매완료
+              </v-chip>
+              <v-chip v-else-if="item.status === '취소 대기'"
+                color="blue lighten-3"
+                outlined>
+                  환불대기
+              </v-chip>
+              <v-chip v-else
+                color="grey"
+                outlined>
+                  취소완료
+              </v-chip>
             </template>
         </v-data-table>
         <v-pagination
@@ -133,6 +150,7 @@ export default {
                 {text:'공연명', value:'performName'},
                 {text:'관람날짜', value:'performShowDate', width:'140'},
                 {text:'매수', value:'seat.length', width:'80'},
+                {text:'상태', value:'status', width:'90'},
                 {text:'', value:'data-table-expand' ,width:'50'}
             ],
             expanded: [],

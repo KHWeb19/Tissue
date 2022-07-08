@@ -10,14 +10,31 @@
             <hr class="hrLine mt-6 mb-5" color='#90CAF9' width="94%" >
                 <v-data-table class="mr-12"
                 :headers="headers3"
-                :items="myTicket"
+                :items="newTicket"
                 hide-default-footer
                 >
+                <template v-slot:[`item.status`]="{ item }">
+              <v-chip color="pink lighten-3"
+                outlined
+                v-if="item.status === '예매완료'">
+                  예매완료
+              </v-chip>
+              <v-chip v-else-if="item.status === '취소 대기'"
+                color="blue lighten-3"
+                outlined>
+                  환불대기
+              </v-chip>
+              <v-chip v-else
+                color="grey"
+                outlined>
+                  취소완료
+              </v-chip>
+            </template>
                 </v-data-table>
         </div>
         <div class="tem2">
             <v-row no-gutters>
-                <v-col >
+                <v-col>
                     <v-row no-gutters>
                         <v-icon class="ml-3 mr-5" color="pink lighten-3">mdi-check-bold</v-icon>
                         <span> 최근 찜 목록 </span>
@@ -27,10 +44,8 @@
                     </v-row>
                         <v-data-table 
                         :headers="headers"
-                        :items="myLike"
+                        :items="newLike"
                         hide-default-footer
-                        hide-default-header
-                        :items-per-page="3"
                       >
                         <template v-slot:[`item.performance.performThumbnail`] ="{item}">
                              <img class="imgwidth"
@@ -47,7 +62,7 @@
                         </v-data-table>
                 </v-col>
                 <v-divider class='ml-7 mr-7' vertical/>
-                <v-col >
+                <v-col>
                     <v-row no-gutters>
                         <v-icon class="ml-3 mr-5" color="pink lighten-3">mdi-check-bold</v-icon>
                         <span> 최근 QnA 목록 </span>
@@ -55,13 +70,11 @@
                         <router-link class="more mt-2 mr-12" :to="{name:'MyPageQnA'}"> 더보기 ></router-link>
                         <hr class="hrLine mt-3 mb-5" color='#90CAF9' width="90%" >
                     </v-row>
-        
-                        <v-data-table class="mr-10"
+                        <v-data-table class="mr-12"
                         :headers="headers2"
-                        :items="myQna"
+                        :items="newQna"
                         hide-default-footer
-                        hide-default-header
-                        :items-per-page="5"
+                        calculate-widths
                         >
                         <template v-slot:[`item.qnaTitle`]="{ item }">
                             <router-link 
@@ -71,7 +84,6 @@
                             </router-link>
                         </template>
                         </v-data-table>
-                
                 </v-col>
             </v-row>
         </div>
@@ -90,33 +102,34 @@ export default {
     data () {
         return {
             headers: [
-                {text:'썸네일', value:'performance.performThumbnail'},
-                {text:'공연명', value:'performance.performName', width:'150'},
+                {text:'썸네일', value:'performance.performThumbnail',width:'10'},
+                {text:'공연명', value:'performance.performName', width:'370'},
             ],
             headers2: [
-                {text:'구분', value:'qnaCategory', width:'50'},
+                {text:'구분', value:'qnaCategory', width:'110'},
                 {text:'제목', value:'qnaTitle', width:'200'},
-                {text:'등록날짜', value:'qnaDate', width:'120'}
+                {text:'등록날짜', value:'qnaDate', width:'90'}
             ],
             headers3: [
                 {text:'예매일', value:'reg_date', width:'150'},
                 {text:'예매번호', value:'ticketing_no', width:'100'},
-                {text:'공연명', value:'performName'},
-                {text:'관람일시', value:'performShowDate'},
-                {text:'매수', value:'seat.length'},
+                {text:'공연명', value:'performName', width:'270'},
+                {text:'관람일시', value:'performShowDate', width:'100'},
+                {text:'매수', value:'seat.length', width:'100'},
+                {text:'상태', value:'status', width:'70'}
             ],
         }
     },
     computed: {
-        ...mapState(['myLike','myQna', 'myTicket'])
+        ...mapState(['newLike','newQna', 'newTicket'])
     },
     mounted() {
-        this.fetchMyLike(this.memberNo)
-        this.fetchMyQna(this.memberNo)
-        this.fetchMyTicket(this.memberNo)
+        this.fetchMyNewLike(this.memberNo)
+        this.fetchMyNewQna(this.memberNo)
+        this.fetchMyNewTicket(this.memberNo)
     },
     methods: {
-        ...mapActions(['fetchMyLike', 'fetchMyQna', 'fetchMyTicket']),
+        ...mapActions(['fetchMyNewLike', 'fetchMyNewQna', 'fetchMyNewTicket']),
 
     }
 }

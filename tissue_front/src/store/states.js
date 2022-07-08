@@ -41,8 +41,11 @@ export default {
     newConcert: [],
     newMusical: [],
     newTheater: [],
-    newExhibition:[],
-    // 유아림
+    newExhibition: [],
+    newQna: [],
+    newLike: [],
+    newTicket: [],
+     // 유아림
 
 
     events: [],

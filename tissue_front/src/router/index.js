@@ -64,6 +64,7 @@ import QnaModifyPage from '../views/qna/QnaModifyPage.vue'
 
 import QnaBestRegisterPage from '../views/qna/QnaBestRegisterPage.vue'
 import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
+import axios from 'axios'
 
 
 Vue.use(VueRouter)
@@ -78,6 +79,19 @@ const requireLogin = () => (to, from, next) => {
     }
 } 
 
+const requireAdmin = () => (to, from, next) => {
+    let token = localStorage.getItem('token')
+    axios.get('Admin/role', { params: { token:token }})
+        .then((res) => {
+            if (res.data == true) {
+            return next()
+            } else {
+                alert('접근 권한이 없습니다.')
+                router.push("/")
+            }
+        })
+}
+
 const routes = [
   // 메인페이지 (임지훈)
   {
@@ -88,12 +102,14 @@ const routes = [
   {
     path: '/hallRegister',
     name: 'HallRegisterPage',
-    component: HallRegisterPage
+      component: HallRegisterPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/hallList',
     name: 'HallListPage',
-    component: HallListPage
+      component: HallListPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/hallRead/:hallNo',
@@ -103,7 +119,8 @@ const routes = [
     },
     props: {
       default: true
-    }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/ticketing/:performNo',
@@ -128,18 +145,21 @@ const routes = [
   {
     path: '/Admin',
     name: 'AdminMember',
-    component: AdminMember
+    component: AdminMember, 
+    beforeEnter: requireAdmin()
   },
   
   {
     path: '/couponRegister',
     name: 'CouponRegisterPage',
-    component: CouponRegisterPage
+      component: CouponRegisterPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/couponList',
     name: 'CouponListPage',
-    component: CouponListPage
+      component: CouponListPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/couponModify/:couponNo',
@@ -149,7 +169,8 @@ const routes = [
   },
   props:{
       default: true
-  }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/event',
@@ -303,12 +324,14 @@ const routes = [
   {
     path: '/performanceRegisterPage',
     name: 'PerformanceRegisterPage',
-    component: PerformanceRegisterPage
+      component: PerformanceRegisterPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/performanceListPage',
     name: 'PerformanceListPage',
-    component: PerformanceListPage
+      component: PerformanceListPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/performanceReadPage/:performNo',
@@ -318,7 +341,8 @@ const routes = [
     },
     props: {
       default: true
-    }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/performanceModifyPage/:performNo',
@@ -328,7 +352,8 @@ const routes = [
     },
      props: {
       default: true
-     }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/mapPage',
@@ -338,12 +363,14 @@ const routes = [
   {
     path: '/eventRegisterPage',
     name: 'EventRegisterPage',
-    component: EventRegisterPage
+      component: EventRegisterPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/eventListPage',
     name: 'EventListPage',
-    component: EventListPage
+      component: EventListPage,
+      beforeEnter: requireAdmin()
   },
   {
     path: '/eventReadPage/:eventNo',
@@ -353,7 +380,8 @@ const routes = [
     },
      props: {
       default: true
-     }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/eventModifyPage/:eventNo',
@@ -363,7 +391,8 @@ const routes = [
     },
      props: {
       default: true
-     }
+      },
+      beforeEnter: requireAdmin()
   },
   {
     path: '/area',
@@ -465,7 +494,34 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+    routes,
+})
+
+router.beforeEach(async (to, from, next) => {
+    console.log("전체 라우팅 테스트")
+    let token = localStorage.getItem('token')
+    let refreshToken = localStorage.getItem('refreshToken')
+    if (token != null) {
+        axios.get('security/check', {params: {token: token, refreshToken: refreshToken}})
+            .then((res) => {
+                console.log(res.data)
+                if (res.data == 'ACCESS') {
+                    return next();
+                } else if (res.data == 'EXPIRED') {
+                    alert("토큰이 만료되셨습니다. 다시 로그인해주세요.")
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('refreshToken')
+                    return next('/login')
+                } else {
+                    console.log("리프레쉬 중 ! ")
+                    localStorage.removeItem('token')
+                    localStorage.setItem('token', res.data)
+                    return next()
+                }
+        })
+
+    }
+    return next();
 })
 
 export default router

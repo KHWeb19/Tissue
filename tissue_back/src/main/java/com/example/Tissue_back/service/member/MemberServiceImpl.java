@@ -8,10 +8,12 @@ import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
 import com.example.Tissue_back.entity.coupon.Coupon;
 import com.example.Tissue_back.entity.map.Map;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.repository.LikesRepository;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
 import com.example.Tissue_back.repository.map.MapRepository;
 import com.example.Tissue_back.repository.member.MemberRepository;
@@ -57,6 +59,8 @@ public class MemberServiceImpl implements MemberService {
     private CouponRepository couponRepository;
     @Autowired
     private MapRepository mapRepository;
+    @Autowired
+    private LikesRepository likesRepository;
 
     @Override
     public void register(MemberDto memberDto) {
@@ -79,7 +83,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public String [] login(LoginDto loginDto) {
         Optional<Member> maybeMember = repository.findByMemberId(loginDto.getMemberId());
 
         if(maybeMember.equals(Optional.empty())){
@@ -96,9 +100,20 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
 
-        String token = securityService.createToken(loginDto.getMemberId(),loginMember.getMemberNo(), loginMember.getRole(), (30*1000*60));
+        String token = securityService.createToken(loginDto.getMemberId(),loginMember.getMemberNo(), loginMember.getRole(), (1*1000*60));
 
-        return token;
+        if(loginMember.getRefreshToken() == null) {
+            String refreshToken = securityService.createRefreshToken();
+
+            loginMember.setRefreshToken(refreshToken);
+            repository.save(loginMember);
+        }
+
+        String [] allToken = new String[2];
+        allToken[0] = token;
+        allToken[1] = loginMember.getRefreshToken();
+
+        return allToken;
     }
 
     @Override
@@ -309,5 +324,50 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return ticketDtoList;
+    }
+
+    // -----------------------------------------------
+
+    @Override
+    public List<Likes> newLikes (Long memberNo) {
+        Optional<Member> who = repository.findById(memberNo);
+        Member member = who.get();
+        return likesRepository.findTop4ByMemberOrderByLikesNoDesc(member);
+    }
+
+    @Override
+    public List<Qna> newQna (Long memberNo) {
+        Optional<Member> who = repository.findById(memberNo);
+        Member member = who.get();
+        return qnaRepository.findTop5ByMemberOrderByQnaNoDesc(member);
+    }
+
+    @Override
+            public List<MyTicketDto> newTicket (Long memberNo) {
+                Optional<Member> findMember = repository.findById(memberNo);
+                Member member = findMember.get();
+
+                List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
+                List<MyTicketDto> ticketDtoList = new ArrayList<>();
+
+                for (int i = 0; i <getTicket.size(); i++) {
+                    Ticketing ticketing = getTicket.get(i);
+
+                    Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
+                    Performance performance = getPerform.get();
+
+                    MyTicketDto ticketDto = new MyTicketDto();
+
+                    ticketDto.setTicketing_no(ticketing.getTicketingNo());
+                    ticketDto.setReg_date(ticketing.getReviewRegDate());
+                    ticketDto.setSeat(ticketing.getSeatNameArr());
+                    ticketDto.setPerformShowDate(performance.getPerformShowDate());
+                    ticketDto.setPerformName(performance.getPerformName());
+            ticketDto.setStatus(ticketing.getStatus());
+
+            ticketDtoList.add(ticketDto);
+        }
+
+        return  ticketDtoList;
     }
 }
