@@ -89,15 +89,18 @@ export default {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-        if(this.token === null) {
-            this.memberInfo.memberId = null
-        }
-
+        
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
 
         
     },
+    mounted() {
+        if(this.token === null) {
+            this.memberInfo.memberId = null
+        }
+
+    }
 }
 </script>
 
