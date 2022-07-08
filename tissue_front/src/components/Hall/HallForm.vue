@@ -5,8 +5,15 @@
         <div>
           <div class="stage">S T A G E</div>
 
-          <div style="display: flex">
-            <div style="width: 50px">
+          <div style="display: flex; justify-content: center">
+            <div
+              style="
+                width: 50px;
+                position: absolute;
+                padding-right: 400px;
+                z-index: 0;
+              "
+            >
               <table v-if="dataTable" style="margin: 0">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -17,7 +24,7 @@
                 </tr>
               </table>
             </div>
-            <div style="display: flex; justify-content: center">
+            <div style="display: flex; justify-content: center; z-index: 1">
               <table v-if="dataTable" style="">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -44,7 +51,7 @@
                         ></div>
                       </div>
                       <div v-if="hall.rowCnt > 5">
-                        <div v-if="indexes == 2" style="width: 20px"></div>
+                        <div v-if="indexes == 1" style="width: 20px"></div>
                         <div
                           v-if="indexes == hall.rowCnt - 3"
                           style="width: 20px"
@@ -68,9 +75,9 @@
               >
                 <div
                   :class="{
-                    lightsalmon: item.color == 'lightsalmon',
-                    lightgreen: item.color == 'lightgreen',
-                    mediumpurple: item.color == 'mediumpurple',
+                    crimson: item.color == 'crimson',
+                    seagreen: item.color == 'seagreen',
+                    blueviolet: item.color == 'blueviolet',
                   }"
                 ></div>
                 <span class="ml-3" style="font-size: 13px">
@@ -129,18 +136,21 @@ export default {
       type: Object,
       required: true,
     },
+    ticketingList: {
+      type: Array,
+    },
   },
   data() {
     return {
       gradePrice: [
-        { price: this.performance.performPriceR },
         { price: this.performance.performPriceS },
+        { price: this.performance.performPriceR },
         { price: this.performance.performPriceVip },
       ],
       gradeColor: [
-        { color: "lightsalmon", grade: "R" },
-        { color: "lightgreen", grade: "S" },
-        { color: "mediumpurple", grade: "VIP" },
+        { color: "crimson", grade: "S" },
+        { color: "seagreen", grade: "R" },
+        { color: "blueviolet", grade: "VIP" },
       ],
       isClick: "",
       dataTable: null,
@@ -152,6 +162,7 @@ export default {
       showSelectInfo: [],
       seatGradeCnt: [{ cnt: 0 }, { cnt: 0 }, { cnt: 0 }],
       selectPrice: 0,
+      ticketingListCopy: [],
     };
   },
 
@@ -162,32 +173,68 @@ export default {
   },
 
   created() {
+    console.log("3홀폼");
+    console.log(this.$store.state.ticketingList);
+    this.ticketingListCopy = [];
+
+    if (this.ticketingList.length == 0) {
+      this.ticketingListCopy = [{ ticketing: 0 }];
+    } else {
+      this.ticketingListCopy = this.ticketingList;
+    }
+
     this.dataTable = new Array(this.hall.rowCnt);
 
     for (let i = 0; i < this.dataTable.length; i++) {
       this.dataTable[i] = new Array(this.hall.colCnt);
     }
     let cnt = 0;
+
     for (let i = 0; i < this.hall.rowCnt; i++) {
       for (let j = 0; j < this.hall.colCnt; j++) {
-        this.dataTable[i][j] = {
-          name: this.hall.seats[cnt].seatName,
-          grade: this.hall.seats[cnt].seatGrade,
-          click: false,
-        };
+        for (let k = 0; k < this.ticketingListCopy.length; k++) {
+          if (
+            i * this.hall.colCnt + j + 1 !=
+            this.ticketingListCopy[k].seatName
+          ) {
+            this.dataTable[i][j] = {
+              name: this.hall.seats[cnt].seatName,
+              grade: this.hall.seats[cnt].seatGrade,
+              click: false,
+              ticketing: false,
+            };
+          } else {
+            this.dataTable[i][j] = {
+              name: this.hall.seats[cnt].seatName,
+              grade: this.hall.seats[cnt].seatGrade,
+              click: false,
+              ticketing: true,
+            };
+            break;
+          }
+        }
         cnt = cnt + 1;
       }
     }
 
     for (let i = 0; i < this.hall.rowCnt; i++) {
       for (let j = 0; j < this.hall.colCnt; j++) {
-        if (this.dataTable[i][j].grade == "R") {
+        if (
+          this.dataTable[i][j].grade == "S" &&
+          this.dataTable[i][j].ticketing == false
+        ) {
           this.seatGradeCnt[0].cnt += 1;
         }
-        if (this.dataTable[i][j].grade == "S") {
+        if (
+          this.dataTable[i][j].grade == "R" &&
+          this.dataTable[i][j].ticketing == false
+        ) {
           this.seatGradeCnt[1].cnt += 1;
         }
-        if (this.dataTable[i][j].grade == "VIP") {
+        if (
+          this.dataTable[i][j].grade == "VIP" &&
+          this.dataTable[i][j].ticketing == false
+        ) {
           this.seatGradeCnt[2].cnt += 1;
         }
       }
@@ -199,21 +246,26 @@ export default {
   mounted() {
     for (let i = 0; i < this.hall.rowCnt; i++) {
       for (let j = 0; j < this.hall.colCnt; j++) {
-        if (this.dataTable[i][j].grade == "R") {
+        if (this.dataTable[i][j].ticketing == true) {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "lightsalmon";
-        } else if (this.dataTable[i][j].grade == "S") {
-          let bodyTag = document.getElementsByClassName("seat");
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightgrey";
+        } else {
+          if (this.dataTable[i][j].grade == "S") {
+            let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "lightgreen";
-        } else if (this.dataTable[i][j].grade == "VIP") {
-          let bodyTag = document.getElementsByClassName("seat");
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "crimson";
+          } else if (this.dataTable[i][j].grade == "R") {
+            let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "mediumpurple";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "seagreen";
+          } else if (this.dataTable[i][j].grade == "VIP") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+              "blueviolet";
+          }
         }
       }
     }
@@ -224,17 +276,20 @@ export default {
       let row = Number(e.target.getAttribute("row-index"));
       let col = Number(e.target.getAttribute("cell-index"));
 
-      console.log(
-        row,
-        col,
-        this.hall.seats[row * this.hall.colCnt + col].seatGrade
-      );
+      // console.log(
+      //   row,
+      //   col,
+      //   this.hall.seats[row * this.hall.colCnt + col].seatGrade
+      // );
 
       let temp = `${row + 1}열 ${col + 1}번 `;
       let priceGradeTemp =
         this.hall.seats[row * this.hall.colCnt + col].seatGrade;
 
-      if (this.dataTable[row][col].click == false) {
+      if (
+        this.dataTable[row][col].click == false &&
+        this.dataTable[row][col].ticketing == false
+      ) {
         this.dataTable[row][col].click = true;
         if (this.showSelectInfo.length < 10) {
           this.showSelectInfo.push({
@@ -242,10 +297,10 @@ export default {
             grade: this.dataTable[row][col].grade,
             seatName: row * this.hall.colCnt + col + 1,
           });
-          if (priceGradeTemp == "R") {
-            this.selectPrice += this.performance.performPriceR;
-          } else if (priceGradeTemp == "S") {
+          if (priceGradeTemp == "S") {
             this.selectPrice += this.performance.performPriceS;
+          } else if (priceGradeTemp == "R") {
+            this.selectPrice += this.performance.performPriceR;
           } else if (priceGradeTemp == "VIP") {
             this.selectPrice += this.performance.performPriceVip;
           }
@@ -253,16 +308,19 @@ export default {
           alert("최대 10개만 선택 가능합니다.");
           this.dataTable[row][col].click = false;
         }
-      } else if (this.dataTable[row][col].click == true) {
+      } else if (
+        this.dataTable[row][col].click == true &&
+        this.dataTable[row][col].ticketing == false
+      ) {
         this.dataTable[row][col].click = false;
 
         for (let i = 0; i < this.showSelectInfo.length; i++) {
           if (this.showSelectInfo[i].info == temp) {
             this.showSelectInfo.splice(i, 1);
-            if (priceGradeTemp == "R") {
-              this.selectPrice -= this.performance.performPriceR;
-            } else if (priceGradeTemp == "S") {
+            if (priceGradeTemp == "S") {
               this.selectPrice -= this.performance.performPriceS;
+            } else if (priceGradeTemp == "R") {
+              this.selectPrice -= this.performance.performPriceR;
             } else if (priceGradeTemp == "VIP") {
               this.selectPrice -= this.performance.performPriceVip;
             }
@@ -272,26 +330,32 @@ export default {
 
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {
-          if (this.dataTable[i][j].click == true) {
+          if (
+            this.dataTable[i][j].click == true &&
+            this.dataTable[i][j].ticketing == false
+          ) {
             let bodyTag = document.getElementsByClassName("seat");
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "skyblue";
-          } else if (this.dataTable[i][j].click == false) {
-            if (this.dataTable[i][j].grade == "R") {
+          } else if (
+            this.dataTable[i][j].click == false &&
+            this.dataTable[i][j].ticketing == false
+          ) {
+            if (this.dataTable[i][j].grade == "S") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightsalmon";
-            } else if (this.dataTable[i][j].grade == "S") {
+                "crimson";
+            } else if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightgreen";
+                "seagreen";
             } else if (this.dataTable[i][j].grade == "VIP") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "mediumpurple";
+                "blueviolet";
             }
           }
         }
@@ -305,21 +369,23 @@ export default {
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {
           this.dataTable[i][j].click = false;
-          if (this.dataTable[i][j].grade == "R") {
-            let bodyTag = document.getElementsByClassName("seat");
+          if (this.dataTable[i][j].ticketing == false) {
+            if (this.dataTable[i][j].grade == "S") {
+              let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightsalmon";
-          } else if (this.dataTable[i][j].grade == "S") {
-            let bodyTag = document.getElementsByClassName("seat");
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "crimson";
+            } else if (this.dataTable[i][j].grade == "R") {
+              let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightgreen";
-          } else if (this.dataTable[i][j].grade == "VIP") {
-            let bodyTag = document.getElementsByClassName("seat");
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "seagreen";
+            } else if (this.dataTable[i][j].grade == "VIP") {
+              let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "mediumpurple";
+              bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
+                "blueviolet";
+            }
           }
         }
       }
@@ -337,20 +403,20 @@ export default {
 </script>
 
 <style scoped>
-.lightsalmon {
+.crimson {
   width: 20px;
   height: 20px;
-  background-color: lightsalmon;
+  background-color: crimson;
 }
-.lightgreen {
+.seagreen {
   width: 20px;
   height: 20px;
-  background-color: lightgreen;
+  background-color: seagreen;
 }
-.mediumpurple {
+.blueviolet {
   width: 20px;
   height: 20px;
-  background-color: mediumpurple;
+  background-color: blueviolet;
 }
 .grey {
   width: 10px;
@@ -358,7 +424,7 @@ export default {
   background-color: lightgrey;
 }
 .seat {
-  border-radius: 15px;
+  border-radius: 5px;
   margin: 5px;
   margin-right: 0;
   width: 20px;
@@ -395,7 +461,7 @@ export default {
 }
 
 .showCol {
-  width: 20px;
+  width: 26px;
   height: 20px;
   margin: 5px;
   margin-right: 0;

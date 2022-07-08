@@ -2,9 +2,12 @@ import {
 
     FETCH_HALL_LIST,
     FETCH_HALL,
+    FETCH_TICKETING_LIST,
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
+
+    FETCH_REFUND_LIST,
 
       // performance
     FETCH_PERFORMANCE_LIST,
@@ -67,6 +70,18 @@ export default {
         return axios.get(`http://localhost:7777/hall/${hallNo}`)
         .then((res)=>{
             commit(FETCH_HALL,res.data)
+        })
+    },
+    fetchTicketingList({commit},performNo) {
+        return axios.get(`http://localhost:7777/ticketing/${performNo}`)
+        .then((res)=>{
+            commit(FETCH_TICKETING_LIST,res.data)
+        })
+    },
+    fetchRefundList({commit}) {
+        return axios.get("http://localhost:7777/refund/list")
+        .then((res)=>{
+            commit(FETCH_REFUND_LIST,res.data)
         })
     },
     fetchCouponList({commit}) {
