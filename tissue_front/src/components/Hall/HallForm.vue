@@ -6,7 +6,14 @@
           <div class="stage">S T A G E</div>
 
           <div style="display: flex; justify-content: center">
-            <div style="width: 50px; position: absolute; padding-right: 400px">
+            <div
+              style="
+                width: 50px;
+                position: absolute;
+                padding-right: 400px;
+                z-index: 0;
+              "
+            >
               <table v-if="dataTable" style="margin: 0">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -17,7 +24,7 @@
                 </tr>
               </table>
             </div>
-            <div style="display: flex; justify-content: center">
+            <div style="display: flex; justify-content: center; z-index: 1">
               <table v-if="dataTable" style="">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -68,9 +75,9 @@
               >
                 <div
                   :class="{
-                    lightsalmon: item.color == 'lightsalmon',
-                    lightgreen: item.color == 'lightgreen',
-                    mediumpurple: item.color == 'mediumpurple',
+                    crimson: item.color == 'crimson',
+                    seagreen: item.color == 'seagreen',
+                    blueviolet: item.color == 'blueviolet',
                   }"
                 ></div>
                 <span class="ml-3" style="font-size: 13px">
@@ -136,14 +143,14 @@ export default {
   data() {
     return {
       gradePrice: [
-        { price: this.performance.performPriceR },
         { price: this.performance.performPriceS },
+        { price: this.performance.performPriceR },
         { price: this.performance.performPriceVip },
       ],
       gradeColor: [
-        { color: "lightsalmon", grade: "R" },
-        { color: "lightgreen", grade: "S" },
-        { color: "mediumpurple", grade: "VIP" },
+        { color: "crimson", grade: "S" },
+        { color: "seagreen", grade: "R" },
+        { color: "blueviolet", grade: "VIP" },
       ],
       isClick: "",
       dataTable: null,
@@ -213,13 +220,13 @@ export default {
     for (let i = 0; i < this.hall.rowCnt; i++) {
       for (let j = 0; j < this.hall.colCnt; j++) {
         if (
-          this.dataTable[i][j].grade == "R" &&
+          this.dataTable[i][j].grade == "S" &&
           this.dataTable[i][j].ticketing == false
         ) {
           this.seatGradeCnt[0].cnt += 1;
         }
         if (
-          this.dataTable[i][j].grade == "S" &&
+          this.dataTable[i][j].grade == "R" &&
           this.dataTable[i][j].ticketing == false
         ) {
           this.seatGradeCnt[1].cnt += 1;
@@ -244,21 +251,20 @@ export default {
 
           bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightgrey";
         } else {
-          if (this.dataTable[i][j].grade == "R") {
+          if (this.dataTable[i][j].grade == "S") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "crimson";
+          } else if (this.dataTable[i][j].grade == "R") {
             let bodyTag = document.getElementsByClassName("seat");
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightsalmon";
-          } else if (this.dataTable[i][j].grade == "S") {
-            let bodyTag = document.getElementsByClassName("seat");
-
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightgreen";
+              "seagreen";
           } else if (this.dataTable[i][j].grade == "VIP") {
             let bodyTag = document.getElementsByClassName("seat");
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "mediumpurple";
+              "blueviolet";
           }
         }
       }
@@ -291,10 +297,10 @@ export default {
             grade: this.dataTable[row][col].grade,
             seatName: row * this.hall.colCnt + col + 1,
           });
-          if (priceGradeTemp == "R") {
-            this.selectPrice += this.performance.performPriceR;
-          } else if (priceGradeTemp == "S") {
+          if (priceGradeTemp == "S") {
             this.selectPrice += this.performance.performPriceS;
+          } else if (priceGradeTemp == "R") {
+            this.selectPrice += this.performance.performPriceR;
           } else if (priceGradeTemp == "VIP") {
             this.selectPrice += this.performance.performPriceVip;
           }
@@ -311,10 +317,10 @@ export default {
         for (let i = 0; i < this.showSelectInfo.length; i++) {
           if (this.showSelectInfo[i].info == temp) {
             this.showSelectInfo.splice(i, 1);
-            if (priceGradeTemp == "R") {
-              this.selectPrice -= this.performance.performPriceR;
-            } else if (priceGradeTemp == "S") {
+            if (priceGradeTemp == "S") {
               this.selectPrice -= this.performance.performPriceS;
+            } else if (priceGradeTemp == "R") {
+              this.selectPrice -= this.performance.performPriceR;
             } else if (priceGradeTemp == "VIP") {
               this.selectPrice -= this.performance.performPriceVip;
             }
@@ -335,21 +341,21 @@ export default {
             this.dataTable[i][j].click == false &&
             this.dataTable[i][j].ticketing == false
           ) {
-            if (this.dataTable[i][j].grade == "R") {
+            if (this.dataTable[i][j].grade == "S") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightsalmon";
-            } else if (this.dataTable[i][j].grade == "S") {
+                "crimson";
+            } else if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightgreen";
+                "seagreen";
             } else if (this.dataTable[i][j].grade == "VIP") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "mediumpurple";
+                "blueviolet";
             }
           }
         }
@@ -364,21 +370,21 @@ export default {
         for (let j = 0; j < this.hall.colCnt; j++) {
           this.dataTable[i][j].click = false;
           if (this.dataTable[i][j].ticketing == false) {
-            if (this.dataTable[i][j].grade == "R") {
+            if (this.dataTable[i][j].grade == "S") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightsalmon";
-            } else if (this.dataTable[i][j].grade == "S") {
+                "crimson";
+            } else if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightgreen";
+                "seagreen";
             } else if (this.dataTable[i][j].grade == "VIP") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "mediumpurple";
+                "blueviolet";
             }
           }
         }
@@ -397,20 +403,20 @@ export default {
 </script>
 
 <style scoped>
-.lightsalmon {
+.crimson {
   width: 20px;
   height: 20px;
-  background-color: lightsalmon;
+  background-color: crimson;
 }
-.lightgreen {
+.seagreen {
   width: 20px;
   height: 20px;
-  background-color: lightgreen;
+  background-color: seagreen;
 }
-.mediumpurple {
+.blueviolet {
   width: 20px;
   height: 20px;
-  background-color: mediumpurple;
+  background-color: blueviolet;
 }
 .grey {
   width: 10px;
