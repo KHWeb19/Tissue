@@ -5,8 +5,8 @@
         <div>
           <div class="stage">S T A G E</div>
 
-          <div style="display: flex">
-            <div style="width: 50px">
+          <div style="display: flex; justify-content: center">
+            <div style="width: 50px; position: absolute; padding-right: 400px">
               <table v-if="dataTable" style="margin: 0">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -44,7 +44,7 @@
                         ></div>
                       </div>
                       <div v-if="hall.rowCnt > 5">
-                        <div v-if="indexes == 2" style="width: 20px"></div>
+                        <div v-if="indexes == 1" style="width: 20px"></div>
                         <div
                           v-if="indexes == hall.rowCnt - 3"
                           style="width: 20px"
@@ -418,7 +418,7 @@ export default {
   background-color: lightgrey;
 }
 .seat {
-  border-radius: 15px;
+  border-radius: 5px;
   margin: 5px;
   margin-right: 0;
   width: 20px;
@@ -455,7 +455,7 @@ export default {
 }
 
 .showCol {
-  width: 20px;
+  width: 26px;
   height: 20px;
   margin: 5px;
   margin-right: 0;

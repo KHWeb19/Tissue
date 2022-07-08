@@ -1,17 +1,15 @@
 <template>
   <v-container>
     <v-app-bar app elevation="3">
-        <v-toolbar-title class="ml-3">
-            📌 공연장 관리
-        </v-toolbar-title>
+      <v-toolbar-title class="ml-3"> 📌 공연장 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container class="mt-10">
       <div style="display: flex; justify-content: center; align-items: center">
         <div>
           <div class="stage">S T A G E</div>
 
-          <div style="display: flex">
-            <div style="width: 50px">
+          <div style="display: flex; justify-content: center">
+            <div style="width: 50px; position: absolute; padding-right: 400px">
               <table v-if="dataTable" style="margin: 0">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -42,12 +40,18 @@
                         :cell-index="indexes"
                       ></div>
                       <div v-if="hall.rowCnt <= 5">
-                        <div v-if="indexes == 0" style="width: 50px"></div>
-                        <div v-if="indexes == 3" style="width: 50px"></div>
+                        <div v-if="indexes == 0" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 2"
+                          style="width: 20px"
+                        ></div>
                       </div>
                       <div v-if="hall.rowCnt > 5">
-                        <div v-if="indexes == 1" style="width: 50px"></div>
-                        <div v-if="indexes == 7" style="width: 50px"></div>
+                        <div v-if="indexes == 1" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 3"
+                          style="width: 20px"
+                        ></div>
                       </div>
                     </div>
                   </td>
@@ -418,18 +422,18 @@ export default {
 
 <style scoped>
 .lightsalmon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: lightsalmon;
 }
 .lightgreen {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: lightgreen;
 }
 .mediumpurple {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: mediumpurple;
 }
 .grey {
@@ -438,11 +442,11 @@ export default {
   background-color: lightgrey;
 }
 .seat {
-  border-radius: 15px;
+  border-radius: 5px;
   margin: 5px;
   margin-right: 0;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
 }
 
 .stage {
@@ -452,18 +456,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 300px;
+  width: 300px;
+  height: 150px;
   background-color: lightgrey;
   margin-bottom: 30px;
 }
 
 .showSelectSeat {
   width: 390px;
-  height: 200px;
+  height: 150px;
   border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
+  overflow: auto;
 }
 .showHallInfo {
   width: 390px;
@@ -472,11 +477,12 @@ export default {
   border-radius: 15px;
 }
 .showCol {
-  width: 50px;
-  height: 50px;
+  width: 26px;
+  height: 20px;
   margin: 5px;
   margin-right: 0;
-  padding-top: 12px;
+  padding-top: 2px;
+  font-size: 12px;
 }
 
 .titleBox {
