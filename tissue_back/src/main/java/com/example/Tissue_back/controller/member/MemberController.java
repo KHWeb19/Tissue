@@ -6,6 +6,7 @@ import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.controller.request.review.MyReviewDto;
 import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
@@ -141,5 +142,25 @@ public class MemberController {
         log.info("==my Ticket List ==");
 
         return service.myTicket(memberNo);
+    }
+
+    // 최신 목록
+    @GetMapping("/newLikes/{memberNo}")
+    public List<Likes> newLikes (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New Likes");
+
+        return service.newLikes(memberNo);
+    }
+    @GetMapping("/newQna/{memberNo}")
+    public List<Qna> newQna (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New Qna");
+
+        return service.newQna(memberNo);
+    }
+    @GetMapping("/newTicket/{memberNo}")
+    public List<MyTicketDto> newTicket (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New TIcket");
+
+        return service.newTicket(memberNo);
     }
 }

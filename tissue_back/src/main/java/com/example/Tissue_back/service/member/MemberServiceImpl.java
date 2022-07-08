@@ -5,13 +5,16 @@ import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.controller.request.review.MyReviewDto;
 import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
+import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
 import com.example.Tissue_back.entity.coupon.Coupon;
 import com.example.Tissue_back.entity.map.Map;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.repository.LikesRepository;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
 import com.example.Tissue_back.repository.map.MapRepository;
 import com.example.Tissue_back.repository.member.MemberRepository;
@@ -57,6 +60,8 @@ public class MemberServiceImpl implements MemberService {
     private CouponRepository couponRepository;
     @Autowired
     private MapRepository mapRepository;
+    @Autowired
+    private LikesRepository likesRepository;
 
     @Override
     public void register(MemberDto memberDto) {
@@ -309,5 +314,50 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return ticketDtoList;
+    }
+
+    // -----------------------------------------------
+
+    @Override
+    public List<Likes> newLikes (Long memberNo) {
+        Optional<Member> who = repository.findById(memberNo);
+        Member member = who.get();
+        return likesRepository.findTop4ByMemberOrderByLikesNoDesc(member);
+    }
+
+    @Override
+    public List<Qna> newQna (Long memberNo) {
+        Optional<Member> who = repository.findById(memberNo);
+        Member member = who.get();
+        return qnaRepository.findTop5ByMemberOrderByQnaNoDesc(member);
+    }
+
+    @Override
+    public List<MyTicketDto> newTicket (Long memberNo) {
+        Optional<Member> findMember = repository.findById(memberNo);
+        Member member = findMember.get();
+
+        List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
+        List<MyTicketDto> ticketDtoList = new ArrayList<>();
+
+        for (int i = 0; i <getTicket.size(); i++) {
+            Ticketing ticketing = getTicket.get(i);
+
+            Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
+            Performance performance = getPerform.get();
+
+            MyTicketDto ticketDto = new MyTicketDto();
+
+            ticketDto.setTicketing_no(ticketing.getTicketingNo());
+            ticketDto.setReg_date(ticketing.getReviewRegDate());
+            ticketDto.setSeat(ticketing.getSeatNameArr());
+            ticketDto.setPerformShowDate(performance.getPerformShowDate());
+            ticketDto.setPerformName(performance.getPerformName());
+            ticketDto.setStatus(ticketing.getStatus());
+
+            ticketDtoList.add(ticketDto);
+        }
+
+        return  ticketDtoList;
     }
 }

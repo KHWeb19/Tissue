@@ -70,7 +70,7 @@ public class LikesServiceImpl implements LikesService {
 
         Optional<Likes> maybeLikes = likeRepository.findByMemberAndPerformance(member, performance);
         log.info("check  success ! ! ");
-        likeRepository.deleteById(maybeLikes.get().getLikes_no());
+        likeRepository.deleteById(maybeLikes.get().getLikesNo());
 
         return likeRepository.findByPerformance(performance);
 
