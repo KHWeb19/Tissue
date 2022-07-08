@@ -88,7 +88,7 @@ const requireAdmin = () => (to, from, next) => {
                 alert('접근 권한이 없습니다.')
                 router.push("/")
             }
-    })
+        })
 }
 
 const routes = [
@@ -493,16 +493,23 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
     console.log("전체 라우팅 테스트")
     let token = localStorage.getItem('token')
+    let refreshToken = localStorage.getItem('refreshToken')
     if (token != null) {
-        axios.get('security/check', {params: {token: token}})
+        axios.get('security/check', {params: {token: token, refreshToken: refreshToken}})
             .then((res) => {
                 console.log(res.data)
                 if (res.data == 'ACCESS') {
                     return next();
-                } else {
-                    localStorage.removeItem('token')
+                } else if (res.data == 'EXPIRED') {
                     alert("토큰이 만료되셨습니다. 다시 로그인해주세요.")
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('refreshToken')
                     return next('/login')
+                } else {
+                    console.log("리프레쉬 중 ! ")
+                    localStorage.removeItem('token')
+                    localStorage.setItem('token', res.data)
+                    return next()
                 }
         })
 

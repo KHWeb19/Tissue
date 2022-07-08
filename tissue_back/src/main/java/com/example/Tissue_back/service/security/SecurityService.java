@@ -79,6 +79,7 @@ public class SecurityService {
         return JwtCode.DENIED;
     }
 
+
     public static enum JwtCode{
         DENIED,
         ACCESS,

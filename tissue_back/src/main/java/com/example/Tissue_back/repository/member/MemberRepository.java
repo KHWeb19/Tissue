@@ -16,6 +16,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.memberName = :name")
     Optional<Member> findByMemberName(@Param("name") String memberName);
 
+    Optional<Member> findByRefreshToken (String token);
+
     //임지훈
     @Transactional
     @Modifying
