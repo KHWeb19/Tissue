@@ -19,7 +19,7 @@ public interface MemberService {
 
     public void register(MemberDto memberDto);
     public Boolean checkId(String memberId);
-    public String login (LoginDto loginDto);
+    public String [] login (LoginDto loginDto);
     public FindDto findId(FindDto findDto) throws CoolsmsException;
     public FindDto findPw(FindDto findDto) throws  CoolsmsException;
     public Member getInfo (String token);

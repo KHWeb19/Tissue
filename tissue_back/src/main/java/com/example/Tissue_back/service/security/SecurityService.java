@@ -1,17 +1,18 @@
 package com.example.Tissue_back.service.security;
 
 import com.example.Tissue_back.entity.member.Role;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.sql.Date;
+import java.util.Date;
+
 
 @Service
+@Slf4j
 public class SecurityService {
 
     private final String secretKey = "lalatissuetissuetissue20220620lala";
@@ -38,6 +39,17 @@ public class SecurityService {
                 .compact();
 
     }
+    public String createRefreshToken() {
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+
+        Date now = new Date();
+        return Jwts.builder()
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + (3 * 24 * 60 * 1000 * 60)))
+                .signWith(key, signatureAlgorithm)
+                .compact();
+    }
 
     public String getMemberId (String token) {
 
@@ -52,6 +64,25 @@ public class SecurityService {
                 .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .build()
                 .parseClaimsJws(token).getBody();
+    }
+
+    public JwtCode validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8))).build().parseClaimsJws(token);
+            return JwtCode.ACCESS;
+        } catch (ExpiredJwtException e){
+            // 만료된 경우에는 refresh token을 확인하기 위해
+            return JwtCode.EXPIRED;
+        } catch (JwtException | IllegalArgumentException e) {
+            log.info("jwtException : {}", e);
+        }
+        return JwtCode.DENIED;
+    }
+
+    public static enum JwtCode{
+        DENIED,
+        ACCESS,
+        EXPIRED;
     }
 
 }

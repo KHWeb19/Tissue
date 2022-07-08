@@ -487,7 +487,27 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+    routes,
+})
+
+router.beforeEach(async (to, from, next) => {
+    console.log("전체 라우팅 테스트")
+    let token = localStorage.getItem('token')
+    if (token != null) {
+        axios.get('security/check', {params: {token: token}})
+            .then((res) => {
+                console.log(res.data)
+                if (res.data == 'ACCESS') {
+                    return next();
+                } else {
+                    localStorage.removeItem('token')
+                    alert("토큰이 만료되셨습니다. 다시 로그인해주세요.")
+                    return next('/login')
+                }
+        })
+
+    }
+    return next();
 })
 
 export default router

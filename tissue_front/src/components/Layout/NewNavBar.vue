@@ -114,6 +114,9 @@ export default {
                   this.$router.push("/myPage")
               }
           })
+          .catch(() => {
+              alert("토큰이 만료되셨습니다.")
+          })
       } else {
         alert("로그인이 필요합니다.");
         this.$router.push("/login");

@@ -50,11 +50,11 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/login")
-    public String login (@Validated @RequestBody LoginDto loginDto) throws Exception{
+    public String [] login (@Validated @RequestBody LoginDto loginDto) throws Exception{
 
         log.info("== Tissue Member Login ==" + loginDto);
 
-        String response = service.login(loginDto);
+        String [] response = service.login(loginDto);
         log.info("check" + response);
 
         if (response != null) {

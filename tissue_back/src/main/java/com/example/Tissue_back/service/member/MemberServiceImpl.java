@@ -5,7 +5,6 @@ import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.controller.request.review.MyReviewDto;
 import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
-import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
 import com.example.Tissue_back.entity.coupon.Coupon;
 import com.example.Tissue_back.entity.map.Map;
 import com.example.Tissue_back.entity.member.Member;
@@ -84,7 +83,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public String [] login(LoginDto loginDto) {
         Optional<Member> maybeMember = repository.findByMemberId(loginDto.getMemberId());
 
         if(maybeMember.equals(Optional.empty())){
@@ -103,7 +102,18 @@ public class MemberServiceImpl implements MemberService {
 
         String token = securityService.createToken(loginDto.getMemberId(),loginMember.getMemberNo(), loginMember.getRole(), (30*1000*60));
 
-        return token;
+        if(loginMember.getRefreshToken() == null) {
+            String refreshToken = securityService.createRefreshToken();
+
+            loginMember.setRefreshToken(refreshToken);
+            repository.save(loginMember);
+        }
+
+        String [] allToken = new String[2];
+        allToken[0] = token;
+        allToken[1] = loginMember.getRefreshToken();
+
+        return allToken;
     }
 
     @Override
@@ -333,26 +343,26 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MyTicketDto> newTicket (Long memberNo) {
-        Optional<Member> findMember = repository.findById(memberNo);
-        Member member = findMember.get();
+            public List<MyTicketDto> newTicket (Long memberNo) {
+                Optional<Member> findMember = repository.findById(memberNo);
+                Member member = findMember.get();
 
-        List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
-        List<MyTicketDto> ticketDtoList = new ArrayList<>();
+                List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
+                List<MyTicketDto> ticketDtoList = new ArrayList<>();
 
-        for (int i = 0; i <getTicket.size(); i++) {
-            Ticketing ticketing = getTicket.get(i);
+                for (int i = 0; i <getTicket.size(); i++) {
+                    Ticketing ticketing = getTicket.get(i);
 
-            Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
-            Performance performance = getPerform.get();
+                    Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
+                    Performance performance = getPerform.get();
 
-            MyTicketDto ticketDto = new MyTicketDto();
+                    MyTicketDto ticketDto = new MyTicketDto();
 
-            ticketDto.setTicketing_no(ticketing.getTicketingNo());
-            ticketDto.setReg_date(ticketing.getReviewRegDate());
-            ticketDto.setSeat(ticketing.getSeatNameArr());
-            ticketDto.setPerformShowDate(performance.getPerformShowDate());
-            ticketDto.setPerformName(performance.getPerformName());
+                    ticketDto.setTicketing_no(ticketing.getTicketingNo());
+                    ticketDto.setReg_date(ticketing.getReviewRegDate());
+                    ticketDto.setSeat(ticketing.getSeatNameArr());
+                    ticketDto.setPerformShowDate(performance.getPerformShowDate());
+                    ticketDto.setPerformName(performance.getPerformName());
             ticketDto.setStatus(ticketing.getStatus());
 
             ticketDtoList.add(ticketDto);
