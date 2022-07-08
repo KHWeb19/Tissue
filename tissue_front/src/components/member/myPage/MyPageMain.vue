@@ -34,7 +34,7 @@
         </div>
         <div class="tem2">
             <v-row no-gutters>
-                <v-col >
+                <v-col>
                     <v-row no-gutters>
                         <v-icon class="ml-3 mr-5" color="pink lighten-3">mdi-check-bold</v-icon>
                         <span> 최근 찜 목록 </span>
@@ -62,7 +62,7 @@
                         </v-data-table>
                 </v-col>
                 <v-divider class='ml-7 mr-7' vertical/>
-                <v-col class="mytable">
+                <v-col>
                     <v-row no-gutters>
                         <v-icon class="ml-3 mr-5" color="pink lighten-3">mdi-check-bold</v-icon>
                         <span> 최근 QnA 목록 </span>
@@ -157,8 +157,5 @@ export default {
 .more {
     font-size:8pt;
     color: grey;
-}
-.mytable {
-
 }
 </style>
