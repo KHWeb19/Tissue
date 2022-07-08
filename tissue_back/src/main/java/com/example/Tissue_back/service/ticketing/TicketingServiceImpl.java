@@ -43,8 +43,8 @@ public class TicketingServiceImpl implements TicketingService{
     private SecurityService securityService;
 
     @Override
-    public void register(TicketingDto ticketingDto) {
-        String memberId = securityService.getMemberId(ticketingDto.getMemberId());
+    public void register(TicketingDto ticketingDto,String memberId) {
+        //String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
 
         Ticketing ticketing = new Ticketing();
@@ -59,6 +59,8 @@ public class TicketingServiceImpl implements TicketingService{
         ticketing.setSeatNameArr(ticketingDto.getSeatNameArr());
 
         ticketingRepository.save(ticketing);
+
+
     }
 
     @Override
@@ -75,6 +77,8 @@ public class TicketingServiceImpl implements TicketingService{
             ticketingSeatRepository.save(ticketingSeat);
             ticketingSeat.setTicketingSeatNo(null);
         }
+
+
     }
 
     @Override
@@ -84,21 +88,23 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     @Override
-    public void useMileage(TicketingDto ticketingDto) {
+    public void useMileage(TicketingDto ticketingDto,String memberId) {
         //사용마일리지 차감
-        String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
+
+        log.info("useMileage()");
         memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+
+        log.info("useMileage Suc");
     }
 
     @Override
-    public void useCoupon(TicketingDto ticketingDto) {
+    public void useCoupon(TicketingDto ticketingDto,String memberId) {
         //사용 쿠폰 삭제 / 내역 저장
-
-        String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
         Optional<Member> findMember = memberRepository.findByMemberId(memberId);
 
+        log.info("useCoupon mmm");
         Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
 
         Coupon coupon = whatCoupon.get();
@@ -110,5 +116,7 @@ public class TicketingServiceImpl implements TicketingService{
         member.getUsed_coupons().add(coupon);
 
         memberRepository.save(member);
+
+        log.info("useCoupon Suc");
     }
 }
