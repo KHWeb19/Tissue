@@ -143,6 +143,7 @@
                     v-if="hall"
                     :hall="hall"
                     :performance="performance"
+                    :ticketingList="ticketingList"
                     v-on:showSelectInfo="showSelectInfo"
                     v-on:selectPrice="selectPrice"
                   />
@@ -309,6 +310,9 @@ export default {
       type: Object,
       required: true,
     },
+    ticketingList: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -343,17 +347,11 @@ export default {
       return this.tempSelectPriceInfoCopy - this.finalSalePrice;
     },
   },
-  created() {
-    //this.$store.state.hall = null;
 
-    this.fetchHall(this.hallNo)
-      .then(() => {
-        alert("공연장 요청 성공");
-      })
-      .catch(() => {
-        alert("공연장 요청 실패");
-        this.$router.push();
-      });
+  created() {
+    console.log("2홀폼");
+    console.log(this.$store.state.ticketingList);
+    this.$store.state.hall = null;
 
     for (let i = 0; i < this.coupons.length; i++) {
       if (this.coupons[i].couponCategory == this.performance.performCategory) {
@@ -362,7 +360,17 @@ export default {
     }
   },
 
-  mounted() {},
+  mounted() {
+    this.fetchHall(this.hallNo)
+      .then(() => {
+        //this.$store.state.hall = res.data;
+        alert("공연장 요청 성공");
+      })
+      .catch(() => {
+        alert("공연장 요청 실패");
+        this.$router.push();
+      });
+  },
   methods: {
     ...mapActions(["fetchHall"]),
 

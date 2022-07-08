@@ -56,20 +56,24 @@ export default {
   data() {
     return {
       items: [
-
-        { title: "회원 관리", icon: "mdi-account", route:'/Admin' },
+        { title: "회원 관리", icon: "mdi-account", route: "/Admin" },
         {
           title: "공연 관리",
           icon: "mdi-play-box-outline",
           route: "/performanceListPage",
         },
         { title: "공연장 관리", icon: "mdi-town-hall", route: "/hallList" },
-        { title: "이벤트 관리", icon: "mdi-calendar-question", route: "/eventListPage" },
+        {
+          title: "이벤트 관리",
+          icon: "mdi-calendar-question",
+          route: "/eventListPage",
+        },
         {
           title: "쿠폰 관리",
           icon: "mdi-ticket-percent",
           route: "/couponList",
         },
+        { title: "환불 관리", icon: "mdi-cash-refund", route: "/refundList" },
         {
           title: "공지사항 관리",
           icon: "mdi-bulletin-board",

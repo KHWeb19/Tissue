@@ -301,7 +301,7 @@ public class MemberServiceImpl implements MemberService {
 
             ticketDto.setTicketing_no(ticketing.getTicketingNo());
             ticketDto.setFinal_price(ticketing.getFinalPrice());
-            ticketDto.setReg_date(ticketing.getReviewRegDate());
+            ticketDto.setReg_date(ticketing.getTicketingRegDate());
 
             if(ticketing.getUsedCouponNo() != null) {
                 Optional<Coupon> getCoupon = couponRepository.findById(ticketing.getUsedCouponNo());

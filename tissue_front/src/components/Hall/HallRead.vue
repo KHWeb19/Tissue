@@ -1,17 +1,22 @@
 <template>
   <v-container>
     <v-app-bar app elevation="3">
-        <v-toolbar-title class="ml-3">
-            📌 공연장 관리
-        </v-toolbar-title>
+      <v-toolbar-title class="ml-3"> 📌 공연장 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container class="mt-10">
       <div style="display: flex; justify-content: center; align-items: center">
         <div>
           <div class="stage">S T A G E</div>
 
-          <div style="display: flex">
-            <div style="width: 50px">
+          <div style="display: flex; justify-content: center">
+            <div
+              style="
+                width: 50px;
+                position: absolute;
+                padding-right: 400px;
+                z-index: 0;
+              "
+            >
               <table v-if="dataTable" style="margin: 0">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -22,7 +27,7 @@
                 </tr>
               </table>
             </div>
-            <div>
+            <div style="display: flex; justify-content: center; z-index: 1">
               <table v-if="dataTable" style="margin: auto">
                 <tr
                   v-for="(line, index) in dataTable"
@@ -42,12 +47,18 @@
                         :cell-index="indexes"
                       ></div>
                       <div v-if="hall.rowCnt <= 5">
-                        <div v-if="indexes == 0" style="width: 50px"></div>
-                        <div v-if="indexes == 3" style="width: 50px"></div>
+                        <div v-if="indexes == 0" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 2"
+                          style="width: 20px"
+                        ></div>
                       </div>
                       <div v-if="hall.rowCnt > 5">
-                        <div v-if="indexes == 1" style="width: 50px"></div>
-                        <div v-if="indexes == 7" style="width: 50px"></div>
+                        <div v-if="indexes == 1" style="width: 20px"></div>
+                        <div
+                          v-if="indexes == hall.rowCnt - 3"
+                          style="width: 20px"
+                        ></div>
                       </div>
                     </div>
                   </td>
@@ -92,9 +103,9 @@
               <div class="mr-10" v-for="item in gradeColor" :key="item.grade">
                 <div
                   :class="{
-                    lightsalmon: item.color == 'lightsalmon',
-                    lightgreen: item.color == 'lightgreen',
-                    mediumpurple: item.color == 'mediumpurple',
+                    crimson: item.color == 'crimson',
+                    seagreen: item.color == 'seagreen',
+                    blueviolet: item.color == 'blueviolet',
                   }"
                 ></div>
                 <div style="text-align: center">
@@ -208,12 +219,12 @@ export default {
       checkbox: false,
       isClick: "",
       dataTable: null,
-      radioGroup: "R",
-      kindsGrade: ["R", "S", "VIP"],
+      radioGroup: "S",
+      kindsGrade: ["S", "R", "VIP"],
       gradeColor: [
-        { color: "lightsalmon", grade: "R" },
-        { color: "lightgreen", grade: "S" },
-        { color: "mediumpurple", grade: "VIP" },
+        { color: "crimson", grade: "S" },
+        { color: "seagreen", grade: "R" },
+        { color: "blueviolet", grade: "VIP" },
       ],
       modifyData: this.hall,
       seatNo: "",
@@ -247,21 +258,19 @@ export default {
   mounted() {
     for (let i = 0; i < this.hall.rowCnt; i++) {
       for (let j = 0; j < this.hall.colCnt; j++) {
-        if (this.dataTable[i][j].grade == "R") {
+        if (this.dataTable[i][j].grade == "S") {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "lightsalmon";
-        } else if (this.dataTable[i][j].grade == "S") {
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "crimson";
+        } else if (this.dataTable[i][j].grade == "R") {
           let bodyTag = document.getElementsByClassName("seat");
 
-          bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "lightgreen";
+          bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "seagreen";
         } else if (this.dataTable[i][j].grade == "VIP") {
           let bodyTag = document.getElementsByClassName("seat");
 
           bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-            "mediumpurple";
+            "blueviolet";
         }
       }
     }
@@ -300,21 +309,21 @@ export default {
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "skyblue";
           } else if (this.dataTable[i][j].click == false) {
-            if (this.dataTable[i][j].grade == "R") {
+            if (this.dataTable[i][j].grade == "S") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightsalmon";
-            } else if (this.dataTable[i][j].grade == "S") {
+                "crimson";
+            } else if (this.dataTable[i][j].grade == "R") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "lightgreen";
+                "seagreen";
             } else if (this.dataTable[i][j].grade == "VIP") {
               let bodyTag = document.getElementsByClassName("seat");
 
               bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-                "mediumpurple";
+                "blueviolet";
             }
           }
         }
@@ -362,21 +371,20 @@ export default {
       for (let i = 0; i < this.hall.rowCnt; i++) {
         for (let j = 0; j < this.hall.colCnt; j++) {
           this.dataTable[i][j].click = false;
-          if (this.dataTable[i][j].grade == "R") {
+          if (this.dataTable[i][j].grade == "S") {
+            let bodyTag = document.getElementsByClassName("seat");
+
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "crimson";
+          } else if (this.dataTable[i][j].grade == "R") {
             let bodyTag = document.getElementsByClassName("seat");
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightsalmon";
-          } else if (this.dataTable[i][j].grade == "S") {
-            let bodyTag = document.getElementsByClassName("seat");
-
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "lightgreen";
+              "seagreen";
           } else if (this.dataTable[i][j].grade == "VIP") {
             let bodyTag = document.getElementsByClassName("seat");
 
             bodyTag[i * this.hall.colCnt + j].style.backgroundColor =
-              "mediumpurple";
+              "blueviolet";
           }
         }
       }
@@ -399,15 +407,15 @@ export default {
           if (this.dataTable[i][j].grade == "R") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightsalmon";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "crimson";
           } else if (this.dataTable[i][j].grade == "S") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "lightgreen";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "seagreen";
           } else if (this.dataTable[i][j].grade == "VIP") {
             let bodyTag = document.getElementsByClassName("seat");
 
-            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "mediumpurple";
+            bodyTag[i * this.hall.colCnt + j].style.backgroundColor = "blueviolet";
           }
         }
       }
@@ -417,20 +425,20 @@ export default {
 </script>
 
 <style scoped>
-.lightsalmon {
-  width: 25px;
-  height: 25px;
-  background-color: lightsalmon;
+.crimson {
+  width: 20px;
+  height: 20px;
+  background-color: crimson;
 }
-.lightgreen {
-  width: 25px;
-  height: 25px;
-  background-color: lightgreen;
+.seagreen {
+  width: 20px;
+  height: 20px;
+  background-color: seagreen;
 }
-.mediumpurple {
-  width: 25px;
-  height: 25px;
-  background-color: mediumpurple;
+.blueviolet {
+  width: 20px;
+  height: 20px;
+  background-color: blueviolet;
 }
 .grey {
   width: 10px;
@@ -438,11 +446,11 @@ export default {
   background-color: lightgrey;
 }
 .seat {
-  border-radius: 15px;
+  border-radius: 5px;
   margin: 5px;
   margin-right: 0;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
 }
 
 .stage {
@@ -452,18 +460,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 300px;
+  width: 300px;
+  height: 150px;
   background-color: lightgrey;
   margin-bottom: 30px;
 }
 
 .showSelectSeat {
   width: 390px;
-  height: 200px;
+  height: 150px;
   border: 1px solid #f48fb1;
   padding: 10px;
   border-radius: 15px;
+  overflow: auto;
 }
 .showHallInfo {
   width: 390px;
@@ -472,11 +481,12 @@ export default {
   border-radius: 15px;
 }
 .showCol {
-  width: 50px;
-  height: 50px;
+  width: 26px;
+  height: 20px;
   margin: 5px;
   margin-right: 0;
-  padding-top: 12px;
+  padding-top: 2px;
+  font-size: 12px;
 }
 
 .titleBox {

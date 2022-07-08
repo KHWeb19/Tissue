@@ -1,9 +1,13 @@
 package com.example.Tissue_back.controller.ticketing;
 
+
+import com.example.Tissue_back.controller.request.refund.RefundListResponse;
+import com.example.Tissue_back.entity.ticketing.RefundRequest;
 import com.example.Tissue_back.service.ticketing.RefundService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -19,5 +23,12 @@ public class RefundController {
         log.info("== ticket Refund Request ==" + ticketingNo);
 
         refundService.request(ticketingNo);
+    }
+
+    @GetMapping("/list")
+    public List<RefundListResponse> refundList(){
+        log.info("refundList()");
+
+        return refundService.list();
     }
 }
