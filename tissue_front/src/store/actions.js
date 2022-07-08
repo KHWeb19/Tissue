@@ -35,6 +35,9 @@ import {
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
     FETCH_MY_TICKET,
+    FETCH_MY_NEW_QNA,
+    FETCH_MY_NEW_LIKE,
+    FETCH_MY_NEW_TICKET,
 
     FETCH_NEW_CONCERT,
     FETCH_NEW_MUSICAL,
@@ -253,6 +256,27 @@ export default {
                 console.log(res.data)
                 commit(FETCH_MY_TICKET, res.data)
         })
+    },
+    fetchMyNewQna({ commit }, memberNo) {
+        return axios.get(`Member/newQna/${memberNo}`)
+            .then((res => {
+                console.log(res.data)
+                commit(FETCH_MY_NEW_QNA, res.data)
+        }))
+    },
+    fetchMyNewLike({ commit }, memberNo) {
+        return axios.get(`Member/newLikes/${memberNo}`)
+            .then((res => {
+                console.log(res.data)
+                commit(FETCH_MY_NEW_LIKE, res.data)
+            }))
+    },
+    fetchMyNewTicket({ commit }, memberNo) {
+        return axios.get(`Member/newTicket/${memberNo}`)
+            .then((res => {
+                console.log(res.data)
+                commit(FETCH_MY_NEW_TICKET, res.data)
+            }))
     },
     fetchNewConcert({ commit }, performCategory) {
         return axios.get(`performance/new/${performCategory}`)
