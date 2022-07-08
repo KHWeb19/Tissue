@@ -2,6 +2,7 @@ import {
     FETCH_HALL_LIST,
     FETCH_HALL,
     FETCH_TICKETING_LIST,
+    FETCH_REFUND_LIST,
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
@@ -61,6 +62,9 @@ export default{
     },
     [FETCH_TICKETING_LIST](state, ticketingList) {
         state.ticketingList = ticketingList
+    },
+    [FETCH_REFUND_LIST](state, refundList) {
+        state.refundList = refundList
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList

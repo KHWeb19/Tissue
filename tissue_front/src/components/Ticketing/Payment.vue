@@ -90,9 +90,7 @@ export default {
       required: true,
     },
     selectCouponInfo: {},
-    mileageSalePrice: {
-      type: Number,
-    },
+    mileageSalePrice: {},
     tempSelectSeatInfo: {
       required: true,
     },

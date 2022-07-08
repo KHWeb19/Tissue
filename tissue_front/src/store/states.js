@@ -5,6 +5,7 @@ export default {
     couponList:[],
     coupon: null,
     ticketingList:[],
+    refundList: [],
 
     performances: [],
     performance: {},
