@@ -77,7 +77,7 @@
                     <my-page-qn-a v-if="this.$route.name == 'MyPageQnA'" :memberNo="memberInfo.memberNo"/>
                     <my-page-star v-if="this.$route.name == 'MyPageStar'" :memberNo="memberInfo.memberNo"/>
                     <my-page-review v-if="this.$route.name =='MyPageReview'" :memberNo="memberInfo.memberNo"/>
-                    <my-page-ticket v-if="this.$route.name == 'MyPageTicket'" :memberNo="memberNo"/>
+                    <my-page-ticket v-if="this.$route.name == 'MyPageTicket'" :memberNo="memberInfo.memberNo"/>
                 </v-row>
             </v-main>
         </div>

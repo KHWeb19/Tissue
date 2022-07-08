@@ -89,10 +89,16 @@
                             </v-col>
                         </v-row>
                         <v-row justify="end" class="pb-5 pr-5"> 
-                            <v-btn small color="blue lighten-3" dark depressed block
-                            @click="cancleTicket">
+                            <v-btn v-if="item.status === '예매완료'" 
+                            small color="blue lighten-3" dark depressed block
+                            @click="cancleTicket(item.ticketing_no)">
                                 <strong>예매취소</strong>
                             </v-btn>
+                            <v-btn v-else
+                            small color="blue lighten-3" depressed disabled block
+                               >
+                            <strong>환불 대기</strong>
+                        </v-btn>
                         </v-row>
                     </div>
                 </td>
@@ -110,11 +116,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 export default {
     name:'MyPageTicket',
-    memberNo : {
-        type: Number
+    props: {
+        memberNo : {
+            type: Number
+        }
     },
     data () {
         return {
@@ -140,8 +149,15 @@ export default {
     },
     methods: {
         ...mapActions(['fetchMyTicket']),
-        cancleTicket() {
-
+        cancleTicket(ticketingNo) {
+            axios.post(`refund/requset/${ticketingNo}`)
+            .then(() => {
+                alert("예매가 취소요청 되셨습니다. 환불은 예매 취소일 기준 1~2일 소요됩니다.")
+                history.go(0)
+            })
+            .catch((res => {
+                console.log(res.message)
+            }))
         }
     }
 }
