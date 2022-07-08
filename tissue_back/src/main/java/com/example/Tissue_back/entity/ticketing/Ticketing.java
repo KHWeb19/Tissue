@@ -41,6 +41,11 @@ public class Ticketing {
     @Column
     private Integer finalPrice;
 
+
     @OneToMany(mappedBy = "ticketing", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<TicketingSeat> seats;
+
+    @Column
+    public String status = "예매완료";
+
 }

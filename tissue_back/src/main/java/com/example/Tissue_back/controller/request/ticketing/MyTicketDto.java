@@ -18,6 +18,7 @@ public class MyTicketDto {
     private Integer final_price;
     private String reg_date;
     private String used_coupon;
+    private String status;
     private Integer used_mileage;
     private String [] seat;
 

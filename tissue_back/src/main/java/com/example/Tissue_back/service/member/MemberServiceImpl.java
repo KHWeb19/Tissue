@@ -303,6 +303,7 @@ public class MemberServiceImpl implements MemberService {
             ticketDto.setPerformArea(map.getName());
             ticketDto.setPerformThumbnail(performance.getPerformThumbnail());
             ticketDto.setPerformName(performance.getPerformName());
+            ticketDto.setStatus(ticketing.getStatus());
 
             ticketDtoList.add(ticketDto);
         }
