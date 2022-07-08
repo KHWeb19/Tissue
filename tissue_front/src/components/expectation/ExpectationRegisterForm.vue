@@ -51,23 +51,28 @@ export default {
   },
   methods: {
     ...mapActions([ 'fetchExpectList']),
+     
     btnLogin() {
       this.$router.push({ path: '/login'})
     },
     addComment () {
+      
       
       const id = this.memberInfo.memberId
       const expectContent = this.expectContent
       const eventNo = this.eventNo
 
       console.log(id, expectContent, eventNo)
+
       axios.post('http://localhost:7777/expectation/register', { id, expectContent, eventNo })
         .then((res) => { 
-          if(res.data == true) {  
+          console.log(res)
+            if(res.data == true) {  
             alert("기대평이 등록되었습니다.")
             this.fetchExpectList(eventNo)
             this.expectContent = null
 
+            //적립금 
             const memberMileage = this.memberInfo.memberMileage + 3000
 
             axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
@@ -75,11 +80,11 @@ export default {
                   console.log('마일리지 적립', memberMileage)
                   alert('기대평 적립금 3,000원이 적립되었습니다!')
                 })
-          }
-          else{
-            alert("기대평은 1회만 작성 가능합니다.")
-            this.$router.push({ path: '/event'})
-          }
+            } else { 
+              alert("기대평은 1회만 작성 가능합니다.")
+              this.$router.push({ path: '/event' })
+            }
+
       }).catch(err => {
         alert(err)
       })

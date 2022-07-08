@@ -94,7 +94,7 @@ export default {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-        // this.$store.state.memberInfo.memberId = null 
+        // this.$store.state.expect.id = null
 
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)

@@ -2,15 +2,13 @@ package com.example.Tissue_back.service.expectation;
 
 import com.example.Tissue_back.controller.request.expectation.ExpectationDto;
 import com.example.Tissue_back.entity.expectation.Expectation;
-import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.repository.event.EventRepository;
 import com.example.Tissue_back.repository.expectation.ExpectationRepository;
 import com.example.Tissue_back.service.security.SecurityService;
-import com.sun.tools.jconsole.JConsoleContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,28 +22,30 @@ public class ExpectationServiceImpl implements ExpectationService {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private EventRepository eventRepository;
+
+
     @Override
     public Boolean register(ExpectationDto expectationDto) throws Exception {
 
-//        String id = securityService.getMemberId(token)
-//        Expectation expectation = new Expectation();
-//
-//        expectation.setExpectContent(expectationDto.getExpectContent());
-//        expectation.setId(id);
-//
-//        expectationRepository.save(expectation);
+        log.info("get ID():" + expectationDto.getId()); // 기대평 등록한 아이디 맞게 들어옴
 
-        String memberId = expectationDto.getId();
+        List<Expectation> expectationList = expectationRepository.findByEventNo(expectationDto.getEventNo());
 
-        Optional<Expectation> checkId = expectationRepository.findByExpectId(memberId);
+        log.info(String.valueOf(expectationList)); // 해당 eventNo을 가진 기대평 리스트 잘 나옴
 
-        if(checkId.isPresent()) {
-            return false;
+        for(int i = 0; i < expectationList.size(); i++){
+            Expectation expectation = expectationList.get(i);
+
+            if(expectation.getId().equals(expectationDto.getId())) {
+                return false;
+            }
         }
-        else {
-            expectationRepository.save(expectationDto.toEntity());
-            return true;
-        }
+
+        expectationRepository.save(expectationDto.toEntity());
+        return true;
+
     }
 
 

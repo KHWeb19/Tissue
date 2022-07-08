@@ -27,6 +27,7 @@ public class ExpectationController {
         Boolean expectation = expectationService.register(expectationDto);
 
         return expectation;
+
     }
 
     @GetMapping("/read/{eventNo}")
