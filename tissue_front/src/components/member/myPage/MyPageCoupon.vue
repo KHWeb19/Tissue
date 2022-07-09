@@ -1,46 +1,50 @@
 <template>
-    <v-container class="couponMain">
-        <div class="mr-10 mb-5 mt-7">
-            <span class="ml-3" style="font-size:20pt;"> 사용 가능 쿠폰 </span>
-            <p/>
-            <hr color="#90CAF9">
-        </div>
-      <v-row v-if="coupons.length == 0">
-            <v-icon large color="red">mdi-exclamation-thick</v-icon>
-            <span style="font-size:17pt" class="mr-10">사용 가능한 쿠폰이 없습니다.</span>
-            <v-btn depressed color="blue lighten-3" dark @click="goPage"> 다운하러 가기 </v-btn>
-      </v-row>
-      <v-row v-else no-gutters>
-        <v-col
-          v-for="coupon in coupons"
-          :key="coupon.couponNo"
-          lg="4"
-          sm="6"
-          class="pt-5"
-        >
-          <v-card class="card">
-            <div class="imgWrap">
-              <div class="pt-10">
-                <v-img
-                  :src="require(`@/assets/coupon/${coupon.filename}`)"
-                  class="img"
-                >
-                  <div class="couponPrice">
-                    {{ coupon.couponPrice | comma }}
-                  </div>
-                </v-img>
-              </div>
+  <v-container class="couponMain">
+    <div class="mr-10 mb-5 mt-7">
+      <span class="ml-3" style="font-size: 20pt"> 사용 가능 쿠폰 </span>
+      <p />
+      <hr color="#90CAF9" />
+    </div>
+    <v-row v-if="coupons.length == 0">
+      <v-icon large color="red">mdi-exclamation-thick</v-icon>
+      <span style="font-size: 17pt" class="mr-10"
+        >사용 가능한 쿠폰이 없습니다.</span
+      >
+      <v-btn depressed color="blue lighten-3" dark @click="goPage">
+        다운하러 가기
+      </v-btn>
+    </v-row>
+    <v-row v-else no-gutters>
+      <v-col
+        v-for="coupon in coupons"
+        :key="coupon.couponNo"
+        lg="4"
+        sm="6"
+        class="pt-5"
+      >
+        <v-card class="card">
+          <div class="imgWrap">
+            <div class="pt-10">
+              <v-img
+                :src="require(`@/assets/coupon/${coupon.filename}`)"
+                class="img"
+              >
+                <div class="couponPrice">
+                  {{ coupon.couponPrice | comma }}
+                </div>
+              </v-img>
             </div>
-            <div class="content">
-
+          </div>
+          <div class="content">
             <v-card-title class="pt-3 pb-1 couponTitle">
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
             </v-card-title>
 
             <v-card-actions class="pb-2 pt-3 pl-0">
               <v-card-text class="pb-0 pt-0 subContent"
-                ><b class="subTitle">사용 기간 :</b><p/> {{ coupon.couponStart }} ~
-                {{ coupon.couponEnd }}</v-card-text
+                ><b class="subTitle">사용 기간 :</b>
+                <p />
+                {{ coupon.couponStart }} ~ {{ coupon.couponEnd }}</v-card-text
               >
             </v-card-actions>
 
@@ -50,27 +54,33 @@
                 {{ coupon.couponCondition }}</v-card-text
               >
             </v-card-actions>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-    name:'MyPageCoupon',
-    props: {
-        coupons: {
-            type: Array
-        }
+  name: "MyPageCoupon",
+  props: {
+    coupons: {
+      type: Array,
     },
-    methods: {
-        goPage() {
-            this.$router.push("/event")
-        }
-    }
-}
+  },
+
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+  },
+  methods: {
+    goPage() {
+      this.$router.push("/event");
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -93,7 +103,7 @@ export default {
   border-radius: 15px;
 }
 .content {
-    zoom:0.9;
+  zoom: 0.9;
 }
 .couponTitle {
   font-size: 20px;
@@ -118,23 +128,22 @@ export default {
   color: #999;
 }
 .couponMain {
-    position: relative;
+  position: relative;
 
-    bottom: 30px;
+  bottom: 30px;
 }
 .card {
-    width:223px;
-    height: 360px; 
+  width: 223px;
+  height: 360px;
 }
 @media (min-width: 1800px) {
-    .card {
-        width:330px;
-    }
-    .couponPrice {
+  .card {
+    width: 330px;
+  }
+  .couponPrice {
     font-size: 50px;
     padding-top: 30px;
     padding-left: 50px;
-    }
+  }
 }
-
 </style>
