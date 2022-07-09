@@ -343,31 +343,30 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-            public List<MyTicketDto> newTicket (Long memberNo) {
-                Optional<Member> findMember = repository.findById(memberNo);
-                Member member = findMember.get();
+    public List<MyTicketDto> newTicket (Long memberNo) {
+        Optional<Member> findMember = repository.findById(memberNo);
+        Member member = findMember.get();
 
-                List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
-                List<MyTicketDto> ticketDtoList = new ArrayList<>();
+        List<Ticketing> getTicket = ticketingRepository.findTop5ByMemberIdOrderByTicketingNoDesc(member.getMemberId());
+        List<MyTicketDto> ticketDtoList = new ArrayList<>();
 
-                for (int i = 0; i <getTicket.size(); i++) {
-                    Ticketing ticketing = getTicket.get(i);
+        for (int i = 0; i <getTicket.size(); i++) {
+            Ticketing ticketing = getTicket.get(i);
 
-                    Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
-                    Performance performance = getPerform.get();
+            Optional<Performance> getPerform = performanceRepository.findById(ticketing.getPerformNo());
+            Performance performance = getPerform.get();
 
-                    MyTicketDto ticketDto = new MyTicketDto();
+            MyTicketDto ticketDto = new MyTicketDto();
 
-                    ticketDto.setTicketing_no(ticketing.getTicketingNo());
-                    ticketDto.setReg_date(ticketing.getTicketingRegDate());
-                    ticketDto.setSeat(ticketing.getSeatNameArr());
-                    ticketDto.setPerformShowDate(performance.getPerformShowDate());
-                    ticketDto.setPerformName(performance.getPerformName());
-                    ticketDto.setStatus(ticketing.getStatus());
+            ticketDto.setTicketing_no(ticketing.getTicketingNo());
+            ticketDto.setReg_date(ticketing.getTicketingRegDate());
+            ticketDto.setSeat(ticketing.getSeatNameArr());
+            ticketDto.setPerformShowDate(performance.getPerformShowDate());
+            ticketDto.setPerformName(performance.getPerformName());
+            ticketDto.setStatus(ticketing.getStatus());
 
             ticketDtoList.add(ticketDto);
         }
-
         return  ticketDtoList;
     }
 }
