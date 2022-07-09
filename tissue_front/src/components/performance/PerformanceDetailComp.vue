@@ -4,21 +4,9 @@
       <div class="performInfo mb-15">공연 정보</div>
       <div class="performDetailImg">
         <v-img
-          v-if="this.performance.performDetailImg1 != null"
+          v-if="this.performance.performDetailImg5 != null"
           :src="
-            require(`@/assets/detailImg/${this.performance.performDetailImg1}`)
-          "
-        ></v-img>
-        <v-img
-          v-if="this.performance.performDetailImg2 != null"
-          :src="
-            require(`@/assets/detailImg/${this.performance.performDetailImg2}`)
-          "
-        ></v-img>
-        <v-img
-          v-if="this.performance.performDetailImg3 != null"
-          :src="
-            require(`@/assets/detailImg/${this.performance.performDetailImg3}`)
+            require(`@/assets/detailImg/${this.performance.performDetailImg5}`)
           "
         ></v-img>
         <v-img
@@ -28,9 +16,21 @@
           "
         ></v-img>
         <v-img
-          v-if="this.performance.performDetailImg5 != null"
+          v-if="this.performance.performDetailImg3 != null"
           :src="
-            require(`@/assets/detailImg/${this.performance.performDetailImg5}`)
+            require(`@/assets/detailImg/${this.performance.performDetailImg3}`)
+          "
+        ></v-img>
+        <v-img
+          v-if="this.performance.performDetailImg2 != null"
+          :src="
+            require(`@/assets/detailImg/${this.performance.performDetailImg2}`)
+          "
+        ></v-img>
+        <v-img
+          v-if="this.performance.performDetailImg1 != null"
+          :src="
+            require(`@/assets/detailImg/${this.performance.performDetailImg1}`)
           "
         ></v-img>
       </div>
@@ -38,14 +38,14 @@
 
       <div align="center" class="mb-10">
         <div v-if="showMap">
-        <div style="padding-top: 30px; padding-bottom: 30px">
-          <span style="font-size: 35px"> {{ name }}</span>
-        </div>
-        <div style="font-size: 16px; padding-bottom: 30px">
-          {{ address }} <b class="pl-3">({{ phone }})</b>
-        </div>
-        <div align="center" style="z-index: -1">
-          <div>
+          <div style="padding-top: 30px; padding-bottom: 30px">
+            <span style="font-size: 35px"> {{ name }}</span>
+          </div>
+          <div style="font-size: 16px; padding-bottom: 30px">
+            {{ address }} <b class="pl-3">({{ phone }})</b>
+          </div>
+          <div align="center" style="z-index: -1">
+            <div>
               <naver-maps
                 :height="500"
                 :width="1000"
@@ -89,30 +89,31 @@ export default {
     };
   },
   watch: {
-      performance () {
-          this.fetchMap(this.performance.performNo)
-      },
+    performance() {
+      this.fetchMap(this.performance.performNo);
+    },
   },
   methods: {
     fetchMap(performNo) {
-      axios.get(`map/read/${performNo}`)
-      .then((res) => {
-        console.log(performNo)
-        const map = res.data;
-        console.log(map);
-        this.mapOptions.lat = map.y;
-        this.mapOptions.lng = map.x;
-        this.name = map.name;
-        this.address = map.address;
-        this.phone = map.phone;
-        this.url = map.url;
-        if (map.y != 0) {
-          this.showMap = true;
-        }
-      })
-      .catch (() =>  {
-          alert("오류")
-      })
+      axios
+        .get(`map/read/${performNo}`)
+        .then((res) => {
+          console.log(performNo);
+          const map = res.data;
+          console.log(map);
+          this.mapOptions.lat = map.y;
+          this.mapOptions.lng = map.x;
+          this.name = map.name;
+          this.address = map.address;
+          this.phone = map.phone;
+          this.url = map.url;
+          if (map.y != 0) {
+            this.showMap = true;
+          }
+        })
+        .catch(() => {
+          alert("오류");
+        });
     },
   },
 };
