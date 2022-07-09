@@ -1,20 +1,29 @@
 package com.example.Tissue_back.repository.ranking;
 
-import com.example.Tissue_back.entity.Book;
+import com.example.Tissue_back.entity.ticketing.Ticketing;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.util.List;
+@Repository
+public interface RankingRepository extends JpaRepository<Ticketing, Long>{
 
-public interface RankingRepository extends JpaRepository<Book, Long>{
+   /* @Query(value =
+            "SELECT performNo, COUNT(reviewRegDate) FROM Ticketing WHERE reviewRegDate >date_format(now(), '%Y-%m-%d') GROUP BY performNo ORDER BY COUNT(reviewRegDate) DESC limit 30"
+            , nativeQuery = true)
+    List<RankingDTO> RankedByToday ();*/
 
-    @Query(nativeQuery = true, value =
-            "select performNo, COUNT(bookDate) from Book" +
-            "where bookDate = :bookDate" +
+    /*@Query(name = "find_ranking_today_dto", nativeQuery = true)
+    List<RankingToday> RankedTodayBy ();*/
+
+
+
+
+
+    /*@Query(nativeQuery = true, value =
+            "select performNo, COUNT(reviewRegDate) from Ticketing" +
+            "where reviewRegDate = :reviewRegDate" +
             "group by performNo" +
-            "order by COUNT(bookDate) DESC")
-    List<Book> RankedByDate (@Param("bookDate") Date bookDate);
+            "order by COUNT(reviewRegDate) DESC limit 30")
+    List<Ticketing> RankedByDate (@Param("reviewRegDate") String reviewRegDate);*/
 
 }

@@ -1,10 +1,13 @@
 package com.example.Tissue_back.service.ranking;
 
-import com.example.Tissue_back.entity.Book;
+import com.example.Tissue_back.controller.request.ranking.RankingDTO;
+import com.example.Tissue_back.controller.request.ranking.RankingToday;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface RankingService {
-    public List<Book> list(Date bookDate);
+    public List<RankingToday> todayList ();
+    public List<RankingDTO> dateList(String reviewRegDate);
+
 }
