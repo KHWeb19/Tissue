@@ -5,7 +5,7 @@
     </v-app-bar>
     <v-container class="mt-10">
       <div style="display: flex; justify-content: center; align-items: center">
-        <div>
+        <div class="mr-10">
           <div class="stage">S T A G E</div>
 
           <div style="display: flex; justify-content: center">
@@ -70,30 +70,14 @@
 
         <div class="ml-10">
           <div>
-            <div class="mb-10 showHallInfo" style="height: 250px">
+            <div class="mb-10 showHallInfo">
               <v-row>
                 <v-col>
-                  <div class="pt-7">
-                    <div style="font-size: 20px">공연장명</div>
-                    <v-text-field
-                      flat
-                      solo
-                      readonly
-                      :value="hall.hallName"
-                      single-line
-                      style="height: 50px"
-                      class="mb-7"
-                    />
-                    <div style="font-size: 20px">총 좌석 수</div>
-                    <v-text-field
-                      flat
-                      solo
-                      readonly
-                      :value="hall.rowCnt * hall.colCnt"
-                      single-line
-                      style="height: 50px"
-                      class="mb-7"
-                    />
+                  <div>
+                    <div style="font-size: 18 px">공연장명</div>
+                    <div>{{ hall.hallName }}</div>
+                    <div style="font-size: 18px">총 좌석 수</div>
+                    <div>{{ hall.colCnt * hall.rowCnt }}</div>
                   </div>
                 </v-col>
               </v-row>
@@ -111,6 +95,17 @@
                 <div style="text-align: center">
                   {{ item.grade }}
                 </div>
+              </div>
+            </div>
+            <div style="display: flex">
+              <div class="mr-7">
+                <div>{{ seatGradeCnt[0].cnt }} 석</div>
+              </div>
+              <div class="mr-7">
+                <div>{{ seatGradeCnt[1].cnt }} 석</div>
+              </div>
+              <div>
+                <div>{{ seatGradeCnt[2].cnt }} 석</div>
               </div>
             </div>
 
@@ -232,6 +227,7 @@ export default {
       seatGrade: String,
       hallNo: this.hall.hallNo,
       showSelectInfo: [{ info: "" }],
+      seatGradeCnt: [{ cnt: 0 }, { cnt: 0 }, { cnt: 0 }],
     };
   },
 
@@ -250,6 +246,20 @@ export default {
           click: false,
         };
         cnt = cnt + 1;
+      }
+    }
+
+    for (let i = 0; i < this.hall.rowCnt; i++) {
+      for (let j = 0; j < this.hall.colCnt; j++) {
+        if (this.dataTable[i][j].grade == "S") {
+          this.seatGradeCnt[0].cnt += 1;
+        }
+        if (this.dataTable[i][j].grade == "R") {
+          this.seatGradeCnt[1].cnt += 1;
+        }
+        if (this.dataTable[i][j].grade == "VIP") {
+          this.seatGradeCnt[2].cnt += 1;
+        }
       }
     }
 

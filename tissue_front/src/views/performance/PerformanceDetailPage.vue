@@ -8,6 +8,8 @@
       :likeMember="likeMember"
       :performanceEvent="performanceEvent"
       :reviewList="reviewList"
+      :hall="hall"
+      :ticketingList="ticketingList"
       @update:likeList="likeList = $event"
       @update:likeMember="likeMember = $event"
     />
@@ -34,6 +36,7 @@ export default {
       likeMember: false,
     };
   },
+
   computed: {
     likeList: {
       ...mapState({ get: "likeList" }),
@@ -44,8 +47,11 @@ export default {
       "couponList",
       "performanceEvent",
       "reviewList",
+      "hall",
+      "ticketingList",
     ]),
   },
+
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
@@ -53,6 +59,8 @@ export default {
     this.checkMember();
     this.fetchPerformanceEvent(this.performNo);
     this.fetchPerformanceReviewList(this.performNo);
+    this.fetchHall(this.performance.hallName);
+    this.fetchTicketingList(this.performNo);
   },
   methods: {
     ...mapActions([
@@ -61,6 +69,8 @@ export default {
       "fetchPerformanceLike",
       "fetchPerformanceEvent",
       "fetchPerformanceReviewList",
+      "fetchHall",
+      "fetchTicketingList",
     ]),
     checkMember() {
       let token = localStorage.getItem("token");
@@ -75,7 +85,7 @@ export default {
           return (this.likeMember = false);
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>

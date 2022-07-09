@@ -342,35 +342,35 @@
                     <b style="color: #f48fb1">{{
                       performance.performPriceS | comma
                     }}</b
-                    >원 <b>(잔여: {{ 1 }}석)</b>
+                    >원 <b>(잔여: {{ sCnt }}석)</b>
                   </div>
                   <div class="wrapPriceGrade">
                     <div class="gradeText">R석</div>
                     <b style="color: #f48fb1">{{
                       performance.performPriceR | comma
                     }}</b
-                    >원 <b>(잔여: {{ 1 }}석)</b>
+                    >원 <b>(잔여: {{ rCnt }}석)</b>
                   </div>
                   <div class="wrapPriceGrade">
                     <div class="gradeText">VIP석</div>
                     <b style="color: #f48fb1">{{
                       performance.performPriceVip | comma
                     }}</b
-                    >원 <b>(잔여: {{ 1 }}석)</b>
+                    >원 <b>(잔여: {{ VipCnt }}석)</b>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div style="display: flex; justify-content: center">
-              <v-btn
-                color="blue lighten-3"
-                class="reserveBtn white--text"
-                width="230"
-                height="50"
-                @click="checkToken(performance.performNo)"
-                >예매하기</v-btn
-              >
+            <v-btn
+              color="blue lighten-3"
+              class="reserveBtn white--text"
+              width="230"
+              height="50"
+              @click="checkToken(performance.performNo)"
+              >예매하기</v-btn
+            >
           </div>
         </v-col>
       </v-row>
@@ -443,6 +443,13 @@ export default {
       type: Array,
       required: true,
     },
+    hall: {
+      type: Object,
+      required: true,
+    },
+    ticketingList: {
+      type: Array,
+    },
   },
   components: {
     PerformanceDetailComp,
@@ -467,7 +474,40 @@ export default {
 
       reviewAvg: "",
       clickDate: true,
+      rCnt: 0,
+      sCnt: 0,
+      VipCnt: 0,
     };
+  },
+
+  created() {
+    this.rCnt = 0;
+    this.sCnt = 0;
+    this.VipCnt = 0;
+
+    for (let i = 0; i < this.hall.seats.length; i++) {
+      if (this.hall.seats[i].seatGrade == "S") {
+        this.sCnt += 1;
+      } else if (this.hall.seats[i].seatGrade == "R") {
+        this.rCnt += 1;
+      } else if (this.hall.seats[i].seatGrade == "VIP") {
+        this.VipCnt += 1;
+      }
+    }
+
+    for (let i = 0; i < this.ticketingList.length; i++) {
+      for (let j = 0; j < this.hall.seats.length; j++) {
+        if (this.ticketingList[i].seatName == this.hall.seats[j].seatName) {
+          if (this.hall.seats[j].seatGrade == "S") {
+            this.sCnt -= 1;
+          } else if (this.hall.seats[j].seatGrade == "R") {
+            this.rCnt -= 1;
+          } else if (this.hall.seats[j].seatGrade == "VIP") {
+            this.VipCnt -= 1;
+          }
+        }
+      }
+    }
   },
   watch: {
     performance() {
@@ -480,6 +520,7 @@ export default {
       }
     },
   },
+
   computed: {
     reviewSumAvg() {
       let sum = 0;
@@ -595,15 +636,17 @@ export default {
       }
     },
     checkToken(performNo) {
-        if(localStorage.getItem('token') == null) {
-            let result = confirm('현재 [비회원] 예매입니다. 이대로 진행하시면 쿠폰과 마일리지 사용이 불가능합니다.')
-            if(result) {
-                this.$router.push(`/nonticketing/${performNo}`)
-            }
-        } else {
-            this.$router.push(`/ticketing/${performNo}`)
+      if (localStorage.getItem("token") == null) {
+        let result = confirm(
+          "현재 [비회원] 예매입니다. 이대로 진행하시면 쿠폰과 마일리지 사용이 불가능합니다."
+        );
+        if (result) {
+          this.$router.push(`/nonticketing/${performNo}`);
         }
-    }
+      } else {
+        this.$router.push(`/ticketing/${performNo}`);
+      }
+    },
   },
 };
 </script>
