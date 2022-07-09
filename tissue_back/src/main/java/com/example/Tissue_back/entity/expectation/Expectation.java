@@ -43,6 +43,5 @@ public class Expectation {
         this.expectContent = expectationDto.getExpectContent();
     }
 
-
 }
 

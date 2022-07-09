@@ -35,7 +35,7 @@
             <div class="eventSubBox">
               <div class="eventSubTitle">-당첨 인원</div>
               <div>
-                {{ performanceEvent.eventWinnerCnt }}
+                {{ performanceEvent.eventWinnerCnt }} 명
               </div>
             </div>
             <div

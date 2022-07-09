@@ -3,7 +3,9 @@ package com.example.Tissue_back.entity.performance;
 
 import com.example.Tissue_back.controller.request.performance.PerformanceDto;
 
+import com.example.Tissue_back.entity.event.Event;
 import com.example.Tissue_back.entity.review.Review;
+import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -125,5 +127,9 @@ public class Performance {
     @Fetch(FetchMode.SUBSELECT)
     private Set<Likes> performLike = new HashSet<>();
 
+
+    @OneToOne(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Event event;
 
 }
