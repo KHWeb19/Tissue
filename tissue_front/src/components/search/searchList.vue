@@ -57,7 +57,11 @@
             <hr class="mt-5 mb-5" color="skyblue">
             <v-data-table
             :headers="headers"
-            :items="noticeSearchList">
+            :items="noticeSearchList"
+            :page.sync="page"
+            :items-per-page="7"
+            @page-count="pageCount = $event"
+            hide-default-footer>
 
             <template v-slot:[`item.noticeTitle`]="{ item }">
                 <router-link
@@ -67,6 +71,14 @@
                 </router-link>
             </template>
             </v-data-table>
+            <v-pagination
+            class="mt-10"
+            v-model="page"
+            :length="pageCount"
+            total-visible="5"
+            color="pink lighten-3"
+            circle>
+        </v-pagination>
         </div>
     </v-container>
 </template>
@@ -110,7 +122,9 @@ export default {
             ],
             countC: '',
             whole: true,
-            active_tab:0
+            active_tab:0,
+            page: 1,
+            pageCount: 0,
         }
     },
     created() {
