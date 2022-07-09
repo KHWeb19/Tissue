@@ -6,7 +6,9 @@
           <router-link to="/">
             <div>
               <div class="header_logo" @click="goHome">
-                  <span style="color:skyblue">T</span><span style="color:pink">issue</span></div>
+                <span style="color: skyblue">T</span
+                ><span style="color: pink">issue</span>
+              </div>
             </div>
           </router-link>
         </v-toolbar-title>
@@ -74,8 +76,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapActions } from 'vuex';
+import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   name: "NewNavBar2",
   data() {
@@ -93,7 +95,7 @@ export default {
         { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: "",
-      keyword:''
+      keyword: "",
     };
   },
   mounted() {
@@ -123,7 +125,7 @@ export default {
     this.token = localStorage.getItem("token");
   },
   methods: {
-    ...mapActions(['fetchSearchList', 'fetchNoticeSearchList']),
+    ...mapActions(["fetchSearchList", "fetchNoticeSearchList"]),
     goHome() {
       this.$router.push("/");
     },
@@ -131,46 +133,53 @@ export default {
       let result = confirm("로그아웃하시겠습니까?");
       if (result) {
         localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken")
+        localStorage.removeItem("refreshToken");
         this.$router.push("/");
         this.token = null;
       }
     },
     goToMyPage() {
-        let token = localStorage.getItem('token')
-        let refreshToken = localStorage.getItem('refreshToken')
+      let token = localStorage.getItem("token");
+      let refreshToken = localStorage.getItem("refreshToken");
 
-        if (token != null) {
-            axios.get('Admin/role', { params: { token:token } })
-                .then((res) => {
-                    if (res.data == true) {
-                        return this.$router.push("/Admin")
-                    } else {
-                        return this.$router.push("/myPage")
-                    }
-                })
-                .catch(() => {
-                axios.get('security/check', {params: {token: token, refreshToken: refreshToken}})
-                .then((res) => {
-                    console.log(res.data)
-                    console.log("리프레쉬 중 ! ")
-                    localStorage.removeItem('token')
-                    localStorage.setItem('token', res.data)
-                    return this.goToMyPage()   
-                })
-            })
-        } else {
-            alert("로그인이 필요합니다.");
-            return this.$$router.push("/login")
-        }
+      if (token != null) {
+        axios
+          .get("Admin/role", { params: { token: token } })
+          .then((res) => {
+            if (res.data == true) {
+              return this.$router.push("/Admin");
+            } else {
+              return this.$router.push("/myPage");
+            }
+          })
+          .catch(() => {
+            axios
+              .get("security/check", {
+                params: { token: token, refreshToken: refreshToken },
+              })
+              .then((res) => {
+                console.log(res.data);
+                console.log("리프레쉬 중 ! ");
+                localStorage.removeItem("token");
+                localStorage.setItem("token", res.data);
+                return this.goToMyPage();
+              });
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+        return this.$router.push("/login");
+      }
     },
     search() {
-        console.log(this.keyword)
-        this.fetchSearchList(this.keyword),
-        this.fetchNoticeSearchList(this.keyword)
-        this.$router.push({name: 'SearchPage', params: { keyword: this.keyword }})
-        this.keyword=''
-    }
+      console.log(this.keyword);
+      this.fetchSearchList(this.keyword),
+        this.fetchNoticeSearchList(this.keyword);
+      this.$router.push({
+        name: "SearchPage",
+        params: { keyword: this.keyword },
+      });
+      this.keyword = "";
+    },
   },
 };
 </script>
@@ -185,7 +194,7 @@ export default {
 
 .header_logo {
   margin-left: 50px;
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-size: 40pt;
 }
 
@@ -193,7 +202,7 @@ export default {
   color: black;
   font-weight: bold;
   font-size: 18px;
-  margin-top:3px;
+  margin-top: 3px;
 }
 .header_main_item::before {
   display: none;
@@ -201,7 +210,7 @@ export default {
 .header_sub_item {
   color: black;
   font-size: 14px;
-  margin-top:3px;
+  margin-top: 3px;
 }
 .header_sub_item::before {
   display: none;
@@ -211,7 +220,7 @@ export default {
   height: 3px;
   background: skyblue;
   margin-right: 10px;
-  margin-top:3px;
+  margin-top: 3px;
 }
 .sub_tab_icon::before {
   display: none;
