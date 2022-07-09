@@ -2,8 +2,6 @@
     <div>
         <performance-list-form :performances = "performances"/> 
     </div>
-    
-    
 </template>
 
 <script>

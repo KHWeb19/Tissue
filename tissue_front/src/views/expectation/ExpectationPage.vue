@@ -17,7 +17,7 @@
 
             <v-row>
                 <v-col>
-                    <v-img :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img"></v-img>
+                    <v-img width="350px" style="padding:0px" :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img"></v-img>
                 </v-col>
                 <v-col>
                     <div class="expect-detail-wrap">
@@ -89,25 +89,22 @@ export default {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-        
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
-
-        
     },
     mounted() {
-        if(this.token === null) {
-            this.memberInfo.memberId = null
+       console.log(this.token)
+       if(this.token == null) {
+            this.memberInfo.memberId = ''
         }
-
     }
 }
 </script>
 
 <style scoped>
-.container{
+/* .container{
   overflow: hidden;
-}
+} */
 .background {
     background-color: #EEEEEE;
 }
@@ -133,15 +130,19 @@ h1 {
     text-decoration-thickness: 8px;
     text-decoration-color: #F48FB1;
 }
-.container > img {
+/* img {
   position: absolute;
-  width: 100%;
+  width: 200px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+  display: block;
+  margin-right: -15px;
+  margin: 0px;
+  padding: 0px;
+}  */
 .linkbtn {
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .to-detail-page{
     width: 300px;

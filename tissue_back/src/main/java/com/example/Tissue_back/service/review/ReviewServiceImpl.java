@@ -1,6 +1,7 @@
 package com.example.Tissue_back.service.review;
 
 import com.example.Tissue_back.controller.request.review.ReviewDto;
+import com.example.Tissue_back.entity.expectation.Expectation;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.review.Review;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
