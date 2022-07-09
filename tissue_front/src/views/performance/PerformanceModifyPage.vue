@@ -431,27 +431,6 @@ label {
   border: 1px solid #dddddd;
 }
 
-.information-title {
-  text-align: center;
-  font-size: 18px;
-  line-height: 60px;
-  border-bottom: 1px solid #dddddd;
-}
-
-.file-upload-example {
-  height: 100%;
-}
-
-.picture-notice {
-  margin: 20px;
-  padding: 20px 40px;
-  border: 1px solid #dddddd;
-}
-
-.file-preview-content-container {
-  height: 100%;
-}
-
 .file-upload-wrapper {
   margin: 20px;
   border: 1px solid #dddddd;
@@ -465,76 +444,27 @@ label {
   height: 100%;
 }
 
-.file-upload-example-container {
+.file-preview-content-container {
+  height: 100%;
+}
+
+.file-preview-container {
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.file-notice-item {
-  margin-top: 5px;
-  text-align: center;
-}
-
-.file-notice-item-red {
-  color: #ef4351;
-}
-
-.image-box {
-  margin-top: 30px;
-  padding-bottom: 20px;
-  text-align: center;
-}
-
-.image-box input[type="file"] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
-
-.image-box label {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #232d4a;
-  color: #fff;
-  vertical-align: middle;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.thumb-image-box {
-  margin-top: 30px;
-  padding-bottom: 20px;
-  text-align: center;
-}
-
-.thumb-image-box input[type="file"] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
-
-.thumb-image-box label {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #232d4a;
-  color: #fff;
-  vertical-align: middle;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 5px;
+  flex-wrap: wrap;
 }
 
 .file-preview-wrapper {
   padding: 10px;
   position: relative;
+}
+
+.file-preview-wrapper-upload {
+  margin: 10px;
+  padding-top: 20px;
+  background-color: #888888;
+  width: 190px;
+  height: 130px;
 }
 
 .file-preview-wrapper > img {
@@ -558,19 +488,5 @@ label {
   height: 20px;
   text-align: center;
   cursor: pointer;
-}
-
-.file-preview-container {
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.file-preview-wrapper-upload {
-  margin: 10px;
-  padding-top: 20px;
-  background-color: #888888;
-  width: 190px;
-  height: 130px;
 }
 </style>

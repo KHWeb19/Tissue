@@ -89,11 +89,18 @@ export default {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-       // this.$store.state.memberInfo.memberId = '' // 이렇게 해도 로그아웃하고 다른 아이디로 로그인하면 이전 아이디 정보로 나옴
-
+        
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
+
+        
     },
+    mounted() {
+        if(this.token === null) {
+            this.memberInfo.memberId = null
+        }
+
+    }
 }
 </script>
 

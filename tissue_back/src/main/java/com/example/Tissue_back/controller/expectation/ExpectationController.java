@@ -21,12 +21,13 @@ public class ExpectationController {
     private ExpectationService expectationService;
 
     @PostMapping("/register")
-    public ResponseEntity register (@RequestBody ExpectationDto expectationDto) {
-        log.info("expectation Register()" + expectationDto);
+    public Boolean register (@RequestBody ExpectationDto expectationDto) throws Exception {
+        log.info("expectation Register()");
 
-        Expectation expectation = expectationService.register(expectationDto);
+        Boolean expectation = expectationService.register(expectationDto);
 
-        return new ResponseEntity(expectation, HttpStatus.OK);
+        return expectation;
+
     }
 
     @GetMapping("/read/{eventNo}")
