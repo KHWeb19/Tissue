@@ -110,7 +110,7 @@ public class TicketingServiceImpl implements TicketingService{
 
         Optional<Member> findMember = memberRepository.findByMemberId(memberId);
 
-        log.info("useCoupon mmm");
+
         Optional<Coupon> whatCoupon = couponRepository.findById(ticketingDto.getUsedCouponNo());
 
         Coupon coupon = whatCoupon.get();
@@ -123,7 +123,7 @@ public class TicketingServiceImpl implements TicketingService{
 
         memberRepository.save(member);
 
-        log.info("useCoupon Suc");
+
     }
 
     @Override

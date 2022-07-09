@@ -31,4 +31,11 @@ public class RefundController {
 
         return refundService.list();
     }
+
+    @PostMapping("/accept/{refundNo}")
+    public void refundAccept(@PathVariable("refundNo")Long refundNo){
+        log.info("refundAccept()" + refundNo);
+
+        refundService.acceptRefund(refundNo);
+    }
 }

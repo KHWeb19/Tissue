@@ -100,7 +100,7 @@ public class MemberServiceImpl implements MemberService {
 
         String encodedPassword = passwordEncoder.encode(loginDto.getMemberPw());
 
-        String token = securityService.createToken(loginDto.getMemberId(),loginMember.getMemberNo(), loginMember.getRole(), (1*1000*60));
+        String token = securityService.createToken(loginDto.getMemberId(),loginMember.getMemberNo(), loginMember.getRole(), (30*1000*60));
 
         if(loginMember.getRefreshToken() == null) {
             String refreshToken = securityService.createRefreshToken();

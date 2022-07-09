@@ -4,6 +4,7 @@ import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -20,4 +21,9 @@ public interface TicketingRepository extends JpaRepository<Ticketing, Long> {
     List<Ticketing> findByMemberId (String memberId);
     
     List<Ticketing> findTop5ByMemberIdOrderByTicketingNoDesc(String memberId);
+
+    @Transactional
+    @Modifying
+    @Query("update Ticketing t set t.status = :status where t.ticketingNo = :ticketingNo")
+    void changeStatus(@Param("ticketingNo")Long ticketingNo, @Param("status")String status);
 }
