@@ -1,27 +1,37 @@
 <template>
-    <div>
-        <ranking-list @submit="onSubmit"/>
+    <div align="center">
+        <today-ranking @submit="onSubmit" v-if="rankings" :rankings="rankings"/>
     </div>
 </template>
 
 <script>
+import TodayRanking from '@/components/ranking/TodayRanking.vue'
+import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
-import RankingList from '@/components/ranking/RankingList.vue'
 
 export default {
-    name: 'RankingPage',
+    name: 'RankingPage.vue',
     components: {
-        RankingList
+        TodayRanking
     },
-    onSubmit (payload) {
-        const { bookDate } = payload
-        axios.get('ranking/list', { params: { bookDate }})
-          .then(() => {
-              alert('success')
-          })
-          .catch(() => {
-              alert('fail')
-          })
+    computed: {
+        ...mapState(['rankings'])
+    },
+    mounted () {
+        this.fetchRankingList()
+    },
+    methods: {
+        ...mapActions(['fetchRankingList']),
+        onSubmit (payload) {
+            const { reviewRegDate } = payload
+            axios.get('ranking/list/byDate', { params: { reviewRegDate }})
+            .then(() => {
+                alert('success')
+            })
+            .catch(() => {
+                alert('fail')
+            })
+        }
     }
 }
 </script>

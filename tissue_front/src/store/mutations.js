@@ -14,7 +14,7 @@ import {
     FETCH_EXHIBITION_LIST,
     FETCH_PERFORMANCE_EVENT,
     FETCH_REVIEW_LIST,
-  
+
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
 
@@ -40,6 +40,9 @@ import {
     FETCH_EVENT,
     FETCH_EXPECT_LIST,
     FETCH_EXPECT,
+
+    FETCH_RANKING_LIST,
+    FETCH_RANKING_DATE_LIST
 
 
 } from './mutation-types'
@@ -146,5 +149,11 @@ export default{
     },
     [FETCH_EXPECT] (state, expect) {
         state.expect = expect
+    },
+    [FETCH_RANKING_LIST] (state, rankings) {
+        state.rankings = rankings
+    },
+    [FETCH_RANKING_DATE_LIST] (state, rankings) {
+        state.rankings = rankings
     }
 }

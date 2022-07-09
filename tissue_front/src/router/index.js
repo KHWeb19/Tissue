@@ -7,7 +7,7 @@ import HallRegisterPage from '@/views/hall/HallRegisterPage.vue'
 import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
-import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue'
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
 import CouponRegisterPage from '@/views/coupon/CouponRegisterPage.vue'
@@ -64,6 +64,8 @@ import QnaModifyPage from '../views/qna/QnaModifyPage.vue'
 import QnaBestRegisterPage from '../views/qna/QnaBestRegisterPage.vue'
 import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
 
+import RankingPage from '../views/ranking/RankingPage.vue'
+
 
 
 Vue.use(VueRouter)
@@ -76,7 +78,7 @@ const requireLogin = () => (to, from, next) => {
         alert('로그인이 필요한 서비스입니다.')
         router.push("/")
     }
-} 
+}
 
 const routes = [
   // 메인페이지 (임지훈)
@@ -370,7 +372,7 @@ const routes = [
   },
 
   // 노서현
-  
+
   {
     path: '/noticeRegister',
     name: 'NoticeRegisterPage',
@@ -446,7 +448,12 @@ const routes = [
     props: {
       default: true
     }
-  }
+  },
+  {
+    path: '/ranking',
+    name: 'RankingPage',
+    component: RankingPage
+  },
 
 ]
 
