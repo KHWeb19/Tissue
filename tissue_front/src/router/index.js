@@ -8,6 +8,7 @@ import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
 import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import NoMemberTicketingPage from '@/views/Ticketing/NoMemberTicketingPage.vue'
 import RefundPage from '@/views/refund/RefundPage.vue'
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
 
@@ -131,7 +132,17 @@ const routes = [
   props:{
       default: true
   }
-  },
+    },
+    {
+        path: '/nonticketing/:performNo',
+        name: 'NoMemberTicketingPage',
+        components: {
+            default: NoMemberTicketingPage
+        },
+        props: {
+            default: true
+        }
+    },
   {
     path: '/test',
     name: 'PerformanceTest',

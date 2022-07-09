@@ -1,6 +1,7 @@
 package com.example.Tissue_back.controller.ticketing;
 
 
+import com.example.Tissue_back.controller.request.ticketing.Ticketing2Dto;
 import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
 import com.example.Tissue_back.entity.ticketing.TicketingSeat;
@@ -48,6 +49,17 @@ public class TicketingController {
             ticketingService.useCoupon(ticketingDto,memberId);
         }
 
+
+    }
+
+    @PostMapping("/register2")
+    public void ticketing2Register(@Validated @RequestBody Ticketing2Dto ticketingDto){
+        log.info("ticketing2Register()");
+        //예매 내역 저장
+        ticketingService.register2(ticketingDto);
+
+        //예매 좌석 저장
+        ticketingService.register2TicketingSeats(ticketingDto);
 
     }
 

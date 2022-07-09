@@ -25,4 +25,9 @@ public class TicketingSeat {
     @JsonIgnore
     @JoinColumn(name = "ticketing_ticketingNo")
     private Ticketing ticketing;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "ticketing2_ticketingNo")
+    private Ticketing2 ticketing2;
 }

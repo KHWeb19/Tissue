@@ -363,21 +363,14 @@
             </div>
           </div>
           <div style="display: flex; justify-content: center">
-            <router-link
-              :to="{
-                name: 'TicketingPage',
-                params: { performNo: performance.performNo.toString() },
-              }"
-            >
               <v-btn
                 color="blue lighten-3"
                 class="reserveBtn white--text"
                 width="230"
                 height="50"
-                :disabled="clickDate"
+                @click="checkToken(performance.performNo)"
                 >예매하기</v-btn
               >
-            </router-link>
           </div>
         </v-col>
       </v-row>
@@ -601,6 +594,16 @@ export default {
         return false;
       }
     },
+    checkToken(performNo) {
+        if(localStorage.getItem('token') == null) {
+            let result = confirm('현재 [비회원] 예매입니다. 이대로 진행하시면 쿠폰과 마일리지 사용이 불가능합니다.')
+            if(result) {
+                this.$router.push(`/nonticketing/${performNo}`)
+            }
+        } else {
+            this.$router.push(`/ticketing/${performNo}`)
+        }
+    }
   },
 };
 </script>
