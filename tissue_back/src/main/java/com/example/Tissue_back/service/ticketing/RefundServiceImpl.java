@@ -2,10 +2,12 @@ package com.example.Tissue_back.service.ticketing;
 
 import com.example.Tissue_back.controller.request.refund.RefundListResponse;
 import com.example.Tissue_back.entity.coupon.Coupon;
+import com.example.Tissue_back.entity.member.Member;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.ticketing.RefundRequest;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
 import com.example.Tissue_back.repository.coupon.CouponRepository;
+import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.ticketing.RefundRepository;
 import com.example.Tissue_back.repository.ticketing.TicketingRepository;
@@ -14,7 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +36,8 @@ public class RefundServiceImpl implements RefundService{
     private CouponRepository couponRepository;
     @Autowired
     private PerformanceRepository performanceRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public void request (Long ticketingNo) {
@@ -60,6 +68,7 @@ public class RefundServiceImpl implements RefundService{
 
             RefundListResponse refundListResponse = new RefundListResponse();
 
+            refundListResponse.setRefundNo(refundRequest.getRefundNo());
             refundListResponse.setTicketingDate(refundRequest.getTicketing().getTicketingRegDate());
             refundListResponse.setRefundDate(refundRequest.getRefundRegDate());
             refundListResponse.setMemberId(refundRequest.getTicketing().getMemberId());
@@ -78,6 +87,7 @@ public class RefundServiceImpl implements RefundService{
                 refundListResponse.setUsedCouponPrice(coupon.getCouponPrice());
             }
 
+
             refundListResponse.setCancelCommission("날짜 비교해서 반환");
             refundListResponse.setRefundStatus(refundRequest.getTicketing().getStatus());
 
@@ -85,6 +95,37 @@ public class RefundServiceImpl implements RefundService{
         }
 
         return refundResponse;
+
+    }
+
+    @Override
+    public void acceptRefund(Long refundNo) {
+
+        Optional<RefundRequest> findRefundInfo = refundRepository.findById(refundNo);
+        RefundRequest getRefundInfo = findRefundInfo.get();
+
+        //마일리지 복구
+        if (getRefundInfo.getTicketing().getUsedMileage() != 0){
+            memberRepository.refundMileage(getRefundInfo.getTicketing().getMemberId(), getRefundInfo.getTicketing().getUsedMileage());
+        }
+
+        //쿠폰 사용내역 삭제 -> 쿠폰 복구
+        if (getRefundInfo.getTicketing().getUsedCouponNo() != null) {
+            Optional<Member> findMember = memberRepository.findByMemberId(getRefundInfo.getTicketing().getMemberId());
+            Optional<Coupon> findCoupon = couponRepository.findById(getRefundInfo.getTicketing().getUsedCouponNo());
+
+            Coupon coupon = findCoupon.get();
+            Member member = findMember.get();
+
+            member.getUsed_coupons().remove(coupon);
+            member.getCoupons().add(coupon);
+
+            memberRepository.save(member);
+        }
+
+        //환불 상태 변경
+        String status = "취소완료";
+        ticketingRepository.changeStatus(getRefundInfo.getTicketing().getTicketingNo(),status);
 
     }
 }

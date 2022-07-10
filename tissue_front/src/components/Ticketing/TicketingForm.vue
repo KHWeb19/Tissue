@@ -349,7 +349,6 @@ export default {
   },
 
   created() {
-    console.log("2홀폼");
     console.log(this.$store.state.ticketingList);
     this.$store.state.hall = null;
 

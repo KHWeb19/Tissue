@@ -127,9 +127,12 @@ public class Performance {
     @Fetch(FetchMode.SUBSELECT)
     private Set<Likes> performLike = new HashSet<>();
 
-//
-//    @OneToOne(mappedBy = "performance", cascade = CascadeType.REMOVE)
-//    @JsonIgnore
-//    private Event event;
+
+
+/*
+    @OneToOne(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Event event;
+*/
 
 }

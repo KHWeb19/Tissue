@@ -216,11 +216,11 @@ export default {
           })
     },
     fetchMemberInfo({ commit }, token) {
-        if (token != null) {
-            return axios.get('Member/info', { params: { token: token } })
-                .then((res) => {
-                    commit(FETCH_MEMBER_INFO, res.data)
-                })
+        if(token != null){
+        return axios.get('Member/info', { params: { token: token } })
+            .then((res) => {
+                commit(FETCH_MEMBER_INFO, res.data)
+            })
         }
     },
     fetchMember({ commit }) {

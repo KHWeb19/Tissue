@@ -4,11 +4,17 @@
       <v-toolbar-title class="ml-3"> 📌 쿠폰 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container>
-      <v-row class="mt-5 mb-5">
+      <v-row class="ml-3 mt-10" style="font-size: 18pt">
+        전체 쿠폰 수&nbsp;<span style="color: skyblue">{{
+          paginatedData.length
+        }}</span>
+        개
+      </v-row>
+      <v-row class="mt-10">
         <v-col
           v-for="coupon in paginatedData"
           :key="coupon.couponNo"
-          lg="3"
+          lg="4"
           sm="6"
         >
           <v-card width="350">
@@ -91,7 +97,7 @@
                         >
                           삭제
                         </v-btn>
-                        <v-btn text @click="dialogDeleteHall = false">
+                        <v-btn text @click="dialogDeleteCoupon = false">
                           취소
                         </v-btn>
                       </v-card-actions>
@@ -215,14 +221,6 @@ export default {
 </script>
 
 <style scoped>
-.titleBox {
-  width: 100%;
-  height: 168.91px;
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: #fce4ec;
-  border-bottom: 1px solid lightgrey;
-}
 .couponPrice {
   font-size: 60px;
   padding-top: 30px;

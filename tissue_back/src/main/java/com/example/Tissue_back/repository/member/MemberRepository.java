@@ -24,4 +24,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("update Member m set m.memberMileage = m.memberMileage - :usedMileage where m.memberId = :memberId")
     void updateMileage(@Param("memberId") String memberId, @Param("usedMileage")Integer usedMileage);
 
+    @Transactional
+    @Modifying
+    @Query("update Member m set m.memberMileage = m.memberMileage + :usedMileage where m.memberId = :memberId")
+    void refundMileage(@Param("memberId")String memberId, @Param("usedMileage")Integer usedMileage);
 }

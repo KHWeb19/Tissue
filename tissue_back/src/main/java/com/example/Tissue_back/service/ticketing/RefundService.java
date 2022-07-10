@@ -9,4 +9,5 @@ public interface RefundService {
 
     public void request (Long ticketingNo);
     public List<RefundListResponse> list();
+    public void acceptRefund(Long refundNo);
 }
