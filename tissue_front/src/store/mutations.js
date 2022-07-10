@@ -16,6 +16,7 @@ import {
     FETCH_EXHIBITION_LIST,
     FETCH_PERFORMANCE_EVENT,
     FETCH_REVIEW_LIST,
+    FETCH_NON_MEMBER_REFUND_LIST,
   
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
@@ -68,6 +69,9 @@ export default{
     },
     [FETCH_REFUND_LIST](state, refundList) {
         state.refundList = refundList
+    },
+    [FETCH_NON_MEMBER_REFUND_LIST](state, nonMemberRefundLust) {
+        state.nonMemberRefundLust = nonMemberRefundLust
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList

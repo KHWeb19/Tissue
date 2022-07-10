@@ -1,6 +1,9 @@
 <template>
   <div>
-    <refund-list :refundList="refundList" />
+    <refund-list
+      :refundList="refundList"
+      :nonMemberRefundLust="nonMemberRefundLust"
+    />
   </div>
 </template>
 
@@ -15,13 +18,14 @@ export default {
   },
 
   computed: {
-    ...mapState(["refundList"]),
+    ...mapState(["refundList", "nonMemberRefundLust"]),
   },
   methods: {
-    ...mapActions(["fetchRefundList"]),
+    ...mapActions(["fetchRefundList", "fetchNonMemberRefundList"]),
   },
   mounted() {
     this.fetchRefundList();
+    this.fetchNonMemberRefundList();
   },
 };
 </script>

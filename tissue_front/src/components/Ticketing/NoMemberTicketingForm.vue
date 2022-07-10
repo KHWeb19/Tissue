@@ -159,42 +159,67 @@
 
               <v-stepper-content step="2">
                 <v-container class="cantBox">
-                    <div class="cant">
-                        현재 [비회원] 예매입니다.
-                    </div>
-                    <div class="cant2">
-                        📌쿠폰 및 마일리지 사용 불가능
-                    </div>
+                  <div class="cant">현재 [비회원] 예매입니다.</div>
+                  <div class="cant2">📌쿠폰 및 마일리지 사용 불가능</div>
                 </v-container>
-                <div style="font-size:14pt" class="mb-7">
-                ✋ 예매 번호 찾기에 필요한 휴대폰 번호를 입력해주세요
+                <div style="font-size: 14pt" class="mb-7">
+                  ✋ 예매 번호 찾기에 필요한 휴대폰 번호를 입력해주세요
                 </div>
                 <v-row no-gutters>
-                    <v-col cols="8">
-                        <v-text-field dense v-model="phone" color="pink lighten-3" placeholder="휴대폰 번호 ('-') 없이 입력"></v-text-field>
-                    </v-col>
-                    <v-col cols="2">
-                        <v-btn fab
-                         @click="ckPhone(phone.toString())" dark
-                        color="blue lighten-3" depressed>인증</v-btn>
-                    </v-col>
+                  <v-col cols="8">
+                    <v-text-field
+                      dense
+                      v-model="phone"
+                      color="pink lighten-3"
+                      placeholder="휴대폰 번호 ('-') 없이 입력"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="2">
+                    <v-btn
+                      fab
+                      @click="ckPhone(phone.toString())"
+                      dark
+                      color="blue lighten-3"
+                      depressed
+                      >인증</v-btn
+                    >
+                  </v-col>
                 </v-row>
                 <v-row no-gutters>
-                    <v-col cols="4">
-                      <v-text-field dense color="pink lighten-3" placeholder="인증번호"
-                        v-model="checkNum"></v-text-field>
-                    </v-col>
-                    <v-col cols="2" class="mb-2">
-                        <v-btn dark @click="ckNum()" depressed fab
-                        :color="this.checkPhoneCondition == true ? 'pink lighten-4' : 'blue lighten-3'">
-                        확인</v-btn>
-                    </v-col>
+                  <v-col cols="4">
+                    <v-text-field
+                      dense
+                      color="pink lighten-3"
+                      placeholder="인증번호"
+                      v-model="checkNum"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="2" class="mb-2">
+                    <v-btn
+                      dark
+                      @click="ckNum()"
+                      depressed
+                      fab
+                      :color="
+                        this.checkPhoneCondition == true
+                          ? 'pink lighten-4'
+                          : 'blue lighten-3'
+                      "
+                    >
+                      확인</v-btn
+                    >
+                  </v-col>
                 </v-row>
                 <div style="float: right">
                   <v-btn color="blue lighten-3" text @click="backStep1">
                     이전 단계
                   </v-btn>
-                  <v-btn color="blue lighten-3" text @click="goStep3" :disabled="pass == false">
+                  <v-btn
+                    color="blue lighten-3"
+                    text
+                    @click="goStep3"
+                    :disabled="pass == false"
+                  >
                     다음 단계
                   </v-btn>
                 </div>
@@ -226,8 +251,8 @@
 <script>
 import HallForm from "@/components/Hall/HallForm.vue";
 import { mapActions, mapState } from "vuex";
-import Payment2 from './Payment2.vue';
-import axios from 'axios';
+import Payment2 from "./Payment2.vue";
+import axios from "axios";
 
 export default {
   name: "TicketingForm",
@@ -258,12 +283,12 @@ export default {
       filterCouponList: [],
       couponSalePrice: 0,
       mileageSalePrice: 0,
-      phone:'',
-      authNum:'',
-      ckeckNum:'',
+      phone: "",
+      authNum: "",
+      checkNum: "",
       sendAuth: false,
-      pass:false,
-      checkPhoneCondition:false
+      pass: false,
+      checkPhoneCondition: false,
     };
   },
 
@@ -289,11 +314,12 @@ export default {
     console.log(this.$store.state.ticketingList);
     this.$store.state.hall = null;
 
+    /*
     for (let i = 0; i < this.coupons.length; i++) {
       if (this.coupons[i].couponCategory == this.performance.performCategory) {
         this.filterCouponList.push(this.coupons[i]);
       }
-    }
+    }*/
   },
 
   mounted() {
@@ -398,24 +424,25 @@ export default {
       this.inputMileage = 0;
     },
     ckPhone(phone) {
-        axios.get(`phone/check/${phone}`)
+      axios
+        .get(`phone/check/${phone}`)
         .then((res) => {
-            alert("인증번호가 전송되었습니다.")
-            this.authNum = res.data
-            this.sendAuth = true
+          alert("인증번호가 전송되었습니다.");
+          this.authNum = res.data;
+          this.sendAuth = true;
         })
         .catch(() => {
-            console.log('전송실패')
-        })
+          console.log("전송실패");
+        });
     },
     ckNum() {
-        if(this.checkNum == this.authNum) {
-            this.pass = true
-            this.checkPhoneCondition = true
-            alert("인증되셨습니다.")
-        }else {
-            alert("인증번호가 올바르지 않습니다.")
-        }
+      if (this.checkNum == this.authNum) {
+        this.pass = true;
+        this.checkPhoneCondition = true;
+        alert("인증되셨습니다.");
+      } else {
+        alert("인증번호가 올바르지 않습니다.");
+      }
     },
   },
 };
@@ -465,19 +492,19 @@ export default {
   margin-left: 20px;
 }
 .cant {
-    text-align: center;
-    font-size: 20pt;
-    margin: auto;
+  text-align: center;
+  font-size: 20pt;
+  margin: auto;
 }
 .cant2 {
-    text-align: center;
-    font-size: 15pt;
-    margin: auto;
+  text-align: center;
+  font-size: 15pt;
+  margin: auto;
 }
 .cantBox {
-    position: relative;
-    width: 100%;
-    line-height: 100px;
-    height: 500px;
+  position: relative;
+  width: 100%;
+  line-height: 100px;
+  height: 500px;
 }
 </style>
