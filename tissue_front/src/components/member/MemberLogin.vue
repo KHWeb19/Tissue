@@ -85,10 +85,11 @@ export default {
                 })
 
                 if (response.data) {
-                    localStorage.setItem("token", response.data)
-                    this.$store.state.token = localStorage.getItem("token")
+                    localStorage.setItem("token", response.data[0])
+                    localStorage.setItem("refreshToken", response.data[1])
                     this.$router.push('/')
-                    console.log(localStorage)
+                    console.log(localStorage.getItem("token", response.data[0]))
+                    console.log(localStorage.getItem("refreshToken", response.data[1]))
                 } else {
                     alert("아이디와 비밀번호를 확인해주세요.")
                 }

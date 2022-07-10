@@ -13,7 +13,7 @@ public class Likes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Likes_no;
+    private Long likesNo;
 
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name="member_no")

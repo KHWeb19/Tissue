@@ -4,9 +4,12 @@ import com.example.Tissue_back.controller.request.member.FindDto;
 import com.example.Tissue_back.controller.request.member.LoginDto;
 import com.example.Tissue_back.controller.request.member.MemberDto;
 import com.example.Tissue_back.controller.request.review.MyReviewDto;
+import com.example.Tissue_back.controller.request.ticketing.MyTicketDto;
 import com.example.Tissue_back.entity.member.Member;
+import com.example.Tissue_back.entity.performance.Likes;
 import com.example.Tissue_back.entity.qna.Qna;
 import com.example.Tissue_back.entity.review.Review;
+import com.example.Tissue_back.entity.ticketing.Ticketing;
 import com.example.Tissue_back.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -47,11 +50,11 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/login")
-    public String login (@Validated @RequestBody LoginDto loginDto) throws Exception{
+    public String [] login (@Validated @RequestBody LoginDto loginDto) throws Exception{
 
         log.info("== Tissue Member Login ==" + loginDto);
 
-        String response = service.login(loginDto);
+        String [] response = service.login(loginDto);
         log.info("check" + response);
 
         if (response != null) {
@@ -134,4 +137,30 @@ public class MemberController {
         return service.myReview(memberNo);
     }
 
+    @GetMapping("/myTicket/{memberNo}")
+    public List<MyTicketDto> myTicket (@PathVariable("memberNo") Long memberNo) {
+        log.info("==my Ticket List ==");
+
+        return service.myTicket(memberNo);
+    }
+
+    // 최신 목록
+    @GetMapping("/newLikes/{memberNo}")
+    public List<Likes> newLikes (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New Likes");
+
+        return service.newLikes(memberNo);
+    }
+    @GetMapping("/newQna/{memberNo}")
+    public List<Qna> newQna (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New Qna");
+
+        return service.newQna(memberNo);
+    }
+    @GetMapping("/newTicket/{memberNo}")
+    public List<MyTicketDto> newTicket (@PathVariable("memberNo") Long memberNo) {
+        log.info("get New TIcket");
+
+        return service.newTicket(memberNo);
+    }
 }

@@ -20,28 +20,28 @@
                   <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage', params: { eventNo: event.eventNo} }">
                     <h1 class="imgText" style="color:black">기대평 이벤트</h1>
                   </router-link>
-                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
+                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo.toString()} }">
                     <h1 class="reviewImgText" style="color:black"> 관람후기 이벤트 </h1>
                   </router-link>
                 </v-img>
                 </div>
             </div>
 
-              <v-card-title class="eventCategory mt-3 blue--text text--lighten-3" style="font-weight: lighter">
+              <v-card-title class="eventCategory mt-3 blue--text text--lighten-3">
                 {{ event.eventCategory }}
               </v-card-title>
               <v-card-subtitle class="eventTitle mt-5">
                 {{ event.eventTitle }}
               </v-card-subtitle>
 
-              <v-card-text class="pb-3 pt-3 subContent">
+              <v-card-text class="pb-5 pt-4 subContent">
                 <b class="subTitle"></b> 이벤트 기간: {{ event.eventStart }} ~
                 {{ event.eventEnd }}
               </v-card-text>
             </div>
             <div v-for="dday in fetchDdayCount" :key="dday.eventNo">
               <div v-if="event.eventNo == dday.eventNo">
-                <v-progress-linear :value="dday.result"></v-progress-linear>
+                <v-progress-linear :value="dday.result" ></v-progress-linear>
                 <h2 class="ddayTxt">{{ dday.result }}일 남음</h2>
               </div>
             </div>
@@ -195,7 +195,7 @@ export default {
 .imgText {
   font-size: 20px;
   padding: 5px 10px;
-	background-color: #BCAAA4;
+	background-color: #F8BBD0;
 	text-align: center;
 	top: 85%;
 	/* left: 50%; */
@@ -203,7 +203,7 @@ export default {
 .reviewImgText {
   font-size: 20px;
   padding: 5px 10px;
-  background-color: #b0bec5;
+  background-color: #BBDEFB;
   text-align: center;
   top: 85%;
   /* left: 50%; */

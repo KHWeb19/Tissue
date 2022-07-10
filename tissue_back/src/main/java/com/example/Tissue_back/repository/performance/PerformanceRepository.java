@@ -21,4 +21,6 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
     List<Performance> findByPerformNameContaining (String keyword);
 
     Performance findByPerformName (String performName);
+
+    List<Performance> findTop6ByPerformCategoryOrderByPerformNoDesc(String performCategory);
 }

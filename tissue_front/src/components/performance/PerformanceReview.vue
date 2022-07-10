@@ -35,7 +35,7 @@
             <div class="eventSubBox">
               <div class="eventSubTitle">-당첨 인원</div>
               <div>
-                {{ performanceEvent.eventWinnerCnt }}
+                {{ performanceEvent.eventWinnerCnt }} 명
               </div>
             </div>
             <div
@@ -415,7 +415,8 @@ export default {
             reviewRating,
           })
           .then(() => {
-            alert("후기 등록 성공");
+      
+              alert("후기 등록 성공");
             this.$router.go();
           })
           .catch(() => {

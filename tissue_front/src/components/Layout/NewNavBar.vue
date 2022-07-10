@@ -72,6 +72,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   name: "NewNavBar",
   data() {
@@ -101,18 +102,31 @@ export default {
 
       if (result) {
         localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken")
         history.go(0);
       }
     },
     goToMyPage() {
-      if (this.token != null) {
-          axios.get('Admin/role',{params: {token: this.token}})
+        let token = localStorage.getItem('token')
+        let refreshToken = localStorage.getItem('refreshToken')
+      if (token != null) {
+          axios.get('Admin/role',{params: {token: token}})
           .then((res) => {
               if(res.data == true){
                   this.$router.push("/Admin")
               }else {
                   this.$router.push("/myPage")
               }
+          })
+          .catch(() => {
+            axios.get('security/check', {params: {token: token, refreshToken: refreshToken}})
+            .then((res) => {
+                console.log(res.data)
+                console.log("리프레쉬 중 ! ")
+                localStorage.removeItem('token')
+                localStorage.setItem('token', res.data)
+                return this.goToMyPage()   
+            })
           })
       } else {
         alert("로그인이 필요합니다.");

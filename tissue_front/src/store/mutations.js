@@ -1,6 +1,8 @@
 import {
     FETCH_HALL_LIST,
     FETCH_HALL,
+    FETCH_TICKETING_LIST,
+    FETCH_REFUND_LIST,
 
     FETCH_COUPON_LIST,
     FETCH_COUPON,
@@ -35,6 +37,15 @@ import {
     FETCH_MY_LIKE,
     FETCH_MY_QNA,
     FETCH_MY_REVIEW,
+    FETCH_MY_TICKET,
+    FETCH_MY_NEW_QNA,
+    FETCH_MY_NEW_LIKE,
+    FETCH_MY_NEW_TICKET,
+
+    FETCH_NEW_CONCERT,
+    FETCH_NEW_MUSICAL,
+    FETCH_NEW_THEATER,
+    FETCH_NEW_EXHIBITION,
     // event
     FETCH_EVENT_LIST,
     FETCH_EVENT,
@@ -54,6 +65,12 @@ export default{
     },
     [FETCH_HALL](state, hall) {
         state.hall = hall
+    },
+    [FETCH_TICKETING_LIST](state, ticketingList) {
+        state.ticketingList = ticketingList
+    },
+    [FETCH_REFUND_LIST](state, refundList) {
+        state.refundList = refundList
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList
@@ -133,6 +150,30 @@ export default{
     },
     [FETCH_MY_QNA](state, myQna) {
         state.myQna = myQna
+    },
+    [FETCH_MY_TICKET](state, myTicket) {
+        state.myTicket = myTicket
+    },
+    [FETCH_NEW_CONCERT](state, newConcert) {
+        state.newConcert = newConcert
+    },
+    [FETCH_NEW_MUSICAL](state, newMusical) {
+        state.newMusical = newMusical
+    },
+    [FETCH_NEW_THEATER](state, newTheater) {
+        state.newTheater = newTheater
+    },
+    [FETCH_NEW_EXHIBITION](state, newExhibition) {
+        state.newExhibition = newExhibition
+    },
+    [FETCH_MY_NEW_QNA](state, newQna) {
+        state.newQna = newQna
+    },
+    [FETCH_MY_NEW_LIKE](state, newLike) {
+        state.newLike = newLike
+    },
+    [FETCH_MY_NEW_TICKET](state, newTicket) {
+        state.newTicket = newTicket
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {

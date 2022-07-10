@@ -90,9 +90,7 @@ export default {
       required: true,
     },
     selectCouponInfo: {},
-    mileageSalePrice: {
-      type: Number,
-    },
+    mileageSalePrice: {},
     tempSelectSeatInfo: {
       required: true,
     },
@@ -110,7 +108,6 @@ export default {
       for (let i = 0; i < this.tempSelectSeatInfo.length; i++) {
         seatNameArr.push(this.tempSelectSeatInfo[i].seatName);
       }
-      console.log(seatNameArr);
 
       let today = new Date();
 
