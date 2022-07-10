@@ -31,6 +31,8 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
+import NonMemberFindRvPage from '../views/nonMember/NonMemberFindRvPage.vue'
+import NonMemberFindSerialPage from '../views/nonMember/NonMemberFindSerialPage.vue'
 
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
@@ -245,6 +247,21 @@ const routes = [
         path: '/findPw',
         name: 'MemberFindPwPage',
         component:MemberFindPwPage
+    },
+    {
+        path: '/nonMemberRv',
+        name: 'NonMemberFindRvPage',
+        components: {
+            default: NonMemberFindRvPage
+        },
+        props: {
+            default: true
+        },
+    },
+    {
+        path: '/nonMemberSerial',
+        name: 'NonMemberFindSerialPage',
+        component: NonMemberFindSerialPage
     },
     {
         path: '/kakaoLogin',

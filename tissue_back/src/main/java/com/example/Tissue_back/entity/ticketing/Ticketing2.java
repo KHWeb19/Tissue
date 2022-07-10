@@ -1,6 +1,10 @@
 package com.example.Tissue_back.entity.ticketing;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -8,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
+
 
 @Data
 @Entity
@@ -35,7 +40,10 @@ public class Ticketing2 {
     @Column
     private Integer finalPrice;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "ticketing2", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<TicketingSeat> seats;
 
     @Column
