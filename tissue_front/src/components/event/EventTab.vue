@@ -20,7 +20,7 @@
                   <router-link v-if="event.eventCategory === '기대평'" :to="{ name: 'ExpectationPage', params: { eventNo: event.eventNo} }">
                     <h1 class="imgText" style="color:black">기대평 이벤트</h1>
                   </router-link>
-                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo} }">
+                  <router-link v-else :to="{ name: 'PerformanceDetailPage', params: { performNo: event.performance.performNo.toString()} }">
                     <h1 class="reviewImgText" style="color:black"> 관람후기 이벤트 </h1>
                   </router-link>
                 </v-img>

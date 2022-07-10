@@ -136,6 +136,7 @@ export default {
   mounted () {
     this.fetchExpectList(this.eventNo)
   },
+  
   methods: {
     ...mapActions([ 'fetchExpectList', 'fetchExpect' ]),
     removeDialog (expectNo) {
