@@ -39,7 +39,7 @@ import SearchPage from '../views/search/SearchPage.vue'
 
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
-import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
+// import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 import MapPage from '@/views/map/MapPage.vue'
@@ -344,17 +344,17 @@ const routes = [
       component: PerformanceListPage,
       beforeEnter: requireAdmin()
   },
-  {
-    path: '/performanceReadPage/:performNo',
-    name: 'PerformanceReadPage',
-    components: {
-      default: PerformanceReadPage
-    },
-    props: {
-      default: true
-      },
-      beforeEnter: requireAdmin()
-  },
+  // {
+  //   path: '/performanceReadPage/:performNo',
+  //   name: 'PerformanceReadPage',
+  //   components: {
+  //     default: PerformanceReadPage
+  //   },
+  //   props: {
+  //     default: true
+  //     },
+  //     beforeEnter: requireAdmin()
+  // },
   {
     path: '/performanceModifyPage/:performNo',
     name: 'PerformanceModifyPage',

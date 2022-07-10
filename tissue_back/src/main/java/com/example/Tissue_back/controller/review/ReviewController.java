@@ -23,7 +23,7 @@ public class ReviewController {
     public void reviewRegister(@Validated @RequestBody ReviewDto reviewDto, @PathVariable("performNo")Long performNo){
         log.info("reviewRegister()" + performNo + reviewDto);
 
-        reviewService.register(performNo, reviewDto);
+         reviewService.register(performNo, reviewDto);
     }
 
     @GetMapping("/list/{performNo}")
