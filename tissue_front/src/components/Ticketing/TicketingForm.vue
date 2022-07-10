@@ -448,11 +448,23 @@ export default {
         this.inputMileage = 0;
         return;
       }
-      this.mileageSalePrice = this.inputMileage;
+
+      if (this.inputMileage > this.finalPrice) {
+        this.mileageSalePrice = this.finalPrice;
+        this.inputMileage = 0;
+      } else {
+        this.mileageSalePrice = this.inputMileage;
+        this.inputMileage = 0;
+      }
     },
     useAllMileage() {
-      this.mileageSalePrice = this.memberInfo.memberMileage;
-      this.inputMileage = this.mileageSalePrice;
+      if (this.memberInfo.memberMileage > this.finalPrice) {
+        this.mileageSalePrice = this.finalPrice;
+        this.inputMileage = 0;
+      } else {
+        this.mileageSalePrice = this.memberInfo.memberMileage;
+        this.inputMileage = 0;
+      }
     },
     resetMileage() {
       this.mileageSalePrice = 0;

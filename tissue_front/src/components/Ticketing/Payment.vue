@@ -108,7 +108,7 @@ export default {
       for (let i = 0; i < this.tempSelectSeatInfo.length; i++) {
         seatNameArr.push(this.tempSelectSeatInfo[i].seatName);
       }
-
+      console.log(this.price);
       let today = new Date();
 
       let year = today.getFullYear(); // 년도
