@@ -1,6 +1,7 @@
 package com.example.Tissue_back.repository.ticketing;
 
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.entity.ticketing.Ticketing2;
 import com.example.Tissue_back.entity.ticketing.TicketingSeat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,6 +19,10 @@ public interface TicketingSeatRepository extends JpaRepository<TicketingSeat, Lo
     @Transactional
     @Modifying
     @Query("delete from TicketingSeat ts where ts.ticketing = :ticketing")
-    void deleteByTicketingNo(@Param("ticketing") Ticketing ticketing
-    );
+    void deleteByTicketingNo(@Param("ticketing") Ticketing ticketing);
+
+    @Transactional
+    @Modifying
+    @Query("delete from TicketingSeat ts where ts.ticketing2 = :ticketing2")
+    void deleteNonMemberByTicketingNo(@Param("ticketing2")Ticketing2 ticketing2);
 }
