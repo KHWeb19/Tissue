@@ -127,9 +127,7 @@
                 >
                   <span class="infoTitle">최종 금액</span>
                   <div class="salePrice">
-                    {{
-                      (this.tempSelectPriceInfoCopy - finalSalePrice) | comma
-                    }}
+                    {{ finalPrice | comma }}
                     원
                   </div>
                 </div>
