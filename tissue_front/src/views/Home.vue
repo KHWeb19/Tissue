@@ -257,7 +257,7 @@ export default {
   height: 150px;
   text-align: center;
   bottom: 10px;
-  top: 700px;
+  top: 500px;
   background-color: transparent;
   z-index: 2;
   border-radius: 80px;

@@ -161,7 +161,7 @@ export default {
             })
         } else {
             alert("로그인이 필요합니다.");
-            return this.$$router.push("/login")
+            return this.$router.push("/login")
         }
     },
     search() {

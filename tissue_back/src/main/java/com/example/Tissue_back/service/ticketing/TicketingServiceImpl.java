@@ -26,7 +26,7 @@ import java.util.Random;
 
 @Service
 @Slf4j
-public class TicketingServiceImpl implements TicketingService{
+public class TicketingServiceImpl implements TicketingService {
 
     @Autowired
     private TicketingRepository ticketingRepository;
@@ -49,7 +49,7 @@ public class TicketingServiceImpl implements TicketingService{
     private SecurityService securityService;
 
     @Override
-    public void register(TicketingDto ticketingDto,String memberId) {
+    public void register(TicketingDto ticketingDto, String memberId) {
         //String memberId = securityService.getMemberId(ticketingDto.getMemberId());
 
 
@@ -72,11 +72,11 @@ public class TicketingServiceImpl implements TicketingService{
     @Override
     public void registerTicketingSeats(TicketingDto ticketingDto) {
         TicketingSeat ticketingSeat = new TicketingSeat();
-        String [] seatNameArr = ticketingDto.getSeatNameArr();
+        String[] seatNameArr = ticketingDto.getSeatNameArr();
         Optional<Ticketing> findTicketing = ticketingRepository.findBySeat(seatNameArr);
 
 
-        for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++){
+        for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++) {
             ticketingSeat.setSeatName(ticketingDto.getSeatNameArr()[i]);
             ticketingSeat.setTicketing(findTicketing.get());
             ticketingSeat.setPerformNo(ticketingDto.getPerformNo());
@@ -94,18 +94,18 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     @Override
-    public void useMileage(TicketingDto ticketingDto,String memberId) {
+    public void useMileage(TicketingDto ticketingDto, String memberId) {
         //사용마일리지 차감
 
 
         log.info("useMileage()");
-        memberRepository.updateMileage(memberId,ticketingDto.getUsedMileage());
+        memberRepository.updateMileage(memberId, ticketingDto.getUsedMileage());
 
         log.info("useMileage Suc");
     }
 
     @Override
-    public void useCoupon(TicketingDto ticketingDto,String memberId) {
+    public void useCoupon(TicketingDto ticketingDto, String memberId) {
         //사용 쿠폰 삭제 / 내역 저장
 
         Optional<Member> findMember = memberRepository.findByMemberId(memberId);
@@ -116,7 +116,7 @@ public class TicketingServiceImpl implements TicketingService{
         Coupon coupon = whatCoupon.get();
         Member member = findMember.get();
 
-        log.info("----"+member.getCoupons());
+        log.info("----" + member.getCoupons());
 
         member.getCoupons().remove(coupon);
         member.getUsed_coupons().add(coupon);
@@ -127,13 +127,13 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     @Override
-    public void register2(Ticketing2Dto ticketingDto) {
+    public String register2(Ticketing2Dto ticketingDto) {
 
         Ticketing2 ticketing = new Ticketing2();
 
-        Random rand  = new Random();
+        Random rand = new Random();
         String serial = "";
-        for(int i=0; i<8; i++) {
+        for (int i = 0; i < 8; i++) {
             String ran = Integer.toString(rand.nextInt(10));
             serial += ran;
         }
@@ -146,21 +146,23 @@ public class TicketingServiceImpl implements TicketingService{
 
         ticketing2Repository.save(ticketing);
 
+        return serial;
+
     }
+
     @Override
     public void register2TicketingSeats(Ticketing2Dto ticketingDto) {
         TicketingSeat ticketingSeat = new TicketingSeat();
-        String [] seatNameArr = ticketingDto.getSeatNameArr();
+        String[] seatNameArr = ticketingDto.getSeatNameArr();
         Optional<Ticketing2> findTicketing = ticketing2Repository.findBySeat(seatNameArr);
 
-        for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++){
+        for (int i = 0; i < ticketingDto.getSeatNameArr().length; i++) {
             ticketingSeat.setSeatName(ticketingDto.getSeatNameArr()[i]);
             ticketingSeat.setTicketing2(findTicketing.get());
             ticketingSeat.setPerformNo(ticketingDto.getPerformNo());
             ticketingSeatRepository.save(ticketingSeat);
             ticketingSeat.setTicketingSeatNo(null);
         }
-
 
     }
 
