@@ -197,8 +197,7 @@
           plain
           router-link
           :to="{
-            name: 'PerformanceReadPage',
-            params: { performNo: performance.performNo.toString() },
+            name: 'PerformanceListPage',
           }"
         >
           취소
@@ -411,8 +410,7 @@ export default {
         alert("게시물 수정 성공!");
         console.log(res);
         this.$router.push({
-          name: "PerformanceReadPage",
-          params: { performNo: this.performNo },
+          name: "PerformanceListPage",
         });
       });
     },

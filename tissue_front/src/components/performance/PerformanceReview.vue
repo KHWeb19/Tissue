@@ -415,7 +415,8 @@ export default {
             reviewRating,
           })
           .then(() => {
-            alert("후기 등록 성공");
+      
+              alert("후기 등록 성공");
             this.$router.go();
           })
           .catch(() => {

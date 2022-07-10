@@ -4,6 +4,7 @@ package com.example.Tissue_back.controller.ticketing;
 import com.example.Tissue_back.controller.request.ticketing.Ticketing2Dto;
 import com.example.Tissue_back.controller.request.ticketing.TicketingDto;
 import com.example.Tissue_back.entity.ticketing.Ticketing;
+import com.example.Tissue_back.entity.ticketing.Ticketing2;
 import com.example.Tissue_back.entity.ticketing.TicketingSeat;
 import com.example.Tissue_back.service.security.SecurityService;
 import com.example.Tissue_back.service.ticketing.TicketingService;
@@ -53,13 +54,15 @@ public class TicketingController {
     }
 
     @PostMapping("/register2")
-    public void ticketing2Register(@Validated @RequestBody Ticketing2Dto ticketingDto){
+    public String ticketing2Register(@Validated @RequestBody Ticketing2Dto ticketingDto){
         log.info("ticketing2Register()");
         //예매 내역 저장
-        ticketingService.register2(ticketingDto);
+        String serial = ticketingService.register2(ticketingDto);
 
         //예매 좌석 저장
         ticketingService.register2TicketingSeats(ticketingDto);
+
+        return serial;
 
     }
 
@@ -69,4 +72,5 @@ public class TicketingController {
 
         return ticketingService.ticketingList(performNo);
     }
+
 }

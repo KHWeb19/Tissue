@@ -9,7 +9,7 @@
       <v-container
         ><br /><br /><br />
         <v-row>
-          <v-col cols="5">
+          <v-col>
             <img
               :src="
                 require(`@/assets/thumbNail/${this.event.performance.performThumbnail}`)
@@ -98,8 +98,8 @@
         </v-row>
         <br />
 
-        <v-row justify="start" no-gutters class="ml-5">
-          <v-btn color="mr-3 blue lighten-3" dark type="submit" large>수정완료</v-btn>
+        <v-row justify="center" class="mt-7 mb-10">
+          <v-btn color="mr-5 blue lighten-3" dark type="submit" large>수정완료</v-btn>
           <v-btn
             color="blue lighten-3"
             large

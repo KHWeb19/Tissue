@@ -25,4 +25,8 @@ public class RefundRequest {
     @OneToOne
     @JoinColumn(name="ticketingNo")
     private Ticketing ticketing;
+
+    @OneToOne
+    @JoinColumn(name="ticketing2No")
+    private Ticketing2 ticketing2;
 }

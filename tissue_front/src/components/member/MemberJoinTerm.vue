@@ -296,6 +296,7 @@ export default {
 .article{
     display:flex;
     height:180px;
+    font-family: 'Nanum Gothic', sans-serif !important;
 }
 #a {
     overflow:scroll;
