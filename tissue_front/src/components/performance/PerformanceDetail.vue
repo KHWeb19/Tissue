@@ -342,21 +342,21 @@
                     <b style="color: #f48fb1">{{
                       performance.performPriceS | comma
                     }}</b
-                    >원 <b>(잔여: {{ sCnt }}석)</b>
+                    >원
                   </div>
                   <div class="wrapPriceGrade">
                     <div class="gradeText">R석</div>
                     <b style="color: #f48fb1">{{
                       performance.performPriceR | comma
                     }}</b
-                    >원 <b>(잔여: {{ rCnt }}석)</b>
+                    >원
                   </div>
                   <div class="wrapPriceGrade">
                     <div class="gradeText">VIP석</div>
                     <b style="color: #f48fb1">{{
                       performance.performPriceVip | comma
                     }}</b
-                    >원 <b>(잔여: {{ VipCnt }}석)</b>
+                    >원
                   </div>
                 </div>
               </div>
@@ -443,13 +443,6 @@ export default {
       type: Array,
       required: true,
     },
-    hall: {
-      type: Object,
-      required: true,
-    },
-    ticketingList: {
-      type: Array,
-    },
   },
   components: {
     PerformanceDetailComp,
@@ -474,41 +467,9 @@ export default {
 
       reviewAvg: "",
       clickDate: true,
-      rCnt: 0,
-      sCnt: 0,
-      VipCnt: 0,
     };
   },
 
-  created() {
-    this.rCnt = 0;
-    this.sCnt = 0;
-    this.VipCnt = 0;
-
-    for (let i = 0; i < this.hall.seats.length; i++) {
-      if (this.hall.seats[i].seatGrade == "S") {
-        this.sCnt += 1;
-      } else if (this.hall.seats[i].seatGrade == "R") {
-        this.rCnt += 1;
-      } else if (this.hall.seats[i].seatGrade == "VIP") {
-        this.VipCnt += 1;
-      }
-    }
-
-    for (let i = 0; i < this.ticketingList.length; i++) {
-      for (let j = 0; j < this.hall.seats.length; j++) {
-        if (this.ticketingList[i].seatName == this.hall.seats[j].seatName) {
-          if (this.hall.seats[j].seatGrade == "S") {
-            this.sCnt -= 1;
-          } else if (this.hall.seats[j].seatGrade == "R") {
-            this.rCnt -= 1;
-          } else if (this.hall.seats[j].seatGrade == "VIP") {
-            this.VipCnt -= 1;
-          }
-        }
-      }
-    }
-  },
   watch: {
     performance() {
       for (let i = 0; i < this.couponList.length; i++) {
