@@ -11,6 +11,7 @@ import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.ticketing.RefundRepository;
 import com.example.Tissue_back.repository.ticketing.TicketingRepository;
+import com.example.Tissue_back.repository.ticketing.TicketingSeatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -38,6 +39,8 @@ public class RefundServiceImpl implements RefundService{
     private PerformanceRepository performanceRepository;
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private TicketingSeatRepository ticketingSeatRepository;
 
     @Override
     public void request (Long ticketingNo) {
@@ -126,6 +129,9 @@ public class RefundServiceImpl implements RefundService{
         //환불 상태 변경
         String status = "취소완료";
         ticketingRepository.changeStatus(getRefundInfo.getTicketing().getTicketingNo(),status);
+
+        //좌석 삭제
+        ticketingSeatRepository.deleteByTicketingNo(getRefundInfo.getTicketing());
 
     }
 }
