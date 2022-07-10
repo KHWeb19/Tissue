@@ -66,6 +66,7 @@ public class NonMemberServiceImpl implements NonMemberService {
         ticketDto.setPerformName(performance.getPerformName());
         ticketDto.setStatus(ticketing2.getStatus());
 
+        log.info("!!!!!!!!!!!!!!!!!!!!!!" + ticketDto);
         return ticketDto;
     }
     

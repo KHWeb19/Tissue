@@ -17,11 +17,9 @@
                     </div>
                 </v-col>
             </v-row>
-            <div class="box pl-5 pr-5 pt-10">
-                <v-row justify="center" class="mt-16" >
-                    <v-col cols="5">
-                        <non-member-find-rv :performance="performance"/>
-                    </v-col>
+            <div class="box">
+                <v-row>
+                <non-member-find-rv class="com mt-16" :performance="performance"/>
                 </v-row>
             </div>
         </v-container>
@@ -41,6 +39,9 @@ export default {
             required: true,
         }
     },
+    created() {
+        console.log(performance)
+    }
 
 }
 </script>
@@ -63,7 +64,8 @@ template{
     border: 1px solid rgb(197, 197, 197);
     width:82%;
     margin: auto;
-    padding-bottom: 120px;
+    padding-bottom: 100px;
+
 }
 .findIdBtn {
     float:left;
@@ -101,5 +103,8 @@ template{
     left:60%;
     zoom:0.8;
     }
+}
+.com{
+    margin:auto;
 }
 </style>

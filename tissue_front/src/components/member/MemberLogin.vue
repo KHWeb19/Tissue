@@ -102,10 +102,11 @@ export default {
             location.href=GoogleAuthUri
         },
         myRv(serial) { 
-                const respone = axios.post(`nonMember/rv/${serial}`)
-                .then(() => {
-                    if(respone.data) {
-                        this.$router.push('/nonMemberRv', {params : {performance:respone.data}})
+                axios.post(`nonMember/rv/${serial}`)
+                .then((res) => {
+                    if(res.data) {
+                        console.log(res.data)
+                        this.$router.push({name: 'NonMemberFindRvPage', params : {performance:res.data}})
                     } else {
                         alert("예매번호를 확인해주세요.")
                     }

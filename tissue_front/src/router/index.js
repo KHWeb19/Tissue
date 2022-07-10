@@ -252,7 +252,7 @@ const routes = [
         path: '/nonMemberRv',
         name: 'NonMemberFindRvPage',
         components: {
-            NonMemberFindRvPage
+            default: NonMemberFindRvPage
         },
         props: {
             default: true
