@@ -3,26 +3,27 @@
     <area-banner />
     <v-container>
       <span class="aTitle">지역별 공연</span>
+      <br><br>
 
-      <v-tabs
+      <v-tabs active-class="tabs"
         class="areaBox mt-10"
         fixed-tabs
         background-color="transparent"
         dark
         height="80px"
       >
-        <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
         <v-tab
           v-for="tab in tabs"
           :key="tab.name"
           @click="tab.value"
-          class="black--text"
+          class="tab black--text"
+          style="border:0.5px solid; border-color:#E0E0E0; height:70px;"
         >
           {{ tab.name }}
         </v-tab>
       </v-tabs>
 
-      <br /><br />
+      <br /><br /> <br>
 
       <v-card style="width: 100%" class="detailSearchBox" flat>
         <v-row>
@@ -98,6 +99,10 @@
           lg="3"
           sm="6"
         >
+        <router-link :to="{
+              name: 'PerformanceDetailPage',
+              params: { performNo: perform.performNo.toString() },
+            }">
           <v-card class="mx-auto" max-width="216" flat>
             <v-img
               :src="
@@ -124,6 +129,7 @@
               </div>
             </div>
           </v-card>
+        </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -330,7 +336,7 @@ font-size: 20px;
   padding: 50px 0;
 }
 .category-select {
-  /* font-family: 'Nanum Gothic', sans-serif !important; */
+  font-family: 'Nanum Gothic', sans-serif !important;
   font-size: 30pt;
 }
 .checkBox {
@@ -347,4 +353,12 @@ font-size: 20px;
 .aTitle {
   font-size: 30pt;
 }
+.tabs {
+  border: 1px solid;
+  background-color:#F8BBD0
+}
+.tab {
+  font-family: "Nanum Gothic", sans-serif !important;
+}
+
 </style>

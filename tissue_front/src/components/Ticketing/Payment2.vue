@@ -60,6 +60,27 @@
         >결제</v-btn
       >
     </section>
+
+    <v-dialog v-model="dialog" width="500" content-class="elevation-2">
+        <v-card>
+            <v-card-title class="grey lighten-2">
+                🎈 예매 완료
+            </v-card-title>
+            <v-divider/>
+            <v-card-text class="mt-10 mb-4" style="text-align:center; font-size:13pt">
+                회원님의 예매 번호는 <span style="color:pink">{{ this.serial }} </span> 입니다.
+            </v-card-text>
+            <v-card-text>
+                * 비회원은 예매번호를 통해 예매조회가 가능합니다.
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer/>
+                <v-btn @click="goHome" color="blue lighten-3" depressed dark>
+                    확인
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -74,6 +95,8 @@ export default {
       price: 0,
       checkbox1: false,
       checkbox2: false,
+      serial:'',
+      dialog:false,
     };
   },
   props: {
@@ -99,6 +122,9 @@ export default {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   },
   methods: {
+      goHome() {
+          this.$router.push('/')
+      },
     PaymentBtn: function () {
       this.price = this.finalPrice;
       let seatNameArr = [];
@@ -155,9 +181,10 @@ export default {
                 phone: this.phone,
                 finalPrice: this.price,
               })
-              .then(() => {
+              .then((res) => {
                 alert("DB 저장 완료");
-                this.$emit(4)
+                this.serial = res.data
+                this.dialog = true
               });
           } else {
             console.log("결제 실패");

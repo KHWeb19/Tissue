@@ -1,19 +1,20 @@
 <template>
-  <v-dialog v-model="dialog" width="500"  >
+  <v-dialog v-model="dialog" width="350px"  >
     <template v-slot:activator="{ on }">
       <v-list-item v-on="on" @click="readComment" style="font-size:15px; color:#F48FB1">
         수정
       </v-list-item>
     </template>
 
-    <v-card width="1000px"> 
+    <v-card> 
       <div align="center">
       <v-textarea v-model="expectContent" placeholder="기대평을 작성해주세요."
-            counter clearable auto-grow color="pink lighten-3" 
+            
+            counter clearable auto-grow color="pink lighten-3"
             style="width: 300px; height: 150px"
             :rules="[v => (v || '' ).length >= 30|| '30자 이상 작성해주세요.']"/>
       </div>
-      <v-card-actions class="mt-10">
+      <v-card-actions>
         <v-btn @click="btnCancle" text color="pink lighten-3">
          취소
         </v-btn>

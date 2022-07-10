@@ -31,6 +31,8 @@ import MemberFindIdPage from '../views/member/MemberFindIdPage.vue'
 import MemberFindPwPage from '../views/member/MemberFindPwPage.vue'
 import KakaoOAuth from '../components/OAuth/KakaoOAuth.vue'
 import GoogleOAuth from '../components/OAuth/GoogleOAuth.vue'
+import NonMemberFindRvPage from '../views/nonMember/NonMemberFindRvPage.vue'
+import NonMemberFindSerialPage from '../views/nonMember/NonMemberFindSerialPage.vue'
 
 import MyPageView from '../views/member/myPage/MyPage.vue'
 import AdminMember from '../components/Admin/AdminMember.vue'
@@ -39,7 +41,7 @@ import SearchPage from '../views/search/SearchPage.vue'
 
 // performance
 import PerformanceRegisterPage from '@/views/performance/PerformanceRegisterPage.vue'
-import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
+// import PerformanceReadPage from '@/views/performance/PerformanceReadPage.vue'
 import PerformanceListPage from '@/views/performance/PerformanceListPage.vue'
 import PerformanceModifyPage from '@/views/performance/PerformanceModifyPage.vue'
 import MapPage from '@/views/map/MapPage.vue'
@@ -247,6 +249,21 @@ const routes = [
         component:MemberFindPwPage
     },
     {
+        path: '/nonMemberRv',
+        name: 'NonMemberFindRvPage',
+        components: {
+            default: NonMemberFindRvPage
+        },
+        props: {
+            default: true
+        },
+    },
+    {
+        path: '/nonMemberSerial',
+        name: 'NonMemberFindSerialPage',
+        component: NonMemberFindSerialPage
+    },
+    {
         path: '/kakaoLogin',
         name:'KakaoOAuth',
         component:KakaoOAuth
@@ -344,17 +361,17 @@ const routes = [
       component: PerformanceListPage,
       beforeEnter: requireAdmin()
   },
-  {
-    path: '/performanceReadPage/:performNo',
-    name: 'PerformanceReadPage',
-    components: {
-      default: PerformanceReadPage
-    },
-    props: {
-      default: true
-      },
-      beforeEnter: requireAdmin()
-  },
+  // {
+  //   path: '/performanceReadPage/:performNo',
+  //   name: 'PerformanceReadPage',
+  //   components: {
+  //     default: PerformanceReadPage
+  //   },
+  //   props: {
+  //     default: true
+  //     },
+  //     beforeEnter: requireAdmin()
+  // },
   {
     path: '/performanceModifyPage/:performNo',
     name: 'PerformanceModifyPage',

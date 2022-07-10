@@ -20,10 +20,7 @@
                     ></v-text-field>
                 </v-col>
             </v-row>
-            <v-row class="btnReg"> 
-                <v-btn color="blue lighten-3" dark :to="{ name: 'EventRegisterPage' }">등록</v-btn>
-            </v-row>
-                <br><br><br>
+           
                 <v-data-table
                     :headers="headers"
                     :items="events"
@@ -41,13 +38,25 @@
                     </template>
                 </v-data-table>
 
-                <v-pagination
+
+                 <div class="text-center pt-10">
+                    <v-pagination
                     v-model="page"
-                    :length="pageCount"
                     total-visible="5"
+                    :length="pageCount"
                     color="pink lighten-3"
-                    circle>
-                </v-pagination><br><br>
+                    circle
+                    ></v-pagination>
+                </div>
+                <div style="float: right">
+                    <v-btn
+                    rounded
+                    color="blue lighten-3"
+                    style="color: white"
+                    to="/EventRegisterPage"
+                    >이벤트 등록</v-btn
+                    >
+                </div>
         </v-container>
     </v-container>
 </template>
@@ -79,7 +88,5 @@ export default {
 </script>
 
 <style scoped>
-.btnReg {
-    float: right;
-}
+
 </style>
