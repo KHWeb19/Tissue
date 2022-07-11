@@ -28,7 +28,6 @@
 
             <v-card-title class="pt-0 pb-0 couponTitle">
               [{{ coupon.couponCategory }}]{{ coupon.couponName }}
-              {{ coupon.couponNo }}
             </v-card-title>
 
             <v-card-actions class="pb-1 pt-0 pl-0">
