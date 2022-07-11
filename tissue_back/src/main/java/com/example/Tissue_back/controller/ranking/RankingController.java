@@ -5,9 +5,10 @@ import com.example.Tissue_back.controller.request.ranking.RankingToday;
 import com.example.Tissue_back.service.ranking.RankingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -20,18 +21,21 @@ public class RankingController {
     private RankingService rankingService;
 
     @GetMapping("/list")
-    public List<RankingToday> RankingToday () {
+    public List<RankingDTO> RankingToday () {
         log.info("Today Ranking");
 
         return rankingService.todayList();
     }
 
-    @GetMapping("/list/byDate")
-    public List<RankingDTO> RankingByDate (@RequestParam(value = "reviewRegDate") String reviewRegDate) {
+    @GetMapping("/list/byDate/{reviewRegDate}")
+    public List<RankingDTO> RankingByDate (@PathVariable("reviewRegDate") String reviewRegDate) {
         log.info("Date Ranking!");
+        log.info(String.valueOf(reviewRegDate));
 
         return rankingService.dateList(reviewRegDate);
     }
+
+
 
     /*@GetMapping("/list")
     public List<Ticketing> QnaList() {
