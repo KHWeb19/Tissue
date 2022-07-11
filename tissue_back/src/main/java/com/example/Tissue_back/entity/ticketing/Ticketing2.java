@@ -1,0 +1,44 @@
+package com.example.Tissue_back.entity.ticketing;
+
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.List;
+
+@Data
+@Entity
+public class Ticketing2 {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ticketingNo;
+
+    @Column
+    private String serialNumber;
+
+    @Column
+    private String phone;
+
+    @Column
+    private Long performNo;
+
+    @Column
+    private String [] seatNameArr;
+
+    @CreatedDate
+    private String ticketingRegDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+
+    @Column
+    private Integer finalPrice;
+
+    @OneToMany(mappedBy = "ticketing2", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<TicketingSeat> seats;
+
+    @Column
+    public String status = "예매완료";
+
+}

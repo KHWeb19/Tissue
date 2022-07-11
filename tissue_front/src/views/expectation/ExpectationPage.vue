@@ -17,7 +17,7 @@
 
             <v-row>
                 <v-col>
-                    <v-img :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img"></v-img>
+                    <v-img width="350px" style="padding:0px" :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img"></v-img>
                 </v-col>
                 <v-col>
                     <div class="expect-detail-wrap">
@@ -89,18 +89,22 @@ export default {
         ...mapActions(['fetchEvent', 'fetchMemberInfo'])
     },
     created() {
-       // this.$store.state.memberInfo.memberId = '' // 이렇게 해도 로그아웃하고 다른 아이디로 로그인하면 이전 아이디 정보로 나옴
-
         this.fetchEvent(this.eventNo)
         this.fetchMemberInfo(this.token)
     },
+    mounted() {
+       console.log(this.token)
+       if(this.token == null) {
+            this.memberInfo.memberId = ''
+        }
+    }
 }
 </script>
 
 <style scoped>
-.container{
+/* .container{
   overflow: hidden;
-}
+} */
 .background {
     background-color: #EEEEEE;
 }
@@ -126,15 +130,19 @@ h1 {
     text-decoration-thickness: 8px;
     text-decoration-color: #F48FB1;
 }
-.container > img {
+/* img {
   position: absolute;
-  width: 100%;
+  width: 200px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+  display: block;
+  margin-right: -15px;
+  margin: 0px;
+  padding: 0px;
+}  */
 .linkbtn {
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .to-detail-page{
     width: 300px;

@@ -92,7 +92,7 @@ export default {
         { text: "랭킹", route: "ㄴ" },
         { text: "이벤트/쿠폰", route: "/event" },
       ],
-      token: localStorage.getItem("token"),
+      token: "",
       keyword:''
     };
   },
@@ -131,24 +131,38 @@ export default {
       let result = confirm("로그아웃하시겠습니까?");
       if (result) {
         localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken")
         this.$router.push("/");
         this.token = null;
       }
     },
     goToMyPage() {
-      if (this.token != null) {
-          axios.get('Admin/role',{params: {token: this.token}})
-          .then((res) => {
-              if(res.data == true){
-                  this.$router.push("/Admin")
-              }else {
-                  this.$router.push("/myPage")
-              }
-          })
-      } else {
-        alert("로그인이 필요합니다.");
-        this.$router.push("/login");
-      }
+        let token = localStorage.getItem('token')
+        let refreshToken = localStorage.getItem('refreshToken')
+
+        if (token != null) {
+            axios.get('Admin/role', { params: { token:token } })
+                .then((res) => {
+                    if (res.data == true) {
+                        return this.$router.push("/Admin")
+                    } else {
+                        return this.$router.push("/myPage")
+                    }
+                })
+                .catch(() => {
+                axios.get('security/check', {params: {token: token, refreshToken: refreshToken}})
+                .then((res) => {
+                    console.log(res.data)
+                    console.log("리프레쉬 중 ! ")
+                    localStorage.removeItem('token')
+                    localStorage.setItem('token', res.data)
+                    return this.goToMyPage()   
+                })
+            })
+        } else {
+            alert("로그인이 필요합니다.");
+            return this.$router.push("/login")
+        }
     },
     search() {
         console.log(this.keyword)

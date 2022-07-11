@@ -1,5 +1,10 @@
 <template>
     <v-container class="couponMain">
+        <div class="mr-10 mb-5 mt-7">
+            <span class="ml-3" style="font-size:20pt;"> 사용 가능 쿠폰 </span>
+            <p/>
+            <hr color="#90CAF9">
+        </div>
       <v-row v-if="coupons.length == 0">
             <v-icon large color="red">mdi-exclamation-thick</v-icon>
             <span style="font-size:17pt" class="mr-10">사용 가능한 쿠폰이 없습니다.</span>
@@ -114,7 +119,7 @@ export default {
 }
 .couponMain {
     position: relative;
-    left:20px;
+
     bottom: 30px;
 }
 .card {

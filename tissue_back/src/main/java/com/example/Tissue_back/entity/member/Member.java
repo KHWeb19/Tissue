@@ -65,6 +65,8 @@ public class Member {
     @Column(nullable = false)
     private Role role;
 
+    private String refreshToken;
+
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @Builder.Default

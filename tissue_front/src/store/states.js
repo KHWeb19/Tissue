@@ -4,6 +4,8 @@ export default {
     hall: null,
     couponList:[],
     coupon: null,
+    ticketingList:[],
+    refundList: [],
 
     performances: [],
     performance: {},
@@ -34,8 +36,16 @@ export default {
     likeList: [],
     myLike: [],
     myQna: [],
-    myReview:[],
-    // 유아림
+    myReview: [],
+    myTicket: [],
+    newConcert: [],
+    newMusical: [],
+    newTheater: [],
+    newExhibition: [],
+    newQna: [],
+    newLike: [],
+    newTicket: [],
+     // 유아림
 
 
     events: [],

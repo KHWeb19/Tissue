@@ -6,7 +6,8 @@ import com.example.Tissue_back.entity.expectation.Expectation;
 import java.util.List;
 
 public interface ExpectationService{
-    public Expectation register(ExpectationDto expectationDto);
+    public Boolean register(ExpectationDto expectationDto) throws Exception;
+//    public Boolean checkId(String expectId);
     public List<Expectation> read(Long eventNo);
     public Expectation readOnly(Long expectNo);
     public void modify(Expectation expectation, ExpectationDto expectationDto);
