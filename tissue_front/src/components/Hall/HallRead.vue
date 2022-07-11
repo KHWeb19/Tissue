@@ -46,17 +46,17 @@
                         :row-index="index"
                         :cell-index="indexes"
                       ></div>
-                      <div v-if="hall.rowCnt <= 5">
+                      <div v-if="hall.colCnt <= 5">
                         <div v-if="indexes == 0" style="width: 20px"></div>
                         <div
-                          v-if="indexes == hall.rowCnt - 2"
+                          v-if="indexes == hall.colCnt - 2"
                           style="width: 20px"
                         ></div>
                       </div>
-                      <div v-if="hall.rowCnt > 5">
+                      <div v-if="hall.colCnt > 5">
                         <div v-if="indexes == 1" style="width: 20px"></div>
                         <div
-                          v-if="indexes == hall.rowCnt - 3"
+                          v-if="indexes == hall.colCnt - 3"
                           style="width: 20px"
                         ></div>
                       </div>
