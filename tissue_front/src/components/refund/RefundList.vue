@@ -45,7 +45,10 @@
             </template>
 
             <template v-slot:[`item.usedCouponPrice`]="{ item }">
-              {{ item.usedCouponPrice | comma }}
+              <span v-if="item.usedCouponPrice != null">{{
+                item.usedCouponPrice | comma
+              }}</span>
+              <span v-if="item.usedCouponPrice == null">0</span>
             </template>
 
             <template v-slot:[`item.refundStatus`]="{ item }">

@@ -49,8 +49,10 @@
                     <div class="mb-3 titleInfo">
                       {{ this.performance.performName }}
                     </div>
-
-                    <div class="mb-3 infoTitle">선택한 날짜</div>
+                    <span class="infoTitle">날짜</span>
+                    <div class="mb-3 titleInfo">
+                      {{ this.performance.performShowDate }}
+                    </div>
                     <span class="infoTitle">공연 시간</span>
                     <div class="titleInfo">
                       {{ this.performance.performTime }}

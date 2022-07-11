@@ -106,10 +106,7 @@
           <div class="showSelectPrice">
             <div>{{ selectPrice | comma }} 원</div>
           </div>
-          <div class="mt-3">
-            <v-btn rounded class="white--text" color="blue lighten-3"
-              >뒤로</v-btn
-            >
+          <div class="mt-3" align="center">
             <v-btn
               rounded
               class="white--text"
