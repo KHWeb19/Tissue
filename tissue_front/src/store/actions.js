@@ -54,6 +54,9 @@ import {
     FETCH_EXPECT_LIST,
     FETCH_EXPECT,
 
+    FETCH_RANKING_LIST,
+    FETCH_RANKING_DATE_LIST
+
 
 
 } from './mutation-types'
@@ -338,7 +341,18 @@ export default {
                     commit(FETCH_EXPECT, res.data)
                 })
     },
-
+    fetchRankingList({ commit } ) {
+        return axios.get('ranking/list')
+            .then((res) => {
+                commit(FETCH_RANKING_LIST, res.data)
+            })
+    },
+    fetchRankingDateList({ commit }, reviewRegDate) {
+        return axios.get('ranking/list/byDate', { params: reviewRegDate })
+            .then((res) => {
+                commit(FETCH_RANKING_DATE_LIST, res.data)
+            })
+    }
 }
 
 

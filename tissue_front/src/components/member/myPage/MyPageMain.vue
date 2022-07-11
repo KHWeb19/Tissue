@@ -120,10 +120,17 @@ export default {
             ],
         }
     },
+    watch: {
+        memberNo() {
+            this.fetchMyNewLike(this.memberNo)
+            this.fetchMyNewQna(this.memberNo)
+            this.fetchMyNewTicket(this.memberNo)
+        }
+    },
     computed: {
         ...mapState(['newLike','newQna', 'newTicket'])
     },
-    mounted() {
+    created() {
         this.fetchMyNewLike(this.memberNo)
         this.fetchMyNewQna(this.memberNo)
         this.fetchMyNewTicket(this.memberNo)
