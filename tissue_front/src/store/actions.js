@@ -345,9 +345,7 @@ export default {
             .then((res) => {
                 commit(FETCH_RANKING_DATE_LIST, res.data)
             })
-    },
-
-
+    }
 }
 
 

@@ -8,7 +8,7 @@ import HallListPage from '@/views/hall/HallListPage.vue'
 import HallReadPage from '@/views/hall/HallReadPage.vue'
 
 
-import TicketingPage from '@/views/Ticketing/TicketingPage.vue' 
+import TicketingPage from '@/views/Ticketing/TicketingPage.vue'
 import NoMemberTicketingPage from '@/views/Ticketing/NoMemberTicketingPage.vue'
 import RefundPage from '@/views/refund/RefundPage.vue'
 import PerformanceTest from '@/views/performance/PerformanceTest.vue'
@@ -68,7 +68,8 @@ import QnaBestRegisterPage from '../views/qna/QnaBestRegisterPage.vue'
 import QnaBestModifyPage from '../views/qna/QnaBestModifyPage.vue'
 
 
-import RankingPage from '../views/ranking/RankingPage.vue'
+import TodayRankingPage from '../views/ranking/TodayRankingPage.vue'
+import DateRankingPage from '../views/ranking/DateRankingPage.vue'
 
 
 import axios from 'axios'
@@ -162,10 +163,10 @@ const routes = [
   {
     path: '/Admin',
     name: 'AdminMember',
-    component: AdminMember, 
+    component: AdminMember,
     beforeEnter: requireAdmin()
   },
-  
+
   {
     path: '/couponRegister',
     name: 'CouponRegisterPage',
@@ -507,8 +508,14 @@ const routes = [
   },
   {
     path: '/ranking',
-    name: 'RankingPage',
-    component: RankingPage
+    name: 'TodayRankingPage',
+    component: TodayRankingPage,
+    props: true
+  },
+  {
+    path: '/ranking/:reivewRegDate',
+    name: 'DateRankingPage',
+    component: DateRankingPage
   },
 
 ]
