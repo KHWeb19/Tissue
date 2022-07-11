@@ -80,6 +80,7 @@ public class RefundServiceImpl implements RefundService{
                 refundListResponse.setSeatNameArr(refundRequest.getTicketing().getSeatNameArr());
                 refundListResponse.setFinalPrice(refundRequest.getTicketing().getFinalPrice());
                 refundListResponse.setUsedMileage(refundRequest.getTicketing().getUsedMileage());
+                refundListResponse.setSerial(refundRequest.getTicketing().getSerialNumber());
 
                 Optional<Performance> getPerform = performanceRepository.findById(refundRequest.getTicketing().getPerformNo());
                 Performance performance = getPerform.get();

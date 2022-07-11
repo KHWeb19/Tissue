@@ -18,4 +18,5 @@ public class RefundListResponse {
     private Integer usedCouponPrice;
     private String cancelCommission;
     private String refundStatus;
+    private String serial;
 }

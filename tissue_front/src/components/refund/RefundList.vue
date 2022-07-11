@@ -206,8 +206,8 @@ export default {
           align: "center",
         },
         {
-          text: "상품",
-          value: "performName",
+          text: "예매번호",
+          value: "serial",
           width: "100px",
           align: "center",
         },
