@@ -77,12 +77,12 @@ export default {
         {
           title: "공지사항 관리",
           icon: "mdi-bulletin-board",
-          route: "/",
+          route: "/noticeRegister",
         },
         {
           title: "자주 묻는 질문 관리",
           icon: "mdi-comment-question",
-          route: "/",
+          route: "/qnaBestRegister",
         },
       ],
     };

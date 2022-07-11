@@ -433,7 +433,8 @@ const routes = [
   {
     path: '/noticeRegister',
     name: 'NoticeRegisterPage',
-    component: NoticeRegisterPage
+    component: NoticeRegisterPage,
+    beforeEnter: requireAdmin()
   },
   {
     path: '/noticeList',
@@ -458,7 +459,8 @@ const routes = [
     },
     props: {
       default: true
-    }
+      },
+    beforeEnter: requireAdmin()
     },
 
   {
@@ -494,7 +496,8 @@ const routes = [
   {
     path: '/qnaBestRegister',
     name: 'QnaBestRegisterPage',
-    component: QnaBestRegisterPage
+    component: QnaBestRegisterPage,
+    beforeEnter: requireAdmin()
   },
   {
     path: '/qnaBestModify/:qnaBestNo',
@@ -504,18 +507,23 @@ const routes = [
     },
     props: {
       default: true
-    }
+    },
+    beforeEnter: requireAdmin()
   },
   {
     path: '/ranking',
     name: 'TodayRankingPage',
-    component: TodayRankingPage,
-    props: true
+    component: TodayRankingPage
   },
   {
     path: '/ranking/:reivewRegDate',
     name: 'DateRankingPage',
-    component: DateRankingPage
+    components: {
+      default: DateRankingPage
+    },
+    props: {
+      default: true
+    }
   },
 
 ]

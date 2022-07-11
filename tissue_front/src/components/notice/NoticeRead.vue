@@ -1,14 +1,17 @@
 <template>
     <div>
-        <v-container><br><br><br><br>
+        <v-container><br>
             <h1>공지사항</h1><br>
-                <v-input style="color: skyblue">{{ notice.noticeCategory }}</v-input>
+                <v-input style="color:#90CAF9">{{ notice.noticeCategory }}</v-input>
                 <v-input id="title" style="font-size: 26px">{{notice.noticeTitle}}</v-input>
                     <hr aria-setsize="5px">
-                        <div id='a'>
+                        <div id='noticeInform'>
                             <li style="color:gray">
                                 등록일: {{notice.noticeDate}}&emsp;조회수: {{notice.noticeView}}
                             </li>
+                        </div>
+
+                        <div align="right" v-if="memberInfo.roles === 'ADMIN'">
                             <router-link style="color: gray" :to="{ name: 'NoticeModifyPage', params: { noticeNo: notice.noticeNo } }">
                             <v-icon right style="color: gray">
                                 mdi-pencil
@@ -23,7 +26,11 @@
                             <img v-if="this.notice.noticeImg !== null && this.notice.noticeImg !== 'null'"
                                 :src="require(`@/assets/uploadImg/${this.notice.noticeImg}`)"
                                  width="90%">
-                            <textarea rows="20" :value="notice.noticeContent" type="text" readonly></textarea><br>
+                            <v-textarea rows="20"
+                              :value="notice.noticeContent"
+                               type="text"
+                               auto-grow flat solo
+                                readonly></v-textarea><br>
 
                             <section v-if="this.notice.noticeYoutube !== null && this.notice.noticeYoutube !== ''">
                                 <iframe width="1000" height="600" :src="(`https://www.youtube.com/embed/${notice.noticeYoutube}`)"
@@ -32,7 +39,7 @@
                             <section v-else></section><br><br>
                             <hr aria-setsize="5px"><br>
                                 <p>
-                                    <v-icon right style="color: pink">
+                                    <v-icon right style="color: #F48FB1">
                                         mdi-alert-circle
                                     </v-icon>
                                     티켓오픈 일정은 Tissue 또는 기획사의 사정에 의해 사전예고 없이 변경 또는 취소 될 수 있습니다.
@@ -50,6 +57,10 @@ export default {
   name: "NoticeRead",
   props: {
     notice: {
+      type: Object,
+      required: true
+    },
+    memberInfo: {
       type: Object,
       required: true
     }
@@ -79,7 +90,7 @@ textarea { width: 90%;
             outline-style: none;
 			border-radius: 5px;}
 img { object-fit: contain; }
-#a { text-align: right; font-size: 15px;}
+#noticeInform { text-align: right; font-size: 15px;}
 #btn { text-align: center;}
 #btnListPage { background:white; width: 250px; height: 55px; font-size: 18px;}
 p { text-align: right; font-size: 14px; color: silver;}

@@ -1,7 +1,7 @@
 <template>
     <body>
       <v-container>
-      <form @submit.prevent="onSubmit"><br><br><br><br>
+      <form @submit.prevent="onSubmit"><br>
         <h2>공지사항 수정</h2><br>
           <v-select v-model="noticeCategory" label="카테고리" :items="categoryList"></v-select>
           <v-text-field v-model="noticeTitle" label="제목" type="text"></v-text-field>
@@ -13,7 +13,7 @@
           <v-img :src="image" alt=""/><br><br><br><br>
           <div id ='btn'>
             <v-btn class="white--text" id="BtnModify" type="submit">수정</v-btn>
-          </div><br><br><br><br>
+          </div><br><br>
       </form>
   </v-container>
 </body>
@@ -71,5 +71,5 @@ export default {
 </script>
 <style scoped>
 #btn { text-align: center; font-size: 20px; }
-#BtnModify { background-color: pink; width: 500px; height: 55px;}
+#BtnModify { background-color: #F48FB1; width: 500px; height: 55px;}
 </style>
