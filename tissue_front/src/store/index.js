@@ -6,7 +6,7 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 
-import createPersistedState from 'vuex-persistedstate'
+//import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
