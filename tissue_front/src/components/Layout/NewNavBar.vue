@@ -144,7 +144,7 @@ export default {
 <style scoped>
 .menubar {
   position: absolute;
-  z-index: 3;
+  z-index: 3 !important;
   width: 100%;
 }
 

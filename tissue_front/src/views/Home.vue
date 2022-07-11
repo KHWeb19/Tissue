@@ -38,7 +38,156 @@
                 style="border-bottom: 5px solid #F48FB1"
               ></div>
             </div>
-            <div class="content_thumbnail">이미지</div>
+            <table class="ranking mt-15">
+            <tr>
+                <td rowspan="2" class="pr-5 hoverImg">
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[0].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[0].performThumbnail}`)
+                        "
+                        width="400"
+                    >
+                    <v-img
+                        class="medal"
+                        :src="
+                        require('@/assets/main/win1.png')
+                        "
+                        width="120"
+                    ></v-img>
+                    <span class="hoverContent">{{this.newRanking[0].performName}}</span>
+                    </v-img>
+                    </router-link>
+                </td>
+                <td class="hoverImg">
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[1].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[1].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <v-img
+                        class="medal"
+                        :src="
+                        require('@/assets/main/win2.png')
+                        "
+                        width="80"
+                    ></v-img>
+                     <span class="hoverContent">{{this.newRanking[1].performName}}</span>
+                    </v-img>
+                    </router-link>
+                </td>
+                <td>
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[2].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[2].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <v-img
+                        class="medal"
+                        :src="
+                        require('@/assets/main/win3.png')
+                        "
+                        width="80"
+                    ></v-img>
+                    <span class="hoverContent">{{this.newRanking[2].performName}}</span></v-img>
+                    </router-link>
+                </td>
+                <td>
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[3].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[3].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <span class="hoverContent">{{this.newRanking[3].performName}}</span>
+                    </v-img>
+                    </router-link>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[4].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[4].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <span class="hoverContent">{{this.newRanking[4].performName}}</span></v-img>
+                    </router-link>
+                </td>
+                <td>
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[5].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[5].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <span class="hoverContent">{{this.newRanking[5].performName}}</span></v-img>
+                    </router-link>
+                </td>
+                <td>
+                    <router-link
+                                :to="{
+                                name: 'PerformanceDetailPage',
+                                params: { performNo: this.newRanking[6].performNo.toString() },
+                                }"
+                            >
+                    <v-img
+                        class="himg"
+                        :src="
+                        require(`@/assets/thumbNail/${this.newRanking[6].performThumbnail}`)
+                        "
+                        width="200"
+                    >
+                    <span class="hoverContent">{{this.newRanking[6].performName}}</span>
+                    </v-img>
+                    </router-link>
+                </td>
+            </tr>
+            </table>
         </v-col>
         </v-row>
         <v-divider class="mt-13 mb-15"/>
@@ -230,16 +379,17 @@ export default {
     };
   },
   computed: {
-      ...mapState(['newConcert', 'newMusical', 'newTheater', 'newExhibition'])
+      ...mapState(['newConcert', 'newMusical', 'newTheater', 'newExhibition','newRanking'])
   },
   mounted () {
       this.fetchNewConcert('콘서트')
       this.fetchNewMusical('뮤지컬')
       this.fetchNewTheater('연극')
       this.fetchNewExhibition('전시회')
+      this.fetchNewRanking()
   },
   methods: {
-      ...mapActions(['fetchNewConcert', 'fetchNewMusical', 'fetchNewTheater', 'fetchNewExhibition'])
+      ...mapActions(['fetchNewConcert', 'fetchNewMusical', 'fetchNewTheater', 'fetchNewExhibition','fetchNewRanking'])
   }
 };
 </script>
@@ -316,4 +466,33 @@ export default {
     font-weight: bold;
     color: #90CAF9;
 }
+.ranking {
+    margin:auto;
+}
+.medal {
+    position:absolute;
+}
+table {
+    border-spacing: 20px;
+  border-collapse: separate;
+}
+.hoverContent {
+    position: absolute;
+    top: 150%;
+    transform: translate( -50%, -50% );
+    left:50%;
+    z-index:2;
+    color:white;
+    transition: all .35s ;
+    font-size: 13pt;
+    text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+}
+td:hover .hoverContent{
+    top: 50%;
+    color: rgb(0, 0, 0);
+}
+td:hover .himg{
+     filter: brightness(70%); 
+}
+
 </style>

@@ -36,6 +36,12 @@ public class RankingController {
     }
 
 
+    @GetMapping("/main/list")
+    public List<RankingDTO> RankingMain () {
+        log.info("Today Ranking");
+
+        return rankingService.mainList();
+    }
 
     /*@GetMapping("/list")
     public List<Ticketing> QnaList() {

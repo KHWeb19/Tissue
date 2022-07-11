@@ -9,5 +9,6 @@ import java.util.List;
 public interface RankingService {
     public List<RankingDTO> todayList ();
     public List<RankingDTO> dateList(String reviewRegDate);
+    public List<RankingDTO> mainList ();
 
 }
