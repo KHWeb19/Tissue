@@ -128,8 +128,11 @@ public class Performance {
     private Set<Likes> performLike = new HashSet<>();
 
 
+
+/*
     @OneToOne(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Event event;
+*/
 
 }

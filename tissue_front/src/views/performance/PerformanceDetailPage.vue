@@ -34,6 +34,7 @@ export default {
       likeMember: false,
     };
   },
+
   computed: {
     likeList: {
       ...mapState({ get: "likeList" }),
@@ -46,6 +47,7 @@ export default {
       "reviewList",
     ]),
   },
+
   mounted() {
     this.fetchPerformance(this.performNo);
     this.fetchCouponList();
@@ -75,7 +77,7 @@ export default {
           return (this.likeMember = false);
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>

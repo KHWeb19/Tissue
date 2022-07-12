@@ -45,7 +45,7 @@ export default {
           },
         })
         .then(() => {
-          alert("쿠폰 등록 성공");
+          //alert("쿠폰 등록 성공");
           setTimeout(() => {
             this.$router.push({
               name: "CouponListPage",
@@ -53,7 +53,7 @@ export default {
           }, 300);
         })
         .catch(() => {
-          alert("문제 발생");
+          //alert("문제 발생");
         });
     },
   },

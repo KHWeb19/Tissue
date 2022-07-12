@@ -66,7 +66,6 @@ export default {
       const expectContent  = this.expectContent
       axios.patch(`http://localhost:7777/expectation/modify/${this.expectNo}`, { expectContent })
         .then(() => {
-        alert('수정이 완료되었습니다')
         this.fetchExpectList(this.eventNo)
         this.dialog = false
       })

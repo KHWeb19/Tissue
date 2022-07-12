@@ -24,6 +24,9 @@ public class Ticketing {
     private String memberId;
 
     @Column
+    private String serialNumber;
+
+    @Column
     private Long performNo;
 
     @Column

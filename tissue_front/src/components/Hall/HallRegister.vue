@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-app-bar app elevation="3">
-        <v-toolbar-title class="ml-3">
-            📌 공연장 관리
-        </v-toolbar-title>
+      <v-toolbar-title class="ml-3"> 📌 공연장 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container class="mt-10">
       <v-row justify="center">
@@ -86,7 +84,7 @@ export default {
           this.$router.push("/HallList");
         })
         .catch(() => {
-          alert("실패");
+          //alert("실패");
         });
     },
   },

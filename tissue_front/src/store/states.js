@@ -6,6 +6,7 @@ export default {
     coupon: null,
     ticketingList:[],
     refundList: [],
+    nonMemberRefundLust:[],
 
     performances: [],
     performance: {},
@@ -45,6 +46,7 @@ export default {
     newQna: [],
     newLike: [],
     newTicket: [],
+    newRanking:[],
      // 유아림
 
 

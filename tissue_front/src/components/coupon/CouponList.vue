@@ -4,11 +4,18 @@
       <v-toolbar-title class="ml-3"> 📌 쿠폰 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container>
-      <v-row class="mt-5 mb-5">
+      <v-row class="ml-3 mt-10" style="font-size: 18pt">
+        전체 쿠폰 수&nbsp;<span style="color: skyblue">{{
+          paginatedData.length
+        }}</span>
+        개
+      </v-row>
+
+      <v-row class="mt-10">
         <v-col
           v-for="coupon in paginatedData"
           :key="coupon.couponNo"
-          lg="3"
+          lg="4"
           sm="6"
         >
           <v-card width="350">
@@ -60,7 +67,7 @@
                         text
                         v-bind="attrs"
                         v-on="on"
-                        @click="resetCheckBox"
+                        @click="resetCheckBox, test(coupon.couponNo)"
                         height="21"
                       >
                         삭제
@@ -84,14 +91,11 @@
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          text
-                          :disabled="!checkbox"
-                          @click="remove(coupon.couponNo)"
-                        >
+                        <v-btn text :disabled="!checkbox" @click="remove()">
                           삭제
                         </v-btn>
-                        <v-btn text @click="dialogDeleteHall = false">
+
+                        <v-btn text @click="dialogDeleteCoupon = false">
                           취소
                         </v-btn>
                       </v-card-actions>
@@ -167,6 +171,7 @@ export default {
       pageNum: 0,
       checkbox: false,
       dialogDeleteCoupon: false,
+      temp: 0,
     };
   },
 
@@ -202,27 +207,25 @@ export default {
     resetCheckBox() {
       this.checkbox = false;
     },
-    remove(val) {
-      this.couponNo = val;
-      const { couponNo } = this;
-      axios.delete(`http://localhost:7777/coupon/${couponNo}`).then(() => {
+    remove() {
+      this.couponNo = this.temp;
+      console.log(this.couponNo);
+
+      axios.delete(`http://localhost:7777/coupon/${this.couponNo}`).then(() => {
         alert("쿠폰 삭제가 완료되었습니다.");
         this.$router.go();
       });
+    },
+
+    test(val) {
+      this.temp = val;
+      console.log(this.temp);
     },
   },
 };
 </script>
 
 <style scoped>
-.titleBox {
-  width: 100%;
-  height: 168.91px;
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: #fce4ec;
-  border-bottom: 1px solid lightgrey;
-}
 .couponPrice {
   font-size: 60px;
   padding-top: 30px;

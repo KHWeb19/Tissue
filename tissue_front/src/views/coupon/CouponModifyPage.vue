@@ -24,8 +24,10 @@ export default {
     ...mapState(["coupon"]),
   },
   created() {
+    this.$store.state.coupon = null;
+
     this.fetchCoupon(this.couponNo).catch(() => {
-      alert("조회 실패");
+      //alert("조회 실패");
       this.$router.back();
     });
   },
@@ -62,7 +64,7 @@ export default {
           },
         })
         .then(() => {
-          alert("쿠폰 수정 성공");
+          //alert("쿠폰 수정 성공");
           setTimeout(() => {
             this.$router.push({
               name: "CouponListPage",
@@ -70,7 +72,7 @@ export default {
           }, 300);
         })
         .catch(() => {
-          alert("문제 발생");
+          //alert("문제 발생");
         });
     },
   },

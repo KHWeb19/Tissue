@@ -51,7 +51,9 @@
           this.$route.name != 'EventRegisterPage' &&
           this.$route.name != 'EventReadPage' &&
           this.$route.name != 'EventModifyPage' &&
-          this.$route.name != 'RefundPage'
+          this.$route.name != 'RefundPage' &&
+          this.$route.name != 'NonMemberFindSerialPage' &&
+          this.$route.name != 'NonMemberFindRvPage'
         "
       >
         <new-nav-bar-2 />
@@ -87,7 +89,9 @@
         this.$route.name != 'EventRegisterPage' &&
         this.$route.name != 'EventReadPage' &&
         this.$route.name != 'EventModifyPage' &&
-        this.$route.name != 'RefundPage'
+        this.$route.name != 'RefundPage' &&
+        this.$route.name != 'NonMemberFindSerialPage' &&
+        this.$route.name != 'NonMemberFindRvPage'
       "
     />
     <join-footer
