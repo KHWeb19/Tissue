@@ -10,6 +10,7 @@
         }}</span>
         개
       </v-row>
+
       <v-row class="mt-10">
         <v-col
           v-for="coupon in paginatedData"
@@ -66,7 +67,7 @@
                         text
                         v-bind="attrs"
                         v-on="on"
-                        @click="resetCheckBox"
+                        @click="resetCheckBox, test(coupon.couponNo)"
                         height="21"
                       >
                         삭제
@@ -90,13 +91,10 @@
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn
-                          text
-                          :disabled="!checkbox"
-                          @click="remove(coupon.couponNo)"
-                        >
+                        <v-btn text :disabled="!checkbox" @click="remove()">
                           삭제
                         </v-btn>
+
                         <v-btn text @click="dialogDeleteCoupon = false">
                           취소
                         </v-btn>
@@ -173,6 +171,7 @@ export default {
       pageNum: 0,
       checkbox: false,
       dialogDeleteCoupon: false,
+      temp: 0,
     };
   },
 
@@ -208,13 +207,19 @@ export default {
     resetCheckBox() {
       this.checkbox = false;
     },
-    remove(val) {
-      this.couponNo = val;
-      const { couponNo } = this;
-      axios.delete(`http://localhost:7777/coupon/${couponNo}`).then(() => {
+    remove() {
+      this.couponNo = this.temp;
+      console.log(this.couponNo);
+
+      axios.delete(`http://localhost:7777/coupon/${this.couponNo}`).then(() => {
         alert("쿠폰 삭제가 완료되었습니다.");
         this.$router.go();
       });
+    },
+
+    test(val) {
+      this.temp = val;
+      console.log(this.temp);
     },
   },
 };

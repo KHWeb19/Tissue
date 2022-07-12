@@ -49,8 +49,10 @@
                     <div class="mb-3 titleInfo">
                       {{ this.performance.performName }}
                     </div>
-
-                    <div class="mb-3 infoTitle">선택한 날짜</div>
+                    <span class="infoTitle">날짜</span>
+                    <div class="mb-3 titleInfo">
+                      {{ this.performance.performShowDate }}
+                    </div>
                     <span class="infoTitle">공연 시간</span>
                     <div class="titleInfo">
                       {{ this.performance.performTime }}
@@ -127,9 +129,7 @@
                 >
                   <span class="infoTitle">최종 금액</span>
                   <div class="salePrice">
-                    {{
-                      (this.tempSelectPriceInfoCopy - finalSalePrice) | comma
-                    }}
+                    {{ finalPrice | comma }}
                     원
                   </div>
                 </div>
@@ -450,11 +450,23 @@ export default {
         this.inputMileage = 0;
         return;
       }
-      this.mileageSalePrice = this.inputMileage;
+
+      if (this.inputMileage > this.finalPrice) {
+        this.mileageSalePrice = this.finalPrice;
+        this.inputMileage = 0;
+      } else {
+        this.mileageSalePrice = this.inputMileage;
+        this.inputMileage = 0;
+      }
     },
     useAllMileage() {
-      this.mileageSalePrice = this.memberInfo.memberMileage;
-      this.inputMileage = this.mileageSalePrice;
+      if (this.memberInfo.memberMileage > this.finalPrice) {
+        this.mileageSalePrice = this.finalPrice;
+        this.inputMileage = 0;
+      } else {
+        this.mileageSalePrice = this.memberInfo.memberMileage;
+        this.inputMileage = 0;
+      }
     },
     resetMileage() {
       this.mileageSalePrice = 0;

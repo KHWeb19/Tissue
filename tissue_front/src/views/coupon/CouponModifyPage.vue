@@ -24,6 +24,8 @@ export default {
     ...mapState(["coupon"]),
   },
   created() {
+    this.$store.state.coupon = null;
+
     this.fetchCoupon(this.couponNo).catch(() => {
       alert("조회 실패");
       this.$router.back();

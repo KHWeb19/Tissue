@@ -8,6 +8,7 @@ import {
     FETCH_COUPON,
 
     FETCH_REFUND_LIST,
+    FETCH_NON_MEMBER_REFUND_LIST,
 
       // performance
     FETCH_PERFORMANCE_LIST,
@@ -89,6 +90,12 @@ export default {
         return axios.get("http://localhost:7777/refund/list")
         .then((res)=>{
             commit(FETCH_REFUND_LIST,res.data)
+        })
+    },
+    fetchNonMemberRefundList({commit}) {
+        return axios.get("http://localhost:7777/refund/nonMemberList")
+        .then((res)=>{
+            commit(FETCH_NON_MEMBER_REFUND_LIST,res.data)
         })
     },
     fetchCouponList({commit}) {

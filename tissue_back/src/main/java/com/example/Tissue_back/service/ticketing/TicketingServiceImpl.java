@@ -51,9 +51,30 @@ public class TicketingServiceImpl implements TicketingService {
     @Override
     public void register(TicketingDto ticketingDto, String memberId) {
         //String memberId = securityService.getMemberId(ticketingDto.getMemberId());
-
+        Boolean isDup = true;
+        String serial = "";
+        List<Ticketing> findTicketing = ticketingRepository.findAll();
 
         Ticketing ticketing = new Ticketing();
+
+        Random rand = new Random();
+
+        while(isDup){
+            for (int i = 0; i < 8; i++) {
+                String ran = Integer.toString(rand.nextInt(10));
+                serial += ran;
+            }
+            for(int i = 0; i < findTicketing.size(); i++){
+                if (findTicketing.get(i).getSerialNumber() == serial){
+                    serial = "";
+                    isDup = true;
+                }else if(findTicketing.get(i).getSerialNumber() != serial){
+                    isDup = false;
+                }
+            }
+        }
+
+        ticketing.setSerialNumber(serial);
 
         ticketingDto.setMemberId(memberId);
 
@@ -128,15 +149,30 @@ public class TicketingServiceImpl implements TicketingService {
 
     @Override
     public String register2(Ticketing2Dto ticketingDto) {
+        Boolean isDup = true;
+        String serial = "";
+        List<Ticketing2> findTicketing2 = ticketing2Repository.findAll();
 
         Ticketing2 ticketing = new Ticketing2();
 
         Random rand = new Random();
-        String serial = "";
-        for (int i = 0; i < 8; i++) {
-            String ran = Integer.toString(rand.nextInt(10));
-            serial += ran;
+
+        while(isDup){
+            for (int i = 0; i < 8; i++) {
+                String ran = Integer.toString(rand.nextInt(10));
+                serial += ran;
+            }
+            for(int i = 0; i < findTicketing2.size(); i++){
+                if (findTicketing2.get(i).getSerialNumber() == serial){
+                    serial = "";
+                    isDup = true;
+                }else if(findTicketing2.get(i).getSerialNumber() != serial){
+                    isDup = false;
+                }
+            }
         }
+
+
 
         ticketing.setSerialNumber(serial);
         ticketing.setPhone(ticketingDto.getPhone());

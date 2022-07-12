@@ -108,7 +108,7 @@ export default {
       for (let i = 0; i < this.tempSelectSeatInfo.length; i++) {
         seatNameArr.push(this.tempSelectSeatInfo[i].seatName);
       }
-
+      console.log(this.price);
       let today = new Date();
 
       let year = today.getFullYear(); // 년도
@@ -143,7 +143,7 @@ export default {
           pay_method: "card",
           merchant_uid: createUid,
           name: this.performance.performName,
-          amount: 100,
+          amount: 100, //this.price,
           buyer_email: this.memberInfo.memberEmail,
           buyer_name: this.memberInfo.memberName,
           buyer_tel: this.memberInfo.memberPhone,
