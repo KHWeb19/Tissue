@@ -86,7 +86,7 @@ export default {
       ],
       subLinks: [
         { text: "지역", route: "/area" },
-        { text: "랭킹", route: "ㄴ" },
+        { text: "랭킹", route: "/ranking" },
         { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: "",
@@ -125,7 +125,7 @@ export default {
                 console.log("리프레쉬 중 ! ")
                 localStorage.removeItem('token')
                 localStorage.setItem('token', res.data)
-                return this.goToMyPage()   
+                return this.goToMyPage()
             })
           })
       } else {

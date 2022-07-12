@@ -13,7 +13,7 @@ export default {
         DateRanking
     },
     props: {
-      reviewRegDate: {
+      ticketingRegDate: {
           type: String,
           required: true
       }
@@ -22,24 +22,10 @@ export default {
         ...mapState(['dateRankings'])
     },
     mounted () {
-        this.fetchRankingDateList(this.reviewRegDate)
+        this.fetchRankingDateList(this.ticketingRegDate)
     },
     methods: {
         ...mapActions(['fetchRankingDateList'])
-        /*onSubmit (payload) {
-            const { reviewRegDate } = payload
-            axios.get(`ranking/list/byDate/${this.reviewRegDate}`, { params: { reviewRegDate }})
-            .then(res => {
-                alert('success')
-                this.$router.replace({
-                    name: 'DateRankingPage',
-                    params: { reviewRegDate: res.reviewRegDate }
-                })
-            })
-            .catch(() => {
-                alert('fail')
-            })
-        }*/
     }
 }
 </script>

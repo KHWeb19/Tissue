@@ -194,7 +194,7 @@ export default{
     [FETCH_RANKING_LIST] (state, rankings) {
         state.rankings = rankings
     },
-    [FETCH_RANKING_DATE_LIST] (state, rankings) {
-        state.rankings = rankings
+    [FETCH_RANKING_DATE_LIST] (state, dateRankings) {
+        state.dateRankings = dateRankings
     }
 }

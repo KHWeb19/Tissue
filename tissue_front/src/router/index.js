@@ -516,7 +516,7 @@ const routes = [
     component: TodayRankingPage
   },
   {
-    path: '/ranking/:reivewRegDate',
+    path: '/ranking/:ticketingRegDate',
     name: 'DateRankingPage',
     components: {
       default: DateRankingPage
