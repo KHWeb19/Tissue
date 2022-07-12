@@ -40,7 +40,7 @@
             </div>
             <table class="ranking mt-15">
             <tr>
-                <td rowspan="2" class="pr-5 hoverImg">
+                <td rowspan="2" class="pr-5 hoverImg" v-if="this.newRanking[0]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -65,7 +65,7 @@
                     </v-img>
                     </router-link>
                 </td>
-                <td class="hoverImg">
+                <td class="hoverImg" v-if="this.newRanking[1]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -90,7 +90,7 @@
                     </v-img>
                     </router-link>
                 </td>
-                <td>
+                <td v-if="this.newRanking[2]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -114,7 +114,7 @@
                     <span class="hoverContent">{{this.newRanking[2].performName}}</span></v-img>
                     </router-link>
                 </td>
-                <td>
+                <td v-if="this.newRanking[3]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -134,7 +134,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td v-if="this.newRanking[4]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -151,7 +151,7 @@
                     <span class="hoverContent">{{this.newRanking[4].performName}}</span></v-img>
                     </router-link>
                 </td>
-                <td>
+                <td v-if="this.newRanking[5]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
@@ -168,7 +168,7 @@
                     <span class="hoverContent">{{this.newRanking[5].performName}}</span></v-img>
                     </router-link>
                 </td>
-                <td>
+                <td v-if="this.newRanking[6]">
                     <router-link
                                 :to="{
                                 name: 'PerformanceDetailPage',
