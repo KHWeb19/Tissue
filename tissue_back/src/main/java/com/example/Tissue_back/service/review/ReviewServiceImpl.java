@@ -4,6 +4,7 @@ import com.example.Tissue_back.controller.request.review.ReviewDto;
 import com.example.Tissue_back.entity.expectation.Expectation;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.review.Review;
+import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.review.ReviewRepository;
 import com.example.Tissue_back.service.security.SecurityService;
@@ -23,6 +24,9 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Autowired
     private PerformanceRepository performanceRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Autowired
     private SecurityService securityService;
@@ -70,6 +74,9 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public void delete (Long reviewNo) {
+        Optional<Review> findReview = reviewRepository.findById(reviewNo);
+
+        memberRepository.restoreMileage(findReview.get().getReviewWriter());
         reviewRepository.deleteById(reviewNo);
     }
 }
