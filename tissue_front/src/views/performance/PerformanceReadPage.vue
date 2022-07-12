@@ -1,183 +1,257 @@
 <template>
   <div>
-    <v-container style="width: 1200px">
-      <v-row>
-        <v-col>
-          <div style="border-bottom: 2px solid black" class="pb-5 mt-10">
-            <div class="font15">
-              {{ performance.performCategory }}
-            </div>
-            <div
-              style="font-size: 35px; color: #333; font-weight: bold"
-              class="mb-5"
-            >
-              {{ performance.performName }}
-            </div>
-            <div class="font15">
-              {{ performance.performStart }} ~ {{ performance.performEnd }} |
-              {{ name }} {{ address }}
-              <v-icon color="blue lighten-3">mdi-map-marker</v-icon>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <img
-            class="img"
-            :src="
-              require(`@/assets/thumbNail/${this.performance.performThumbnail}`)
-            "
-          />
-        </v-col>
-        <v-col>
-            <div style="margin: 0 0 50px 50px">
-              <div class="wrapSubTitle">
-                <div class="performSubTitle">등급</div>
-                <div class="font15">{{ performance.performGrade }}</div>
-              </div>
-              <div class="wrapSubTitle">
-                <div class="performSubTitle">관람시간</div>
-                <div class="font15">{{ "필드추가 필요" }}</div>
-              </div>
-              <div class="wrapSubTitle">
-                <div class="performSubTitle">출연</div>
-                <div class="font15">{{ performance.performer }}</div>
-              </div>
-              <div class="wrapSubTitle">
-                <div class="performSubTitle">가격</div>
-                <div class="priceTable">
-                  <div class="wrapPriceGrade">
-                    <div class="gradeText">VIP석</div>
-                    <b style="color: #f48fb1" class="ml-2">{{
-                      performance.performPriceVip | comma
-                    }}</b
-                    >원
-                  </div>
-                  <div class="wrapPriceGrade">
-                    <div class="gradeText">R석</div>
-                    <b style="color: #f48fb1" class="ml-2">{{
-                      performance.performPriceR | comma
-                    }}</b
-                    >원
-                  </div>
-                  <div class="wrapPriceGrade">
-                    <div class="gradeText">S석</div>
-                    <b style="color: #f48fb1" class="ml-2">{{
-                      performance.performPriceS | comma
-                    }}</b
-                    >원
+    <v-container>
+       <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3"> 📌 공연 관리 </v-toolbar-title>
+      </v-app-bar>
+      <v-container>
+        <v-row>
+            <v-col>
+              <form>
+                <div>
+                  <label>공연명</label>
+                  <v-text-field
+                    :value="performance.performName"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>공연날짜</label>
+                  <v-text-field
+                  :value="performance.performShowDate"
+                    outlined
+                    type="Date"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>공연시작일</label>
+                  <v-text-field
+                  :value="performance.performStart"
+                    outlined
+                    type="Date"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>공연마감일</label>
+                <v-text-field
+                :value="performance.performEnd"
+                    outlined
+                    type="Date"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>공연시간</label>
+                  <v-text-field
+                  :value="performance.performTime"
+                    outlined
+                    type="Time"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>S석가격</label>
+                  <v-text-field
+                  :value="performance.performPriceS"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>R석가격</label>
+                  <v-text-field
+                  :value="performance.performPriceR"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>vip석가격</label>
+                  <v-text-field
+                  :value="performance.performPriceVip"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>지역</label>
+                  <v-text-field
+                  :value="performance.performArea"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>공연카테고리</label>
+                  <v-text-field
+                  :value="performance.performCategory"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>등급</label>
+                  <v-text-field
+                  :value="performance.performGrade"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+                <div>
+                  <label>출연자</label>
+                  <v-text-field
+                  :value="performance.performer"
+                    outlined
+                    type="text"
+                    color="pink lighten-3"
+                    readonly
+                  ></v-text-field>
+                </div>
+
+                <div>
+                  <label>썸네일</label>
+                  <div align="center" style="background-color:#EEEEEE;">
+                    <img
+                      class="img"
+                      :src="
+                        require(`@/assets/thumbNail/${this.performance.performThumbnail}`)
+                      "
+                    />
                   </div>
                 </div>
-              </div>
-            </div>
-        </v-col>
-      </v-row>
-      <hr class="mt-5 mb-5" />
-      <div align="center" class="detailImgBox">
-        <v-row justify="center">
-          <v-col class="label">상세이미지</v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col>
-            <img
-              class="img"
-              v-if="
-                this.performance.performDetailImg1 !== null &&
-                this.performance.performDetailImg1 !== 'null'
-              "
-              :src="
-                require(`@/assets/detailImg/${this.performance.performDetailImg1}`)
-              "
-            />
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col>
-            <img
-              class="img"
-              v-if="
-                this.performance.performDetailImg2 !== null &&
-                this.performance.performDetailImg2 !== 'null'
-              "
-              :src="
-                require(`@/assets/detailImg/${this.performance.performDetailImg2}`)
-              "
-            />
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col>
-            <img
-              class="img"
-              v-if="
-                this.performance.performDetailImg3 !== null &&
-                this.performance.performDetailImg3 !== 'null'
-              "
-              :src="
-                require(`@/assets/detailImg/${this.performance.performDetailImg3}`)
-              "
-            />
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col>
-            <img
-              class="img"
-              v-if="
-                this.performance.performDetailImg4 !== null &&
-                this.performance.performDetailImg4 !== 'null'
-              "
-              :src="
-                require(`@/assets/detailImg/${this.performance.performDetailImg4}`)
-              "
-            />
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col>
-            <img
-              class="img"
-              v-if="
-                this.performance.performDetailImg5 !== null &&
-                this.performance.performDetailImg5 !== 'null'
-              "
-              :src="
-                require(`@/assets/detailImg/${this.performance.performDetailImg5}`)
-              "
-            />
-          </v-col>
-        </v-row>
-      </div>
 
-      <hr class="mt-5 mb-5" />
-      <div align="center">
-        <v-row>
-          <v-col v-if="showMap">
-            <v-col> {{ name }} </v-col>
-            <v-col> {{ address }} ({{ phone }}) </v-col>
-            <naver-maps
-              :height="500"
-              :width="1000"
-              :mapOptions="mapOptions"
-            ></naver-maps>
-            <naver-marker
-              :lat="mapOptions.lat"
-              :lng="mapOptions.lng"
-            ></naver-marker>
-          </v-col>
-        </v-row>
-      </div>
+                <div>
+                  <label>상세이미지</label>
+                  <div class="mt-3" align="center" style="background-color:#EEEEEE;">
+                    <v-row justify="center">
+                      <v-col>
+                        <img
+                          class="detailimg"
+                          v-if="
+                            this.performance.performDetailImg1 !== null &&
+                            this.performance.performDetailImg1 !== 'null'
+                          "
+                          :src="
+                            require(`@/assets/detailImg/${this.performance.performDetailImg1}`)
+                          "
+                        />
+                      </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                      <v-col>
+                        <img
+                          class="detailimg"
+                          v-if="
+                            this.performance.performDetailImg2 !== null &&
+                            this.performance.performDetailImg2 !== 'null'
+                          "
+                          :src="
+                            require(`@/assets/detailImg/${this.performance.performDetailImg2}`)
+                          "
+                        />
+                      </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                      <v-col>
+                        <img
+                          class="detailimg"
+                          v-if="
+                            this.performance.performDetailImg3 !== null &&
+                            this.performance.performDetailImg3 !== 'null'
+                          "
+                          :src="
+                            require(`@/assets/detailImg/${this.performance.performDetailImg3}`)
+                          "
+                        />
+                      </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                      <v-col>
+                        <img
+                          class="detailimg"
+                          v-if="
+                            this.performance.performDetailImg4 !== null &&
+                            this.performance.performDetailImg4 !== 'null'
+                          "
+                          :src="
+                            require(`@/assets/detailImg/${this.performance.performDetailImg4}`)
+                          "
+                        />
+                      </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                      <v-col>
+                        <img
+                          class="detailimg"
+                          v-if="
+                            this.performance.performDetailImg5 !== null &&
+                            this.performance.performDetailImg5 !== 'null'
+                          "
+                          :src="
+                            require(`@/assets/detailImg/${this.performance.performDetailImg5}`)
+                          "
+                        />
+                      </v-col>
+                    </v-row>
+                  </div>
+                </div>
 
-      <div align="center" class="mt-5">
-        <v-btn class="mr-5" color="blue lighten-3" dark :to="{ name: 'PerformanceModifyPage', params: { performNo } }">
-          수정
-        </v-btn>
-        <v-btn class="mr-5" color="blue lighten-3" dark @click="onDelete"> 삭제 </v-btn>
-        <v-btn class="mr-5" color="blue lighten-3" dark :to="{ name: 'PerformanceListPage' }">
-          리스트
-        </v-btn>
-      </div>
+                <div class="mt-5">
+                  <label>지도</label>
+                  <div class="mt-3" align="center" style="background-color:#EEEEEE;">
+                    <v-row>
+                      <v-col v-if="showMap">
+                        <v-col style="font-size:13px;color:#F48FB1"> {{ name }} </v-col>
+                        <v-col style="font-size:13px;color:#F48FB1"> {{ address }} ({{ phone }}) </v-col>
+                        <naver-maps
+                          :height="500"
+                          :width="1000"
+                          :mapOptions="mapOptions"
+                        ></naver-maps>
+                        <naver-marker
+                          :lat="mapOptions.lat"
+                          :lng="mapOptions.lng"
+                        ></naver-marker>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </div>
+
+              </form>
+            </v-col>
+        </v-row>
+
+        <v-row class="mt-8" justify="center">
+          <v-btn color="blue lighten-3 mr-8" dark :to="{ name: 'PerformanceModifyPage', params: { performNo } }">
+            수정
+          </v-btn>
+        <v-btn class="mr-8" color="blue lighten-3" dark @click="onDelete"> 삭제 </v-btn>
+          <v-btn class="mr-5" color="blue lighten-3" dark :to="{ name: 'PerformanceListPage' }">
+            리스트
+          </v-btn>
+        </v-row>
+      </v-container>
     </v-container>
   </div>
 </template>
@@ -271,15 +345,17 @@ export default {
 </script>
 
 <style scoped>
-.label {
+label {
+  font-size: 5px;
   text-align: center;
 }
 
 .img {
   position: relative;
-  max-height: 100%;
-  max-width: 100;
-  /* margin-top: 5%; */
+   max-width: 450px;
+}
+.detailimg{
+  max-width: 450px;
 }
 
 .detailImgBox {

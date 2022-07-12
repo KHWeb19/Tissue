@@ -1,6 +1,10 @@
 <template>
   <div>
     <v-container>
+        <v-app-bar app elevation="3">
+        <v-toolbar-title class="ml-3"> 📌 공연 관리 </v-toolbar-title>
+      </v-app-bar>
+      <v-container>
       <v-row>
         <v-col>
           <form>
@@ -9,6 +13,7 @@
               <v-text-field
                 outlined
                 v-model="performName"
+                color="pink lighten-3"
                 type="text"
                 required
               ></v-text-field>
@@ -17,6 +22,7 @@
               <label>공연장</label>
               <v-select
                 v-model="performHall"
+                color="pink lighten-3"
                 :items="halls"
                 item-text="hallName"
                 item-value="hallNo"
@@ -27,6 +33,7 @@
               <v-text-field
                 outlined
                 v-model="performShowDate"
+                color="pink lighten-3"
                 type="Date"
                 required
               ></v-text-field>
@@ -36,6 +43,7 @@
               <v-text-field
                 outlined
                 v-model="performStart"
+                color="pink lighten-3"
                 type="Date"
                 required
               ></v-text-field>
@@ -45,6 +53,7 @@
               <v-text-field
                 outlined
                 v-model="performEnd"
+                color="pink lighten-3"
                 type="Date"
                 required
               ></v-text-field>
@@ -54,6 +63,7 @@
               <v-text-field
                 outlined
                 v-model="performTime"
+                color="pink lighten-3"
                 type="Time"
                 required
               ></v-text-field>
@@ -63,6 +73,7 @@
               <v-text-field
                 outlined
                 v-model="performPriceS"
+                color="pink lighten-3"
                 type="text"
                 required
               ></v-text-field>
@@ -72,6 +83,7 @@
               <v-text-field
                 outlined
                 v-model="performPriceR"
+                color="pink lighten-3"
                 type="text"
                 required
               ></v-text-field>
@@ -81,6 +93,7 @@
               <v-text-field
                 outlined
                 v-model="performPriceVip"
+                color="pink lighten-3"
                 type="text"
                 required
               ></v-text-field>
@@ -89,6 +102,7 @@
               <label>지역</label>
               <v-select
                 v-model="performArea"
+                color="pink lighten-3"
                 :items="areaList"
                 item-text="area"
                 item-value="area"
@@ -98,6 +112,7 @@
               <label>공연카테고리</label>
               <v-select
                 v-model="performCategory"
+                color="pink lighten-3"
                 :items="list"
                 item-text="category"
                 item-value="category"
@@ -107,6 +122,7 @@
               <label>등급</label>
               <v-select
                 v-model="performGrade"
+                color="pink lighten-3"
                 :items="ageList"
                 item-text="age"
                 item-value="age"
@@ -117,6 +133,7 @@
               <v-text-field
                 outlined
                 v-model="performer"
+                color="pink lighten-3"
                 type="text"
                 required
               ></v-text-field>
@@ -204,6 +221,7 @@
         </v-btn>
       </v-row>
     </v-container>
+    </v-container>
   </div>
 </template>
 
@@ -266,7 +284,6 @@ export default {
   },
   created() {
     // this.fetchPerformance(this.$route.params.performNo)
-
     this.performNo = this.$route.params.performNo;
     this.performName = this.performance.performName;
     this.performStart = this.performance.performStart;
