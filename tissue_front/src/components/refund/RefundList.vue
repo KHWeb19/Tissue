@@ -319,11 +319,11 @@ export default {
       axios
         .post(`http://localhost:7777/refund/accept/${this.refundNo}`)
         .then(() => {
-          alert("환불 성공");
+          //alert("환불 성공");
           this.$router.go();
         })
         .catch(() => {
-          alert("환불 실패");
+          //alert("환불 실패");
         });
     },
   },

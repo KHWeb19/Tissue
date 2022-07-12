@@ -112,7 +112,7 @@ export default {
           }
         })
         .catch(() => {
-          alert("오류");
+          //alert("오류");
         });
     },
   },

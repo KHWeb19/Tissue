@@ -368,7 +368,7 @@ export default {
                 hallNo,
               })
               .catch(() => {
-                alert("수정 실패");
+                // alert("수정 실패");
               });
           }
         }

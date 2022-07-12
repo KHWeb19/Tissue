@@ -326,10 +326,10 @@ export default {
     this.fetchHall(this.hallNo)
       .then(() => {
         //this.$store.state.hall = res.data;
-        alert("공연장 요청 성공");
+        //alert("공연장 요청 성공");
       })
       .catch(() => {
-        alert("공연장 요청 실패");
+        //alert("공연장 요청 실패");
         this.$router.push();
       });
   },
