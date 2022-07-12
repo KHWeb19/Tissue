@@ -8,6 +8,7 @@ import {
     FETCH_COUPON,
 
     FETCH_REFUND_LIST,
+    FETCH_NON_MEMBER_REFUND_LIST,
 
       // performance
     FETCH_PERFORMANCE_LIST,
@@ -41,6 +42,7 @@ import {
     FETCH_MY_NEW_QNA,
     FETCH_MY_NEW_LIKE,
     FETCH_MY_NEW_TICKET,
+    FETCH_MY_NEW_RANKING,
 
     FETCH_NEW_CONCERT,
     FETCH_NEW_MUSICAL,
@@ -88,6 +90,12 @@ export default {
         return axios.get("http://localhost:7777/refund/list")
         .then((res)=>{
             commit(FETCH_REFUND_LIST,res.data)
+        })
+    },
+    fetchNonMemberRefundList({commit}) {
+        return axios.get("http://localhost:7777/refund/nonMemberList")
+        .then((res)=>{
+            commit(FETCH_NON_MEMBER_REFUND_LIST,res.data)
         })
     },
     fetchCouponList({commit}) {
@@ -219,8 +227,8 @@ export default {
           })
     },
     fetchMemberInfo({ commit }, token) {
-        if(token != null) {
-            return axios.get('Member/info', { params: { token: token } })
+        if(token != null){
+        return axios.get('Member/info', { params: { token: token } })
             .then((res) => {
                 commit(FETCH_MEMBER_INFO, res.data)
             })
@@ -321,6 +329,12 @@ export default {
             .then((res => {
                 commit(FETCH_NEW_EXHIBITION, res.data)
             }))
+    },
+    fetchNewRanking({ commit }) {
+        return axios.get('ranking/main/list') 
+            .then((res) => {
+                commit(FETCH_MY_NEW_RANKING, res.data)
+            })
     },
     fetchExpectList({ commit }, eventNo) {
         return axios.get(`http://localhost:7777/expectation/read/${eventNo}`)

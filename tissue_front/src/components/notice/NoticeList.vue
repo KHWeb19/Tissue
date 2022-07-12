@@ -28,7 +28,7 @@
             style="color: black"
             :to="{
               name: 'NoticeReadPage',
-              params: { noticeNo: item.noticeNo },
+              params: { noticeNo: item.noticeNo.toString() },
             }"
           >
             {{ item.noticeTitle }}

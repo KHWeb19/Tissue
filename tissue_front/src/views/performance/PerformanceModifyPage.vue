@@ -189,12 +189,12 @@
       </v-row>
       <br />
       <!-- 업로드 버튼 -->
-      <v-row>
-        <v-btn plain @click="[modifyFiles(), modifyMap()]" value="Upload"
+      <v-row justify="center">
+        <v-btn color="blue lighten-3 mr-8" dark @click="[modifyFiles(), modifyMap()]" value="Upload"
           >수정 완료</v-btn
         >
         <v-btn
-          plain
+          color="blue lighten-3 mb-3" dark
           router-link
           :to="{
             name: 'PerformanceListPage',
@@ -214,7 +214,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: { AddMap },
-  name: "PerformanceRegisterPage",
+  name: "PerformanceModifyPage",
   data() {
     return {
       performNo: "",
@@ -265,6 +265,8 @@ export default {
     };
   },
   created() {
+    // this.fetchPerformance(this.$route.params.performNo)
+
     this.performNo = this.$route.params.performNo;
     this.performName = this.performance.performName;
     this.performStart = this.performance.performStart;
@@ -282,6 +284,8 @@ export default {
 
     this.hallCopy = this.$store.state.halls;
     console.log(this.performHall);
+
+    
   },
 
   computed: {
@@ -289,6 +293,7 @@ export default {
   },
   mounted() {
     this.fetchHallList();
+    this.fetchPerformance(this.performNo)
   },
   methods: {
     ...mapActions(["fetchPerformance", "fetchHallList"]),
@@ -402,12 +407,12 @@ export default {
           this.fetchPerformance(this.performNo);
         })
         .catch((res) => {
-          alert("등록 실패: " + res.message);
+          alert(res.message);
         });
     },
     modifyMap() {
       axios.patch(`map/modify/${this.performNo}`, this.map).then((res) => {
-        alert("게시물 수정 성공!");
+        alert("공연이 수정되었습니다.");
         console.log(res);
         this.$router.push({
           name: "PerformanceListPage",

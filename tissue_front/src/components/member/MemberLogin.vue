@@ -42,16 +42,16 @@
                 <v-container>
                     <v-row dense no-gutters>
                         <v-col>
-                            <v-text-field v-model="nonMemberName" color="pink lighten-3" placeholder="이름" outlined></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row dense no-gutters>
-                        <v-col>
-                            <v-text-field v-model="nonMemberPhone" color="pink lighten-3" placeholder="휴대폰" outlined></v-text-field>
+                            <v-text-field v-model="serial" color="pink lighten-3" placeholder="예매번호" outlined></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
-                        <v-btn color="blue lighten-3" dark large width="95%">확인</v-btn>
+                        <v-btn color="blue lighten-3" dark large width="95%" @click="myRv(serial.toString())">확인</v-btn>
+                    </v-row>
+                    <v-row>
+                        <v-col style="font-size:11pt" class="rinkColor mt-2">
+                            <router-link to="/nonMemberSerial"> 예매번호 찾기 </router-link>
+                        </v-col>
                     </v-row>    
                 </v-container>
             </v-tab-item>
@@ -70,9 +70,7 @@ export default {
         return {
             memberId:'',
             memberPw:'',
-            nonMemberName:'',
-            nonMemberPhone:'',
-
+            serial:'',
             items: ['회원 로그인', '비회원 조회']
         }
     },
@@ -102,6 +100,20 @@ export default {
         },
         googleLogin() {
             location.href=GoogleAuthUri
+        },
+        myRv(serial) { 
+                axios.post(`nonMember/rv/${serial}`)
+                .then((res) => {
+                    if(res.data) {
+                        console.log(res.data)
+                        this.$router.push({name: 'NonMemberFindRvPage', params : {performance:res.data}})
+                    } else {
+                        alert("예매번호를 확인해주세요.")
+                    }
+                })
+                .catch(() => {
+                    alert("예매번호를 확인해주세요.")
+                })
         }
     }
 }

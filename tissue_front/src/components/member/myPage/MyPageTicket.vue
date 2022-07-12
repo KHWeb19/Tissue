@@ -105,16 +105,16 @@
             </template>
             <template v-slot:[`item.status`]="{ item }">
               <v-chip color="pink lighten-3"
-                outlined
+                outlined 
                 v-if="item.status === '예매완료'">
                   예매완료
               </v-chip>
               <v-chip v-else-if="item.status === '취소 대기'"
-                color="blue lighten-3"
+                color="blue lighten-3" 
                 outlined>
                   환불대기
               </v-chip>
-              <v-chip v-else
+              <v-chip v-else 
                 color="grey"
                 outlined>
                   취소완료
@@ -145,13 +145,13 @@ export default {
     data () {
         return {
             headers : [
-                {text:'예매일', value:'reg_date', width:'150', align: 'start'},
-                {text:'예매번호', value:'ticketing_no', width:'100'},
-                {text:'공연명', value:'performName'},
-                {text:'관람날짜', value:'performShowDate', width:'140'},
-                {text:'매수', value:'seat.length', width:'80'},
+                {text:'예매일', value:'reg_date', width:'80', align: 'start'},
+                {text:'번호', value:'ticketing_no', width:'60'},
+                {text:'공연명', value:'performName', width:'200'},
+                {text:'관람날짜', value:'performShowDate', width:'100'},
+                {text:'매수', value:'seat.length', width:'60'},
                 {text:'상태', value:'status', width:'90'},
-                {text:'', value:'data-table-expand' ,width:'50'}
+                {text:'', value:'data-table-expand' ,width:'20'}
             ],
             expanded: [],
             singleExpand: true,

@@ -21,7 +21,7 @@
         <v-col
           v-for="(coupon, index) in paginatedData"
           :key="coupon.couponNo"
-          lg="3"
+          lg="4"
           sm="6"
         >
           <v-card width="400">

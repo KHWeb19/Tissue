@@ -30,17 +30,16 @@
                 :items-per-page="itemsPerPage"
                 @page-count="pageCount = $event"
                 >
-                <!-- <template v-slot:[`item.performName`]="{ item }">
-                    <router-link style="color: black" :to="{ name: 'PerformanceReadPage',
+                <template v-slot:[`item.performName`]="{ item }">
+                    <router-link style="color: black" :to="{ name: 'PerformanceModifyPage',
                                             params: { performNo: item.performNo } }">
                         {{ item.performName }}
                         </router-link>
-                </template> -->
-                 <template v-slot:[`item.delete`]="{item}">
-                <v-icon small @click="modifyPage(item.performNo)">mdi-content-save</v-icon>
-                <v-icon small @click="deleteItem(item.performNo, item.performThumbnail, item.performDetailImg1,
-                    item.performDetailImg2, item.performDetailImg3, item.performDetailImg4, item.performDetailImg5)"> delete </v-icon>
-            </template>
+                </template>
+                <template v-slot:[`item.delete`]="{item}">
+                    <v-icon small @click="onDelete(item.performNo, item.performThumbnail, item.performDetailImg1,
+                        item.performDetailImg2, item.performDetailImg3, item.performDetailImg4, item.performDetailImg5)"> delete </v-icon>
+                </template>
             </v-data-table>
 
             <div class="text-center pt-10">
@@ -94,10 +93,11 @@ export default {
         }
     },
     methods: {
-        modifyPage(performNo) {
-            this.$router.push({ name: 'PerformanceModifyPage' , params: { performNo }})
-        },
-        onDelete(performNo, performThumbnail, performDetailImg1, performDetailImg2, performDetailImg3,performDetailImg4, performDetailImg5) {
+        onDelete(performNo, performThumbnail, performDetailImg1, performDetailImg2,
+                 performDetailImg3,performDetailImg4, performDetailImg5) {
+            
+            let result = confirm ('공연을 삭제하시겠습니까?')
+            if(result) {
                 axios.delete(`performance/${performNo}`, {
                     performThumbnail,
                     performDetailImg1,
@@ -105,14 +105,15 @@ export default {
                     performDetailImg3,
                     performDetailImg4,
                     performDetailImg5,
-                    })
-                    .then(() => {
-                    alert("삭제 성공!");
-                    this.$router.push({ name: "PerformanceListPage" });
-                    })
-                    .catch(() => {
-                    alert("삭제 실패! 문제 발생!");
-                    });
+             })
+            .then(() => {
+                alert("공연을 삭제하였습니다.");
+                this.$router.push({ name: "PerformanceListPage" });
+            })
+            .catch((err) => {
+                alert("삭제 실패!", err);
+            });
+            }
         },
     }
 }

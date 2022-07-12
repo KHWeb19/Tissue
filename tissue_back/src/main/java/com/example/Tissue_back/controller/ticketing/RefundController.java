@@ -1,6 +1,7 @@
 package com.example.Tissue_back.controller.ticketing;
 
 
+import com.example.Tissue_back.controller.request.refund.NonMemberRefundListResponse;
 import com.example.Tissue_back.controller.request.refund.RefundListResponse;
 import com.example.Tissue_back.entity.ticketing.RefundRequest;
 import com.example.Tissue_back.service.ticketing.RefundService;
@@ -30,5 +31,19 @@ public class RefundController {
         log.info("refundList()");
 
         return refundService.list();
+    }
+
+    @GetMapping("/nonMemberList")
+    public List<NonMemberRefundListResponse> nonMemberRefundList(){
+        log.info("nonMemberRefundList()");
+
+        return refundService.nonMemberList();
+    }
+
+    @PostMapping("/accept/{refundNo}")
+    public void refundAccept(@PathVariable("refundNo")Long refundNo){
+        log.info("refundAccept()" + refundNo);
+
+        refundService.acceptRefund(refundNo);
     }
 }

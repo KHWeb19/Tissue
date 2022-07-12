@@ -17,7 +17,7 @@
 
             <v-row>
                 <v-col>
-                    <v-img width="350px" style="padding:0px" :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)" class="img"></v-img>
+                    <v-img  class="img" width="380px" style="padding:0px; margin:0px" :src="require(`@/assets/thumbNail/${event.performance.performThumbnail}`)"></v-img>
                 </v-col>
                 <v-col>
                     <div class="expect-detail-wrap">
@@ -58,8 +58,6 @@
             <!-- 댓글영역 -->
             <expectation-read-form :eventNo="eventNo" :memberInfo="memberInfo"/>
 
-
-
         </v-container>
     </div>
 </template>
@@ -93,7 +91,6 @@ export default {
         this.fetchMemberInfo(this.token)
     },
     mounted() {
-       console.log(this.token)
        if(this.token == null) {
             this.memberInfo.memberId = ''
         }
@@ -130,17 +127,13 @@ h1 {
     text-decoration-thickness: 8px;
     text-decoration-color: #F48FB1;
 }
-/* img {
+/* .img {
   position: absolute;
   width: 200px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: block;
-  margin-right: -15px;
-  margin: 0px;
-  padding: 0px;
-}  */
+} */
 .linkbtn {
     margin-top: 80px;
 }

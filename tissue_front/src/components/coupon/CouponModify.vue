@@ -1,9 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="mt-10 mb-10">
     <v-app-bar app elevation="3">
-        <v-toolbar-title class="ml-3">
-            📌 쿠폰 관리
-        </v-toolbar-title>
+      <v-toolbar-title class="ml-3"> 📌 쿠폰 관리 </v-toolbar-title>
     </v-app-bar>
     <v-container class="white">
       <v-row justify="center">

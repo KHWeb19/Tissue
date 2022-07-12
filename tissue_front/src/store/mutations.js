@@ -17,6 +17,9 @@ import {
     FETCH_PERFORMANCE_EVENT,
     FETCH_REVIEW_LIST,
 
+    FETCH_NON_MEMBER_REFUND_LIST,
+  
+
     FETCH_NOTICE_LIST,
     FETCH_NOTICE,
 
@@ -41,6 +44,7 @@ import {
     FETCH_MY_NEW_QNA,
     FETCH_MY_NEW_LIKE,
     FETCH_MY_NEW_TICKET,
+    FETCH_MY_NEW_RANKING,
 
     FETCH_NEW_CONCERT,
     FETCH_NEW_MUSICAL,
@@ -71,6 +75,9 @@ export default{
     },
     [FETCH_REFUND_LIST](state, refundList) {
         state.refundList = refundList
+    },
+    [FETCH_NON_MEMBER_REFUND_LIST](state, nonMemberRefundLust) {
+        state.nonMemberRefundLust = nonMemberRefundLust
     },
     [FETCH_COUPON_LIST](state, couponList){
         state.couponList = couponList
@@ -174,6 +181,9 @@ export default{
     },
     [FETCH_MY_NEW_TICKET](state, newTicket) {
         state.newTicket = newTicket
+    },
+    [FETCH_MY_NEW_RANKING](state, newRanking) {
+        state.newRanking = newRanking
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {
