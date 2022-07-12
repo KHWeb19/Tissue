@@ -145,11 +145,11 @@ export default {
     data () {
         return {
             headers : [
-                {text:'예매일', value:'reg_date', width:'80', align: 'start'},
+                {text:'예매일', value:'reg_date', width:'100', align: 'start'},
                 {text:'번호', value:'ticketing_no', width:'60'},
                 {text:'공연명', value:'performName', width:'200'},
                 {text:'관람날짜', value:'performShowDate', width:'100'},
-                {text:'매수', value:'seat.length', width:'60'},
+                {text:'매수', value:'seat.length', width:'70'},
                 {text:'상태', value:'status', width:'90'},
                 {text:'', value:'data-table-expand' ,width:'20'}
             ],

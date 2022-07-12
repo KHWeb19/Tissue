@@ -56,7 +56,7 @@ public class NonMemberServiceImpl implements NonMemberService {
 
         MyTicketDto ticketDto = new MyTicketDto();
 
-        ticketDto.setTicketing_no(ticketing2.getTicketingNo());
+        ticketDto.setTicketing_no(ticketing2.getSerialNumber());
         ticketDto.setFinal_price(ticketing2.getFinalPrice());
         ticketDto.setReg_date(ticketing2.getTicketingRegDate());
         ticketDto.setSeat(ticketing2.getSeatNameArr());

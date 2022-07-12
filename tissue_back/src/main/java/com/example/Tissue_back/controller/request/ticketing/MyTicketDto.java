@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class MyTicketDto {
 
-    private Long ticketing_no;
+    private String ticketing_no;
     private String performName;
     private String performThumbnail;
     private String performArea;

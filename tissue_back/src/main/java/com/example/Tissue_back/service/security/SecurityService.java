@@ -25,9 +25,6 @@ public class SecurityService {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
-//        byte[] pwBytes = DatatypeConverter.parseBase64Binary(secretKey);
-//        Key signingKey = new SecretKeySpec(pwBytes, signatureAlgorithm.getJcaName());
-
         Claims claims = Jwts.claims().setSubject(memberId);
         claims.put("roles", roles);
         claims.put("memberNo", memberNo);
