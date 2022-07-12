@@ -242,10 +242,16 @@
                           ><v-icon>mdi-close-circle-outline</v-icon></v-btn
                         >
                       </div>
-                      <v-btn color="blue lighten-3" @click="useSelectMileage"
+                      <v-btn
+                        color="blue lighten-3"
+                        class="mr-3"
+                        @click="useSelectMileage"
                         >적용</v-btn
                       >
-                      <v-btn color="blue lighten-3" @click="useAllMileage"
+                      <v-btn
+                        color="blue lighten-3"
+                        class="ml-3"
+                        @click="useAllMileage"
                         >전액 사용</v-btn
                       >
                     </div>

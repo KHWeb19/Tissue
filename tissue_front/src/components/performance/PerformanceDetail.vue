@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="scrollTopBtn">
+      <v-btn color="blue lighten-3" @click="scrollTop"
+        ><v-icon color="white">mdi-arrow-up-bold</v-icon></v-btn
+      >
+    </div>
     <v-container style="width: 1200px">
       <v-row>
         <v-col>
@@ -503,7 +508,12 @@ export default {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
-
+  mounted() {
+    window.addEventListener("scroll", this.scrollHandle);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.scrollHandle);
+  },
   methods: {
     ...mapActions(["fetchPerformanceLike"]),
     checkMember() {
@@ -560,6 +570,19 @@ export default {
         e.preventDefault();
         document.querySelector(".reviewBox").scrollIntoView(true);
       });
+    },
+    scrollTop() {
+      window.scrollTo(0, 0);
+    },
+    scrollHandle() {
+      let a = document.getElementsByClassName("scrollTopBtn");
+      for (let i = 0; i < a.length; i++) {
+        if (window.scrollY <= 600) {
+          a[i].style.position = "absolute";
+        } else if (window.scrollY > 600) {
+          a[i].style.position = "fixed";
+        }
+      }
     },
     down(couponNo) {
       let token = localStorage.getItem("token");
@@ -689,5 +712,10 @@ export default {
 }
 .tab_active {
   border-top: 3px solid skyblue;
+}
+.scrollTopBtn {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }
 </style>
