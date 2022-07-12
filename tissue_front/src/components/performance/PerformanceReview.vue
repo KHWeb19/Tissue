@@ -219,7 +219,7 @@
               <v-btn
                 width="150"
                 height="50"
-                @click="[registerReview(performance.performNo), addMileage()]"
+                @click="[registerReview(performance.performNo)]"
                 color="blue lighten-3"
                 class="white--text mr-3"
                 style="font-size: 15px"
@@ -395,8 +395,23 @@ export default {
             reviewContent,
             reviewRating,
           })
-          .then(() => {
+          .then((res) => {
             //alert("후기 등록 성공");
+            if (res.data == true) {
+              alert("후기가 등록되었습니다.");
+
+              const memberMileage = this.memberInfo.memberMileage + 3000;
+
+              axios.post("Member/addMileage", {
+                memberId: this.memberInfo.memberId,
+                memberMileage,
+              });
+
+              console.log("마일리지 적립", memberMileage);
+              alert("후기 적립금 3,000원이 적립되었습니다!");
+            } else {
+              alert("이미 후기를 작성하셨습니다.");
+            }
             this.$router.go();
           })
           .catch(() => {
@@ -411,19 +426,6 @@ export default {
     },
     prevPage() {
       this.pageNum -= 1;
-    },
-    addMileage() {
-      const memberMileage = this.memberInfo.memberMileage + 3000;
-
-      axios
-        .post("Member/addMileage", {
-          memberId: this.memberInfo.memberId,
-          memberMileage,
-        })
-        .then(() => {
-          console.log("마일리지 적립", memberMileage);
-          alert("후기 적립금 3,000원이 적립되었습니다!");
-        });
     },
   },
 };

@@ -28,21 +28,28 @@ public class ReviewServiceImpl implements ReviewService{
     private SecurityService securityService;
 
     @Override
-    public void register(Long performNo, ReviewDto reviewDto) {
+    public Boolean register(Long performNo, ReviewDto reviewDto) {
         Optional<Performance> findPerformance = performanceRepository.findById(performNo);
         String memberId = securityService.getMemberId(reviewDto.getReviewWriter());
 
-        Review review = new Review();
 
-        reviewDto.setReviewWriter(memberId);
-        reviewDto.setPerformance(findPerformance.get());
+        if (reviewRepository.findByPerformanceAndReviewWriter(findPerformance.get(),memberId).isEmpty()){
+            Review review = new Review();
 
-        review.setReviewWriter(reviewDto.getReviewWriter());
-        review.setReviewContent(reviewDto.getReviewContent());
-        review.setReviewRating(reviewDto.getReviewRating());
-        review.setPerformance(reviewDto.getPerformance());
+            reviewDto.setReviewWriter(memberId);
+            reviewDto.setPerformance(findPerformance.get());
 
-        reviewRepository.save(review);
+            review.setReviewWriter(reviewDto.getReviewWriter());
+            review.setReviewContent(reviewDto.getReviewContent());
+            review.setReviewRating(reviewDto.getReviewRating());
+            review.setPerformance(reviewDto.getPerformance());
+
+            reviewRepository.save(review);
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -498,7 +498,7 @@ export default {
         avg = sum / this.reviewList.length;
 
         console.log("평균" + avg);
-        return Number(avg);
+        return Number(avg.toFixed(2));
       }
       return Number(avg);
     },
