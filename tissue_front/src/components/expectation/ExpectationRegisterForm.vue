@@ -73,7 +73,7 @@ export default {
               axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
                   .then(() => {
                     console.log('마일리지 적립', memberMileage)
-                    alert('기대평 적립금 3,000원이 적립되었습니다!')
+                    alert('마일리지 3,000원이 적립되었습니다!')
                   })
             } else { 
               alert("이미 작성하였습니다.")
