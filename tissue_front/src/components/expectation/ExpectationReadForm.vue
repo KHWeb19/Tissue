@@ -50,15 +50,15 @@
 
       <v-dialog v-model="dialog" width="300">
         <v-card>
-          <v-card-title style="font-size:15px">
-           삭제하시겠습니까?
+          <v-card-title style="font-size:14px;">
+            정말 삭제하시겠습니까?
           </v-card-title>
           <v-card-actions>
             <v-btn @click="btnCancle" text style="color:#F48FB1">
               취소
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn @click="btnRemove" text style="color:#F48FB1">
+            <v-btn @click="[btnRemove(), delMileage()]" text style="color:#F48FB1">
               삭제
             </v-btn>
           </v-card-actions>
@@ -148,10 +148,17 @@ export default {
     },
     btnRemove () {
       axios.delete(`http://localhost:7777/expectation/remove/${this.expectNo}`).then(() => {
-        alert('댓글이 삭제되었습니다!')
         this.fetchExpectList(this.eventNo)
         this.dialog = false
       })
+    },
+    delMileage() {
+      const memberMileage = this.memberInfo.memberMileage - 3000
+
+      axios.post('Member/addMileage', { memberId: this.memberInfo.memberId, memberMileage} )
+          .then(() => {
+            alert('기대평이 삭제되었습니다.')
+          })
     },
     nextPage() {
       this.pageNum += 1;
