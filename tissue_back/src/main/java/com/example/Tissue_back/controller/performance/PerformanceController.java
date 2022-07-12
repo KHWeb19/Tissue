@@ -3,6 +3,7 @@ package com.example.Tissue_back.controller.performance;
 
 import com.example.Tissue_back.controller.request.performance.KeywordDto;
 
+import com.example.Tissue_back.controller.request.ranking.RankingDTO;
 import com.example.Tissue_back.entity.event.Event;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
@@ -158,6 +159,7 @@ public class PerformanceController {
 
         return performanceService.mainList(performCategory);
     }
+
 
    //임지훈 (상세페이지 이벤트)
     @GetMapping("/event/{performNo}")

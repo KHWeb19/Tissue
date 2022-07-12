@@ -44,6 +44,7 @@ import {
     FETCH_MY_NEW_QNA,
     FETCH_MY_NEW_LIKE,
     FETCH_MY_NEW_TICKET,
+    FETCH_MY_NEW_RANKING,
 
     FETCH_NEW_CONCERT,
     FETCH_NEW_MUSICAL,
@@ -180,6 +181,9 @@ export default{
     },
     [FETCH_MY_NEW_TICKET](state, newTicket) {
         state.newTicket = newTicket
+    },
+    [FETCH_MY_NEW_RANKING](state, newRanking) {
+        state.newRanking = newRanking
     },
     // event
     [FETCH_EVENT_LIST] (state, events) {

@@ -46,6 +46,7 @@ export default {
     newQna: [],
     newLike: [],
     newTicket: [],
+    newRanking:[],
      // 유아림
 
 

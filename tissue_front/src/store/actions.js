@@ -42,6 +42,7 @@ import {
     FETCH_MY_NEW_QNA,
     FETCH_MY_NEW_LIKE,
     FETCH_MY_NEW_TICKET,
+    FETCH_MY_NEW_RANKING,
 
     FETCH_NEW_CONCERT,
     FETCH_NEW_MUSICAL,
@@ -328,6 +329,12 @@ export default {
             .then((res => {
                 commit(FETCH_NEW_EXHIBITION, res.data)
             }))
+    },
+    fetchNewRanking({ commit }) {
+        return axios.get('ranking/main/list') 
+            .then((res) => {
+                commit(FETCH_MY_NEW_RANKING, res.data)
+            })
     },
     fetchExpectList({ commit }, eventNo) {
         return axios.get(`http://localhost:7777/expectation/read/${eventNo}`)

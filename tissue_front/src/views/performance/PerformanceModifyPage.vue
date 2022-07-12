@@ -189,12 +189,12 @@
       </v-row>
       <br />
       <!-- 업로드 버튼 -->
-      <v-row>
-        <v-btn plain @click="[modifyFiles(), modifyMap()]" value="Upload"
+      <v-row justify="center">
+        <v-btn color="blue lighten-3 mr-8" dark @click="[modifyFiles(), modifyMap()]" value="Upload"
           >수정 완료</v-btn
         >
         <v-btn
-          plain
+          color="blue lighten-3 mb-3" dark
           router-link
           :to="{
             name: 'PerformanceListPage',
@@ -214,7 +214,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   components: { AddMap },
-  name: "PerformanceRegisterPage",
+  name: "PerformanceModifyPage",
   data() {
     return {
       performNo: "",
@@ -265,7 +265,10 @@ export default {
     };
   },
   created() {
+    console.log(this.$route.params.performNo)
+    this.fetchPerformance(this.$route.params.performNo); 
     this.performNo = this.$route.params.performNo;
+
     this.performName = this.performance.performName;
     this.performStart = this.performance.performStart;
     this.performEnd = this.performance.performEnd;
@@ -282,6 +285,8 @@ export default {
 
     this.hallCopy = this.$store.state.halls;
     console.log(this.performHall);
+
+    
   },
 
   computed: {
