@@ -485,14 +485,14 @@ table {
     color:white;
     transition: all .35s ;
     font-size: 13pt;
-    text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 td:hover .hoverContent{
     top: 50%;
-    color: rgb(0, 0, 0);
+    color: rgb(200, 227, 252);
 }
 td:hover .himg{
-     filter: brightness(70%); 
+     filter: brightness(75%); 
 }
 
 </style>
