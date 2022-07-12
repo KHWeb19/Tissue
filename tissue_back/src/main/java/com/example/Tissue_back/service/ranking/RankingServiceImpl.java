@@ -31,7 +31,7 @@ public class RankingServiceImpl implements RankingService {
                "LEFT OUTER JOIN Performance as p ON t.perform_no = p.perform_no " +
                "LEFT OUTER JOIN Hall as h ON h.hall_no = p.hall_name " +
                "LEFT OUTER JOIN Review as r ON r.perform_no = p.perform_no " +
-               "WHERE t.review_reg_date >DATE_FORMAT(now(), '%Y-%m-%d') " +
+               "WHERE t.ticketing_reg_date >DATE_FORMAT(now(), '%Y-%m-%d') " +
                "GROUP BY perform_no " +
                "ORDER BY COUNT(*) DESC " +
                "limit 30");
@@ -40,11 +40,11 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public List<RankingDTO> dateList (String reviewRegDate) {
+    public List<RankingDTO> dateList (String ticketingRegDate) {
         JpaResultMapper result = new JpaResultMapper();
 
         log.info("Service: ");
-        log.info(reviewRegDate);
+        log.info(ticketingRegDate);
 
         Query query = em.createNativeQuery("SELECT " +
                 "row_number() over(order by COUNT(*) desc) as ranking, t.perform_no, COUNT(*), " +
@@ -53,13 +53,12 @@ public class RankingServiceImpl implements RankingService {
                 "LEFT OUTER JOIN Performance as p ON t.perform_no = p.perform_no "+
                 "LEFT OUTER JOIN Hall as h ON h.hall_no = p.hall_name " +
                 "LEFT OUTER JOIN Review as r ON r.perform_no = p.perform_no " +
-                "WHERE DATE_FORMAT(t.review_reg_date, '%Y-%m-%d') = :reviewRegDate " +
+                "WHERE DATE_FORMAT(t.ticketing_reg_date, '%Y-%m-%d') = :ticketingRegDate " +
                 "GROUP BY perform_no " +
                 "ORDER BY COUNT(*) DESC " +
                 "limit 30")
-                .setParameter("reviewRegDate", reviewRegDate);
+                .setParameter("ticketingRegDate", ticketingRegDate);
 
-        log.info(reviewRegDate);
 
         return result.list(query, RankingDTO.class);
     }

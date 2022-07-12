@@ -36,7 +36,7 @@ public class Ticketing {
     private Long usedCouponNo;
 
     @CreatedDate
-    private String ticketingRegDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    private String ticketingRegDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     @Column
     private Integer finalPrice;
