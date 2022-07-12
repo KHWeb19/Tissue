@@ -51,13 +51,12 @@ export default {
           eventRegDate: this.event.eventRegDate,
         })
         .then((res) => {
-          alert("게시물 수정 성공!");
+          alert("이벤트가 수정되었습니다.");
           console.log(res);
 
           this.$router.push({ name: "EventListPage" });
         })
         .catch((err) => {
-          alert("게시물 수정 실패!");
           console.log(err);
         });
     },

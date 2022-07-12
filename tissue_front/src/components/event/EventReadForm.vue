@@ -80,9 +80,6 @@ export default {
                         alert('이벤트를 삭제했습니다.')
                         this.$router.push({ name: 'EventListPage' })
                     })
-                    .catch(() => {
-                        alert('삭제 실패!')
-                    })
         }
     },
 }

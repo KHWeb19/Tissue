@@ -413,18 +413,17 @@ export default {
           },
         })
         .then((res) => {
-          console.log("공연등록", res);
           this.performNo = res.data.performNo;
           this.map.performNo = res.data.performNo;
         })
         .catch((res) => {
-          alert("등록 실패: " + res.message);
+          alert(res.message);
         });
     },
     addMap() {
       setTimeout(() => {
         axios.post("map/add", this.map).then(() => {
-          alert("등록이 완료되었습니다!");
+          alert("공연이 등록되었습니다.");
           this.$router.push({ name: "PerformanceListPage" });
         });
       }, 2000);

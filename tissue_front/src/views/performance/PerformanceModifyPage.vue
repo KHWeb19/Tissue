@@ -265,10 +265,9 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.params.performNo)
-    this.fetchPerformance(this.$route.params.performNo); 
-    this.performNo = this.$route.params.performNo;
+    // this.fetchPerformance(this.$route.params.performNo)
 
+    this.performNo = this.$route.params.performNo;
     this.performName = this.performance.performName;
     this.performStart = this.performance.performStart;
     this.performEnd = this.performance.performEnd;
@@ -294,6 +293,7 @@ export default {
   },
   mounted() {
     this.fetchHallList();
+    this.fetchPerformance(this.performNo)
   },
   methods: {
     ...mapActions(["fetchPerformance", "fetchHallList"]),
@@ -407,12 +407,12 @@ export default {
           this.fetchPerformance(this.performNo);
         })
         .catch((res) => {
-          alert("등록 실패: " + res.message);
+          alert(res.message);
         });
     },
     modifyMap() {
       axios.patch(`map/modify/${this.performNo}`, this.map).then((res) => {
-        alert("게시물 수정 성공!");
+        alert("공연이 수정되었습니다.");
         console.log(res);
         this.$router.push({
           name: "PerformanceListPage",
