@@ -64,6 +64,25 @@ public class RankingServiceImpl implements RankingService {
         return result.list(query, RankingDTO.class);
     }
 
+    @Override
+    public List<RankingDTO> mainList () {
+        JpaResultMapper result = new JpaResultMapper();
+        //오늘 날짜에 많이 예약된 공연 TOP 30
+        Query query = em.createNativeQuery("SELECT " +
+                "row_number() over(order by COUNT(*) desc) as ranking, t.perform_no, COUNT(*), " +
+                "p.perform_name, p.perform_start, p.perform_end, p.perform_thumbnail, " +
+                "h.hall_name, r.review_rating FROM Ticketing as t " +
+                "LEFT OUTER JOIN Performance as p ON t.perform_no = p.perform_no " +
+                "LEFT OUTER JOIN Hall as h ON h.hall_no = p.hall_name " +
+                "LEFT OUTER JOIN Review as r ON r.perform_no = p.perform_no " +
+                "WHERE t.ticketing_reg_date >DATE_FORMAT(now(), '%Y-%m-%d') " +
+                "GROUP BY perform_no " +
+                "ORDER BY COUNT(*) DESC " +
+                "limit 7");
+
+        return result.list(query, RankingDTO.class);
+    }
+
     /*@Override
     public List<Ticketing> dateList(String reviewRegDate) {
 
