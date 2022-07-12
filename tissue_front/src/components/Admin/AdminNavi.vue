@@ -84,6 +84,11 @@ export default {
           icon: "mdi-comment-question",
           route: "/qnaBestRegister",
         },
+        {
+          title: "QnA 답변 관리",
+          icon: "mdi-comment-question-outline",
+          route: "/qnaList",
+        },
       ],
     };
   },

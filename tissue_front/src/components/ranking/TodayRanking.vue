@@ -3,6 +3,7 @@
     <v-container style="width: 2000px">
       <v-row>
         <v-col>
+          <div class="rankingTop">
           <div class="mainTitle">R A N K I N G</div><br>
             <v-menu
               :close-on-content-click="false"
@@ -39,39 +40,49 @@
                   </router-link>
                 </v-date-picker>
               </div>
-          </v-menu><br>
-
+          </v-menu>
+          </div><br>
+              <div class="tableZone">
                 <v-data-table
                   :headers="headers"
                   :items="rankings"
                   hide-default-footer>
                   <template v-slot:[`item.ranking`]="{ item }">
-                    <v-chip color="#EE82EE" outlined v-if="item.ranking== 1">
+                    <v-chip color="deep-purple" outlined v-if="item.ranking== 1">
                       {{ item.ranking }}위
                     </v-chip>
                     <v-chip color="#90CAF9" outlined v-else-if="item.ranking== 2">
                       {{ item.ranking }}위
                     </v-chip>
-                    <v-chip color="#F48FB1 " outlined v-else-if="item.ranking== 3">
+                    <v-chip color="#F48FB1" outlined v-else-if="item.ranking== 3">
                       {{ item.ranking }}위
                     </v-chip>
-                    <td  v-else>
-                      {{ item.ranking }}위
+                    <td id="rank" v-else>
+                      &emsp;{{ item.ranking }}위
                     </td>
+                  </template>
+
+                  <template v-slot:[`item.img`]="{ item }">
+                    <router-link
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                          <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
+                    </router-link>
+                  </template>
+
+                  <template v-slot:[`item.performName`]="{ item }">
+                    <router-link
+                      style="color: black"
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                        {{ item.performName }}
+                    </router-link>
                   </template>
 
                   <template v-slot:[`item.performDate`]="{ item }">
                     {{ item.performStart }} ~ {{ item.performEnd }}
-                  </template>
-
-                  <template v-slot:[`item.img`]="{ item }">
-                    <!--router-link
-                      :to="{
-                        name: 'PerformanceDetailPage',
-                        param: { performNo: item.performNo } }">
-                          <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
-                    </router-link>-->
-                    <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
                   </template>
 
                   <template v-slot:[`item.reviewRating`]="{ item }">
@@ -87,6 +98,7 @@
                       ></v-rating>
                   </template>
                 </v-data-table>
+              </div>
             </v-col>
           </v-row>
         <v-row>
@@ -95,9 +107,8 @@
   </div>
 </template>
 
-
 <script>
-//import { mapActions, mapState } from "vuex"
+
 export default {
   name: 'TodayRanking',
   props: {
@@ -112,13 +123,13 @@ export default {
       nowDate: '',
       nowTime: '',
       headers: [
-        { text: "순위", value: "ranking" },
-        { text: "", value: "img" },
-        { text: "공연이름", value: "performName" },
-        { text: "공연기간", value: "performDate" },
-        { text: "공연장", value: "hallName" },
-        { text: "평점", value: "reviewRating" },
-        { text: "예매수", value: "count"}
+        { text: 'Rank' ,value: "ranking", width: '7%' },
+        { text: "", value: "img", width: '10%' },
+        { text: "", value: "performName", width: '35%'},
+        { text: "", value: "performDate", width: '20%' },
+        { text: "", value: "hallName", width: '13%' },
+        { text: "", value: "reviewRating", width: '3%'},
+        { text: "예매수", value: "count", width: '8%'}
       ]
     }
   },
@@ -128,25 +139,7 @@ export default {
       this.setNowTimes()
     },1000)
   },
-  /*computed: {
-    ...mapState(['reviewList']),
-    reviewSumAvg() {
-      let sum = 0;
-      let avg = 0;
-      if (this.reviewList.length != 0) {
-        for (let i = 0; i < this.reviewList.length; i++) {
-          sum = sum + this.reviewList[i].reviewRating;
-        }
-        avg = sum / this.reviewList.length;
-
-        console.log("평균" + avg);
-        return Number(avg);
-      }
-      return Number(avg);
-    }
-  },*/
   methods: {
-    //...mapActions(["fetchPerformanceReviewList"]),
     setNowTimes() {
       let date = new Date()
       let yy = String(date.getFullYear())
@@ -174,13 +167,15 @@ export default {
   text-align: center;
   color:#90CAF9;
 }
-.v-data-table >>> td {
-    font-size: 60px;
+.rankingTop {
+  border-bottom: 2px solid black;
+}
+.v-data-table::v-deep td {
+  font-size: 15px !important;
 }
 img {
     width: 100px;
-    height: 100px;
-    border-radius: 70%;
+    height: 160px;
     overflow: hidden;
     object-fit: cover;
 }
