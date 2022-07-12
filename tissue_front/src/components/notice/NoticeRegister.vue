@@ -1,7 +1,7 @@
 <template>
     <body>
       <v-container>
-      <form @submit.prevent="onSubmit"><br><br><br><br>
+      <form @submit.prevent="onSubmit"><br>
         <h2>공지사항 등록</h2><br><br>
           <v-select v-model="noticeCategory" label="카테고리" :items="categoryList"></v-select>
           <v-text-field v-model="noticeTitle" label="제목" type="text"></v-text-field>

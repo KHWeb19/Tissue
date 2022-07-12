@@ -25,7 +25,7 @@ public class Notice {
     @Column(nullable = false)
     private String noticeTitle;
 
-    @Lob
+    @Column
     private String noticeContent;
 
     @CreatedDate

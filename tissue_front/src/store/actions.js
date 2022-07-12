@@ -354,8 +354,8 @@ export default {
                 commit(FETCH_RANKING_LIST, res.data)
             })
     },
-    fetchRankingDateList({ commit }, reviewRegDate) {
-        return axios.get('ranking/list/byDate', { params: reviewRegDate })
+    fetchRankingDateList({ commit }, ticketingRegDate ) {
+        return axios.get(`ranking/list/byDate/${ticketingRegDate}`, {ticketingRegDate})
             .then((res) => {
                 commit(FETCH_RANKING_DATE_LIST, res.data)
             })

@@ -3,6 +3,7 @@
     <v-container style="width: 2000px">
       <v-row>
         <v-col>
+          <div class="rankingTop">
           <div class="mainTitle">R A N K I N G</div><br>
             <v-menu
               :close-on-content-click="false"
@@ -18,46 +19,86 @@
             </template>
 
               <div class="datePicker">
-                  <v-form @submit.prevent="onSubmit">
                 <v-date-picker
                   no-title
                   scrollable
-                  v-model="reviewRegDate">
+                  v-model="ticketingRegDate"
+                  :allowed-dates="(date) => date <= new Date().toISOString().substr(0, 10)">
                   <v-spacer></v-spacer>
+                  <router-link
+                    style="color: black"
+                    :to="{
+                      name: 'DateRankingPage', params: { ticketingRegDate: this.ticketingRegDate }
+                    }"
+                  >
                     <v-btn
                       text
                       color="#F48FB1"
-                      type="submit"
                     >
                       OK
                   </v-btn>
+                  </router-link>
                 </v-date-picker>
-                  </v-form>
               </div>
-          </v-menu><br>
-
+          </v-menu>
+          </div><br>
+              <div class="tableZone">
                 <v-data-table
                   :headers="headers"
                   :items="rankings"
                   hide-default-footer>
                   <template v-slot:[`item.ranking`]="{ item }">
-                    {{ item.ranking }}위
+                    <v-chip color="deep-purple" outlined v-if="item.ranking== 1">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <v-chip color="#90CAF9" outlined v-else-if="item.ranking== 2">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <v-chip color="#F48FB1" outlined v-else-if="item.ranking== 3">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <td id="rank" v-else>
+                      &emsp;{{ item.ranking }}위
+                    </td>
+                  </template>
+
+                  <template v-slot:[`item.img`]="{ item }">
+                    <router-link
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                          <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
+                    </router-link>
+                  </template>
+
+                  <template v-slot:[`item.performName`]="{ item }">
+                    <router-link
+                      style="color: black"
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                        {{ item.performName }}
+                    </router-link>
                   </template>
 
                   <template v-slot:[`item.performDate`]="{ item }">
                     {{ item.performStart }} ~ {{ item.performEnd }}
                   </template>
 
-                  <template v-slot:[`item.img`]="{ item }">
-                    <!--router-link
-                      :to="{
-                        name: 'PerformanceDetailPage',
-                        param: { performNo: rankings.performNo } }">
-                          <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
-                    </router-link-->
-                    <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
+                  <template v-slot:[`item.reviewRating`]="{ item }">
+                      <v-rating
+                        :value="item.reviewRating"
+                        background-color="orange lighten-3"
+                        color="orange"
+                        small
+                        dense
+                        hover
+                        readonly
+                        class="mr-3 pb-4"
+                      ></v-rating>
                   </template>
                 </v-data-table>
+              </div>
             </v-col>
           </v-row>
         <v-row>
@@ -67,8 +108,9 @@
 </template>
 
 <script>
+
 export default {
-  name: 'RankingList',
+  name: 'TodayRanking',
   props: {
     rankings: {
       type: Array,
@@ -77,37 +119,33 @@ export default {
   },
   data () {
     return {
+      ticketingRegDate: '',
       nowDate: '',
       nowTime: '',
-      reviewRegDate: '',
       headers: [
-        { text: "순위", value: "ranking" },
-        { text: "", value: "img" },
-        { text: "공연이름", value: "performName" },
-        { text: "공연기간", value: "performDate" },
-        { text: "공연장", value: "hallName" },
-        { text: "좋아요", value: "likes" },
-        { text: "예매수", value: "count"}
+        { text: 'Rank' ,value: "ranking", width: '7%' },
+        { text: "", value: "img", width: '10%' },
+        { text: "", value: "performName", width: '35%'},
+        { text: "", value: "performDate", width: '20%' },
+        { text: "", value: "hallName", width: '13%' },
+        { text: "", value: "reviewRating", width: '3%'},
+        { text: "예매수", value: "count", width: '8%'}
       ]
     }
   },
   mounted() {
+    //this.fetchPerformanceReviewList();
     this.timer = setInterval(() => {
       this.setNowTimes()
     },1000)
   },
   methods: {
     setNowTimes() {
-      let myDate = new Date()
-      let yy = String(myDate.getFullYear())
-      let mm = myDate.getMonth() + 1
-      let dd = String(myDate.getDate() < 10 ? '0' + myDate.getDate() : myDate.getDate())
+      let date = new Date()
+      let yy = String(date.getFullYear())
+      let mm = ("0" + (1 + date.getMonth())).slice(-2);
+      let dd = String(date.getDate() < 10 ? '0' + date.getDate() : date.getDate())
       this.nowDate = yy + '-' + mm + '-' + dd
-    },
-    onSubmit () {
-      const { reviewRegDate } = this
-      console.log(reviewRegDate)
-      this.$emit('submit', {reviewRegDate})
     }
   }
 }
@@ -124,20 +162,21 @@ export default {
   cursor: pointer;
 }
 .today{
-  width: 200px;
+  width: 230px;
   font-size: 30px;
   text-align: center;
   color:#90CAF9;
 }
-.v-data-table >>> td {
-    font-size: 60px;
+.rankingTop {
+  border-bottom: 2px solid black;
+}
+.v-data-table::v-deep td {
+  font-size: 15px !important;
 }
 img {
     width: 100px;
-    height: 100px;
-    border-radius: 70%;
+    height: 160px;
     overflow: hidden;
     object-fit: cover;
 }
 </style>
-

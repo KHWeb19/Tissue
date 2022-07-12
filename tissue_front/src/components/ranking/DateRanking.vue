@@ -3,53 +3,53 @@
     <v-container style="width: 2000px">
       <v-row>
         <v-col>
+          <div class="rankingTop">
           <div class="mainTitle">R A N K I N G</div><br>
-            <v-menu
-              :close-on-content-click="false"
-              offset-y
-              min-width="290px"
-            >
-            <template v-slot:activator="{ on, attrs }">
-              <v-input v-bind="attrs"
-                        v-on="on" class="today">
-                    {{$route.params.reviewRegDate}}
-                  <v-icon size="40px">mdi-calendar-check</v-icon>
-              </v-input>
-            </template>
-
-              <div class="datePicker">
-                <v-date-picker
-                  no-title
-                  scrollable
-                  v-model="reviewRegDate">
-                  <v-spacer></v-spacer>
-                    <v-btn
-                      text
-                      color="#F48FB1"
-                      type="submit"
-                    >
-                      OK
-                  </v-btn>
-                </v-date-picker>
-              </div>
-          </v-menu><br>
-
+            <router-link :to="{ name: 'TodayRankingPage'}" >
+              <div class="day" data-hover="Today's Ranking">
+                    {{ $route.params.ticketingRegDate }}
+              </div><br>
+            </router-link>
+          </div><br>
                 <v-data-table
                   :headers="headers"
                   :items="dateRankings"
                   hide-default-footer>
                   <template v-slot:[`item.ranking`]="{ item }">
-                    {{ item.ranking }}위
+                    <v-chip color="deep-purple" outlined v-if="item.ranking== 1">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <v-chip color="#90CAF9" outlined v-else-if="item.ranking== 2">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <v-chip color="#F48FB1" outlined v-else-if="item.ranking== 3">
+                      {{ item.ranking }}위
+                    </v-chip>
+                    <td v-else>
+                      &emsp;{{ item.ranking }}위
+                    </td>
                   </template>
-
                   <template v-slot:[`item.performDate`]="{ item }">
                     {{ item.performStart }} ~ {{ item.performEnd }}
                   </template>
 
                   <template v-slot:[`item.img`]="{ item }">
-                    <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
+                    <router-link
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                          <img :src="require(`../../assets/thumbNail/${item.performThumbnail}`)" alt=""/>
+                    </router-link>
                   </template>
-
+                  <template v-slot:[`item.performName`]="{ item }">
+                    <router-link
+                      style="color: black"
+                      :to="{
+                        name: 'PerformanceDetailPage',
+                        params: { performNo: item.performNo } }">
+                        {{ item.performName }}
+                    </router-link>
+                  </template>
                   <template v-slot:[`item.reviewRating`]="{ item }">
                       <v-rating
                         :value="item.reviewRating"
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'DateRanking',
   props: {
@@ -83,15 +84,15 @@ export default {
   },
   data () {
     return {
-      reviewRegDate: '',
+      ticketingRegDate: '',
       headers: [
-        { text: "순위", value: 'ranking' },
-        { text: "", value: "img" },
-        { text: "공연이름", value: "performName" },
-        { text: "공연기간", value: "performDate" },
-        { text: "공연장", value: "hallName" },
-        { text: "평점", value: "reviewRating" },
-        { text: "예매수", value: "count"}
+        { text: 'Rank' ,value: "ranking", width: '7%' },
+        { value: "img", width: '10%' },
+        { value: "performName", width: '35%'},
+        { value: "performDate", width: '20%' },
+        { value: "hallName", width: '13%' },
+        { value: "reviewRating", width: '3%'},
+        { text: "예매수", value: "count", width: '8%'}
       ]
     }
   }
@@ -105,22 +106,27 @@ export default {
   margin-bottom: 20px;
   margin-top: 50px;
 }
-.today:hover {
+.day:hover {
   cursor: pointer;
 }
-.today{
-  width: 230px;
+.day:hover:after{
+  content: attr(data-hover)
+}
+.day{
+  width: 500px;
   font-size: 30px;
   text-align: center;
   color:#90CAF9;
 }
-.v-data-table >>> td {
-    font-size: 60px;
+.rankingTop {
+  border-bottom: 2px solid black;
+}
+.v-data-table::v-deep td {
+  font-size: 15px !important;
 }
 img {
     width: 100px;
-    height: 100px;
-    border-radius: 70%;
+    height: 160px;
     overflow: hidden;
     object-fit: cover;
 }

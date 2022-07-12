@@ -56,6 +56,7 @@ export default {
     expectList: [],
     expect: {},
 
-    rankings: []
+    rankings: [],
+    dateRankings: []
 }
 

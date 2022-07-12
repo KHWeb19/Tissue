@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <notice-read v-if="notice" :notice="notice"/>
+        <notice-read v-if="notice && memberInfo" :memberInfo="memberInfo" :notice="notice"/>
     </div>
 </template>
 
@@ -8,11 +8,15 @@
 import { mapActions, mapState } from 'vuex'
 import NoticeRead from '@/components/notice/NoticeRead.vue'
 
-
 export default {
   name: 'NoticeReadPage',
   components: {
       NoticeRead
+  },
+  data () {
+      return {
+        token: localStorage.getItem('token')
+      }
   },
   props: {
       noticeNo: {
@@ -21,17 +25,21 @@ export default {
       }
   },
   computed: {
-      ...mapState(['notice'])
+      ...mapState(['notice', 'memberInfo'])
   },
   created () {
+      this.fetchMemberRole(this.token)
       this.fetchNotice(this.noticeNo)
         .catch(() => {
             alert('공지사항 요청 실패')
             this.$router.back()
         })
   },
+  mounted() {
+    this.fetchMemberRole(this.token)
+  },
   methods: {
-      ...mapActions(['fetchNotice'])
+      ...mapActions(['fetchNotice','fetchMemberRole'])
   }
 }
 </script>

@@ -1,16 +1,8 @@
 <template>
   <div>
     <v-container
-      ><br /><br /><br /><br />
-      <h1>공지사항</h1>
-      <div id="btn">
-        <v-btn
-          class="white--text"
-          id="btnRegisterPage"
-          :to="{ name: 'NoticeRegisterPage' }"
-          >공지사항 등록</v-btn
-        >
-      </div>
+      ><br>
+      <h1>공지사항</h1><br>
       <input
         class="inputSearch"
         v-model="keyword"
@@ -88,7 +80,7 @@ export default {
   font-size: 18px;
 }
 #btnRegisterPage {
-  background: skyblue;
+  background: #90CAF9;
 }
 .search {
   position: relative;
@@ -104,6 +96,6 @@ export default {
   padding: 10px 12px;
 }
 input:focus {
-  outline-color: pink;
+  outline-color: #F48FB1;
 }
 </style>

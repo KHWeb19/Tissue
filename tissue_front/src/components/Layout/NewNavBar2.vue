@@ -91,7 +91,7 @@ export default {
       ],
       subLinks: [
         { text: "지역", route: "/area" },
-        { text: "랭킹", route: "ㄴ" },
+        { text: "랭킹", route: "/ranking" },
         { text: "이벤트/쿠폰", route: "/event" },
       ],
       token: "",
@@ -141,7 +141,7 @@ export default {
     goToMyPage() {
       let token = localStorage.getItem("token");
       let refreshToken = localStorage.getItem("refreshToken");
-
+      
       if (token != null) {
         axios
           .get("Admin/role", { params: { token: token } })

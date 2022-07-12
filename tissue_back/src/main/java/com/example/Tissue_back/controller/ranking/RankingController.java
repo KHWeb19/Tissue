@@ -27,12 +27,12 @@ public class RankingController {
         return rankingService.todayList();
     }
 
-    @GetMapping("/list/byDate/{reviewRegDate}")
-    public List<RankingDTO> RankingByDate (@PathVariable("reviewRegDate") String reviewRegDate) {
+    @GetMapping("/list/byDate/{ticketingRegDate}")
+    public List<RankingDTO> RankingByDate (@PathVariable("ticketingRegDate") String ticketingRegDate) {
         log.info("Date Ranking!");
-        log.info(String.valueOf(reviewRegDate));
+        log.info(String.valueOf(ticketingRegDate));
 
-        return rankingService.dateList(reviewRegDate);
+        return rankingService.dateList(ticketingRegDate);
     }
 
 
