@@ -74,12 +74,12 @@
                     </v-row>
                     <div class="infoContent">
                         <v-row justify="center" no-gutters >
-                            <v-col cols="7">
+                            <v-col cols="6">
                             <span> 사용한 쿠폰 : 
                                 <span v-if="item.used_coupon == null"> 없음 </span>
                                 {{ item.used_coupon }} </span>
                             </v-col>
-                            <v-col class="price" cols="2">
+                            <v-col class="price" cols="3">
                                 <strong>결제 금액</strong> : {{item.final_price}}원
                             </v-col>
                         </v-row>
