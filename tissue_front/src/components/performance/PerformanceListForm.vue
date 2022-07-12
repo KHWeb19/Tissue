@@ -31,7 +31,7 @@
                 @page-count="pageCount = $event"
                 >
                 <template v-slot:[`item.performName`]="{ item }">
-                    <router-link style="color: black" :to="{ name: 'PerformanceModifyPage',
+                    <router-link style="color: black" :to="{ name: 'PerformanceReadPage',
                                             params: { performNo: item.performNo } }">
                         {{ item.performName }}
                         </router-link>
@@ -108,7 +108,7 @@ export default {
              })
             .then(() => {
                 alert("공연을 삭제하였습니다.");
-                this.$router.push({ name: "PerformanceListPage" });
+                history.go()
             })
             .catch((err) => {
                 alert("삭제 실패!", err);
