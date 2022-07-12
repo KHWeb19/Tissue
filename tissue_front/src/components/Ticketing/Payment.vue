@@ -168,7 +168,7 @@ export default {
                 finalPrice: this.price,
               })
               .then(() => {
-                alert("DB 저장 완료");
+                //alert("DB 저장 완료");
                 this.$router.push("/");
               });
           } else {
