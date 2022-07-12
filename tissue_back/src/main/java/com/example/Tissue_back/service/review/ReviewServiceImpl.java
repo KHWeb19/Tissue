@@ -4,6 +4,7 @@ import com.example.Tissue_back.controller.request.review.ReviewDto;
 import com.example.Tissue_back.entity.expectation.Expectation;
 import com.example.Tissue_back.entity.performance.Performance;
 import com.example.Tissue_back.entity.review.Review;
+import com.example.Tissue_back.repository.member.MemberRepository;
 import com.example.Tissue_back.repository.performance.PerformanceRepository;
 import com.example.Tissue_back.repository.review.ReviewRepository;
 import com.example.Tissue_back.service.security.SecurityService;
@@ -25,24 +26,34 @@ public class ReviewServiceImpl implements ReviewService{
     private PerformanceRepository performanceRepository;
 
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private SecurityService securityService;
 
     @Override
-    public void register(Long performNo, ReviewDto reviewDto) {
+    public Boolean register(Long performNo, ReviewDto reviewDto) {
         Optional<Performance> findPerformance = performanceRepository.findById(performNo);
         String memberId = securityService.getMemberId(reviewDto.getReviewWriter());
 
-        Review review = new Review();
 
-        reviewDto.setReviewWriter(memberId);
-        reviewDto.setPerformance(findPerformance.get());
+        if (reviewRepository.findByPerformanceAndReviewWriter(findPerformance.get(),memberId).isEmpty()){
+            Review review = new Review();
 
-        review.setReviewWriter(reviewDto.getReviewWriter());
-        review.setReviewContent(reviewDto.getReviewContent());
-        review.setReviewRating(reviewDto.getReviewRating());
-        review.setPerformance(reviewDto.getPerformance());
+            reviewDto.setReviewWriter(memberId);
+            reviewDto.setPerformance(findPerformance.get());
 
-        reviewRepository.save(review);
+            review.setReviewWriter(reviewDto.getReviewWriter());
+            review.setReviewContent(reviewDto.getReviewContent());
+            review.setReviewRating(reviewDto.getReviewRating());
+            review.setPerformance(reviewDto.getPerformance());
+
+            reviewRepository.save(review);
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -63,6 +74,9 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public void delete (Long reviewNo) {
+        Optional<Review> findReview = reviewRepository.findById(reviewNo);
+
+        memberRepository.restoreMileage(findReview.get().getReviewWriter());
         reviewRepository.deleteById(reviewNo);
     }
 }
