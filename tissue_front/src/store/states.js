@@ -51,8 +51,10 @@ export default {
 
     events: [],
     event: {},
-    
+
     expectList: [],
-    expect: {}
+    expect: {},
+
+    rankings: []
 }
 
