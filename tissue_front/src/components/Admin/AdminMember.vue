@@ -90,6 +90,7 @@ export default {
                 axios.delete(`Admin/${memberNo}`, { memberNo })
                 .then(() => {
                     alert('탈퇴시켰습니다.')
+                    history.go(0)
                 })
                 .catch(() => {
                     console.log(memberNo)

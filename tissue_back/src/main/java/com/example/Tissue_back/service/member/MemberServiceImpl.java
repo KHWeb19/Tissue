@@ -299,7 +299,8 @@ public class MemberServiceImpl implements MemberService {
 
             MyTicketDto ticketDto = new MyTicketDto();
 
-            ticketDto.setTicketing_no(ticketing.getSerialNumber());
+            ticketDto.setTicketing_no(ticketing.getTicketingNo());
+            ticketDto.setSerial(ticketing.getSerialNumber());
             ticketDto.setFinal_price(ticketing.getFinalPrice());
             ticketDto.setReg_date(ticketing.getTicketingRegDate());
 
@@ -358,7 +359,8 @@ public class MemberServiceImpl implements MemberService {
 
             MyTicketDto ticketDto = new MyTicketDto();
 
-            ticketDto.setTicketing_no(ticketing.getSerialNumber());
+            ticketDto.setTicketing_no(ticketing.getTicketingNo());
+            ticketDto.setSerial(ticketing.getSerialNumber());
             ticketDto.setReg_date(ticketing.getTicketingRegDate());
             ticketDto.setSeat(ticketing.getSeatNameArr());
             ticketDto.setPerformShowDate(performance.getPerformShowDate());
