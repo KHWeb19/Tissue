@@ -112,7 +112,7 @@ export default {
             ],
             headers3: [
                 {text:'예매일', value:'reg_date', width:'150'},
-                {text:'예매번호', value:'ticketing_no', width:'100'},
+                {text:'예매번호', value:'serial', width:'100'},
                 {text:'공연명', value:'performName', width:'270'},
                 {text:'관람일시', value:'performShowDate', width:'100'},
                 {text:'매수', value:'seat.length', width:'100'},
